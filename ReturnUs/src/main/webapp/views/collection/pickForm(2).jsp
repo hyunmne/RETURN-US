@@ -57,6 +57,8 @@
 							<!--body ** 여기서부터 코딩하시면 됩니다!!! ** -->
 							<div id="sm" class="card">
 								여기 안에 코딩하시면 됩니다 ... 
+								<h3 class="noto-sans" style="color:#3E6D10;">STEP 01 정보 작성</h3>
+								<span style="color: #3E6D10;">신청 시 입력된 정보는 추후 수정이 불가하오니, 신중하게 작성 부탁드립니다.</span>
 							</div>
 						</div>
 					</div>

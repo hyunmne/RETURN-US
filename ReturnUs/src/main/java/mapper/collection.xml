@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.collection">
+
+	<insert id="insertCollect" parameterType="collection">
+		<![CDATA[
+			INSERT INTO collection (`ACC_ID`, `COL_DATE`, `COL_STATUS`, `COL_POST`, `COL_USE_PNT`, `COL_PRICE`, `COL_RESULT`, `COL_GETPNT_DT`, 
+									  `COL_PAPER`, `COL_PT_BODY`, `COL_PT_LID`, `COL_BT_190`, `COL_BT_400`, `COL_BT_1000`, `COL_BT_1000_UP`, 
+									  `COL_PPACK`, `COL_PLASTIC`, `COL_CAN`, `COL_TOTAL_PNT`) 
+			VALUES (#{accId},#{colDate},#{colStatus},#{colPost},#{colUsePt},#{colPrice},#{colResult},#{colGetpntDt},
+					#{colPaper},#{colPtBody},#{colPtLid},#{colBt190},#{colBt400},#{colBt400},#{colBt1000},#{colBt1000Up},
+					#{colPpack},#{colPlastic},#{colCan},#{colTatalPnt})
+		]]>
+	</insert>
+
+</mapper>
