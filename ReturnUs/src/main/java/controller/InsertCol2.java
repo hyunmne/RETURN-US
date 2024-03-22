@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class InsertCollection
+ * Servlet implementation class InsertCol2
  */
-@WebServlet("/collect1")
-public class InsertCol1 extends HttpServlet {
+@WebServlet("/collect2")
+public class InsertCol2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertCol1() {
+    public InsertCol2() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,16 +26,16 @@ public class InsertCol1 extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/views/collection/pickForm(1).jsp").forward(request, response);
+		// TODO Auto-generated method stub
+		request.getRequestDispatcher("/views/collection/pickForm(2).jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		
-		response.sendRedirect("/ReturnUs/collect2");
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }
