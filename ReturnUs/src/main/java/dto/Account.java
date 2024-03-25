@@ -15,12 +15,12 @@ public class Account {
 	private String accDetailAddr;
 	private Integer accPnt;
 	private Date accJoinDt;
-	public Account() {
-		super();
-	}
+	
+	
+	public Account() {}
+	
 	public Account(String accId, String accPassword, String accName, Date accBirth, String accTel, String accEmail,
-			String accAdmin, String accPostCode, String accAddr, String accDetailAddr, Integer accPnt,
-			Date accJoinDt) {
+			String accPostCode, String accAddr, String accDetailAddr) {
 		super();
 		this.accId = accId;
 		this.accPassword = accPassword;
@@ -28,13 +28,13 @@ public class Account {
 		this.accBirth = accBirth;
 		this.accTel = accTel;
 		this.accEmail = accEmail;
-		this.accAdmin = accAdmin;
 		this.accPostCode = accPostCode;
 		this.accAddr = accAddr;
 		this.accDetailAddr = accDetailAddr;
-		this.accPnt = accPnt;
-		this.accJoinDt = accJoinDt;
 	}
+
+
+
 	public String getAccId() {
 		return accId;
 	}

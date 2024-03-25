@@ -1,5 +1,7 @@
 package service;
 
-public interface AccountService {
+import javax.servlet.http.HttpServletRequest;
 
+public interface AccountService {
+	void join(HttpServletRequest request) throws Exception;
 }
