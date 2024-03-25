@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import dao.AccountDAO;
 import dao.AccountDAOImpl;
@@ -37,6 +38,22 @@ public class AccountServiceImpl implements AccountService {
 		String accDetailAddr = request.getParameter("accDteailAddr");
 		
 		Account account = new Account(accId,accPassword,accName,accBirth,accTel,accEmail,accPostCode,accAddr,accDetailAddr);
+	}
+
+	@Override
+	public void login(HttpServletRequest request) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		
+		String id = request.getParameter("accId");
+		String pw = request.getParameter("accPassword");
+		Account acc = accountDao.selectAccount(id);
+		
+		if (acc == null) throw new Exception("아이디 오류");
+		if(!acc.getAccPassword().equals(pw)) throw new Exception("비밀번호 오류");
+		
+		HttpSession session = request.getSession();
+		acc.setAccPassword("");
+		session.setAttribute("acc", acc);
 	}
 
 }

@@ -3,7 +3,7 @@
 
 <mapper namespace="mapper.collection">
 
-	<insert id="insertCollect" parameterType="collection">
+	<insert id="insertCollect" parameterType="dto.Collection">
 		<![CDATA[
 			INSERT INTO collection (`ACC_ID`, `COL_DATE`, `COL_STATUS`, `COL_POST`, `COL_USE_PNT`, `COL_PRICE`, `COL_RESULT`, `COL_GETPNT_DT`, 
 									  `COL_PAPER`, `COL_PT_BODY`, `COL_PT_LID`, `COL_BT_190`, `COL_BT_400`, `COL_BT_1000`, `COL_BT_1000_UP`, 

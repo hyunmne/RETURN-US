@@ -15,8 +15,25 @@ public class Account {
 	private String accDetailAddr;
 	private Integer accPnt;
 	private Date accJoinDt;
+	private Integer accJoinDays;
 	
 	
+	public Date getAccJoinDt() {
+		return accJoinDt;
+	}
+
+	public void setAccJoinDt(Date accJoinDt) {
+		this.accJoinDt = accJoinDt;
+	}
+
+	public Integer getAccJoinDays() {
+		return accJoinDays;
+	}
+
+	public void setAccJoinDays(Integer accJoinDays) {
+		this.accJoinDays = accJoinDays;
+	}
+
 	public Account() {}
 	
 	public Account(String accId, String accPassword, String accName, Date accBirth, String accTel, String accEmail,

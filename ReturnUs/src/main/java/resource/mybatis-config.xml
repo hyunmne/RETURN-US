@@ -6,8 +6,8 @@
 <configuration>
 
 	<typeAliases>
-		<typeAlias type="dto.Account" alias="account" />
-		<typeAlias type="dto.Collection" alias="collection" />
+		<typeAlias type="dto.Account" alias="Account" />
+<!-- 		<typeAlias type="dto.Collection" alias="Collection" /> -->
 	</typeAliases>
 	
 	<environments default="development">

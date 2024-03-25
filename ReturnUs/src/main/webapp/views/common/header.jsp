@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -52,17 +53,33 @@
 
         <div class="container-fluid fixed-top">
             <div class="container topbar d-none d-lg-block" style="background-color:#579934">
-                <div class="d-flex justify-content-between">
-                    <div class="top-info ps-2">
-                        <small class="me-2"><i class="fas fa-globe-americas text-secondary"></i> <a href="#" class="text-white">리터너스와 지구를 지킨 지 **일 째</a></small>
-                    </div>
-                    <div class="top-link pe-2">
-                        <a href="#" class="text-white"><i class="fas fa-user"></i><small class="text-white mx-2">박회원 님</small>/</a>
-                        <a href="#" class="text-white"><small class="text-white ms-2">회원가입 </small>/</a>
-                        <a href="#" class="text-white"><small class="text-white ms-2">로그인 </small>/</a>
-                        <a href="#" class="text-white"><small class="text-white ms-2">로그아웃 </small></a>
-                    </div>
-                </div>
+                    <c:choose>
+                    	<c:when test="${not empty acc.accId}">
+			                <div class="d-flex justify-content-between">
+			                    <div class="top-info ps-2">
+			                        <small class="me-2"><i class="fas fa-globe-americas text-secondary"></i> 
+			                        <span class="text-white">&nbsp;&nbsp;리터너스와 지구를 지킨 지 ${acc.accJoinDays }일 째</span></small>
+			                    </div>
+			                    <div class="top-link pe-2">
+				                        <a href="#" class="text-white"><i class="fas fa-user"></i><small class="text-white mx-2">${acc.accName} 님</small>/</a>
+				                        <a href="#" class="text-white"><small class="text-white ms-2">로그아웃 </small></a>
+			                    </div>
+			                </div>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<div class="d-flex justify-content-between">
+			                    <div class="top-info ps-2">
+			                        <small class="me-2"><i class="fas fa-globe-americas text-secondary"></i> 
+			                        <span class="text-white">리터너스와 함께 지구를 지켜주세요!</span></small>
+			                    </div>
+			                    <div class="top-link pe-2">
+			                    		<i class="fas fa-user text-secondary"></i>
+				                        <a href="login" class="text-white"><small class="text-white ms-2"> &nbsp;&nbsp;로그인 </small>/</a>
+				                        <a href="join" class="text-white"><small class="text-white ms-2">회원가입 </small></a>
+			                    </div>
+			                </div>
+                    	</c:otherwise>
+                    </c:choose>
             </div>
             <div class="container px-0">
                 <nav class="navbar navbar-light bg-white navbar-expand-xl">

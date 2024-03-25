@@ -1,7 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<c:set var="path" value="${pageContext.request.contextPath}" />
+<%
+	String cookieHeader = request.getHeader("Cookie");
+	boolean autoLogin = false;
+	String id = "";
+	String password = "";
+	if(cookieHeader!=null){
+		Cookie[] cookies = request.getCookies();
+		for(Cookie cookie : cookies) {
+			if(cookie.getName().equals("autoLogin")) {
+				if (cookie.getValue().equals("true"))
+					autoLogin = true;
+				else autoLogin = false;
+			} else if (cookie.getName().equals("accId")) {
+				id = cookie.getValue();
+			} else if (cookie.getName().equals("accPassword")) {
+				password = cookie.getValue();
+			}
+		}
+	}
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +29,7 @@
    <title>Return:Us</title>
 <style>
    
-.container {
+.logBox {
     display: flex;
     flex-direction: column; /* 요소들을 세로로 정렬합니다 */
     align-items: center; /* 가로 방향 가운데 정렬합니다 */
@@ -76,10 +96,10 @@
 				<div class="col-6"></div>
 			</div>
 			<div class="row g-4">
-				<div class="col-lg-12">
+				<div class="col-lg-12 logBox">
 					<div style="height: 100%; padding: 0px 70px 0px 70px">
 						<!--큰 card ** 여기서부터 코딩하시면 됩니다!!! ** -->
-						<div id="big" class="container">
+						<div id="big">
 							<div style="padding: 50px 0px 30px; /* color: #3E6D10; */">
 								<div class="title">
 									<div class="bgtitle" >
@@ -91,22 +111,29 @@
 								</div>
 							</div>
 							<!--body ** 여기서부터 코딩하시면 됩니다!!! ** -->
-							<div id="sm" class="container">
+							<form action="login" method="post">
+							<div id="sm">
 								<div id="id">
-									<input type="text" class="input" id="input_id" placeholder="ID를 입력하세요..."/>
+									<input type="text" class="input" id="accId" name="accId" value="<%=id %>" placeholder="ID를 입력하세요..."/>
 								</div>
 									<br>
 								<div id="password">
-									<input type="password" class="input" id="input_password" placeholder="비밀번호를 입력하세요.."/>
+									<input type="password" class="input" id="accPassword" name="accPassword" value="<%=password %>" placeholder="비밀번호를 입력하세요.."/>
 								</div>
 								<br>
 								<div id="submit" class="submit_box">
-									<input type="checkbox" >&nbsp;&nbsp;<span>remember me</span> <button type="submit" class="button" >로그인</button>
+								<%if(autoLogin) { %>
+									<input type="checkbox" value="true" name="autoLogin" checked="checked">&nbsp;&nbsp;<span>remember me</span> 
+								<%} else { %>
+									<input type="checkbox" value="true" name="autoLogin">&nbsp;&nbsp;<span>remember me</span>
+								<%} %>
+									<button type="submit" class="button">로그인</button>
 								</div>
 								<div id="linked">
 									<a href="join">회원가입</a><a class="blank"></a><a href="findid">ID찾기</a><a class="blank"></a><a href="findpw">PW찾기</a>
 								</div>
 							</div>
+							</form>
 						</div>
 					</div>
 				</div>
