@@ -2,4 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="mapper.account">
-</mapper>
+	<select id="selectAccount" parameterType="String" resultType="Account">
+		<![CDATA[
+			select ACC_ID as accId, ACC_PASSWORD as accPassword, ACC_NAME as accName, ACC_BIRTH as accBirth, ACC_TEL as accTel, ACC_EMAIL as accEmail,
+			ACC_ADMIN as accAdmin, ACC_POSTCODE as accPostCode, ACC_ADDR as accAddr, ACC_DETAIL_ADDR as accDetailAddr, ACC_PNT as accPnt
+			from account where ACC_ID=#{accId}
+		]]>
+	</select>
+	<insert id="insertAccount" parameterType="Account">
+		<![CDATA[
+			insert into account (ACC_ID, ACC_PASSWORD, ACC_NAME, ACC_BIRTH, ACC_TEL, ACC_EMAIL, ACC_ADMIIN, ACC_POSTCODE, ACC_ADDR, ACC_DETAIL, ACC_PNT
+			values(#{},
+		]]>
+	</insert>
+</mapper>	
+	
