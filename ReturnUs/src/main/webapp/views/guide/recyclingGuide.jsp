@@ -181,7 +181,7 @@
 									    <div class="col-3">
 									    	<img src='<c:url value="/resources/img/pet4.png"/>' class="pills-img" alt="pet">
 									    	<h3 class="step-title">STEP 4</h3>
-											<p class="step-content">압축하여 보내주세요</p>
+											<p class="step-content">압축해서 배출해주세요</p>
 									    </div>
 									  </div>								  
 									</div>								
@@ -208,7 +208,7 @@
 									    <div class="col-3">
 									    	<img src='<c:url value="/resources/img/pack4.png"/>' class="pills-img" alt="pack">
 									    	<h3 class="step-title">STEP 4</h3>
-											<p class="step-content">차곡차곡 쌓아주세요</p>
+											<p class="step-content">차곡차곡 쌓아서 배출해주세요</p>
 									    </div>
 									  </div>								  
 									</div>								
