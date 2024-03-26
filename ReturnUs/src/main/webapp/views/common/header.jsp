@@ -62,7 +62,7 @@
 			                    </div>
 			                    <div class="top-link pe-2">
 				                        <a href="#" class="text-white"><i class="fas fa-user"></i><small class="text-white mx-2">${acc.accName} 님</small>/</a>
-				                        <a href="#" class="text-white"><small class="text-white ms-2">로그아웃 </small></a>
+				                        <a href="logout" class="text-white"><small class="text-white ms-2">로그아웃 </small></a>
 			                    </div>
 			                </div>
                     	</c:when>
