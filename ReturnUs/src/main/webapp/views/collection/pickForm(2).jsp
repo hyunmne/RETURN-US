@@ -107,7 +107,7 @@
 									<span style="color: #3E6D10;">신청 시 입력된 정보는 추후 수정이 불가하오니, 신중하게 작성 부탁드립니다.</span>
 								</div>
 								
-								<form method="post" action="collect2" enctype="multipart/form-data">
+								<form id="colForm" method="post" action="collect2" enctype="multipart">
 									<div class="col-12 d-flex justify-content-center" style="padding:35px 40px 50px">
 										<div style="width:700px; padding:50px;">
 											<!-- 이름 div -->
@@ -181,7 +181,7 @@
 													<input type="radio" style="accent-color: #198754;"> &nbsp;&nbsp; 위 주소를 기본 주소지로 저장
 												</div>
 												<div id="nextBtn" class="col-7 d-flex" style="padding:10px; margin:10px;">
-													<input type="submit" value="다음" class="btn-green" style="color: #3E6D10; text-decoration:underline;">
+													<input type="submit" value="다음" id="nextBtn" class="btn-green" style="color: #3E6D10; text-decoration:underline;">
 							                    </div>
 											</div>
 											
@@ -228,12 +228,43 @@
 	</div>
 
 
-	<!-- 모달  -->
-
-
-
 
 </body>
+
+
+<script>
+    document.getElementById('colForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // 기본 제출 동작 방지
+
+        // 입력 필드들의 값을 가져와 hidden input으로 추가
+        var accName = document.getElementById('accName').value;
+        var accTel = document.getElementById('accTel').value;
+        var accPostCode = document.getElementById('accPostCode').value;
+        var accAddr = document.getElementById('accAddr').value;
+        var accDetailAddr = document.getElementById('accDetailAddr').value;
+
+        // hidden input 요소를 동적으로 생성하여 폼에 추가
+        addHiddenInput('accName', accName);
+        addHiddenInput('accTel', accTel);
+        addHiddenInput('accPostCode', accPostCode);
+        addHiddenInput('accAddr', accAddr);
+        addHiddenInput('accDetailAddr', accDetailAddr);
+
+        // 폼 제출
+        this.submit();
+    });
+
+    // hidden input을 동적으로 생성하여 폼에 추가하는 함수
+    function addHiddenInput(name, value) {
+        var input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = name;
+        input.value = value;
+        document.getElementById('colForm').appendChild(input);
+    }
+</script>
+
+
 
 <script>
 let delList;

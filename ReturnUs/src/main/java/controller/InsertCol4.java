@@ -1,28 +1,23 @@
 package controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dto.Delivery;
-
-
 /**
- * Servlet implementation class InsertCol2
+ * Servlet implementation class InsertCol3
  */
-@WebServlet("/collect2")
-public class InsertCol2 extends HttpServlet {
+@WebServlet("/collect4")
+public class InsertCol4 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertCol2() {
+    public InsertCol4() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,29 +26,35 @@ public class InsertCol2 extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/views/collection/pickForm(2).jsp").forward(request, response);
+		request.setCharacterEncoding("utf-8");
+		
+		request.getRequestDispatcher("/views/collection/pickForm(4).jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("utf-8");
+		
 		try {
 			String accName = request.getParameter("accName");
 			String accTel = request.getParameter("accTel");
-			String accPc = request.getParameter("accPostCode");
+			String accPostCode = request.getParameter("accPostCode");
 			String accAddr = request.getParameter("accAddr");
-			String accDAdr = request.getParameter("accDetailAddr");
+			String accDetailAddr = request.getParameter("accDetailAddr");
+			String boxSize = request.getParameter("boxSize");
 			
 			request.setAttribute("accName", accName);
 			request.setAttribute("accTel", accTel);
-			request.setAttribute("accPostCode", accPc);
+			request.setAttribute("accPostCode", accPostCode);
 			request.setAttribute("accAddr", accAddr);
-			request.setAttribute("accDetailAddr", accDAdr);
+			request.setAttribute("accDetailAddr", accDetailAddr);
+			request.setAttribute("boxSize", boxSize);
 			
-			request.getRequestDispatcher("/views/collection/pickForm(3).jsp").forward(request, response);
+			System.out.println("insertcol3 : "+accName +  accTel + accPostCode + accAddr + accDetailAddr+boxSize);
+			
+			request.getRequestDispatcher("/views/collection/pickForm(4).jsp").forward(request, response);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

@@ -26,6 +26,8 @@ public class InsertCol3 extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		
 		request.getRequestDispatcher("/views/collection/pickForm(3).jsp").forward(request, response);
 	}
 
@@ -33,15 +35,26 @@ public class InsertCol3 extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		
 		try {
 			String accName = request.getParameter("accName");
 			String accTel = request.getParameter("accTel");
-			String accPc = request.getParameter("accPostCode");
-			String accAdr = request.getParameter("accAddr");
-			String accDAdr = request.getParameter("accDetailAddr");
+			String accPostCode = request.getParameter("accPostCode");
+			String accAddr = request.getParameter("accAddr");
+			String accDetailAddr = request.getParameter("accDetailAddr");
+			String boxSize = request.getParameter("boxSize");
 			
-			System.out.println(accName +  accTel + accPc + accAdr + accDAdr);
+			request.setAttribute("accName", accName);
+			request.setAttribute("accTel", accTel);
+			request.setAttribute("accPostCode", accPostCode);
+			request.setAttribute("accAddr", accAddr);
+			request.setAttribute("accDetailAddr", accDetailAddr);
+			request.setAttribute("boxSize", boxSize);
 			
+			System.out.println("insertcol3 : "+accName +  accTel + accPostCode + accAddr + accDetailAddr+boxSize);
+			
+			request.getRequestDispatcher("/views/collection/pickForm(4).jsp").forward(request, response);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

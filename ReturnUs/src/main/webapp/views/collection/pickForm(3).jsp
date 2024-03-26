@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<% request.setCharacterEncoding("UTF-8"); %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,9 +29,12 @@
 
 <!-- 헤더 파일 include -->
 <%@include file="/views/common/header.jsp" %>
-
-
-
+<input id="accName" type="hidden" name="accName" value="<%= request.getParameter("accName") %>" />
+<input id="accTel" type="hidden" name="accTel" value="<%= request.getParameter("accTel") %>" />
+<input id="accPostCode" type="hidden" name="accPostCode" value="<%= request.getParameter("accPostCode") %>" />
+<input id="accAddr" type="hidden" name="accAddr" value="<%= request.getParameter("accAddr") %>" />
+<input id="accDetailAddr" type="hidden" name="accDetailAddr" value="<%= request.getParameter("accDetailAddr") %>" />
+<input id="boxSize" type="hidden" name="boxSize" value="<%= request.getParameter("boxSize") %>" />
 
 	<div class="container-fluid fruite py-5"
 		style="margin: 38px 100px; width: 90%;">
@@ -109,44 +113,57 @@
 
 
 
-
-
-
 	<%@ include file="/views/common/footer.jsp" %>
 
 </body>
 
-
 <script>
-//상자를 클릭했을 때 이벤트 처리
-function handleBoxClick(boxSize) {
-    // 값을 전달할 수 있는 폼 생성
+// 값 전달 폼 생성 및 전송하는 함수
+function submitFormWithValues(boxSize) {
+    var accName = document.getElementById('accName').value;
+    var accTel = document.getElementById('accTel').value;
+    var accPostCode = document.getElementById('accPostCode').value;
+    var accAddr = document.getElementById('accAddr').value;
+    var accDetailAddr = document.getElementById('accDetailAddr').value;
+
     var form = document.createElement('form');
-    form.method = 'POST'; // 또는 'GET'
-    form.action = 'collect2'; // 다음 화면의 URL
-    
-    // 값을 전달할 input 요소 추가
-    var input = document.createElement('input');
-    input.type = 'hidden'; // 숨김 필드로 설정
-    input.name = 'boxSize'; // 전달할 값의 이름 설정
-    input.value = boxSize; // 전달할 값 설정
-    form.appendChild(input); // input을 폼에 추가
-    
-    // 폼을 body에 추가하고 submit
+    form.method = 'POST';
+    form.action = 'collect3';
+
+    function addHiddenInput(name, value) {
+        var input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = name;
+        input.value = value;
+        form.appendChild(input);
+    }
+
+    addHiddenInput('accName', accName);
+    addHiddenInput('accTel', accTel);
+    addHiddenInput('accPostCode', accPostCode);
+    addHiddenInput('accAddr', accAddr);
+    addHiddenInput('accDetailAddr', accDetailAddr);
+    addHiddenInput('boxSize', boxSize);
+
     document.body.appendChild(form);
     form.submit();
 }
 
-// mdBox 클릭 이벤트 처리
+// 상자 클릭 이벤트 처리
+function handleBoxClick(boxSize) {
+    submitFormWithValues(boxSize);
+}
+
+// mdBox와 lgBox에 클릭 이벤트 처리 추가
 document.getElementById('mdBox').addEventListener('click', function() {
     handleBoxClick('5000');
 });
 
-// lgBox 클릭 이벤트 처리
 document.getElementById('lgBox').addEventListener('click', function() {
     handleBoxClick('6000');
 });
 </script>
+
 
 
 <!-- 마우스 토글  -->
