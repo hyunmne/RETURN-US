@@ -13,31 +13,36 @@ import dto.Account;
 
 public class AccountServiceImpl implements AccountService {
 	private AccountDAO accountDao = new AccountDAOImpl();
+	 private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // SimpleDateFormat 객체 추가
 	
 	@Override
 	public void join(HttpServletRequest request) throws Exception {
-		request.setCharacterEncoding("utf-8");
+		  request.setCharacterEncoding("utf-8");
+
+	        String accId = request.getParameter("accId");
+	        Account sacc = accountDao.selectAccount(accId);
+	        if(sacc != null) throw new Exception("아이디가 중복됩니다");
+
+	        String accPassword = request.getParameter("accPassword");
+	        String accName = request.getParameter("accName");
+	        Date accBirth = null;
+	        try {
+	            String accBirthString = request.getParameter("accBirth");
+	            if (accBirthString != null && !accBirthString.isEmpty()) {
+	                accBirth = new Date(sdf.parse(accBirthString).getTime()); // SimpleDateFormat 객체 사용하여 날짜 파싱
+	            }
+	        } catch (ParseException e) {
+	            e.printStackTrace();
+	        }
+	        String accTel = request.getParameter("accTel");
+	        String accEmail = request.getParameter("accEmail");
+	        String accEmailDo = request.getParameter("accEmailDo");
+	        String accPostCode = request.getParameter("accPostCode");
+	        String accAddr = request.getParameter("accAddr");
+	        String accDetailAddr = request.getParameter("accDetailAddr");
 		
-		String accId = request.getParameter("accId");
-		Account sacc = accountDao.selectAccount(accId);
-		if(sacc!=null) throw new Exception("아이디가 중복됩니다");
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); //데이터 형식으로 가져오기 위해 설정
-		
-		String accPassword = request.getParameter("accPassword");
-		String accName = request.getParameter("accName");
-		Date accBirth = null;
-		try {
-		    accBirth = (Date) sdf.parse(request.getParameter("accBirth"));
-		} catch (ParseException e) {
-		    e.printStackTrace();
-		}
-		String accTel = request.getParameter("accTel");
-		String accEmail = request.getParameter("accEmail");
-		String accPostCode = request.getParameter("accPostCode");
-		String accAddr = request.getParameter("accAddr");
-		String accDetailAddr = request.getParameter("accDteailAddr");
-		
-		Account account = new Account(accId,accPassword,accName,accBirth,accTel,accEmail,accPostCode,accAddr,accDetailAddr);
+		Account account = new Account(accId,accPassword,accName,accBirth,accTel,accEmail,accEmailDo,accPostCode,accAddr,accDetailAddr);
+		accountDao.insertAccount(account);
 	}
 
 	@Override
@@ -55,5 +60,14 @@ public class AccountServiceImpl implements AccountService {
 		acc.setAccPassword("");
 		session.setAttribute("acc", acc);
 	}
+
+	@Override
+	public boolean accountIdCheck(String accId) throws Exception {
+		Account account = accountDao.selectAccount(accId);
+		if(account==null) return false;
+		return true;
+	}
+	
+	
 
 }

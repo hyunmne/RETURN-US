@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,42 +12,31 @@ import service.AccountService;
 import service.AccountServiceImpl;
 
 /**
- * Servlet implementation class Join
+ * Servlet implementation class AccountDoubleId
  */
-@WebServlet("/join")
-public class Join extends HttpServlet {
+@WebServlet("/accountdoubleid")
+public class AccountDoubleId extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Join() {
+    public AccountDoubleId() {
         super();
         // TODO Auto-generated constructor stub
     }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/views/account/join.jsp").forward(request, response);
-	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AccountService accountSerivce = new AccountServiceImpl();
-		
+		request.setCharacterEncoding("utf-8");
 		try {
-			accountSerivce.join(request);
-			response.sendRedirect("main");
-		}catch(Exception e){
-			e.printStackTrace();
-			/*
-			 * request.setAttribute("err", e.getMessage());
-			 * request.getRequestDispatcher("error.jsp");
-			 */
+			String accId = request.getParameter("accId");
+			AccountService accountService = new AccountServiceImpl();
+			boolean doubleId = accountService.accountIdCheck(accId);
+			response.getWriter().write(String.valueOf(doubleId));
+		}catch (Exception e) {
+			response.sendError(500);
 		}
 	}
 

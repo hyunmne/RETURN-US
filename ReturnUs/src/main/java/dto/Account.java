@@ -9,6 +9,7 @@ public class Account {
 	private Date accBirth;
 	private String accTel;
 	private String accEmail;
+	private String accEmailDo;
 	private String accAdmin;
 	private String accPostCode;
 	private String accAddr;
@@ -37,7 +38,7 @@ public class Account {
 	public Account() {}
 	
 	public Account(String accId, String accPassword, String accName, Date accBirth, String accTel, String accEmail,
-			String accPostCode, String accAddr, String accDetailAddr) {
+			String accEmailDo, String accPostCode, String accAddr, String accDetailAddr) {
 		super();
 		this.accId = accId;
 		this.accPassword = accPassword;
@@ -45,6 +46,7 @@ public class Account {
 		this.accBirth = accBirth;
 		this.accTel = accTel;
 		this.accEmail = accEmail;
+		this.accEmailDo = accEmailDo;
 		this.accPostCode = accPostCode;
 		this.accAddr = accAddr;
 		this.accDetailAddr = accDetailAddr;
@@ -88,6 +90,14 @@ public class Account {
 	public void setAccEmail(String accEmail) {
 		this.accEmail = accEmail;
 	}
+	public String getAccEmailDo() {
+		return accEmailDo;
+	}
+
+	public void setAccEmailDo(String accEmailDo) {
+		this.accEmailDo = accEmailDo;
+	}
+
 	public String getAccAdmin() {
 		return accAdmin;
 	}

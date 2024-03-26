@@ -146,6 +146,121 @@
 }
 </style>
 
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+$(document).ready(function() {
+    // 아이디 입력란
+    var inputIdElement = $('#accId');
+    // 아이디 생성자 조건에 대한 정규식
+    var idRegex = /^[a-zA-Z0-9]{6,12}$/;
+    // 아이디 중복체크 버튼
+    var doubleIdCheckButton = $('#AccountDoubleId');
+    // 아이디 생성자 조건 메시지를 표시할 요소
+    var idConditionMessage = $('#checkId');
+    // 비밀번호 입력란
+    var passwordElement = $('#accPassword');
+    // 비밀번호 확인 입력란
+    var passwordCheckElement = $('#accPasswordcheck');
+    // 비밀번호 유효성 조건에 대한 정규식
+    var pwRegex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{6,12})/;
+    // 비밀번호 유효성 메시지를 표시할 요소
+    var pwConditionMessage = $('#checkPw');
+    // 비밀번호 일치성 메시지를 표시할 요소
+    var pwCheckSameMessgae = $('#checkDoublePw');
+    
+    // 아이디 생성자 조건을 체크하여 중복체크 버튼 활성/비활성화 및 메시지 표시
+    function checkIdCondition() {
+        var id = inputIdElement.val();
+        if (idRegex.test(id)) {
+            // 아이디 생성자 조건을 만족하는 경우
+            doubleIdCheckButton.prop('disabled', false);
+            idConditionMessage.text('');
+        } else {
+            // 아이디 생성자 조건을 만족하지 않는 경우
+            doubleIdCheckButton.prop('disabled', true);
+            idConditionMessage.text('영문자와 숫자로 이루어진 6~12자여야합니다.');
+            idConditionMessage.css('color', 'red');
+        }
+    }
+
+    // 비밀번호 확인 일치 여부 검사 및 메시지 표시
+    function checkPasswordMatch() {
+        var password = passwordElement.val();
+        var passwordCheck = passwordCheckElement.val();
+        if (password !== passwordCheck) {
+            // 비밀번호 확인이 일치하지 않는 경우
+            pwCheckSameMessgae.text('비밀번호가 일치하지 않습니다.');
+            pwCheckSameMessgae.css('color', 'red');
+        } else {
+            // 비밀번호 확인이 일치하는 경우
+            pwCheckSameMessgae.text('비밀번호가 일치합니다.');
+            pwCheckSameMessgae.css('color', 'green');
+        }
+    }
+    
+    
+    // 비밀번호 유효성 검사 및 메시지 표시
+    function checkPasswordValidity() {
+        var password = passwordElement.val();
+        if (!pwRegex.test(password)) {
+            // 비밀번호 유효성 조건을 만족하지 않는 경우
+            pwConditionMessage.text('특수문자를 포함한 영문 숫자로 이루어진 6~12자여야 합니다.');
+            pwConditionMessage.css('color', 'red');
+        } else {
+            // 비밀번호 유효성 조건을 만족하는 경우
+            pwConditionMessage.text('사용할 수 있는 비밀번호입니다.');
+            pwConditionMessage.css('color', 'green');
+        }
+    }
+    
+    // 아이디 입력란에 입력할 때마다 아이디 생성자 조건 체크
+    inputIdElement.on('input', function() {
+        checkIdCondition();
+    });
+    
+    // 비밀번호 입력란에 입력할 때마다 비밀번호 유효성 검사 및 메시지 표시
+    passwordElement.on('input', function() {
+        checkPasswordValidity();
+    });
+    
+    // 비밀번호 확인 입력란에 입력할 때마다 비밀번호 확인 일치 여부 검사 및 메시지 표시
+    passwordCheckElement.on('input', function() {
+        checkPasswordMatch();
+    });
+    
+    // 중복체크 버튼 클릭 시
+    doubleIdCheckButton.click(function(e) {
+    	e.preventDefault();
+        // 중복체크 로직 수행
+        $.ajax({
+            url: 'accountdoubleid',
+            type: 'post',
+            async: true,
+            dataType: 'text',
+            data: { accId: inputIdElement.val() },
+            success: function(result) {
+                // 중복체크 결과에 따라 메시지 업데이트
+                if (result == 'true') {
+                    idConditionMessage.text('중복된 아이디입니다.');
+                    idConditionMessage.css('color', 'red');
+                } else {
+                    idConditionMessage.text('사용할 수 있는 아이디입니다.');
+                    idConditionMessage.css('color', 'green');
+                }
+            },
+            error: function(result) {
+                // 중복체크 오류 발생 시
+                idConditionMessage.text('아이디 중복 체크 오류');
+                idConditionMessage.css('color', 'red');
+            }
+        });
+    });
+    
+    // 초기에 아이디 생성자 조건 체크 및 비밀번호 유효성 검사 및 메시지 표시
+    checkIdCondition();
+    checkPasswordValidity();
+});
+</script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     function daumPostcode() {
@@ -165,65 +280,99 @@
                     addr = data.jibunAddress;
                 }
 
-                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-                if(data.userSelectedType === 'R'){
-                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                        extraAddr += data.bname;
-                    }
-                    // 건물명이 있고, 공동주택일 경우 추가한다.
-                    if(data.buildingName !== '' && data.apartment === 'Y'){
-                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                    }
-                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                    if(extraAddr !== ''){
-                        extraAddr = ' (' + extraAddr + ')';
-                    }
-                    // 조합된 참고항목을 해당 필드에 넣는다.
-                    document.getElementById("extraAddress").value = extraAddr;
-                
-                } else {
-                    document.getElementById("extraAddress").value = '';
-                }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('postcode').value = data.zonecode;
-                document.getElementById("address").value = addr;
+                document.getElementById('accPostCode').value = data.zonecode;
+                document.getElementById("accAddr").value = addr;
                 // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("detailAddress").focus();
-            }
-        }).open()
-    }
-</script><script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
-    function daumPostcode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var addr = ''; // 주소 변수
-                var extraAddr = ''; // 참고항목 변수
-
-                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                    addr = data.roadAddress;
-                } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                    addr = data.jibunAddress;
-                }
-                document.getElementById('postcode').value = data.zonecode;
-                document.getElementById("address").value = addr;
-                // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("detailAddress").focus();
+                document.getElementById("accDetailAddr").focus();
             }
         }).open();
     }
 </script>
+<script>
 
+$(document).ready(function() {
+    // 회원가입 양식 submit 이벤트
+    $('#signUpForm').submit(function(e) {
+        // 아이디 체크
+        var idMessage = $('#checkId').text();
+        if (idMessage !== '사용할 수 있는 아이디입니다.') {
+            alert('아이디를 확인해주시기 바랍니다.');
+            e.preventDefault(); 
+            return;
+        }
+        
+        // 비밀번호 체크
+        var pwMessage = $('#checkPw').text();
+        if (pwMessage !== '사용할 수 있는 비밀번호입니다.') {
+            alert('비밀번호를 확인해 주시기 바랍니다.');
+            e.preventDefault(); 
+            return;
+        }
+        
+        // 비밀번호 확인 체크
+        var pwCheckMessage = $('#checkDoublePw').text();
+        if (pwCheckMessage !== '비밀번호가 일치합니다.') {
+            alert('비밀번호를 확인해 주시기 바랍니다.');
+            e.preventDefault();
+            return;
+        }
+        
+        // 주소 체크
+        var address = $('#accAddr').val();
+        var detailAddress = $('#accDetailAddr').val();
+        if (address === '' || detailAddress === '') {
+            alert('주소를 입력해주시기 바랍니다.');
+            e.preventDefault(); 
+            return;
+        }
+        
+        // 우편번호 체크
+        var postCode = $('#accPostCode').val();
+        if (postCode.length !== 5 || isNaN(postCode)) {
+            alert('우편번호를 확인해주시기 바랍니다.');
+            e.preventDefault(); 
+            return;
+        }
+        
+        // 이름 체크
+        var name = $('#accName').val();
+        if (name === '' || !isNaN(name)) {
+            alert('이름을 확인해주시기 바랍니다.');
+            e.preventDefault(); 
+            return;
+        }
+        
+        // 생년월일 체크
+        var birth = $('#accBirth').val();
+        if (birth === '') {
+            alert('생년월일을 입력해주시기 바랍니다.');
+            e.preventDefault(); 
+            return;
+        }
+        
+        // 전화번호 체크
+        var tel = $('#accTel').val();
+        if (tel.length < 10 || tel.length > 11 || isNaN(tel)) {
+            alert('전화번호를 확인해주시기 바랍니다.');
+            e.preventDefault(); 
+            return;
+        }
+        
+        // 이메일 체크
+        var emailId = $('#email_id').val();
+        var emailDomain = $('#select').val();
+        if (emailId === '' || emailDomain === '') {
+            alert('이메일을 확인해주시기 바랍니다.');
+            e.preventDefault(); 
+            return;
+        }
+    });
+}); 
+
+</script>
 </head>
-
 <body class="noto-sans">
 
 	<!-- 헤더 파일 include -->
@@ -256,55 +405,71 @@
 							</div>
 							<!--body ** 여기서부터 코딩하시면 됩니다!!! ** -->
 							<div id="sm">
+							<form id="signUpForm" action="join" method="post">
 								<div class="join_tool">
 										<div class="left">
 											<div id="id" class="all">
 												<div class="little-title">아이디<div class="star" id="star">*</div></div>
-												<p><input type="text" class="input" id="id_input" name="id_input"placeholder=" 6-12글자 이내로 작성해주세요" autofocus><button type="button" class="button" id="checkedId">중복검색</button></p>
-												<div id="dobIDcheckMesg"></div>
+												<input type="text" class="input" id="accId" name="accId" placeholder=" 6-12글자 이내로 작성해주세요" autofocus>
+												<button class="button" id="AccountDoubleId">중복체크</button><br>
+												<font id="checkId" class="checkId" name="checkId"></font>
 											</div>
 											<div id="password"class="all">
 												<div class="little-title">비밀번호<div class="star" id="star">*</div></div>
-												<p><input type="password" class="input" id="password_input"name="password" placeholder=" 6-12자 이내, 특수문자 포함하여"autofocus></p>
+												<p><input type="password" class="input" id="accPassword" name="accPassword" placeholder=" 6-12자 이내, 특수문자 포함하여"autofocus></p>
+												<font id="checkPw"></font>
 											</div>
 											<div id="password2" class="all">
 												<div class="little-title">비밀번호 확인<div class="star" id="star">*</div></div>
-												<p><input type="password" class="input" id="password_input"name="password_input" placeholder=" 6-12자 이내, 특수문자 포함하여"autofocus></p>
-												<div id="dobPWcheckMesg"></div>
+												<p><input type="password" class="input" id="accPasswordcheck" name="accPasswordcheck" placeholder=" 6-12자 이내, 특수문자 포함하여"autofocus></p>
+												<font id="checkDoublePw"></font>
 											</div>
 											<div id="postcode_bar" class="all">
 												<div class="little-title">우편번호<div class="star" id="star">*</div></div>
-												<p><input type="text" class="input" id="postcode" placeholder=" 우편번호" >
+												<p><input type="text" class="input" id="accPostCode" name="accPostCode" placeholder=" 우편번호" >
 												<input type="button" class="button" onclick="daumPostcode()" value="주소 찾기"></p>
 											</div>
 											<div id="addr" class="all">
 												<div class="little-title">주소<div class="star" id="star">*</div></div>
-												<p><input type="text" class="input" id="address" placeholder="주소" autofocus></p>
-												<p><input type="text" class="input" id="detailAddress" placeholder=" 상세주소" autofocus></p>
+												<p><input type="text" class="input" id="accAddr" name="accAddr" placeholder="주소" autofocus></p>
+												<p><input type="text" class="input" id="accDetailAddr" name="accDetailAddr" placeholder=" 상세주소" autofocus></p>
 											</div>
 										</div>
 										<div class="right">
 											<div id="name" class="all">
 												<div class="little-title">이름<div class="star" id="star">*</div></div>
-												<p><input type="text" class="input" id="name_input" name="name_input"placeholder=" 이름" autofocus></p>
+												<p><input type="text" class="input" id="accName" name="accName"placeholder=" 이름" autofocus></p>
 											</div>
 											<div id="birth" class="all">
-												<div class="little-title"> 생년월일<div class="star" id="star">*</div></div>
-												<input type="date" class="input" id="birth_input" max="${now_utc}"min="1901-01-01" value="${now_utc}" placeholder=" 연도-월-일"> </label>
+   												 <div class="little-title">생년월일<div class="star" id="star">*</div></div>
+   												 <input type="date" class="input" id="accBirth" name="accBirth" min="1901-01-01" placeholder="연도-월-일" required>
 											</div>
+											<script>
+    										// 현재 날짜를 가져오는 함수
+    											function getCurrentDate() {
+        											var today = new Date();
+        											var year = today.getFullYear(); // 연도
+        											var month = (today.getMonth() + 1).toString().padStart(2, '0'); // 월 (0부터 시작하기 때문에 +1 필요)
+        											var day = today.getDate().toString().padStart(2, '0'); // 일
+        											return year + '-' + month + '-' + day;
+    											}
+
+    											// 최대 날짜 설정
+    											document.getElementById('accBirth').setAttribute('max', getCurrentDate());
+											</script>
 											<div id="tel" class="all">
 												<div class="little-title">전화번호<div class="star" id="star">*</div></div>
-												<p><input type="text" class="input" id="tel_input" name="tel_input"placeholder=" -를 제외하고 입력해주세요." autofocus><button type="button" class="button" id="checkedtel">본인인증</button></p>
+												<p><input type="text" class="input" id="accTel" name="accTel" placeholder=" -를 제외하고 입력해주세요." autofocus><button type="button" class="button" id="checkedtel">본인인증</button></p>
 											</div>
 											<div id="cernum" class="all">
 												<div class="little-title">인증번호<div class="star" id="star">*</div></div>
-												<p><input type="text" class="input" id="cernum_input" name="cernum_input"placeholder=" 인증번호" autofocus></p>
+												<p><input type="text" class="input" id="cernum_input" placeholder=" 인증번호" ></p>
 											</div>
 											<div id="eamil" class="all">
 												<div class="little-title">이메일 <div class="star" id="star">*</div></div>
 												<p class="email_tool" style="display:flex; align-items:center;">
-												<input type="text" id="email_id" value=""title="이메일 아이디" placeholder=" 이메일" maxlength="18" />&nbsp;&nbsp;@&nbsp;
-												<select class ="select" id="select" title="이메일 도메인 주소 선택" onclick="setEmailDomain(this.value);return false;">
+												<input type="text" id="email_id" name="accEmail" value=""title="이메일 아이디" placeholder=" 이메일" maxlength="18" />&nbsp;&nbsp;@&nbsp;
+												<select class ="select" id="select" name="accEmailDo" title="이메일 도메인 주소 선택" onclick="setEmailDomain(this.value);return false;">
 														<option value=""> --------선택--------</option>
 														<option value="naver.com">naver.com</option>
 														<option value="gmail.com">gmail.com</option>
@@ -317,10 +482,11 @@
 												</p>
 											</div>
 											<div>
-											<button type="submit" class="submit"><a class="joinBtn">회원가입</a></button>
+											<button type="submit" class="submit"><div class="joinBtn">회원가입</div></button>
 											</div>
 										</div>
 								</div>
+							</form>
 							</div>
 						</div>
 					</div>
