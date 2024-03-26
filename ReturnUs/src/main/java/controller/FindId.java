@@ -1,11 +1,16 @@
 package controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import dto.Account;
+import service.AccountService;
+import service.AccountServiceImpl;
 
 /**
  * Servlet implementation class FindId
@@ -33,8 +38,23 @@ public class FindId extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.setCharacterEncoding("utf-8");
+		AccountService accountService = new AccountServiceImpl();
+		
+		try {
+			String accName = request.getParameter("accName");
+			String accBirth = request.getParameter("accBirth");
+			String accTel = request.getParameter("accTel");
+			
+			Account account = accountService.findId(accName,accBirth,accTel);
+			request.setAttribute("accId", account.getAccId());
+			request.setAttribute("accJoinDt", account.getAccJoinDt());
+			request.getRequestDispatcher("/views/account/resultFindId.jsp").forward(request, response);
+		}catch (Exception e) {
+			e.printStackTrace(); 
+			request.getRequestDispatcher("views/account/notFountId.jsp").forward(request, response);
+		}
+		
 	}
 
 }

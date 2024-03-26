@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class resultFindId
+ * Servlet implementation class NotFoundId
  */
-@WebServlet(name = "ResultFindId", urlPatterns = { "/resultfindid" })
-public class resultFindId extends HttpServlet {
+@WebServlet("/notfoundid")
+public class NotFoundId extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public resultFindId() {
+    public NotFoundId() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,15 +26,7 @@ public class resultFindId extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/views/account/resultFindId.jsp").forward(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.getRequestDispatcher("views/account/notFoundId.jsp").forward(request, response);
 	}
 
 }

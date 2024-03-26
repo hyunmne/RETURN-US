@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="path" value="${pageContext.request.contextPath}" />
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -110,7 +112,29 @@
 
 
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
 
+$(document).ready(function() {
+	 $('#findIdForm').submit(function(e) {
+		// 이름 체크
+	        var name = $('#accName').val();
+	        if (name === '' || !isNaN(name)) {
+	            alert('이름을 확인해주시기 바랍니다.');
+	            e.preventDefault(); 
+	            return;
+	        }
+	        
+	     // 전화번호 체크
+	        var tel = $('#accTel').val();
+	        if (tel.length < 10 || tel.length > 11 || isNaN(tel)) {
+	            alert('전화번호를 확인해주시기 바랍니다.');
+	            e.preventDefault(); 
+	            return;
+	        }
+     });
+}); 
+</script>
 </head>
 
 <body class="noto-sans">
@@ -146,21 +170,38 @@
 								<div class="smtitle">
 									<p class="smt">리터너스 회원정보에 등록되어 있는 <br>휴대전화 번호와 생년월일로 ID를 찾을 수 있습니다.</p>
 								</div>
-								<div class="input-container">
-									<label for="name">성명<div class="star">*</div></label>
-									<input type="text" id="name" name="name" placeholder="성명 입력">
-								</div>
-								<div class="input-container">
-									<label for="birth">생년월일<div class="star">*</div></label>
-									<input type="text" id="birth" name="birth" placeholder="생년월일 8자리 (ex. YYYYMMDD)">
-								</div>
-								<div class="input-container">
-									<label for="tel">휴대전화번호<div class="star">*</div></label>
-									<input type="text" id="tel" name="tel" placeholder="-를 제외한 11자리">
-								</div>
-								<div>
-									<a href="resultfindid"><button id="findId"><div class="findIdfont">아이디 찾기</div></button></a>
-								</div>
+								<form id="findIdForm" action="findid" method="post">
+									<div class="input-container">
+										<label for="name">성명<div class="star">*</div></label>
+										<input type="text" id="accName" name="accName" value="${accName }" placeholder="성명 입력">
+									</div>
+									<br>
+									<div class="input-container">
+										<label for="birth">생년월일<div class="star">*</div></label>
+										<input type="date" id="accBirth" name="accBirth" value="${accBirth }" placeholder="생년월일 8자리 (ex. YYYYMMDD)"required>
+									</div>
+									<script>
+    									// 현재 날짜를 가져오는 함수
+    										function getCurrentDate() {
+        										var today = new Date();
+        										var year = today.getFullYear(); // 연도
+        										var month = (today.getMonth() + 1).toString().padStart(2, '0'); // 월 (0부터 시작하기 때문에 +1 필요)
+        										var day = today.getDate().toString().padStart(2, '0'); // 일
+        										return year + '-' + month + '-' + day;
+    										}
+
+    										// 최대 날짜 설정
+    										document.getElementById('accBirth').setAttribute('max', getCurrentDate());
+										</script>
+									<br>
+									<div class="input-container">
+										<label for="tel">휴대전화번호<div class="star">*</div></label>
+										<input type="text" id="accTel" name="accTel" value="${accTel }" placeholder="-를 제외하고 입력해주세요">
+									</div>
+									<div>
+										<button type="submit" class="submit" id="findId"><div class="findIdfont">아이디 찾기</div></button>
+									</div>
+								</form>
 							</div>
 						</div>
 					</div>

@@ -108,7 +108,7 @@
 										<h1 id="bigtitle" class="noto-sans"style="color: #59981A">아이디 찾기</h1>
 									</div>
 									<div class="smtitle">
-										<p class="smt">개인정보 보호를 위해 아이디 끝 두자리부터 네 자리는 **처리합니다.</p>
+										<p class="smt"></p>
 									</div>
 								</div>
 							</div>
@@ -116,12 +116,12 @@
 							<!--body ** 여기서부터 코딩하시면 됩니다!!! ** -->
 							<div id="sm">
 								<p style="font-size: 22px; font-family: 'DM Sans'; color: black; font-weight: 500;">
-								회원님의 아이디는 <span class="account" id="accountId">${accId}</span>(으)로 등록되어 있습니다 <br>
-								가입 일자는 <span class="account">${accJoinDt }</span>입니다.
+									등록된 정보를 찾을 수 없습니다.
+								
 								</p>
 								<div style="margin-top: 40px;">
-								<a href="login"><button id="login" class="button"><div class="buttonfont">로그인</div></button></a>
-								<a href="resultfindpw"><button id="findPw" class="button"><div class="buttonfont">비밀번호 찾기</div></button></a>
+								<a href="findid"><button id="findid" class="button"><div class="buttonfont">아이디 찾기</div></button></a>
+								<a href="join"><button id="join" class="button"><div class="buttonfont">회원가입</div></button></a>
 							</div>
 							</div>
 							<hr class="hr-custom2" style="margin-bottom:100px;">
@@ -132,23 +132,7 @@
 		</div>
 	</div>
 
-<script>
-// 끝에 두 글자를 ** 처리하여 표시하는 함수
-function showHiddenChars(elementId) {
-  const element = document.getElementById(elementId);
-  if (element) {
-    const accountId = element.textContent;
-    if (accountId.length >= 2) {
-      const hiddenPart = accountId.substring(accountId.length - 2).replace(/./g, '*');
-      const visiblePart = accountId.substring(0, accountId.length - 2);
-      element.innerHTML = visiblePart + '<span class="account">' + hiddenPart + '</span>';
-    }
-  }
-}
 
-// 아이디를 표시하는 요소의 ID를 인수로 전달하여 함수 호출
-showHiddenChars('accountId');
-</script>
 
 
 

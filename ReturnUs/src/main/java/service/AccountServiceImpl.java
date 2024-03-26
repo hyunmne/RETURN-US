@@ -67,7 +67,10 @@ public class AccountServiceImpl implements AccountService {
 		if(account==null) return false;
 		return true;
 	}
-	
-	
 
+	@Override
+	public Account findId(String accName, String accBirth, String accTel) throws Exception {
+		
+		return accountDao.findIdAccount(accName, accBirth, accTel);
+	}
 }
