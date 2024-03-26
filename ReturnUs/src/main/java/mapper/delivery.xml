@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.delivery">
+
+	<insert id="insertDelivery" parameterType="dto.Delivery">
+		<![CDATA[
+		]]>
+	</insert>
+	
+	<select id="selectDelList" resultType="dto.Delivery" parameterType="String">
+		<![CDATA[
+			select DEL_NO as delNo, DEL_NAME as delName, DEL_TEL as delTel, DEL_TYPE as delType, 
+				   DEL_POSTCODE as delPostCode, DEL_ADDR as delAddr, DEL_DETAIL_ADDR as delDetailaddr
+			from delivery
+			where acc_id = #{accId}
+		]]>
+	</select>
+
+</mapper>

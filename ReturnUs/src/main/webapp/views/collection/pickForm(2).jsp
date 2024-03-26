@@ -49,6 +49,23 @@
         padding: 10px;
         margin: 10px;
     }
+    .radioCol {
+    	width: 30px;
+    	padding:35px;
+    }
+    .titleCol {
+    	width: 100px;
+    	border-right: 1px solid lightgray;
+    	text-align: center;
+    	color:#333333;
+    }
+    
+    .addressCol {
+		padding: 10px; 
+		padding-left:20px;  
+		width:300px; 
+		color:#333333;	
+    }
 </style>
 </head>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -99,7 +116,7 @@
 													<h5 class="noto-sans" style="margin:10px;">이름</h5>
 												</div>
 												<div class="col-7 d-flex justify-content-center">
-													<input type="text" class="rounded-input" placeholder="이름" name="accName">
+													<input type="text" class="rounded-input" placeholder="이름" value="${acc.accName }" name="accName" id="accName">
 												</div>
 											</div>
 											
@@ -109,7 +126,7 @@
 													<h5 class="noto-sans" style="margin:10px;">전화번호</h5>
 												</div>
 												<div class="col-7 d-flex justify-content-center">
-													<input type="text" class="rounded-input" placeholder="전화번호" name="accTel">
+													<input type="text" class="rounded-input" placeholder="전화번호" value="${acc.accTel }" name="accTel" id="accTel">
 												</div>
 											</div>
 											
@@ -120,9 +137,8 @@
 												</div>
 												<div class="col-7 d-flex justify-content-center">
 							                        <div class="d-flex align-items-center">
-							                            <input type="text" id="AddrNm" placeholder="주소명" class="rounded-input" style="width:108px;">
-<!-- 														<input type="button" class="btn-green" onclick="selectAddr()" style="width:134px; height:40px;" value="배송지 목록 조회"> -->
-														<a href="javascript:;" class="status-button btn-green" data-bs-toggle="modal" 
+							                            <input type="text" id="addrNm" placeholder="주소지 선택" class="rounded-input" style="width:108px;">
+														<a href="javascript:;" class="status-button btn-green" data-bs-toggle="modal" data-acc-id="${acc.accId }"
 																						data-bs-target="#verticalycentered">배송지 목록 조회</a>
 							                        </div>
 							                    </div>
@@ -135,7 +151,7 @@
 												</div>
 												<div class="col-7 d-flex justify-content-center">
 							                        <div class="d-flex align-items-center">
-							                            <input type="text" id="accPostCode" name="accPostCode" placeholder="우편번호" class="rounded-input" style="width:108px;">
+							                            <input type="text" id="accPostCode" value="${acc.accPostCode }" name="accPostCode" placeholder="우편번호" class="rounded-input" style="width:108px;">
 														<input type="button" class="btn btn-primary" onclick="findPostCd()" style="width:134px; height:40px;" value="우편번호 찾기">
 							                        </div>
 							                    </div>
@@ -147,16 +163,16 @@
 													<h5 class="noto-sans" style="margin:10px;">주소</h5>
 												</div>
 												<div class="col-7 d-flex justify-content-center">
-													<input type="text" id="accAddr" name="accAddr" class="rounded-input" placeholder="주소">
+													<input type="text" id="accAddr" name="accAddr" value="${acc.accAddr }" class="rounded-input" placeholder="주소">
 												</div>
 											</div>
 											<!-- 상세주소 div -->
 											<div class="col-12 d-flex" style="">
 												<div class="col-5 d-flex justify-content-center" style="padding:0px;">
-<!-- 													<h5 class="noto-sans" style="margin:10px;">주소</h5> -->
 												</div>
 												<div class="col-7 d-flex justify-content-center" style="">
-													<input type="text" class="rounded-input" name="accDetailAddr" id="accDetailAddr" style="margin:0px;" placeholder="상세주소">
+													<input type="text" class="rounded-input" name="accDetailAddr" value="${acc.accDetailAddr }" id="accDetailAddr" 
+													style="margin:0px;" placeholder="상세주소">
 												</div>
 											</div>
 											
@@ -184,43 +200,90 @@
 
 	<%@ include file="/views/common/footer.jsp" %>
 
-
-<!-- 모달  -->
-<div class="modal fade" id="verticalycentered" tabindex="-1">
-	<div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">주소지 목록</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal"
-					aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				<form id="statusChangeForm" method="post" action="#">
-					<input id="accId" type="hidden" name="accId" /> 
-					<span>상태</span>
-					<select class="form-select" name="ctrStatus" id="ctrStatusSelect" style="display: inline; width: 70%; margin-left: 40px;">
-						<option value="" label="상태변경" />
-						<option value="V00" label="신규" />
-						<option value="V01" label="계약 진행" />
-						<option value="V02" label="계약 완료" />
-						<option value="V03" label="연장 계약" />
-						<option value="V99" label="만료(퇴점)" />
-						<option value="V88" label="유찰" />
-					</select>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="submit" class="btn btn-primary">선택</button>
-				<button type="button" class="btn btn-success" data-bs-dismiss="modal">취소</button>
+<!-- 모달 -->
+	<div class="modal fade" id="verticalycentered" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+<!-- 				modal header -->
+				<div class="modal-header">
+					<h5 class="modal-title noto-sans">${acc.accName }님 주소지 목록</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				
+				<!--          모달 본문  -->
+				<div class="modal-body" style="padding: 0px">
+					<input id="accId" type="hidden" name="accId" />
+					<table id="delList">
+					</table>
+				</div>
+				
+<!-- 				modal footer -->
+				<div class="modal-footer">
+					<button id="addressSelBtn" class="btn btn-primary" data-bs-dismiss="modal">선택</button>
+					<button type="button" class="btn btn-success" data-bs-dismiss="modal">취소</button>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
+
+
+	<!-- 모달  -->
 
 
 
 
 </body>
+
+<script>
+let delList;
+// 모달이 열릴 때 실행될 함수
+$('#verticalycentered').on('show.bs.modal', function (e) {
+	var delListDiv = $("#delList");
+	delListDiv.html('')
+    // AJAX 요청을 보냅니다.
+    $.ajax({
+        url: 'delivery', // 서블릿 URL을 입력합니다.
+        type: 'GET', // 요청 방식을 지정합니다.
+        data: { accId: '${acc.accId}' }, // 서블릿으로 전송할 데이터를 지정합니다.
+        success: function(response) { // 요청이 성공하면 실행될 함수입니다.
+        	delList = JSON.parse(response);
+        	delList.map(function(del, index) {
+        		var delDiv = `<tr style="border-bottom:1px solid lightgray">
+								<td class="titleCol">
+									<b>\${del.delName }</b>
+								</td>		
+								<td class="addressCol">
+									<span style="color:#FA4256">\${del.delPostCode } </span><br>
+								    \${del.delTel }<br>
+									\${del.delAddr }&nbsp;
+									\${del.delDetailAddr }</br>
+								</td>		
+								<td class="radioCol">
+									<input type="radio" name="delAddress" value='\${index}' style="accent-color: #198754;" />
+								</td>	
+							 </tr><hr>`;
+							 
+        		delListDiv.append(delDiv);
+        		$("#addressSelBtn").click(function() {
+        			 var selIdx = $("input[name='delAddress']:checked").val();
+        			 $("#addrNm").val(delList[selIdx].delName)
+        			 $("#accTel").val(delList[selIdx].delTel)
+        			 $("#accPostCode").val(delList[selIdx].delPostCode)
+        			 $("#accAddr").val(delList[selIdx].delAddr)
+        			 $("#accDetailAddr").val(delList[selIdx].delDetailAddr)
+        		}) 
+        	});
+        },
+        error: function(xhr, status, error) { // 요청이 실패하면 실행될 함수입니다.
+            console.error('AJAX request failed: ', error);
+        }
+    });
+});
+
+
+
+</script>
 
 <script>
 

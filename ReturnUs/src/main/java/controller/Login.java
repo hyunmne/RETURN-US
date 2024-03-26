@@ -42,7 +42,7 @@ public class Login extends HttpServlet {
 			System.out.println(request.getParameter("accId"));
 			System.out.println(request.getParameter("accPassword"));
 			service.login(request);
-			request.getRequestDispatcher("/views/collection/pickForm(1).jsp").forward(request, response);
+			request.getRequestDispatcher("/main.jsp").forward(request, response);
 //			response.sendRedirect("main.jsp");
 		} catch(Exception e) {
 			e.printStackTrace();
