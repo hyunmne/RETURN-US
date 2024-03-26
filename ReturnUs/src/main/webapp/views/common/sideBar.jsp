@@ -33,6 +33,18 @@
         </div>
       </li>
       <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+          테스트용사이드바-한샘
+        </button>
+        <div class="collapse show" id="home-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="./placeList?plaType=재활용정거장" class="link-dark rounded">재활용정거장</a></li>
+            <li><a href="./placeList?plaType=의류수거함" class="link-dark rounded">의류수거함</a></li>
+            <li><a href="./placeList?plaType=폐건전지수거함" class="link-dark rounded">폐건전지수거함</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="mb-1">
         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
           Orders
         </button>

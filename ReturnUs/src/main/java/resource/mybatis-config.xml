@@ -6,8 +6,13 @@
 <configuration>
 
 	<typeAliases>
+<<<<<<< Updated upstream
 		<typeAlias type="dto.Account" alias="Account" />
 <!-- 		<typeAlias type="dto.Delivery" alias="Delievery" /> -->
+=======
+		<typeAlias type="dto.Account" alias="account" />
+		<typeAlias type="dto.Place" alias="place" />
+>>>>>>> Stashed changes
 	</typeAliases>
 	
 	<environments default="development">
@@ -28,7 +33,11 @@
 	
 	<mappers>
 		<mapper resource="mapper/account.xml"/>
+<<<<<<< Updated upstream
 		<mapper resource="mapper/delivery.xml"/>
 		<mapper resource="mapper/collection.xml"/>
+=======
+		<mapper resource="mapper/place.xml"/>
+>>>>>>> Stashed changes
 	</mappers>
 </configuration>
