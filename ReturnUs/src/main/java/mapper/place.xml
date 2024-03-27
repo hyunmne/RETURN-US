@@ -5,19 +5,29 @@
 
  <mapper namespace="mapper.place">
  
- 	<select id="selectPlaceTypeList" parameterType="java.util.Map" resultType="place">
-         	select pla_no as placeNo, pla_name as plaName, pla_addr as plaAddr, pla_type as plaType, 
-         			pla_lat as plaLat, pla_long as plaLong, pla_region as plaRegion, pla_district as plaDistrict 
-         	from place
-         	where pla_type = #{plaType}
-         	<if test='plaRegion !=null'>
-         		 and pla_region = #{plaRegion}
-         	</if>
-         	<if test='plaDistrict !=null'>
-         		 and pla_district = #{plaDistrict}
-         	</if>
-         	order by pla_no desc
-         	limit #{row}, 10
+ 	<select id="selectPlaceList" parameterType="java.util.Map" resultType="place">
+       	 select 
+	        pla_no as placeNo, pla_name as plaName, pla_addr as plaAddr, pla_type as plaType, 
+	        pla_lat as plaLat, pla_long as plaLong, pla_region as plaRegion, pla_district as plaDistrict
+	     from 
+	         place
+	     where 
+	         pla_type = #{plaType}
+	         <if test='plaRegion !=null'>
+	             and pla_region = #{plaRegion}
+	         </if>
+	         <if test='plaDistrict !=null'>
+	             and pla_district = #{plaDistrict}
+	         </if>
+	      order by
+	     	 CASE 
+	            WHEN pla_name IS NULL THEN 1
+	        END,
+	        CASE 
+	            WHEN pla_region = '서울특별시' THEN 1
+	            ELSE 2
+	        END DESC, pla_district
+	     limit #{row}, 8
  	</select>
  	
  	<select id="selectPlaceCount" parameterType="String" resultType="Integer">
@@ -33,35 +43,6 @@
          	from place
          	where pla_type = #{plaType}
          	order by pla_district
-      	]]>
- 	</select>
- 	
- 	<select id="selectPlaceList" parameterType="java.util.Map" resultType="place">
- 		<![CDATA[
-         	select pla_no as placeNo, pla_name as plaName, pla_addr as plaAddr, pla_type as plaType, 
-         			pla_lat as plaLat, pla_long as plaLong, pla_region as plaRegion, pla_district as plaDistrict 
-         	from place
-         	where pla_type = #{plaType} and pla_region = #{plaRegion} and pla_district = #{plaDistrict}
-      	]]>
- 	</select>
- 	
- 	
- 	
- 	<select id="selectRegionList" parameterType="java.util.Map" resultType="place">
- 		<![CDATA[
-         	select pla_no as placeNo, pla_name as plaName, pla_addr as plaAddr, pla_type as plaType, 
-         			pla_lat as plaLat, pla_long as plaLong, pla_region as plaRegion, pla_district as plaDistrict 
-         	from place
-         	where pla_type = #{plaType} and pla_region = #{plaRegion}
-      	]]>
- 	</select>
-
- 	<select id="selectDistrictList" parameterType="java.util.Map" resultType="place">
- 		<![CDATA[
-         	select pla_no as placeNo, pla_name as plaName, pla_addr as plaAddr, pla_type as plaType, 
-         			pla_lat as plaLat, pla_long as plaLong, pla_region as plaRegion, pla_district as plaDistrict 
-         	from place
-         	where pla_type = #{plaType} and pla_district = #{plaDistrict}
       	]]>
  	</select>
  	

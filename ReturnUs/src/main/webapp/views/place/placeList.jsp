@@ -19,31 +19,65 @@
 	height: 100%; 
 	padding: 45px 50px 0px 50px;
 }
-#listDiv table {
+#listDiv {
     width: 100%;
     border-collapse: collapse;
     margin: auto;
-    margin-top: 40px;
-    border: 1px solid lightgray;
+    margin-top: 30px;
+    margin-left: 25px;
 }
-
+#search {
+    width: 90%;
+    margin-top: 20px;
+    margin-left: 50px;
+    display: flex;
+}
 #pageDiv {
-	margin: auto;
-	width: 800px;
-	text-align: center;
 	margin-bottom: 50px;
 }
+#pageDiv button {
+    padding: 10px 16px;
+    text-decoration: none;
+    transition: 0.5s;
+    border: 1px solid var(--bs-light);
+    margin: 0 4px;
+    background: var(--bs-white);
+}
+#pageDiv button:hover {
+	color: white;
+	background: #81c408;
+}
 #pageDiv a {
-	display: inline-block;
-	width: 20px;
-	height: 20px;
-	text-decoration: none;
+	border: 1px solid var(--bs-light);
 }
-#pageDiv .pageBtn {
-	background: lightgray;
+.typeTitle {
+	color: #59981A;
+    font-size: medium;
+    font-weight: 500;
+    margin: 20px;
 }
-#pageDiv .pageSelect {
-	background: lightblue;
+.imgStyle {
+	width: 2.5%; 
+	margin-right: 5px;
+}
+.placeBox {
+	width: 47%;
+    border-radius: 10px;
+    display: inline-block;
+    margin-right: 20px;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.placeTitle {
+    font-size: smaller;
+}
+#selectRegion, #selectDistrict {
+    width: 20%;
+    border-radius: 10px;
+    height: 35px;
+    text-align: center;
+    margin-left: 15px;
 }
 </style>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -52,22 +86,6 @@
 		var district = document.getElementById("selectDistrict");
 		district.disabled = true;
 	};
-	
-	function getPlaceList(page) {
-		var region = $('#selectRegion').val();
-		var district = $("#selectDistrict").val();
-		var type = $('#plaType').val();
-		console.log("지역 : " + region);
-		console.log("구 : " + district);
-		console.log("타입 : " + type);
-		
-		var url = `placeList?plaType=\${type}&page=\${page}`;
-		if(region!=null && region!=0)
-			url += `&plaRegion=\${region}`;
-		if(district!=null && district!=0)
-			url += `&plaDistrict=\${district}`;
-		document.location.href = url
-	}
 	
 	$(function() {
 		$('#selectRegion').change(function() {
@@ -84,12 +102,13 @@
 			
 			var thisRegion = $(this).val();
 			var plaDistrict = $("#selectDistrict");
-
+			//선택한 '지역'에 해당하는 data-key 속성을 가진 '구'만 보이도록 설정
 			plaDistrict.find('option').hide();
 			plaDistrict.find('option[data-key="' + thisRegion + '"]').show();
 			
 		});
 		
+		//지역,구 선택 후에도 값이 계속 유지되도록 selected 속성 true로 설정
 		$('#selectRegion').val('${plaRegion}').prop("selected",true);
 		$('#selectDistrict').val('${plaDistrict}').prop("selected",true);
 		
@@ -97,6 +116,21 @@
 			getPlaceList(1);
 		});
 	});
+	
+	//페이징 처리 함수
+	function getPlaceList(page) {
+		var region = $('#selectRegion').val();
+		var district = $("#selectDistrict").val();
+		var type = $('#plaType').val();
+		
+		//조건에 따라 넘겨줄 파라미터 설정 후 get방식으로 url넘기기
+		var url = `placeList?plaType=\${type}&page=\${page}`;
+		if(region!=null && region!=0)
+			url += `&plaRegion=\${region}`;
+		if(district!=null && district!=0)
+			url += `&plaDistrict=\${district}`;
+		document.location.href = url;
+	}
 
 </script>
 </head>
@@ -123,58 +157,100 @@
 						<!--큰 card ** 여기서부터 코딩하시면 됩니다!!! ** -->
 						<div id="big" class="card">
 							<div style="padding: 50px 0px 30px; color: #3E6D10;">
-								<h3 class="noto-sans" style="color: #3E6D10;">방문 수거 신청</h3>
-								<span style="color: #3E6D10;">리터너스가 집 앞까지 찾아가 손쉽게 분리수거 해드립니다!</span>
+								<h3 class="noto-sans" style="color: #3E6D10;">장소 검색</h3>
+								<span style="color: #3E6D10;">지구를 지키기위한 한 걸음, ${plaType }의 장소를 검색해보세요!</span>
 							</div>
 							<!--body ** 여기서부터 코딩하시면 됩니다!!! ** -->
 							<div id="sm" class="card">
 								<div id="map" style="width:100%;height:350px;"></div>
 								<input type="hidden" id="plaType" value="${plaType}">
-								<p><em>${plaType }</em></p> 
+								<input type="hidden" id="placeList" value="${placeList}">
 								<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=915b6a231e6d1e690f36f1c4ac84bde8"></script>
 								<script>
-								var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-								    mapOption = { 
-								        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-								        level: 3 // 지도의 확대 레벨
-								    };
-								
-								var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-								  
-								// 마커를 표시할 위치입니다 
-								var position =  new kakao.maps.LatLng(33.450701, 126.570667);
-								
-								// 마커를 생성합니다
-								var marker = new kakao.maps.Marker({
-								  position: position,
-								  clickable: true // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
-								});
-								
-								// 아래 코드는 위의 마커를 생성하는 코드에서 clickable: true 와 같이
-								// 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
-								// marker.setClickable(true);
-								
-								// 마커를 지도에 표시합니다.
-								marker.setMap(map);
-								
-								// 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-								var iwContent = '<div style="padding:5px;">Hello World!</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-								    iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-								
-								// 인포윈도우를 생성합니다
-								var infowindow = new kakao.maps.InfoWindow({
-								    content : iwContent,
-								    removable : iwRemoveable
-								});
-								
-								// 마커에 클릭이벤트를 등록합니다
-								kakao.maps.event.addListener(marker, 'click', function() {
-								      // 마커 위에 인포윈도우를 표시합니다
-								      infowindow.open(map, marker);  
-								});
+									var placeList =  JSON.parse('${placeListJson}');
+									var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+									    mapOption = { 
+									        center: new kakao.maps.LatLng(placeList[0].plaLat, placeList[0].plaLong), // 지도의 중심좌표
+									        level: 3 // 지도의 확대 레벨
+									    };
+									
+									var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+									
+									var positions = [];
+									
+									placeList.forEach(function(place) {
+										var position = {
+												title: place.plaName,
+												latlng: new kakao.maps.LatLng(place.plaLat, place.plaLong),
+												addr: place.plaAddr
+										}
+										positions.push(position);
+									})
+									
+									// 마커 이미지의 이미지 주소입니다
+									var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+									
+									for(var i = 0; i < positions.length; i++) {
+										// 마커 이미지의 이미지 크기 입니다
+									    var imageSize = new kakao.maps.Size(24, 35);
+										
+									 // 마커 이미지를 생성합니다    
+									    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+									    
+									 // 마커를 생성합니다
+									    var marker = new kakao.maps.Marker({
+									        map: map, // 마커를 표시할 지도
+									        position: positions[i].latlng, // 마커를 표시할 위치
+									        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+									        image : markerImage // 마커 이미지 
+									    });
+									    
+									 var prevInfowindow = false;
+									 // 마커에 클릭 이벤트를 등록합니다
+									    (function(marker, position) {
+								            kakao.maps.event.addListener(marker, 'click', function() {
+								                // 이전에 열렸던 인포윈도우 있으면 닫기
+								                if (prevInfowindow) {
+								                    prevInfowindow.close();
+								                }
+								                // 새 인포위도우 열기
+								                var infowindow = new kakao.maps.InfoWindow({
+								                    content: '<div style="padding:5px;"><strong>' + position.title + '</strong><br>' 
+								                    			+ position.addr + '</div>'
+								                });
+								                infowindow.open(map, marker);
+								                prevInfowindow = infowindow;
+								            });
+								        })(marker, positions[i]);
+									}
+									
+									// 모든 마커를 포함하는 지도 범위 얻기
+									var bounds = new kakao.maps.LatLngBounds();
+									
+									for(var i = 0; i < positions.length; i++) {
+										bounds.extend(positions[i].latlng);
+									}
+									
+									map.setBounds(bounds);
+									
 								</script>
-								
-								<div id="search" style="width:100%;">
+								<div class="typeTitle">
+									<c:choose>
+										<c:when test="${plaType eq '재활용정거장'}">
+											<img class="imgStyle" src="./resources/img/icon_recycle.png">
+											${plaType }
+										</c:when>										
+										<c:when test="${plaType eq '의류수거함'}">
+											<img class="imgStyle" src="./resources/img/icon_clothe.png">
+											${plaType }
+										</c:when>										
+										<c:when test="${plaType eq '폐건전지수거함'}">
+											<img class="imgStyle" src="./resources/img/icon_battery.png">
+											${plaType }
+										</c:when>										
+									</c:choose>
+								</div>
+								<div id="search">
 									<select name="region" id="selectRegion" value=${plaRegion }>
 										<option value="0"> 특별 / 광역시 </option>
 										<c:forEach items="${regionCategory }" var="region">
@@ -189,58 +265,58 @@
 								            </c:forEach>
 										</c:forEach>
 									</select>
+									<p style="margin-left: auto;">총 ${countByType }개의 검색 결과가 있습니다</p>
 								</div>
 								<div id="listDiv">
-									<table>
-										<thead class="table-light">
-											<tr>
-												<th>장소명</th>
-												<th>주소</th>
-												<th>유형</th>
-												<th>특별/광역시</th>
-												<th>군/구</th>
-											</tr>
-										</thead>
-										<tbody>
-											<c:forEach items="${plaTypeList }" var="places">
-												<tr>
-													<td>${places.plaName }</td>
-													<td>${places.plaAddr }</td>
-													<td>${places.plaType }</td>
-													<td>${places.plaRegion }</td>
-													<td>${places.plaDistrict }</td>
-												</tr>
-											</c:forEach>
-										</tbody>
-									</table>
-								</div>
-								<div id="pageDiv">
-									<c:choose>
-										<c:when test="${pageInfo.curPage == 1 }">
-											<a>&lt;</a>
-										</c:when>
-										<c:otherwise>
-											<a href="placeList?plaType=${plaType }&page=${pageInfo.curPage-1 }">&lt;</a>
-										</c:otherwise>
-									</c:choose>
-									<c:forEach begin="${pageInfo.startPage }" end="${pageInfo.endPage }" var="i">
-										<c:choose>
-											<c:when test="${i == pageInfo.curPage }">
-												<button onclick="getPlaceList(${i});" class="pageSelect">${i }</button>
-											</c:when>
-											<c:otherwise>
-												<button onclick="getPlaceList(${i});" class="pageBtn">${i }</button>
-											</c:otherwise>
-										</c:choose>
+									<c:forEach items="${placeList }" var="places" varStatus="loop">
+										<div class="placeBox">
+											<div class="placeTitle">
+												<b style="font-size: medium;">${places.plaName }</b> - ${places.plaRegion} ${places.plaDistrict }
+											</div>
+											<div class="placeContent">
+												${places.plaAddr }
+											</div>
+										</div>
+										<c:if test="${loop.index % 2 == 1 }">
+											<br>
+										</c:if>
 									</c:forEach>
-									<c:choose>
-										<c:when test="${pageInfo.curPage == pageInfo.allPage }">
-											<a>&gt;</a>
-										</c:when>
-										<c:otherwise>
-											<a href="placeList?plaType=${plaType }&page=${pageInfo.curPage+1 }">&gt;</a>
-										</c:otherwise>
-									</c:choose>
+								</div>
+									
+									<div id="pageDiv" class="col-12">
+                                        <div class="pagination d-flex justify-content-center mt-5">
+                                        	<c:choose>
+												<c:when test="${pageInfo.curPage == 1 }">
+													<a class="rounded">&lt;</a>
+												</c:when>
+												<c:otherwise>
+													<a href="placeList?plaType=${plaType }&page=${pageInfo.curPage-1 }" class="rounded">&lt;</a>
+												</c:otherwise>
+											</c:choose>
+											<c:forEach begin="${pageInfo.startPage }" end="${pageInfo.endPage }" var="i">
+												<c:choose>
+													<c:when test="${i == pageInfo.curPage }">
+														<button onclick="getPlaceList(${i});" class="rounded" style="background: #81c408;color: white;">${i}</button>
+													</c:when>
+													<c:otherwise>
+														<button onclick="getPlaceList(${i});" class="rounded">${i}</button>
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
+											<c:choose>
+												<c:when test="${pageInfo.curPage == pageInfo.allPage }">
+													<a>&gt;</a>
+													<a class="rounded">&gt;</a>
+												</c:when>
+												<c:otherwise>
+													<a href="placeList?plaType=${plaType }&page=${pageInfo.curPage+1 }" class="rounded">&gt;</a>
+												</c:otherwise>
+											</c:choose>
+                                        </div>
+                                    </div>
+									
+									
+									
 								</div>
 							</div>
 						</div>

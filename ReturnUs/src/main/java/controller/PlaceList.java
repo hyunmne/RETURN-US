@@ -41,7 +41,7 @@ public class PlaceList extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		try {
 			PlaceService service = new PlaceServiceImpl();
-			service.placeTypeList(request);
+			service.placeList(request);
 			request.getRequestDispatcher("/views/place/placeList.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -52,35 +52,6 @@ public class PlaceList extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		response.setCharacterEncoding("utf-8");
-		String plaType = request.getParameter("plaType");
-		String plaRegion = request.getParameter("plaRegion");
-		String plaDistrict = request.getParameter("plaDistrict");
-		
-		try {
-			PlaceService service = new PlaceServiceImpl();
-			List<Place> places = service.placeList(plaType, plaRegion, plaDistrict);
-			
-			JSONArray jPlaces = new JSONArray();
-			for(Place place : places) {
-				JSONObject jPlace = new JSONObject();
-				jPlace.put("plaNo", place.getPlaNo());
-				jPlace.put("plaName", place.getPlaName());
-				jPlace.put("plaAddr", place.getPlaAddr());
-				jPlace.put("plaType", place.getPlaType());
-				jPlace.put("plaLat", place.getPlaLat());
-				jPlace.put("plaLong", place.getPlaLong());
-				jPlace.put("plaRegion", place.getPlaRegion());
-				jPlace.put("plaDistrict", place.getPlaDistrict());
-				jPlaces.add(jPlace);
-			}
-			response.getWriter().write(jPlaces.toJSONString());
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
 		
 	}
 
