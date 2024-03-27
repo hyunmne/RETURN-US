@@ -74,12 +74,15 @@
 									<div class="card" style="padding: 10px 10px; max-height:300px; overflow-y: auto;"> 
 										<%@include file="/views/collection/NewFile.jsp" %>
 									</div>
+									<form id="myForm" action="collect1" method="post">
 									<div style="display:flex; justify-content:right; margin:10px 0px; align-items:center;" >
-										<input type="radio" style="accent-color: #198754;"> &nbsp;&nbsp; 상기 주의사항을 전부 숙지하였으며 동의합니다.
+									 <label>
+								        <input type="radio" id="agreeRadio" style="accent-color: #198754;"> 상기 주의사항을 전부 숙지하였으며 동의합니다.
+								     </label>
 									</div>
-									<form action="collect1" method="post">
+								    <div id="validationMessage" style="display: none; color: red; text-align:right;">동의 여부를 선택해주세요.</div>
 									<div style="display:flex; justify-content:right; margin:10px 0px; padding-right:10px;" >
-										<button class="btn btn-success">다음</button>
+										<button class="btn btn-success" type="submit">다음</button>
 									</div>
 									</form>
 								</div>
@@ -95,5 +98,18 @@
 	<%@ include file="/views/common/footer.jsp" %>
 
 </body>
+
+
+
+<script>
+    document.getElementById("myForm").onsubmit = function() {
+        var agreeRadio = document.getElementById("agreeRadio");
+        if (!agreeRadio.checked) {
+//             alert("동의 여부를 선택해주세요.");
+            document.getElementById("validationMessage").style.display = "block"; // 문구 표시
+            return false; // 폼 제출 막기
+        }
+    };
+</script>
 
 </html>
