@@ -84,7 +84,7 @@
             <div class="container px-0">
                 <nav class="navbar navbar-light bg-white navbar-expand-xl">
 <!--                     <a href="index.jsp" class="navbar-brand"><h1 class="text-primary display-6">Return:us</h1></a> -->
-                    <a href="index.jsp" class="navbar-brand"><img src="./resources/img/logo.png" style="width:180px" class="img-fluid" alt=""></a>
+                    <a href="main" class="navbar-brand"><img src="./resources/img/logo.png" style="width:180px" class="img-fluid" alt="logo"></a>
                     <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                         <span class="fa fa-bars text-primary"></span>
                     </button>
