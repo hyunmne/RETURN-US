@@ -9,5 +9,4 @@ public interface AccountService {
 	void login(HttpServletRequest request) throws Exception;
 	boolean accountIdCheck(String id) throws Exception;
 	Account findId(String accName, String accBirthSt, String accTel) throws Exception;
-	
 }

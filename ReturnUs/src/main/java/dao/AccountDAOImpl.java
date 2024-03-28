@@ -1,5 +1,4 @@
 package dao;
-import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,6 +28,9 @@ public class AccountDAOImpl implements AccountDAO {
 		return sqlSession.selectOne("mapper.account.findIdAccount", param);	
 	}
 	
-	
+	@Override
+	public String selectAdmin(String accId) throws Exception {
+		return sqlSession.selectOne("mapper.account.selectAdmin", accId);
+	}
 
 }

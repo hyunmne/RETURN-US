@@ -22,5 +22,12 @@
 			from account where ACC_Name = #{accName} and ACC_TEL = #{accTel} and ACC_BIRTH = #{accBirth}
 		]]>
 	</select>
+	<select id="selectAdmin" parameterType="String" resultType="String">
+		<![CDATA[
+			select ACC_ADMIN as accAdmin
+			from account 
+			where ACC_ID = #{accId}
+		]]>
+	</select>
 </mapper>	
 	
