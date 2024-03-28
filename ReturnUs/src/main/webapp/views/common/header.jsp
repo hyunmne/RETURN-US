@@ -100,7 +100,15 @@
                         	</c:choose>
                             <a href="recycling-guide" class="nav-item nav-link" style="width:200px; text-align:center;"><b>가이드</b></a>
                             <a href="./placeList?plaType=재활용정거장" class="nav-item nav-link" style="width:200px; text-align:center;"><b>주변탐색</b></a>
-                            <a href="modify-profile" class="nav-item nav-link" style="width:200px; text-align:center;"><b>마이페이지</b></a>
+                            <c:choose>
+		                    	<c:when test="${not empty acc.accId}">
+					                <a href="modify-profile" class="nav-item nav-link" style="width:200px; text-align:center;"><b>마이페이지</b></a>
+		                    	</c:when>
+		                    	<c:otherwise>
+		                    		<a href="login" class="nav-item nav-link" style="width:200px; text-align:center;"><b>마이페이지</b></a>
+		                    	</c:otherwise>
+		                    </c:choose>
+                            
                         </div>
 <!--                         <div class="d-flex m-3 me-0"> -->
 <!--                             <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button> -->
