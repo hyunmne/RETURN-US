@@ -136,7 +136,12 @@ td {
 									<br><br>
 									<span style="color:black;">2-2. 포인트 환급 대상 항목 수량 기입</span>
 								</div>
-
+								accName : <%= request.getParameter("accName") %> <br>
+								accTel  : <%= request.getParameter("accTel") %> <br>
+								accPostCode : <%= request.getParameter("accPostCode") %> <br>
+								accAddr : <%= request.getParameter("accAddr") %> <br>
+								accDetail : <%= request.getParameter("accDetailAddr") %> <br>
+								boxSize : <%= request.getParameter("boxSize") %> <br>
 								<div class="col-12 d-flex" style="padding:35px 40px 30px;">
 									<div class="col-3 d-flex justify-content-center" style="border-right:2px dashed #3E6D10">
 										<div class="card" id="insertDiv">
@@ -305,7 +310,7 @@ td {
 			<h5 class="noto-sans" style="margin-right: 50px">수량 / 무게</h5>
 		</div>
 		<div id="content" class="d-flex col-4 align-items-center">
-			<input id="etcCnt" type="number" class="rounded-input" placeholder="0" style="width: 100px; text-align: right;" />&nbsp;&nbsp;
+			<input id="etcCnt" type="number" min="0" class="rounded-input" placeholder="0" style="width: 100px; text-align: right;" />&nbsp;&nbsp;
 			<h6 class="noto-sans">개 / kg</h6>
 		</div>
 		<div id="btn" class="d-flex col-4 align-items-right">
@@ -335,7 +340,7 @@ td {
 			<h5 class="noto-sans">수량</h5>
 		</div>
 		<div id="content" class="d-flex col-6 align-items-center">
-			<input id="btCnt" type="number" class="rounded-input" placeholder="0" style="width: 100px; text-align: right;" />&nbsp;&nbsp;
+			<input id="btCnt" type="number" min="0" class="rounded-input" placeholder="0" style="width: 100px; text-align: right;" />&nbsp;&nbsp;
 			<h6 class="noto-sans">개</h6>
 		</div>
 		<div id="btn" class="d-flex col-3 align-items-right">
@@ -363,7 +368,7 @@ td {
 			<h5 class="noto-sans">수량</h5>
 		</div>
 		<div id="content" class="d-flex col-6 align-items-center">
-			<input type="number" id="ptCnt" class="rounded-input" placeholder="0" style="width: 100px; text-align: right;" />&nbsp;&nbsp;
+			<input type="number" min="0" id="ptCnt" class="rounded-input" placeholder="0" style="width: 100px; text-align: right;" />&nbsp;&nbsp;
 			<h6 class="noto-sans">개</h6>
 		</div>
 		<div id="btn" class="d-flex col-3 align-items-right">
@@ -402,7 +407,8 @@ function getCntBtn() {
     // 입력된 수량 가져오기
     var count = parseInt(document.getElementById("etcCnt").value);
     var selCelId = document.querySelector("td.selected").id;
-
+	
+    // 세부 항목이 있는 카테고리는 라디오 버튼의 선택 값을 가져옴
     if (selCelId === "pett") {
         selCelId = document.querySelector('input[type="radio"]:checked').id;
         count = parseInt(document.getElementById("ptCnt").value);
@@ -413,21 +419,20 @@ function getCntBtn() {
     var targetDiv = document.getElementById(selCelId + "Cnt");
 
     // 기존에 추가된 div가 있다면 숫자 부분만 업데이트
-    var existingSpan = targetDiv.querySelector("span");
-    if (existingSpan !== null) {
-        var existingText = existingSpan.textContent.trim();
-        var existingNumber = parseInt(existingText.match(/\d+/)[0]);
-        var updatedNumber = existingNumber + count;
-        existingSpan.textContent = existingText.replace(/\d+/, updatedNumber);
+    var exSpan = targetDiv.querySelector("span"); // targetDiv의 첫번째 span 요소를 가르킴
+    
+    if (exSpan !== null) { // exSpan의 요소가 있으면 
+        var exText = exSpan.textContent.trim(); // span의 텍스트를 공백 제거 해서 받음
+        var exNum = parseInt(exText.match(/\d+/)[0]); // 텍스트에서 숫자만 골라냄
+        var updateNum = exNum + count; // 기존 값과 새 입력 값을 더함
+        exSpan.textContent = exText.replace(/\d+/, updateNum); // 숫자였던 부분 자리를 updateNum으로 변경 
     } else {
     	var newSpan = document.createElement('span');
-        var result = count + "개";
-        newSpan.textContent = result;
-        newSpan.style.fontSize = "small";
-        newSpan.style.fontWeight = "bold";
-        newSpan.style.paddingLeft = "10px";
-        newSpan.style.color = "red";
-        targetDiv.appendChild(newSpan)
+    	
+    	newSpan.textContent = (selCelId === "paper") ? count + "kg" : count + "개";
+    	newSpan.classList.add(selCelId+'Col')
+        newSpan.style.cssText = "font-size: small; font-weight: bold; padding-left: 10px; color: red;";
+        targetDiv.appendChild(newSpan);
     }
 }
 
@@ -478,50 +483,52 @@ function getCntBtn() {
 </script>
 
 <script>
-function submitFormWithValues() {
-    var accName = document.getElementById('accName').value;
-    var accTel = document.getElementById('accTel').value;
-    var accPostCode = document.getElementById('accPostCode').value;
-    var accAddr = document.getElementById('accAddr').value;
-    var accDetailAddr = document.getElementById('accDetailAddr').value;
-    var colPaper = document.getElementById('paper').value;;
-    var colCan = document.getElementById('accDetailAddr').value;;
-    var colBt190 = document.getElementById('accDetailAddr').value;;
-    var colBt400 = document.getElementById('accDetailAddr').value;;
-    var colBt1000 = document.getElementById('accDetailAddr').value;;
-    var colBt1000 = document.getElementById('accDetailAddr').value;;
-    var colBt1000Up = document.getElementById('accDetailAddr').value;;
-    var colPlastic = document.getElementById('accDetailAddr').value;;
-    var colPtLid = document.getElementById('accDetailAddr').value;;
-    var colPtBody = document.getElementById('accDetailAddr').value;;
-    var colPpack = document.getElementById('accDetailAddr').value;;
-
+function nextBtn() {
+    // 폼 생성
     var form = document.createElement('form');
     form.method = 'POST';
     form.action = 'collect4';
 
+    // 폼 데이터 추가
     function addHiddenInput(name, value) {
         var input = document.createElement('input');
         input.type = 'hidden';
         input.name = name;
-        input.value = value;
+        // 값이 null이면 0으로 대체
+        input.value = value ? value : 0;
         form.appendChild(input);
     }
 
-    addHiddenInput('accName', accName);
-    addHiddenInput('accTel', accTel);
-    addHiddenInput('accPostCode', accPostCode);
-    addHiddenInput('accAddr', accAddr);
-    addHiddenInput('accDetailAddr', accDetailAddr);
-    addHiddenInput('boxSize', boxSize);
+    function addColValue(name, classNm) {
+        var elements = document.getElementsByClassName(classNm);
+        if (elements.length > 0) {
+            var cnt = elements[0].innerText.match(/\d+/)?.[0];
+            addHiddenInput(name, cnt);
+        } else {
+            addHiddenInput(name, 0);
+        }
+    }
 
+    addColValue('colPaper', 'paperCol');
+    addColValue('colCan', 'canCol');
+    addColValue('colBt190', 'bt190Col');
+    addColValue('colBt400', 'bt400Col');
+    addColValue('colBt1000', 'bt1000Col');
+    addColValue('colBt1000Up', 'bt1000UpCol');
+    addColValue('colPlastic', 'plasticCol');
+    addColValue('colPtLid', 'ptLidCol');
+    addColValue('colPtBody', 'ptBodyCol');
+    addColValue('colPpack', 'paperPackCol');
+
+    // 추가로 hidden 값들도 폼 데이터로 추가
+    var hiddenInputs = document.querySelectorAll('input[type=hidden]');
+    hiddenInputs.forEach(function(input) {
+        addHiddenInput(input.name, input.value);
+    });
+
+    // 폼을 문서에 추가하고 전송
     document.body.appendChild(form);
     form.submit();
-}
-
-function nextBtn() {
-	alert("버튼 누름")
-    submitFormWithValues();
 }
 </script>
 </html>

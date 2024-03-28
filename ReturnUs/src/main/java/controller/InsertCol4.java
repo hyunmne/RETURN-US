@@ -38,23 +38,27 @@ public class InsertCol4 extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		try {
-			String accName = request.getParameter("accName");
-			String accTel = request.getParameter("accTel");
-			String accPostCode = request.getParameter("accPostCode");
-			String accAddr = request.getParameter("accAddr");
-			String accDetailAddr = request.getParameter("accDetailAddr");
-			String boxSize = request.getParameter("boxSize");
 			
-			request.setAttribute("accName", accName);
-			request.setAttribute("accTel", accTel);
-			request.setAttribute("accPostCode", accPostCode);
-			request.setAttribute("accAddr", accAddr);
-			request.setAttribute("accDetailAddr", accDetailAddr);
-			request.setAttribute("boxSize", boxSize);
+			request.setAttribute("accName", request.getParameter("accName"));
+			request.setAttribute("accTel", request.getParameter("accTel"));
+			request.setAttribute("accPostCode", request.getParameter("accPostCode"));
+			request.setAttribute("accAddr", request.getParameter("accAddr"));
+			request.setAttribute("accDetailAddr", request.getParameter("accDetailAddr"));
+			request.setAttribute("boxSize", request.getParameter("boxSize"));
+
+			request.setAttribute("colPaper", request.getParameter("colPaper"));
+			request.setAttribute("colCan", request.getParameter("colCan"));
+			request.setAttribute("colBt190", request.getParameter("colBt190"));
+			request.setAttribute("colBt400", request.getParameter("colBt400"));
+			request.setAttribute("colBt1000", request.getParameter("colBt1000"));
+			request.setAttribute("colBt1000Up", request.getParameter("colBt1000Up"));
+			request.setAttribute("colPlastic", request.getParameter("colPlastic"));
+			request.setAttribute("colPtLid", request.getParameter("colPtLid"));
+			request.setAttribute("colPtBody", request.getParameter("colPtBody"));
+			request.setAttribute("colPpack", request.getParameter("colPpack"));
 			
-			System.out.println("insertcol3 : "+accName +  accTel + accPostCode + accAddr + accDetailAddr+boxSize);
 			
-			request.getRequestDispatcher("/views/collection/pickForm(4).jsp").forward(request, response);
+			request.getRequestDispatcher("/views/collection/pickForm(5).jsp").forward(request, response);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
