@@ -88,7 +88,7 @@
 							<!--body ** 여기서부터 코딩하시면 됩니다!!! ** -->						  	
 							<div id="sm" class="card"><br>
 								<!-- grid start -->
-							  		<div class="container text-center">
+							  		<div class="container">
 									  <div class="row">
 									    <div class="col-md-4">
 									    
@@ -144,7 +144,7 @@
 										<!-- card end -->									    
 									    
 									    </div>
-									  </div><br>
+									  </div><br><br>
 									  <div class="row">
 									    <div class="col-md-4">
 									    

@@ -22,8 +22,8 @@
 			font-weight: bold;
 		}
 		.box {
-			height: 130px;
-			width: 130px;
+			height: 150px;
+			width: 150px;
 			border-radius: 20px;
 			font-size: 0.9em;			
 			display:table-cell;
