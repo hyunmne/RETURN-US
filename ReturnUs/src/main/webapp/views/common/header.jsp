@@ -98,7 +98,7 @@
 		                            <a href="collect1" class="nav-item nav-link active" style="width:200px; text-align:center;"><b>방문수거 신청</b></a>
                         		</c:otherwise>
                         	</c:choose>
-                            <a href="shop-detail.jsp" class="nav-item nav-link" style="width:200px; text-align:center;"><b>가이드</b></a>
+                            <a href="recycling-guide" class="nav-item nav-link" style="width:200px; text-align:center;"><b>가이드</b></a>
                             <a href="./placeList?plaType=재활용정거장" class="nav-item nav-link" style="width:200px; text-align:center;"><b>주변탐색</b></a>
                             <a href="modify-profile" class="nav-item nav-link" style="width:200px; text-align:center;"><b>마이페이지</b></a>
                         </div>
