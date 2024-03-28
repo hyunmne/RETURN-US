@@ -35,7 +35,7 @@ public class PlaceServiceImpl implements PlaceService {
 			page = Integer.parseInt(pageNo);
 		}
 		
-		int maxPage = (int)Math.ceil((double)placeDao.selectPlaceCount(plaType)/10);
+		int maxPage = (int)Math.ceil((double)placeDao.selectPlaceCount(plaType, plaRegion, plaDistrict)/10);
 		int startPage = (page-1)/10*10+1;
 		int endPage = startPage+10-1;
 		if(endPage > maxPage) {
@@ -91,7 +91,7 @@ public class PlaceServiceImpl implements PlaceService {
 		
 		String placeListJson = gson.toJson(jsonPlaceList);
 
-		int countByType = placeDao.selectPlaceCount(plaType);
+		int countByType = placeDao.selectPlaceCount(plaType, plaRegion, plaDistrict);
 		
 		request.setAttribute("pageList", pageInfo);
 		request.setAttribute("plaType", plaType);

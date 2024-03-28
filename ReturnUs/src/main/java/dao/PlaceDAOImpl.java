@@ -16,10 +16,10 @@ public class PlaceDAOImpl implements PlaceDAO {
 	public List<Place> selectPlaceList(String plaType, String plaRegion, String plaDistrict,Integer row) throws Exception {
 		Map<String, Object> params = new HashMap<>();
 		params.put("plaType", plaType);
-		if(plaRegion!=null) {
+		if(plaRegion != null) {
 			params.put("plaRegion", plaRegion);
 		}
-		if(plaDistrict!=null) {
+		if(plaDistrict != null) {
 			params.put("plaDistrict", plaDistrict);
 		}
 		params.put("row", row);
@@ -27,8 +27,16 @@ public class PlaceDAOImpl implements PlaceDAO {
 	}
 
 	@Override
-	public Integer selectPlaceCount(String plaType) throws Exception {
-		return sqlSession.selectOne("mapper.place.selectPlaceCount", plaType);
+	public Integer selectPlaceCount(String plaType, String plaRegion, String plaDistrict) throws Exception {
+		Map<String, Object> params = new HashMap<>();
+		params.put("plaType", plaType);
+		if(plaRegion != null) {
+			params.put("plaRegion", plaRegion);
+		}
+		if(plaDistrict != null) {
+			params.put("plaDistrict", plaDistrict);
+		}
+		return sqlSession.selectOne("mapper.place.selectPlaceCount", params);
 	}
 	
 	@Override

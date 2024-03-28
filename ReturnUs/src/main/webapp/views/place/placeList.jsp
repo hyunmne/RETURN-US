@@ -23,17 +23,18 @@
     width: 100%;
     border-collapse: collapse;
     margin: auto;
-    margin-top: 30px;
+    margin-top: 15px;
     margin-left: 25px;
 }
 #search {
-    width: 90%;
+	width: 95%;
     margin-top: 20px;
-    margin-left: 50px;
+    margin-left: 15px;
     display: flex;
 }
 #pageDiv {
-	margin-bottom: 50px;
+	    margin-top: -30px;
+    margin-bottom: 30px;
 }
 #pageDiv button {
     padding: 10px 16px;
@@ -54,7 +55,7 @@
 	color: #59981A;
     font-size: medium;
     font-weight: 500;
-    margin: 20px;
+    margin: 5px 0 -5px 30px
 }
 .imgStyle {
 	width: 2.5%; 
@@ -73,7 +74,7 @@
     font-size: smaller;
 }
 #selectRegion, #selectDistrict {
-    width: 20%;
+    width: 17%;
     border-radius: 10px;
     height: 35px;
     text-align: center;
@@ -82,11 +83,6 @@
 </style>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
-	window.onload = function() {
-		var district = document.getElementById("selectDistrict");
-		district.disabled = true;
-	};
-	
 	$(function() {
 		$('#selectRegion').change(function() {
 			//'지역' 선택 전에는 '구' 선택 막아놓기
@@ -94,22 +90,16 @@
 			var district = document.getElementById("selectDistrict");
 			var selectedRegion = region.value;
 			
-			if(selectedRegion !== '0') {
-				district.disabled = false;
-			} else {
-				district.disabled = true;
-			}
-			
 			var thisRegion = $(this).val();
 			var plaDistrict = $("#selectDistrict");
 			//선택한 '지역'에 해당하는 data-key 속성을 가진 '구'만 보이도록 설정
 			plaDistrict.find('option').hide();
 			plaDistrict.find('option[data-key="' + thisRegion + '"]').show();
-			
 		});
 		
 		//지역,구 선택 후에도 값이 계속 유지되도록 selected 속성 true로 설정
 		$('#selectRegion').val('${plaRegion}').prop("selected",true);
+		$("#selectRegion").trigger("change");
 		$('#selectDistrict').val('${plaDistrict}').prop("selected",true);
 		
 		$('#selectDistrict').change(function() {
@@ -187,8 +177,17 @@
 										positions.push(position);
 									})
 									
+									var type = $('#plaType').val();
 									// 마커 이미지의 이미지 주소입니다
-									var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+									var imageSrc = "";
+									if(type == "재활용정거장") {
+										imageSrc = "./resources/img/mark_recycle_shadow.png";
+									} else if(type == "의류수거함") {
+										imageSrc = "./resources/img/mark_clothes_shadow.png";
+									} else {
+										imageSrc = "./resources/img/mark_battery_shadow.png";
+									}
+									
 									
 									for(var i = 0; i < positions.length; i++) {
 										// 마커 이미지의 이미지 크기 입니다
@@ -216,7 +215,8 @@
 								                // 새 인포위도우 열기
 								                var infowindow = new kakao.maps.InfoWindow({
 								                    content: '<div style="padding:5px;"><strong>' + position.title + '</strong><br>' 
-								                    			+ position.addr + '</div>'
+								                    			+ position.addr + '</div>',
+								                    removable: true
 								                });
 								                infowindow.open(map, marker);
 								                prevInfowindow = infowindow;
@@ -234,6 +234,7 @@
 									map.setBounds(bounds);
 									
 								</script>
+								<hr style="margin-top: 30px;">
 								<div class="typeTitle">
 									<c:choose>
 										<c:when test="${plaType eq '재활용정거장'}">
@@ -261,11 +262,11 @@
 										<option value="0"> 군,구 </option>
 										<c:forEach items="${districtCategory }" var="place">
 								            <c:forEach items="${place.value}" var="district">
-								                <option value="${district}" data-key="${place.key}">${district}</option>
+								                <option value="${district}" data-key="${place.key}" style="display: none">${district}</option>
 								            </c:forEach>
 										</c:forEach>
 									</select>
-									<p style="margin-left: auto;">총 ${countByType }개의 검색 결과가 있습니다</p>
+									<p style="margin-left: auto;margin-bottom: auto;margin-top: auto;font-size: 15px;">총 ${countByType }개의 검색 결과가 있습니다</p>
 								</div>
 								<div id="listDiv">
 									<c:forEach items="${placeList }" var="places" varStatus="loop">
@@ -282,41 +283,36 @@
 										</c:if>
 									</c:forEach>
 								</div>
-									
-									<div id="pageDiv" class="col-12">
-                                        <div class="pagination d-flex justify-content-center mt-5">
-                                        	<c:choose>
-												<c:when test="${pageInfo.curPage == 1 }">
-													<a class="rounded">&lt;</a>
-												</c:when>
-												<c:otherwise>
-													<a href="placeList?plaType=${plaType }&page=${pageInfo.curPage-1 }" class="rounded">&lt;</a>
-												</c:otherwise>
-											</c:choose>
-											<c:forEach begin="${pageInfo.startPage }" end="${pageInfo.endPage }" var="i">
-												<c:choose>
-													<c:when test="${i == pageInfo.curPage }">
-														<button onclick="getPlaceList(${i});" class="rounded" style="background: #81c408;color: white;">${i}</button>
-													</c:when>
-													<c:otherwise>
-														<button onclick="getPlaceList(${i});" class="rounded">${i}</button>
-													</c:otherwise>
-												</c:choose>
-											</c:forEach>
+								<div id="pageDiv" class="col-12">
+                                       <div class="pagination d-flex justify-content-center mt-5">
+                                       	<c:choose>
+											<c:when test="${pageInfo.curPage == 1 }">
+												<a class="rounded">&lt;</a>
+											</c:when>
+											<c:otherwise>
+												<a href="placeList?plaType=${plaType }&page=${pageInfo.curPage-1 }" class="rounded">&lt;</a>
+											</c:otherwise>
+										</c:choose>
+										<c:forEach begin="${pageInfo.startPage }" end="${pageInfo.endPage }" var="i">
 											<c:choose>
-												<c:when test="${pageInfo.curPage == pageInfo.allPage }">
-													<a>&gt;</a>
-													<a class="rounded">&gt;</a>
+												<c:when test="${i == pageInfo.curPage }">
+													<button onclick="getPlaceList(${i});" class="rounded" style="background: #81c408;color: white;">${i}</button>
 												</c:when>
 												<c:otherwise>
-													<a href="placeList?plaType=${plaType }&page=${pageInfo.curPage+1 }" class="rounded">&gt;</a>
+													<button onclick="getPlaceList(${i});" class="rounded">${i}</button>
 												</c:otherwise>
 											</c:choose>
-                                        </div>
-                                    </div>
-									
-									
-									
+										</c:forEach>
+										<c:choose>
+											<c:when test="${pageInfo.curPage == pageInfo.allPage }">
+												<a class="rounded">&gt;</a>
+											</c:when>
+											<c:otherwise>
+												<a href="placeList?plaType=${plaType }&page=${pageInfo.curPage+1 }" class="rounded">&gt;</a>
+											</c:otherwise>
+										</c:choose>
+                                       </div>
+                                   </div>
 								</div>
 							</div>
 						</div>
@@ -324,7 +320,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
 	<%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>

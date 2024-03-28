@@ -13,27 +13,31 @@
 	         place
 	     where 
 	         pla_type = #{plaType}
-	         <if test='plaRegion !=null'>
+	         <if test="plaRegion != null">
 	             and pla_region = #{plaRegion}
 	         </if>
-	         <if test='plaDistrict !=null'>
+	         <if test="plaDistrict != null">
 	             and pla_district = #{plaDistrict}
 	         </if>
 	      order by
-	     	 CASE 
-	            WHEN pla_name IS NULL THEN 1
-	        END,
-	        CASE 
-	            WHEN pla_region = '서울특별시' THEN 1
-	            ELSE 2
-	        END DESC, pla_district
+	      	case 
+		        when pla_region = '서울특별시' then 1
+		        else 2
+		    end, pla_region
 	     limit #{row}, 8
  	</select>
  	
- 	<select id="selectPlaceCount" parameterType="String" resultType="Integer">
+ 	<select id="selectPlaceCount" parameterType="java.util.Map" resultType="Integer">
  		select count(*)
  		from place
- 		where pla_type = #{plaType}
+ 		where 
+ 			pla_type = #{plaType}
+ 			<if test="plaRegion != null">
+ 				and pla_region = #{plaRegion}
+ 			</if>
+ 			<if test="plaDistrict != null">
+ 				and pla_district = #{plaDistrict}
+ 			</if>
  	</select>
 
 	<select id="selectCategoryList" parameterType="String" resultType="Place">
