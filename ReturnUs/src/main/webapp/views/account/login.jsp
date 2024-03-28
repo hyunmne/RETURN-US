@@ -77,6 +77,9 @@
 .submit_box span{
 	color: #AFAFAF;
 }
+#joinhref{
+	margin-left: 34px;
+}
 </style>
    
 </head>
@@ -130,7 +133,7 @@
 									<button type="submit" class="button">로그인</button>
 								</div>
 								<div id="linked">
-									<a href="join">회원가입</a><a class="blank"></a><a href="findid">ID찾기</a><a class="blank"></a><a href="findpw">PW찾기</a>
+									<a id="joinhref" href="join">회원가입</a><a class="blank"></a><a href="findid">ID찾기</a><a class="blank"></a><a href="findpw">PW찾기</a>
 								</div>
 							</div>
 							</form>

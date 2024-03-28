@@ -38,61 +38,70 @@
 
 .join_tool {
 	display: flex; /* 플렉스 박스로 설정하여 내부 요소들을 정렬하기 쉽게 합니다 */
-	align-items: center;
-	width: auto;
+
 }
 
 .left, .right {
-	flex: 1; /* .left와 .right를 동일한 너비로 설정합니다 */
-	align-items: flex-start; /* 내부 요소를 위쪽으로 정렬합니다 */
+    flex: 1; /* .left와 .right를 동일한 너비로 설정합니다 */
+    align-items: flex-start; /* 내부 요소를 위쪽으로 정렬합니다 */
+    margin-bottom: 100px;
+    width: 50%; /* 부모 요소의 너비에 대한 백분율로 설정합니다 */
+    
 }
-
-.left {
-	width: 450px;
-	margin-right: 50px; /* .left와 .right 사이의 간격을 조정합니다 */
-	float: left;
+.left{
+	margin-right: 5%; /* 오른쪽 여백을 10%로 설정합니다 */
+	margin-left: 5%;
 }
-
-.right {
-	margin-left: 50px; /* .left와 .right 사이의 간격을 조정합니다 */
-	float: right;
-	align-items: flex-start; /* 내부 요소를 위쪽으로 정렬합니다 */
-	/* 	margin-bottom: 88px;  */
+.right{
+	margin-left: 5%; /* 왼쪽 여백을 10%로 설정합니다 */
+	margin-right: 5%;
 }
-
-/* select 요소 스타일 */
+/* 
+ 요소 스타일 */
 
 
 .all {
+	width:100%;
 	padding-bottom: 15px;
 	padding-top: 10px;
+	margin-top: 1%;
+}
+.allnbt{
+	width:100%;
+	padding-bottom: 15px;
+	padding-top: 10px;
+	margin-top: 1%;
 }
 
+
 .input {
-	width: 250px;
-	height: 40px;
+	width: 69%;
+	height: 50px;
+	border: 1px solid #D0D0D0;
+	border-radius: 6px;
+}
+.inputnbt{
+	width: 98%;
+	height: 50px;
 	border: 1px solid #D0D0D0;
 	border-radius: 6px;
 }
 
+
 .button {
+	width: 25%;
 	border: solid 0px;
-	height: 40px;
-	display: inline-block; /* 인라인-블록 요소로 설정 */
-	vertical-align: top; /* 위쪽 정렬 */
+	padding: 13px 13px;
 	font-family: 'Inter';
 	font-style: normal;
 	font-weight: 600;
 	font-size: 16px;
 	line-height: 18px;
-	flex-direction: row;
-	align-items: flex-start;
-	padding: 10px 10px;
-	gap: 8px;
 	background: #D1E7DD;
+	flex: none;
 	border-radius: 6px;
 	color: #146C43;
-	margin-left: 10px;
+	margin-left: 3%;
 }
 
 .email_tool {
@@ -101,14 +110,14 @@
 }
 
 #email_id {
-	width: 150px;
-	height: 40px;
+	width: 30%;
+	height: 50px;
 	border: 1px solid #D0D0D0;
 	border-radius: 6px;
 }
 .select {
-	width: 180px;
-	height: 40px;
+	width: 34%;
+	height: 50px;
 	border: 1px solid #D0D0D0;
 	border-radius: 6px;
 }
@@ -132,6 +141,8 @@
 	border-radius: 6px;
 	float: right;
 	height: -150px;
+	margin-top: 50px;
+	margin-right: 2%;
 }
 .little-title{
 	color: #000000;
@@ -144,6 +155,7 @@
 .joinBtn {
 	color: #FFFFFF;
 }
+
 </style>
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -175,7 +187,10 @@ $(document).ready(function() {
             // 아이디 생성자 조건을 만족하는 경우
             doubleIdCheckButton.prop('disabled', false);
             idConditionMessage.text('');
-        } else {
+        } else if(id === ''){
+        	doubleIdCheckButton.prop('disabled', false);
+            idConditionMessage.text('');	        	
+        }else {
             // 아이디 생성자 조건을 만족하지 않는 경우
             doubleIdCheckButton.prop('disabled', true);
             idConditionMessage.text('영문자와 숫자로 이루어진 6~12자여야합니다.');
@@ -202,11 +217,13 @@ $(document).ready(function() {
     // 비밀번호 유효성 검사 및 메시지 표시
     function checkPasswordValidity() {
         var password = passwordElement.val();
-        if (!pwRegex.test(password)) {
+        if(password === ''){
+        	pwConditionMessage.text('');
+        }else if (!pwRegex.test(password)) {
             // 비밀번호 유효성 조건을 만족하지 않는 경우
             pwConditionMessage.text('특수문자를 포함한 영문 숫자로 이루어진 6~12자여야 합니다.');
             pwConditionMessage.css('color', 'red');
-        } else {
+        }else {
             // 비밀번호 유효성 조건을 만족하는 경우
             pwConditionMessage.text('사용할 수 있는 비밀번호입니다.');
             pwConditionMessage.css('color', 'green');
@@ -388,8 +405,14 @@ $(document).ready(function() {
 				<div class="col-6"></div>
 			</div>
 			<div class="row g-4">
-
-				<div class="col-lg-12">
+				<div class="col-lg-2">
+					<div class="row g-4 shadow-sm">
+						<div class="col-lg-12">
+							<%@include file="/views/common/sideBar.jsp"%>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-10">
 					<div style="height: 100%; padding: 0px 70px 0px 70px">
 						<!--큰 card ** 여기서부터 코딩하시면 됩니다!!! ** -->
 						<div id="big" class="card">
@@ -414,14 +437,14 @@ $(document).ready(function() {
 												<button class="button" id="AccountDoubleId">중복체크</button><br>
 												<font id="checkId" class="checkId" name="checkId"></font>
 											</div>
-											<div id="password"class="all">
+											<div id="password"class="allnbt">
 												<div class="little-title">비밀번호<div class="star" id="star">*</div></div>
-												<p><input type="password" class="input" id="accPassword" name="accPassword" placeholder=" 6-12자 이내, 특수문자 포함하여"autofocus></p>
+												<p><input type="password" class="inputnbt" id="accPassword" name="accPassword" placeholder=" 6-12자 이내, 특수문자 포함"autofocus></p>
 												<font id="checkPw"></font>
 											</div>
-											<div id="password2" class="all">
+											<div id="password2" class="allnbt">
 												<div class="little-title">비밀번호 확인<div class="star" id="star">*</div></div>
-												<p><input type="password" class="input" id="accPasswordcheck" name="accPasswordcheck" placeholder=" 6-12자 이내, 특수문자 포함하여"autofocus></p>
+												<p><input type="password" class="inputnbt" id="accPasswordcheck" name="accPasswordcheck" placeholder=" 6-12자 이내, 특수문자 포함"autofocus></p>
 												<font id="checkDoublePw"></font>
 											</div>
 											<div id="postcode_bar" class="all">
@@ -429,20 +452,20 @@ $(document).ready(function() {
 												<p><input type="text" class="input" id="accPostCode" name="accPostCode" placeholder=" 우편번호" >
 												<input type="button" class="button" onclick="daumPostcode()" value="주소 찾기"></p>
 											</div>
-											<div id="addr" class="all">
+											<div id="addr" class="allnbt">
 												<div class="little-title">주소<div class="star" id="star">*</div></div>
-												<p><input type="text" class="input" id="accAddr" name="accAddr" placeholder="주소" autofocus></p>
-												<p><input type="text" class="input" id="accDetailAddr" name="accDetailAddr" placeholder=" 상세주소" autofocus></p>
+												<p><input type="text" class="inputnbt" id="accAddr" name="accAddr" placeholder="주소" autofocus></p>
+												<p><input type="text" class="inputnbt" id="accDetailAddr" name="accDetailAddr" placeholder=" 상세주소" autofocus></p>
 											</div>
 										</div>
 										<div class="right">
-											<div id="name" class="all">
+											<div id="name" class="allnbt">
 												<div class="little-title">이름<div class="star" id="star">*</div></div>
-												<p><input type="text" class="input" id="accName" name="accName"placeholder=" 이름" autofocus></p>
+												<p><input type="text" class="inputnbt" id="accName" name="accName"placeholder=" 이름" autofocus></p>
 											</div>
-											<div id="birth" class="all">
+											<div id="birth" class="allnbt">
    												 <div class="little-title">생년월일<div class="star" id="star">*</div></div>
-   												 <input type="date" class="input" id="accBirth" name="accBirth" min="1901-01-01" placeholder="연도-월-일" required>
+   												 <input type="date" class="inputnbt" id="accBirth" name="accBirth" min="1901-01-01" placeholder="연도-월-일" required>
 											</div>
 											<script>
     										// 현재 날짜를 가져오는 함수
@@ -457,13 +480,9 @@ $(document).ready(function() {
     											// 최대 날짜 설정
     											document.getElementById('accBirth').setAttribute('max', getCurrentDate());
 											</script>
-											<div id="tel" class="all">
+											<div id="tel" class="allnbt">
 												<div class="little-title">전화번호<div class="star" id="star">*</div></div>
-												<p><input type="text" class="input" id="accTel" name="accTel" placeholder=" -를 제외하고 입력해주세요." autofocus><button type="button" class="button" id="checkedtel">본인인증</button></p>
-											</div>
-											<div id="cernum" class="all">
-												<div class="little-title">인증번호<div class="star" id="star">*</div></div>
-												<p><input type="text" class="input" id="cernum_input" placeholder=" 인증번호" ></p>
+												<p><input type="text" class="inputnbt" id="accTel" name="accTel" placeholder=" -를 제외하고 입력해주세요." autofocus></p>
 											</div>
 											<div id="eamil" class="all">
 												<div class="little-title">이메일 <div class="star" id="star">*</div></div>
@@ -479,11 +498,18 @@ $(document).ready(function() {
 														<option value="nate.com">nate.com</option>
 														<option value="yahoo.com">yahoo.com</option>
 													</select>
+													<button type="button" class="button" id="checkedemail">메일발송</button>
 												</p>
+											
 											</div>
+											<div id="cernum" class="all">
+												<div class="little-title">인증번호<div class="star" id="star">*</div></div>
+												<input type="text" class="input" id="cernum_input" placeholder=" 인증번호" >
+												<button type="button" class="button" id="checkemail">본인인증</button>
+											</div>										
 											<div>
 											<button type="submit" class="submit"><div class="joinBtn">회원가입</div></button>
-											</div>
+											</div>											
 										</div>
 								</div>
 							</form>

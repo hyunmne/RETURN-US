@@ -63,13 +63,14 @@
     font-size: 20px; /* 글꼴 크기 설정 (16px) */
 }
 .input-container {
-	width: 100%;
+	width: 400px;
 	height:85px;
     display: inline-block; /* 인라인-블록 요소로 설정하여 가로로 나열 */
     background-color: #ffffff; /* 하얀색 배경 설정 */
     border: 1px solid #ccc; /* 테두리 추가 */
     border-radius: 12px; /* 둥근 테두리 설정 */
-    margin-bottom: 4%;
+    padding: 10px; /* 내부 여백 추가 */
+    margin-bottom: 10px;
 }
 
 .input-container label {
@@ -81,13 +82,14 @@
 
 .input-container input {
     width: 100%; /* 입력 필드의 너비를 부모 요소에 맞춤 */
+    box-sizing: border-box; /* 테두리와 여백을 포함하여 너비 설정 */
     padding: 8px; /* 내부 여백 추가 */
     border: 0;
-}
+}	
 
-#findId{
+#findPw{
 	height: 50px;
-	width: 100%;
+	width: 400px;
 	border: solid 0px;
 	padding: 13px 13px;
 	font-family: 'Inter';
@@ -103,23 +105,49 @@
 	margin-bottom: 100px;
 
 }
-.findIdfont{
+.findPwfont{
 	color: #FFFFFF;
 }
 .select {
-	width: 100%;
+	width: 120px;
 	height: 40px;
-	border: 1px solid #D0D0D0;
+	border: 0px solid #D0D0D0;
 	border-radius: 6px;
 }
 
+.button {
+	border: solid 0px;
+	height: 40px;
+	display: inline-block; /* 인라인-블록 요소로 설정 */
+	vertical-align: top; /* 위쪽 정렬 */
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 18px;
+	flex-direction: row;
+	align-items: flex-start;
+	padding: 10px 10px;
+	gap: 8px;
+	background: #D1E7DD;
+	border-radius: 6px;
+	color: #146C43;
+	margin-left: 15px;
+}
 
+#email_id{
+	width: 130px;
+}
+
+#CerNum{
+	width: 271px;
+}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 
 $(document).ready(function() {
-	 $('#findIdForm').submit(function(e) {
+	 $('#findPwForm').submit(function(e) {
 		// 이름 체크
 	        var name = $('#accName').val();
 	        if (name === '' || !isNaN(name)) {
@@ -128,19 +156,12 @@ $(document).ready(function() {
 	            return;
 	        }
 	        
-	     // 이메일 체크
+	     // 전화번호 체크
 	        var email = $('#accEmail').val();
 	        if (email === '') {
 	            alert('이메일을 확인해주시기 바랍니다.');
 	            e.preventDefault(); 
 	            return;
-	        }
-	        // 이메일 도메인 체크
-	        var emailDo = $('#accEmailDo').val();
-	        if (emailDo ==='none'){
-	        	alert('이메일을 확인해주시기 바랍니다.')
-	        	e.preventDefault();
-	        	return;
 	        }
      });
 }); 
@@ -176,7 +197,7 @@ $(document).ready(function() {
 							<div style="padding: 50px 0px 30px; color: #3E6D10;">
 								<div class="title">
 									<div class="bgtitle" >
-										<h1 id="bigtitle" class="noto-sans"style="color: #59981A">아이디 찾기</h1>
+										<h1 id="bigtitle" class="noto-sans"style="color: #59981A">비밀번호 찾기</h1>
 									</div>
 								</div>
 							</div>
@@ -184,9 +205,9 @@ $(document).ready(function() {
 							<!--body ** 여기서부터 코딩하시면 됩니다!!! ** -->
 							<div id="sm">
 								<div class="smtitle">
-									<p class="smt">리터너스 회원정보에 등록되어 있는 <br>이메일과 생년월일로 ID를 찾을 수 있습니다.</p>
+									<p class="smt">리터너스 회원정보에 등록되어 있는 <br>이메일과 생년월일로 비밀번호를 찾을 수 있습니다.</p>
 								</div>
-								<form id="findIdForm" action="findid" method="post">
+								<form id="findPwForm" action="findpw" method="post">
 									<div class="input-container">
 										<label for="name">성명<div class="star">*</div></label>
 										<input type="text" id="accName" name="accName" value="${accName }" placeholder="성명 입력">
@@ -213,9 +234,9 @@ $(document).ready(function() {
 									<div class="input-container">
 										<label for="email">이메일 <div class="star" >*</div></label>
 										<p class="email_tool" style="display:flex; align-items:center;">
-										<input type="text" id="accEmail" name="accEmail" title="이메일 아이디" placeholder=" 이메일" maxlength="18" />&nbsp;&nbsp;@&nbsp;
-											<select class ="select" id="accEmailDo" name="accEmailDo" title="이메일 도메인 주소 선택" onclick="setEmailDomain(this.value);return false;">
-												<option value="none"> --------선택--------</option>
+										<input type="text" id="email_id" name="accEmail" title="이메일 아이디" placeholder=" 이메일" maxlength="18" />&nbsp;&nbsp;@&nbsp;
+											<select class ="select" id="email_do" name="accEmailDo" title="이메일 도메인 주소 선택" onclick="setEmailDomain(this.value);return false;">
+												<option value=""> --------선택--------</option>
 												<option value="naver.com">naver.com</option>
 												<option value="gmail.com">gmail.com</option>
 												<option value="hanmail.net">hanmail.net</option>
@@ -224,11 +245,19 @@ $(document).ready(function() {
 												<option value="nate.com">nate.com</option>
 												<option value="yahoo.com">yahoo.com</option>
 											</select>
-											 	
-										</p>	
+											<button class="button" id="CerNumcall">번호발송</button>
+										</p>											
+									</div>
+									<br>
+									<div class="input-container">
+									<label for="CerNum">인증번호<div class="star">*</div></label>
+									<p>
+									<input type="text" id="CerNum" name="CerNum" value="${CerNum }" placeholder="인증번호 6자리">
+									<button class="button" id="CerNumcallDo">인증완료</button>
+									</p>						
 									</div>
 									<div>
-										<button type="submit" class="submit" id="findId"><div class="findIdfont">아이디 찾기</div></button>
+										<button type="submit" class="submit" id="findPw"><div class="findPwfont">비밀번호 찾기</div></button>
 									</div>
 								</form>
 							</div>

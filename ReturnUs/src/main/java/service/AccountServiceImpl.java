@@ -75,8 +75,8 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public Account findId(String accName, String accBirth, String accTel) throws Exception {
+	public Account findId(String accName, String accBirth, String accEmail, String accEmailDo) throws Exception {
 		
-		return accountDao.findIdAccount(accName, accBirth, accTel);
+		return accountDao.findIdAccount(accName, accBirth, accEmail, accEmailDo);
 	}
 }

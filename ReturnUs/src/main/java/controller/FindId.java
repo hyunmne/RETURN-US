@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.Console;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -44,9 +45,14 @@ public class FindId extends HttpServlet {
 		try {
 			String accName = request.getParameter("accName");
 			String accBirth = request.getParameter("accBirth");
-			String accTel = request.getParameter("accTel");
-			
-			Account account = accountService.findId(accName,accBirth,accTel);
+			String accEmail = request.getParameter("accEmail");
+			String accEmailDo = request.getParameter("accEmailDo");
+			System.out.println(accName);
+			System.out.println(accBirth);
+			System.out.println(accEmail);
+			System.out.println(accEmailDo);
+			Account account = accountService.findId(accName,accBirth,accEmail,accEmailDo);
+			System.out.println(account);
 			request.setAttribute("accId", account.getAccId());
 			request.setAttribute("accJoinDt", account.getAccJoinDt());
 			request.getRequestDispatcher("/views/account/resultFindId.jsp").forward(request, response);

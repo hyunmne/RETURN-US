@@ -4,8 +4,8 @@
 <mapper namespace="mapper.account">
 	<insert id="insertAccount" parameterType="Account">
 		<![CDATA[
-			insert into account (ACC_ID, ACC_PASSWORD,  ACC_POSTCODE, ACC_ADDR, ACC_DETAIL_ADDR, ACC_NAME, ACC_BIRTH, ACC_TEL, ACC_EMAIL)
-			values(#{accId},#{accPassword},#{accPostCode},#{accAddr},#{accDetailAddr},#{accName},#{accBirth},#{accTel},#{accEmail})
+			insert into account (ACC_ID, ACC_PASSWORD,  ACC_POSTCODE, ACC_ADDR, ACC_DETAIL_ADDR, ACC_NAME, ACC_BIRTH, ACC_TEL, ACC_EMAIL, ACC_EMAIL_DO)
+			values(#{accId},#{accPassword},#{accPostCode},#{accAddr},#{accDetailAddr},#{accName},#{accBirth},#{accTel},#{accEmail},#{accEmailDo})
 		]]>
 	</insert>
 	<select id="selectAccount" parameterType="String" resultType="Account">
@@ -19,7 +19,7 @@
 	<select id="findIdAccount" parameterType="Map" resultType="Account">
 		<![CDATA[
 			select ACC_ID as accId, ACC_JOIN_DT as accJoinDt
-			from account where ACC_Name = #{accName} and ACC_TEL = #{accTel} and ACC_BIRTH = #{accBirth}
+			from account where ACC_Name = #{accName} and ACC_EMAIL = #{accEmail} and ACC_EMAIL_DO = #{accEmailDo} and ACC_BIRTH = #{accBirth}
 		]]>
 	</select>
 	<select id="selectAdmin" parameterType="String" resultType="String">
