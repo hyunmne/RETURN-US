@@ -90,10 +90,17 @@
                     </button>
                     <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                         <div class="navbar-nav mx-auto">
-                            <a href="collect1" class="nav-item nav-link active" style="width:200px; text-align:center;"><b>방문수거 신청</b></a>
+                        	<c:choose>
+                        		<c:when test="${adminCheck eq 'admin' }">
+		                            <a href="collect1" class="nav-item nav-link active" style="width:200px; text-align:center;"><b>분리수거 관리</b></a>
+                        		</c:when>
+                        		<c:otherwise>
+		                            <a href="collect1" class="nav-item nav-link active" style="width:200px; text-align:center;"><b>방문수거 신청</b></a>
+                        		</c:otherwise>
+                        	</c:choose>
                             <a href="shop-detail.jsp" class="nav-item nav-link" style="width:200px; text-align:center;"><b>가이드</b></a>
                             <a href="./placeList?plaType=재활용정거장" class="nav-item nav-link" style="width:200px; text-align:center;"><b>주변탐색</b></a>
-                            <a href="contact.jsp" class="nav-item nav-link" style="width:200px; text-align:center;"><b>마이페이지</b></a>
+                            <a href="modify-profile" class="nav-item nav-link" style="width:200px; text-align:center;"><b>마이페이지</b></a>
                         </div>
 <!--                         <div class="d-flex m-3 me-0"> -->
 <!--                             <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button> -->
