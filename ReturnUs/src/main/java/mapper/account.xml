@@ -12,7 +12,7 @@
 		<![CDATA[
 			select ACC_ID as accId, ACC_PASSWORD as accPassword, ACC_NAME as accName, ACC_BIRTH as accBirth, ACC_TEL as accTel, ACC_EMAIL as accEmail,
 			ACC_EMAIL_DO as accEmailDo, ACC_ADMIN as accAdmin, ACC_POSTCODE as accPostCode, ACC_ADDR as accAddr, ACC_DETAIL_ADDR as accDetailAddr, 
-			ACC_PNT as accPnt, DATEDIFF(CURDATE(), ACC_JOIN_DT)+1 as accJoinDays
+			ACC_PNT as accPnt, DATEDIFF(CURDATE(), ACC_JOIN_DT)+1 as accJoinDays, ACC_JOIN_DT as accJoinDt
 			from account where ACC_ID=#{accId}
 		]]>
 	</select>
@@ -29,5 +29,9 @@
 			where ACC_ID = #{accId}
 		]]>
 	</select>
+	<update id="updateAccount" parameterType="Account">
+		update account set ACC_NAME = #{accName}, ACC_BIRTH = #{accBirth}, ACC_TEL = #{accTel}, ACC_EMAIL = #{accEmail},
+		ACC_POSTCODE = #{accPostCode}, ACC_ADDR = #{accAddr}, ACC_DETAIL_ADDR = #{accDetailAddr} where ACC_ID = #{accId}		
+	</update> 	
 </mapper>	
 	

@@ -9,4 +9,5 @@ public interface AccountService {
 	void login(HttpServletRequest request) throws Exception;
 	boolean accountIdCheck(String id) throws Exception;
 	Account findId(String accName, String accBirth, String accEmail, String accEmailDo) throws Exception;
+	void modifyProfile(HttpServletRequest request) throws Exception;
 }

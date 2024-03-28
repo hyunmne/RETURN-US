@@ -79,4 +79,24 @@ public class AccountServiceImpl implements AccountService {
 		
 		return accountDao.findIdAccount(accName, accBirth, accEmail, accEmailDo);
 	}
+
+	@Override
+	public void modifyProfile(HttpServletRequest request) throws Exception {
+		String id = request.getParameter("accId");
+		String pw = request.getParameter("accPassword");
+		String birth = request.getParameter("accBirth");
+		Date accBirth = new Date(sdf.parse(birth).getTime());		
+				
+		Account account = accountDao.selectAccount(id);
+		if(!account.getAccPassword().equals(pw)) throw new Exception("비밀번호가 틀립니다");
+		
+		account.setAccName(request.getParameter("accName"));
+		account.setAccBirth(accBirth);
+		account.setAccTel(request.getParameter("accTel"));
+		account.setAccEmail(request.getParameter("accEmail"));
+		account.setAccPostCode(request.getParameter("accPostCode"));
+		account.setAccAddr(request.getParameter("accAddr"));
+		account.setAccDetailAddr(request.getParameter("accDetailAddr"));
+		accountDao.updateAccount(account);
+	}
 }

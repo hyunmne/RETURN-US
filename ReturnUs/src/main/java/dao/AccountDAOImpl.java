@@ -33,5 +33,9 @@ public class AccountDAOImpl implements AccountDAO {
 	public String selectAdmin(String accId) throws Exception {
 		return sqlSession.selectOne("mapper.account.selectAdmin", accId);
 	}
-
+	
+	public void updateAccount(Account account) throws Exception {
+		sqlSession.update("mapper.account.updateAccount", account);
+		sqlSession.commit();
+	}
 }

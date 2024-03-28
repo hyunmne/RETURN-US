@@ -7,4 +7,5 @@ public interface AccountDAO {
 	Account selectAccount (String accId) throws Exception;
 	Account findIdAccount (String accName, String accBirth, String accEmail, String accEmailDo) throws Exception;
 	String selectAdmin(String accId) throws Exception;
+	void updateAccount(Account account) throws Exception;
 }
