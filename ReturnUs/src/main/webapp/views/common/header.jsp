@@ -92,14 +92,14 @@
                         <div class="navbar-nav mx-auto">
                         	<c:choose>
                         		<c:when test="${adminCheck eq 'admin' }">
-		                            <a href="collect1" class="nav-item nav-link active" style="width:200px; text-align:center;"><b>분리수거 관리</b></a>
+		                            <a href="col-management?colStatus=수거준비중" class="nav-item nav-link active" style="width:200px; text-align:center;"><b>신청내역 관리</b></a>
                         		</c:when>
                         		<c:otherwise>
 		                            <a href="collect1" class="nav-item nav-link active" style="width:200px; text-align:center;"><b>방문수거 신청</b></a>
                         		</c:otherwise>
                         	</c:choose>
                             <a href="recycling-guide" class="nav-item nav-link" style="width:200px; text-align:center;"><b>가이드</b></a>
-                            <a href="./placeList?plaType=재활용정거장" class="nav-item nav-link" style="width:200px; text-align:center;"><b>주변탐색</b></a>
+                            <a href="placeList?plaType=재활용정거장" class="nav-item nav-link" style="width:200px; text-align:center;"><b>주변탐색</b></a>
                             <c:choose>
 		                    	<c:when test="${not empty acc.accId}">
 					                <a href="modify-profile" class="nav-item nav-link" style="width:200px; text-align:center;"><b>마이페이지</b></a>
