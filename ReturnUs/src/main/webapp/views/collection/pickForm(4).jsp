@@ -63,29 +63,17 @@ td {
         padding: 5px 10px; /* 내부 여백을 지정합니다. */ 
         box-sizing: border-box; /* 테두리와 내부 여백을 포함한 요소의 전체 크기를 지정합니다. */
     }
-.accordion {
-	font-weight:600;
-	font-size:large;
-}
-.accordion ul {
- 	padding:0px; 
-}
-.accordion ul > li {
-  overflow: hidden; 
-  max-height: 30px;
-  transition: 0.3s;
-}
-.accordion ul > li.on {
-  max-height: 600px;
-}
-.accordion ul > li .title {
-  display: flex;
-  align-items: center;
-/*   padding-left: 0.5rem; */
-}
-.accordion ul > li .desc {
-	padding:0px 30px;
-	margin-bottom:5px;
+.card ul{
+list-style: none; 
+font-weight: normal; 
+font-size: smaller; 
+color:gray; 
+padding-left:23px; 
+margin-bottom:5px
+} 
+.title {
+	display:flex;
+	align-items:center;
 }
 </style>
    
@@ -130,46 +118,30 @@ td {
 										포인트로 환급 받을 수 있는 항목의 수량도 기입해주세요.
 									</span>
 									<br><br>
-									<span style="color:black;">2-2. 포인트 환급 대상 항목 수량 기입</span>
+									<span style="color:black;"><b>2-2. 포인트 환급 대상 항목 수량 기입</b></span>
 								</div>
-								accName : <%= request.getParameter("accName") %> <br>
-								accTel  : <%= request.getParameter("accTel") %> <br>
-								accPostCode : <%= request.getParameter("accPostCode") %> <br>
-								accAddr : <%= request.getParameter("accAddr") %> <br>
-								accDetail : <%= request.getParameter("accDetailAddr") %> <br>
-								boxSize : <%= request.getParameter("boxSize") %> <br>
 								<div class="col-12 d-flex" style="padding:35px 40px 30px;">
 									<div class="col-3 d-flex justify-content-center" style="border-right:2px dashed #3E6D10">
 										<div class="card" id="insertDiv">
 											<h5 class="noto-sans" style="text-align:center; color:#3E6D10; padding-bottom:5px;">추가된 항목</h5>
-											<div class="accordion">
-											    <ul>
-											      <li><div id="paperCnt"><i class="fas fa-genderless"></i>종이류</div></li>
-											      <li><div id="canCnt"><i class="fas fa-genderless"></i>캔류</div></li>
-											      <li>
-											        <div class="title"><i class="fas fa-genderless"></i>병류</div>
-											        <div class="desc">
-														<ul style="list-style: none; font-weight: normal; font-size: medium;">
+											<div style="font-size:large; color:black;">
+												<div class="title" id="paperCnt" ><i class="fas fa-genderless"></i>종이류</div>
+												<div class="title" id="canCnt"><i class="fas fa-genderless"></i>캔류</div>
+												<div class="title"><i class="fas fa-genderless"></i>병류</div>
+														<ul >
 															<li id="bt190Cnt">~ 190ml</li>
 															<li id="bt400Cnt">~ 400ml</li>
 															<li id="bt1000Cnt">~ 1000ml</li>
 															<li id="bt1000UpCnt">1L 이상</li>
 														</ul>
-													</div>
-											      </li>
-											      <li><div id="plasticCnt"><i class="fas fa-genderless"></i>플라스틱</div></li>
-											      <li><div id="paperPackCnt"><i class="fas fa-genderless"></i>종이팩</div></li>
-											      <li>
-											        <div class="title"><i class="fas fa-genderless"></i>페트병</div>
-											        <div class="desc">
-											        	<ul style="list-style:none; font-weight:normal; font-size:medium; ">
-															<li id="ptBodyCnt">본품</li>
-															<li id="ptLidCnt">뚜껑</li>
-														</ul>
-											        </div>
-											      </li>
-											    </ul>
-											  </div>
+												<div class="title" id="plasticCnt"><i class="fas fa-genderless"></i>플라스틱</div>
+												<div class="title" id="paperPackCnt"><i class="fas fa-genderless"></i>종이팩</div>
+												<div class="title"><i class="fas fa-genderless"></i>페트병</div>
+											    	<ul>
+														<li id="ptBodyCnt">본품</li>
+														<li id="ptLidCnt">뚜껑</li>
+													</ul>
+											</div>
 										</div>
 									</div>
 									<div class="col-9 d-flex " style="flex-direction: column; padding:5px;">
@@ -299,7 +271,8 @@ td {
       </div>
    </div>
 
-<div id="etcDiv">
+
+<div id="etcDiv" style="display:none">
 <div class="d-flex align-items-center" style="min-width:100%">
 	<div id="garo" class="col-12" style="">
 		<div id="title" class="d-flex col-4">
@@ -316,7 +289,7 @@ td {
 </div>
 </div>
 
-<div id="BtDiv" >
+<div id="BtDiv" style="display:none">
 <div class="d-flex" style="min-width:100%; flex-direction:column">
 	<div id="garo" class="d-flex  align-items-left" >
 		<div id="title" class="d-flex col-3">
@@ -346,7 +319,7 @@ td {
 </div>
 </div>
 
-<div id="PtDiv" >
+<div id="PtDiv" style="display:none">
 <div class="d-flex" style="min-width:100%; flex-direction:column">
 	<div id="garo" class="d-flex  align-items-left" >
 		<div id="title" class="d-flex col-3">
@@ -374,29 +347,6 @@ td {
 </div>
 </div>
 
-
-<!-- 아코디언 -->
-<script>
-const accordion = document.querySelector(".accordion");
-
-function toggleAccordion() {
-	  const clickedItem = this.parentNode;
-	  const items = accordion.querySelectorAll("li");
-
-	  items.forEach((item) => {
-	    if (clickedItem === item) {
-	      item.classList.toggle("on");
-	    } else {
-	      item.classList.remove("on");
-	    }
-	  });
-	}
-	
-const titles = accordion.querySelectorAll(".title");
-titles.forEach((title) => {
-  title.addEventListener("click", toggleAccordion);
-});
-</script>
 
 <script>
 function getCntBtn() {
