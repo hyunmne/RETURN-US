@@ -3,6 +3,7 @@ package dto;
 import java.sql.Date;
 
 public class Collection {
+	private String colNum;
 	private String accId;
 	private Date colDate;
 	private String colStatus;
@@ -25,10 +26,11 @@ public class Collection {
 	
 	public Collection() {}
 	
-	public Collection(String accId, Date colDate, String colStatus, int colPost, int colUsePnt,
+	public Collection(String colNum, String accId, Date colDate, String colStatus, int colPost, int colUsePnt,
 			int colPrice, String colResult, Date colGetpntDt, int colPaper, int colPtBody, int colPtLid, int colBt190,
 			int colBt400, int colBt1000, int colBt1000Up, int colPpack, int colPlastic, int colCan, int colTotalPnt) {
 		super();
+		this.colNum = colNum;
 		this.accId = accId;
 		this.colDate = colDate;
 		this.colStatus = colStatus;
@@ -48,6 +50,13 @@ public class Collection {
 		this.colPlastic = colPlastic;
 		this.colCan = colCan;
 		this.colTotalPnt = colTotalPnt;
+	}
+	
+	public String getColNum() {
+		return colNum;
+	}
+	public void setColNum(String colNum) {
+		this.colNum = colNum;
 	}
 	public String getAccId() {
 		return accId;
