@@ -36,7 +36,7 @@ public class InsertCol3 extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		
+		// 8. 받아온 데이터들을 request에 다시 세팅해주고 pickForm4로 이동한다.
 		try {
 			String accName = request.getParameter("accName");
 			String accTel = request.getParameter("accTel");
@@ -51,8 +51,6 @@ public class InsertCol3 extends HttpServlet {
 			request.setAttribute("accAddr", accAddr);
 			request.setAttribute("accDetailAddr", accDetailAddr);
 			request.setAttribute("boxSize", boxSize);
-			
-			System.out.println("insertcol3 : "+accName +  accTel + accPostCode + accAddr + accDetailAddr+boxSize);
 			
 			request.getRequestDispatcher("/views/collection/pickForm(4).jsp").forward(request, response);
 		} catch(Exception e) {

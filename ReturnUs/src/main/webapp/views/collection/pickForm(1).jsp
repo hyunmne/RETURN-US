@@ -70,6 +70,8 @@
 									<div class="card" style="padding: 10px 10px; max-height:300px; overflow-y: auto;"> 
 										<%@include file="/views/collection/NewFile.jsp" %>
 									</div>
+									
+<!-- 									2. 다음 버튼을 누르면 form action 타고 collect1의 doPost로 이동 (method가 post) -->
 									<form id="myForm" action="collect1" method="post">
 									<div style="display:flex; justify-content:right; margin:10px 0px; align-items:center;" >
 									 <label>

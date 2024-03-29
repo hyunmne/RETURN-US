@@ -114,6 +114,7 @@
 </body>
 
 <script>
+// 7. input hidden에 있는 값들을 받아오고 그 값들과 택배 가격과 함께 다시 input hidden으로 숨겨서 collect3 doPost로 데이터를 전송한다. 
 // 값 전달 폼 생성 및 전송하는 함수
 function submitFormWithValues(boxSize) {
     var accName = document.getElementById('accName').value;

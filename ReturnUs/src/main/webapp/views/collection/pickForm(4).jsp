@@ -351,16 +351,17 @@ margin-bottom:5px
 <script>
 function getCntBtn() {
     // 입력된 수량 가져오기
-    var count = parseInt(document.getElementById("etcCnt").value);
+    var count;
+    count = parseInt(document.getElementById("etcCnt").value) ? parseInt(document.getElementById("etcCnt").value) : 0;
     var selCelId = document.querySelector("td.selected").id;
-	
     // 세부 항목이 있는 카테고리는 라디오 버튼의 선택 값을 가져옴
+    
     if (selCelId === "pett") {
         selCelId = document.querySelector('input[type="radio"]:checked').id;
-        count = parseInt(document.getElementById("ptCnt").value);
+        count = parseInt(document.getElementById("ptCnt").value) ? parseInt(document.getElementById("ptCnt").value) : 0;
     } else if (selCelId === "bottle") {
         selCelId = document.querySelector('input[type="radio"]:checked').id;
-        count = parseInt(document.getElementById("btCnt").value);
+        count = parseInt(document.getElementById("btCnt").value) ? parseInt(document.getElementById("btCnt").value) : 0;
     }
     var targetDiv = document.getElementById(selCelId + "Cnt");
 
@@ -429,6 +430,7 @@ function getCntBtn() {
 </script>
 
 <script>
+// 9. input hidden의 데이터와 새로 입력 받은 데이터(수거물품수량)를 다시 input hidden으로 collect4 doPost로 보낸다.
 function nextBtn() {
     // 폼 생성
     var form = document.createElement('form');

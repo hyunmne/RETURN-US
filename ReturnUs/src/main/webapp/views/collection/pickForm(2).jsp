@@ -229,6 +229,8 @@
 
 
 <script>
+// 5. 입력 받은 신청자 정보를 input hidden에 숨겨 collect2 doPost로 이동한다.
+
     document.getElementById('colForm').addEventListener('submit', function(event) {
         event.preventDefault(); // 기본 제출 동작 방지
 

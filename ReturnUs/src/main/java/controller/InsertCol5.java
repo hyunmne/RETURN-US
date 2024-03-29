@@ -36,7 +36,7 @@ public class InsertCol5 extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		
+		// 인서트 해야됨 여기서 
 		try {
 			
 			request.setAttribute("accName", request.getParameter("accName"));
@@ -58,7 +58,7 @@ public class InsertCol5 extends HttpServlet {
 			request.setAttribute("colPpack", request.getParameter("colPpack"));
 			
 			
-			request.getRequestDispatcher("/views/collection/pickForm(6).jsp").forward(request, response);
+			request.getRequestDispatcher("/수거신청끝").forward(request, response);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

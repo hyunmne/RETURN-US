@@ -194,7 +194,7 @@ input[type='number']::-webkit-inner-spin-button {
 										  </tbody>
 										 </table>
 									  <div style="display:flex; justify-content: center; font-size: x-large; align-items:center; padding:30px">
-									  	<%=request.getParameter("accName") %> 님께 환급될 포인트는&nbsp;&nbsp;
+									  	${acc.accName }> 님께 환급될 포인트는&nbsp;&nbsp;
 									  	<h4 class="noto-sans" id="totalSum" style="margin:0px"></h4>&nbsp;&nbsp; 입니다.
 									  </div>
 									</div>
@@ -213,8 +213,8 @@ input[type='number']::-webkit-inner-spin-button {
 												<th>주소</th>
 											</tr>
 											<tr class="col-9" style="padding-left:10px">
-												<td><%= request.getParameter("accName") %></td>
-												<td><%= request.getParameter("accTel") %></td>
+												<td>${acc.accName }</td>
+												<td>${acc.accTel }</td>
 												<td><%= request.getParameter("accPostCode") %></td>
 												<td><%= request.getParameter("accAddr") %>&nbsp;&nbsp;<%= request.getParameter("accDetailAddr") %></td>
 											</tr>
@@ -231,13 +231,13 @@ input[type='number']::-webkit-inner-spin-button {
 										<div class="dd">
 											<div>원가</div>								
 											<div class="money" style="display:flex; align-items:center; ">
-												<span style="font-weight:300; padding-right:10px">${boxSize }1234</span>원
+												<span style="font-weight:300; padding-right:10px">${boxSize }</span>원
 											</div>								
 										</div>
 										<div class="dd" style="padding:0px 20px">
 											<div >사용 가능 포인트</div>								
 											<div class="money">
-												<span style="font-weight:300; padding-right:10px">${acc.accPnt }1234</span>원
+												<span style="font-weight:300; padding-right:10px">${acc.accPnt }</span>원
 											</div>								
 										</div>
 											<div class="dd" style="padding:0px 15px 20px; font-weight:400; font-size:medium; justify-content:flex-end; flex-direction:row;">
@@ -276,29 +276,11 @@ input[type='number']::-webkit-inner-spin-button {
 	</div>
 
 
-<div class="modal fade" id="payModal" tabindex="-1">
-  <div class="modal-dialog modal-dialog-center">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="successModalLabel">결제 성공</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        결제가 완료되었습니다.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
 
 	<%@ include file="/views/common/footer.jsp" %>
 
 <script>
+// 11. hidden input 데이터를 다시 받아오고 다시 데이터를 담아 collect5 doPost로 이동해서 DB에 데이터를 저장한다. 
 function requestPay() {
   IMP.init('imp60400838'); //iamport 대신 자신의 "가맹점 식별코드"를 사용
   IMP.request_pay({
@@ -337,9 +319,9 @@ function requestPay() {
             clearInterval(timerInterval);
           }
         }).then((result) => {
-          /* Read more about handling dismissals below */
-          if (result.dismiss === Swal.DismissReason.timer) {
+          if (result.dismiss === Swal.DismissReason.timer) { // 모달이 타이머에 의해 닫혔을 때
             location.href="main"
+            requestCol();
           }
         });
       } else { // 결제 실패 
@@ -373,17 +355,6 @@ function requestPay() {
       }
   });
 }
-
-document.getElementsByClassName('close')[0].onclick = function() {
-	  document.getElementById('successModal').style.display = 'none';
-	}
-	
-window.onclick = function(event) {
-	  var modal = document.getElementById('successModal');
-	  if (event.target == modal) {
-	    modal.style.display = "none";
-	  }
-	}
 </script>
 
 
@@ -414,7 +385,7 @@ window.onload = function(){
 </script>
 
 <script>
-function nextBtn() {
+function requestCol() {
     // 폼 생성
     var form = document.createElement('form');
     form.method = 'POST';

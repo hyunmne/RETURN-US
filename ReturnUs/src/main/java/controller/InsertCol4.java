@@ -36,7 +36,7 @@ public class InsertCol4 extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		
+		// 10. pickForm4에서 받아온 데이터를 다시 request에 세팅하여 pickForm5로 이동한다.
 		try {
 			
 			String accName = request.getParameter("accName");
