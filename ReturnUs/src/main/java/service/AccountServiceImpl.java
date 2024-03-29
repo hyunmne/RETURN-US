@@ -98,5 +98,17 @@ public class AccountServiceImpl implements AccountService {
 		account.setAccAddr(request.getParameter("accAddr"));
 		account.setAccDetailAddr(request.getParameter("accDetailAddr"));
 		accountDao.updateAccount(account);
+		
+		HttpSession sessionOld = request.getSession();
+		sessionOld.invalidate();		
+				
+		HttpSession session = request.getSession();
+		account.setAccPassword("");
+		session.setAttribute("acc", account);
+		
+		String adminCheck = accountDao.selectAdmin(id);
+		if(adminCheck.equals("admin")) {
+			session.setAttribute("adminCheck", adminCheck);
+		}		
 	}
 }
