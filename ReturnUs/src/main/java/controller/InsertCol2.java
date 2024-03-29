@@ -55,7 +55,10 @@ public class InsertCol2 extends HttpServlet {
 			
 			request.getRequestDispatcher("/views/collection/pickForm(3).jsp").forward(request, response);
 		} catch(Exception e) {
-			e.printStackTrace();
+			
+			request.setAttribute("errTitle", "데이터를 전송할 수 없음");
+			request.setAttribute("errContent", "askdf;kasf;al");
+			request.getRequestDispatcher("/views/common/error.jsp").forward(request, response);
 		}
 	}
 
