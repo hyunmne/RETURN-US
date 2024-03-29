@@ -63,7 +63,7 @@
 										포인트로 환급 받을 수 있는 항목의 수량도 기입해주세요.
 									</span>
 									<br><br>
-									<span style="color:black;">2-1. 배출 상자 고르고 서비스 금액 선택하기</span>
+									<span style="color:black;"><b>2-1. 배출 상자 고르고 서비스 금액 선택하기</b></span>
 								</div>
 								
 								<div class="col-12 d-flex" style="padding:35px 40px 50px;">
