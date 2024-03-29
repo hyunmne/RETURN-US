@@ -78,7 +78,7 @@
 			</div>
 			<div class="row g-4">
 				<div class="col-lg-2 shadow-sm">
-					<%@include file="/views/common/sideBar.jsp"%>
+					<%@include file="/views/common/accountSideBar.jsp"%>
 				</div>
 				<div class="col-lg-10">
 					<div style="height: 100%; padding: 0px 70px 0px 70px">
