@@ -62,7 +62,7 @@ public class AccountServiceImpl implements AccountService {
 		
 		String adminCheck = accountDao.selectAdmin(id);
 		if(adminCheck.equals("admin")) {
-			request.setAttribute("adminCheck", adminCheck);
+			session.setAttribute("adminCheck", adminCheck);
 		}
 		
 	}
