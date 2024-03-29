@@ -107,7 +107,7 @@
 											<p class="step-content">차곡차곡 쌓아서 배출해주세요</p>
 									    </div>									    						  
 									  </div>
-									</div>							
+									</div><br><br><br><br><br>							
 									<!-- grid end -->
 								  </div>
 								  <div class="tab-pane fade" id="pills-can" role="tabpanel" aria-labelledby="pills-can-tab" tabindex="0">
@@ -130,7 +130,7 @@
 											<p class="step-content">담배 등의 이물질을 넣지않고 배출해주세요</p>
 									    </div>									    						  
 									  </div>
-									</div>											
+									</div><br><br><br><br><br>											
 									<!-- grid end -->
 								  </div>
 								  <div class="tab-pane fade" id="pills-bottle" role="tabpanel" aria-labelledby="pills-bottle-tab" tabindex="0">
@@ -153,7 +153,7 @@
 											<p class="step-content">담배 등의 이물질을 넣지않고 배출해주세요</p>
 									    </div>									    						  
 									  </div>
-									</div>											
+									</div><br><br><br><br><br>											
 									<!-- grid end -->
 								  </div>
 								  <div class="tab-pane fade" id="pills-pet" role="tabpanel" aria-labelledby="pills-pet-tab" tabindex="0">
@@ -180,7 +180,7 @@
 											<p class="step-content">압축해서 배출해주세요</p>
 									    </div>
 									  </div>								  
-									</div>								
+									</div><br><br><br><br><br>								
 									<!-- grid end -->
 								  </div>
 								  <div class="tab-pane fade" id="pills-pack" role="tabpanel" aria-labelledby="pills-pack-tab" tabindex="0">
@@ -207,7 +207,7 @@
 											<p class="step-content">차곡차곡 쌓아서 배출해주세요</p>
 									    </div>
 									  </div>								  
-									</div>								
+									</div><br><br><br><br><br>								
 									<!-- grid end -->
 								  </div>
 								  <div class="tab-pane fade" id="pills-plastic" role="tabpanel" aria-labelledby="pills-plastic-tab" tabindex="0">
@@ -225,7 +225,7 @@
 											<p class="step-content">라벨을 제거하여 배출해주세요</p>
 									    </div>									    								    						  
 									  </div>
-									</div>											
+									</div><br><br><br><br><br>											
 									<!-- grid end -->
 								  </div>
 								</div>

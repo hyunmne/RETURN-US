@@ -84,32 +84,32 @@
 							<!--body ** 여기서부터 코딩하시면 됩니다!!! ** -->						  	
 							<div id="sm" class="card">
 								<!-- grid start -->
-								<h4>수거 절차</h4><br>
+								<h4 class="noto-sans">수거 절차</h4><br>
 								<div class="container text-center">
 									<div class="row">
 										<div class="col-sm-1"></div>
 								    	<div class="col-sm-2">
 								    		<div class="box" style="background-color:#F9FDDD">
 								    			<p>준비 STEP 1</p>
-								    			<h6>내용물 비우기<br>비닐 제거</h6>
+								    			<h6 class="noto-sans">내용물 비우기<br>비닐 제거</h6>
 								    		</div>									    		
 								    	</div>
 								    	<div class="col-sm-2">
 								    		<div class="box" style="background-color:#F5FBBE">
 								    			<p>준비 STEP 2</p>
-								    			<h6>깨끗이<br>세척하기</h6>
+								    			<h6 class="noto-sans">깨끗이<br>세척하기</h6>
 								    		</div>
 								    	</div>
 								    	<div class="col-sm-2">
 								    		<div class="box" style="background-color:#F0F99E">
 								    			<p>준비 STEP 3</p>
-								    			<h6>건조하고<br>부피 줄이기</h6>
+								    			<h6 class="noto-sans">건조하고<br>부피 줄이기</h6>
 								    		</div>
 								    	</div>
 								    	<div class="col-sm-2">
 								    		<div class="box" style="background-color:#ECF87F">
 								    			<p>준비 STEP 4</p>
-								    			<h6>모아서<br>포장하기</h6>
+								    			<h6 class="noto-sans">모아서<br>포장하기</h6>
 								    		</div>
 								    	</div>
 								    	<div class="col-sm-2"></div>
@@ -121,28 +121,28 @@
 								    	<div class="col-sm-2">
 								    		<div class="box" style="background-color:#D4E5C4">
 									    		<p>STEP 1</p>
-									    		<h6>박스 포장</h6>
+									    		<h6 class="noto-sans">박스 포장</h6>
 									    		<p>보낼 수량에 맞는<br>박스 준비 및 포장</p>
 									    	</div>
 								    	</div>
 								    	<div class="col-sm-2">
 								    		<div class="box" style="background-color:#ABCB8B">
 									    		<p>STEP 2</p>
-									    		<h6>수거 신청</h6>
+									    		<h6 class="noto-sans">수거 신청</h6>
 									    		<p>방문 택배 상품을<br>결제해주세요</p>
 									    	</div>
 								    	</div>
 								    	<div class="col-sm-2">
 								    		<div class="box" style="background-color:#82B153">
 									    		<p>STEP 3</p>
-									    		<h6>방문 수거</h6>
+									    		<h6 class="noto-sans">방문 수거</h6>
 									    		<p>포장한 박스를<br>문 앞에 놓아주세요</p>
 									    	</div>
 								    	</div>
 								    	<div class="col-sm-2">
 								    		<div class="box" style="background-color:#59981A">
 									    		<p id="last">STEP 4</p>
-									    		<h6 id="last">수거 완료</h6>
+									    		<h6 class="noto-sans" id="last">수거 완료</h6>
 									    		<p id="last">품목 수량만큼<br>포인트 적립</p>
 									    	</div>
 								    	</div>
@@ -151,7 +151,7 @@
 								</div><br><br>
 								<!-- grid end -->
 								<!-- price guide start -->
-								<h4>수거 비용</h4><br>
+								<h4 class="noto-sans">수거 비용</h4><br>
 								<div class="container text-center">
 									<div class="row">
 										<div class="col-4">
