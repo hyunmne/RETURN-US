@@ -40,12 +40,8 @@
 				<div class="col-6"></div>
 			</div>
 			<div class="row g-4">
-				<div class="col-lg-2">
-					<div class="row g-4 shadow-sm">
-						<div class="col-lg-12">
-							<%@include file="/views/common/sideBar.jsp"%>
-						</div>
-					</div>
+				<div class="col-lg-2 shadow-sm">
+					<%@include file="/views/common/sideBar.jsp"%>
 				</div>
 				<div class="col-lg-10">
 					<div style="height: 100%; padding: 0px 70px 0px 70px">
