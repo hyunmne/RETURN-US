@@ -39,23 +39,41 @@ public class InsertCol4 extends HttpServlet {
 		
 		try {
 			
-			request.setAttribute("accName", request.getParameter("accName"));
-			request.setAttribute("accTel", request.getParameter("accTel"));
-			request.setAttribute("accPostCode", request.getParameter("accPostCode"));
-			request.setAttribute("accAddr", request.getParameter("accAddr"));
-			request.setAttribute("accDetailAddr", request.getParameter("accDetailAddr"));
-			request.setAttribute("boxSize", request.getParameter("boxSize"));
+			String accName = request.getParameter("accName");
+			String accTel = request.getParameter("accTel");
+			String accPostCode = request.getParameter("accPostCode");
+			String accAddr = request.getParameter("accAddr");
+			String accDetailAddr = request.getParameter("accDetailAddr");
+			String boxSize = request.getParameter("boxSize");
+			
+			request.setAttribute("accName", accName);
+			request.setAttribute("accTel", accTel);
+			request.setAttribute("accPostCode", accPostCode);
+			request.setAttribute("accAddr", accAddr);
+			request.setAttribute("accDetailAddr", accDetailAddr);
+			request.setAttribute("boxSize", boxSize);
+			
+			Integer colPaper = Integer.parseInt(request.getParameter("colPaper"));
+			Integer colCan = Integer.parseInt(request.getParameter("colCan"));
+			Integer colBt190 = Integer.parseInt(request.getParameter("colBt190"));
+			Integer colBt400 = Integer.parseInt(request.getParameter("colBt400"));
+			Integer colBt1000 = Integer.parseInt(request.getParameter("colBt1000"));
+			Integer colBt1000Up = Integer.parseInt(request.getParameter("colBt1000Up"));
+			Integer colPlastic = Integer.parseInt(request.getParameter("colPlastic"));
+			Integer colPtLid = Integer.parseInt(request.getParameter("colPtLid"));
+			Integer colPtBody = Integer.parseInt(request.getParameter("colPtBody"));
+			Integer colPpack = Integer.parseInt(request.getParameter("colPpack"));
 
-			request.setAttribute("colPaper", request.getParameter("colPaper"));
-			request.setAttribute("colCan", request.getParameter("colCan"));
-			request.setAttribute("colBt190", request.getParameter("colBt190"));
-			request.setAttribute("colBt400", request.getParameter("colBt400"));
-			request.setAttribute("colBt1000", request.getParameter("colBt1000"));
-			request.setAttribute("colBt1000Up", request.getParameter("colBt1000Up"));
-			request.setAttribute("colPlastic", request.getParameter("colPlastic"));
-			request.setAttribute("colPtLid", request.getParameter("colPtLid"));
-			request.setAttribute("colPtBody", request.getParameter("colPtBody"));
-			request.setAttribute("colPpack", request.getParameter("colPpack"));
+			request.setAttribute("colPaper", colPaper);
+			request.setAttribute("colCan", colCan);
+			request.setAttribute("colBt190", colBt190);
+			request.setAttribute("colBt400", colBt400);
+			request.setAttribute("colBt1000", colBt1000);
+			request.setAttribute("colBt1000Up", colBt1000Up);
+			request.setAttribute("colPlastic", colPlastic);
+			request.setAttribute("colPtLid", colPtLid);
+			request.setAttribute("colPtBody", colPtBody);
+			request.setAttribute("colPpack", colPpack);
 			
 			
 			request.getRequestDispatcher("/views/collection/pickForm(5).jsp").forward(request, response);
