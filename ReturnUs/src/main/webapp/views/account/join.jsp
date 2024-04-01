@@ -277,6 +277,46 @@ $(document).ready(function() {
     checkIdCondition();
     checkPasswordValidity();
 });
+
+
+//메일발송(인증번호 메일 전송)
+$(function() {
+	$("#checkedemail").click(function(e) {
+		e.preventDefault();
+		var email = $('input[name=accEmail]').val()+'@'+$('select[name=accEmailDo]').val();
+		$.ajax({
+			url:'joinauth',
+			type:'post',
+			data:{email:email},
+			success:function(result) {
+				alert(result);
+			}
+		})
+	})
+	//이메일 인증 여부 메시지를 표시 할 요소
+	var checkEmailCondition = $('#permitemail');
+	//메일체크
+	$("#checkauth").click(function(e) {
+		e.preventDefault();
+		var authcode = $("#authcode").val();
+		$.ajax({
+			url:'checkauth',
+			type:'post',
+			data:{authcode:authcode},
+			success:function(result) {
+				if (result == 'true') {
+					console.log('인증번호가 일치합니다.')
+					checkEmailCondition.text('인증번호가 일치합니다.');
+				    checkEmailCondition.css('color', 'green');
+				} else {
+					console.log('인증번호가 일치하지 않습니다.')
+				    checkEmailCondition.text('인증번호가 일치하지 않습니다.');
+				    checkEmailCondition.css('color', 'red');
+				}
+			}
+		})
+	})
+})
 </script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -361,7 +401,7 @@ $(document).ready(function() {
             return;
         }
         
-        // 생년월일 체크
+        // 생년월일 체크	
         var birth = $('#accBirth').val();
         if (birth === '') {
             alert('생년월일을 입력해주시기 바랍니다.');
@@ -380,14 +420,21 @@ $(document).ready(function() {
         // 이메일 체크
         var emailId = $('#email_id').val();
         var emailDomain = $('#select').val();
-        if (emailId === '' || emailDomain === '') {
+        if (emailId == '' || emailDomain == 'default') {
             alert('이메일을 확인해주시기 바랍니다.');
             e.preventDefault(); 
             return;
         }
-    });
-}); 
-
+        
+        //인증 체크
+        var emialCheck = $('#permitemail').text();
+        if (emialCheck !== '인증번호가 일치합니다.') {
+            alert('이메일 인증을 해주시기 바랍니다.');
+            e.preventDefault(); 
+            return;
+        }
+    })
+})
 </script>
 </head>
 <body class="noto-sans">
@@ -484,11 +531,11 @@ $(document).ready(function() {
 												<div class="little-title">이메일 <div class="star" id="star">*</div></div>
 												<p class="email_tool" style="display:flex; align-items:center;">
 												<input type="text" id="email_id" name="accEmail" value=""title="이메일 아이디" placeholder=" 이메일" maxlength="18" />&nbsp;&nbsp;@&nbsp;
-												<select class ="select" id="select" name="accEmailDo" title="이메일 도메인 주소 선택" onclick="setEmailDomain(this.value);return false;">
-														<option value=""> --------선택--------</option>
+												<select class ="select" id="select" name="accEmailDo" title="이메일 도메인 주소 선택">
+														<option value="default"> --------선택--------</option>
 														<option value="naver.com">naver.com</option>
 														<option value="gmail.com">gmail.com</option>
-														<option value="hanmail.net">hanmail.net</option>
+														<option value="hanmail.net">daum.net</option>
 														<option value="hotmail.com">hotmail.com</option>
 														<option value="korea.com">korea.com</option>
 														<option value="nate.com">nate.com</option>
@@ -500,8 +547,9 @@ $(document).ready(function() {
 											</div>
 											<div id="cernum" class="all">
 												<div class="little-title">인증번호<div class="star" id="star">*</div></div>
-												<input type="text" class="input" id="cernum_input" placeholder=" 인증번호" >
-												<button type="button" class="button" id="checkemail">본인인증</button>
+												<input type="text" class="input" id="authcode" placeholder=" 인증번호" >
+												<button type="button" class="button" id="checkauth">본인인증</button><br>
+												<font id="permitemail"></font>
 											</div>										
 											<div>
 											<button type="submit" class="submit"><div class="joinBtn">회원가입</div></button>
