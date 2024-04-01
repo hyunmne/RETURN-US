@@ -44,4 +44,9 @@ public class AccountDAOImpl implements AccountDAO {
 		sqlSession.delete("mapper.account.deleteAccount", accId);
 		sqlSession.commit();
 	}
+	
+	public void updateAccountPassword(Account account) throws Exception {
+		sqlSession.update("mapper.account.updateAccountPassword", account);
+		sqlSession.commit();
+	}
 }

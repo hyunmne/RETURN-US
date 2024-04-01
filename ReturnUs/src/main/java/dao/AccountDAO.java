@@ -9,4 +9,5 @@ public interface AccountDAO {
 	String selectAdmin(String accId) throws Exception;
 	void updateAccount(Account account) throws Exception;
 	void deleteAccount(String accId) throws Exception;
+	void updateAccountPassword(Account account) throws Exception;
 }

@@ -124,4 +124,22 @@ public class AccountServiceImpl implements AccountService {
 		session.invalidate();
 		accountDao.deleteAccount(id);
 	}
+
+	@Override
+	public void changePassword(HttpServletRequest request) throws Exception {
+		String id = request.getParameter("accId");
+		String pw = request.getParameter("accPassword");
+		String pwConfirmation = request.getParameter("accNewPasswordConfirmation");
+				
+		Account account = accountDao.selectAccount(id);
+		if(!account.getAccPassword().equals(pw)) throw new Exception("비밀번호가 틀립니다");
+		if(!request.getParameter("accNewPassword").equals(pwConfirmation)) throw new Exception("비밀번호가 다릅니다");
+		
+		account.setAccPassword(request.getParameter("accNewPassword"));
+		accountDao.updateAccountPassword(account);
+		
+		HttpSession sessionOld = request.getSession();
+		sessionOld.invalidate();
+		
+	}
 }

@@ -35,6 +35,9 @@
 	</update>
 	<delete id="deleteAccount" parameterType="String">
 		delete from account where ACC_ID = #{accId}		
-	</delete> 	
+	</delete>
+	<update id="updateAccountPassword" parameterType="Account">
+		update account set ACC_PASSWORD = #{accPassword} where ACC_ID = #{accId}		
+	</update> 	
 </mapper>	
 	
