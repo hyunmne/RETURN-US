@@ -167,23 +167,23 @@
 									  <div class="row mb-3">
 										  <label for="colFormLabel" class="col-sm-2 col-form-label">우편번호</label>
 										  <div class="col-sm-2">
-										  	<input type="text" class="form-control" name="accPostCode" value="${sessionScope.acc.accPostCode}">								  	
+										  	<input type="text" readonly class="form-control" id="accPostCode" name="accPostCode" value="${sessionScope.acc.accPostCode}">								  	
 										  </div>
 										  <div class="col-sm-2">
-										  	<button type="button" onclick="daumPostcode()" class="btn btn-success">우편번호 찾기</button>
+										  	<button type="button" onclick="daumPostcode()" class="btn btn-success">주소 찾기</button>
 										  </div>						  
 									  </div>
 									  <div class="row mb-3">
 										  <label for="colFormLabel" class="col-sm-2 col-form-label">주소</label>
 										  <div class="col-sm-10">
-										  	<input type="text" class="form-control" name="accAddr" value="${sessionScope.acc.accAddr}">
+										  	<input type="text" readonly class="form-control" id="accAddr" name="accAddr" value="${sessionScope.acc.accAddr}">
 										  </div>										  
 									  </div>
 									  <div class="row mb-3">
 										  <label for="colFormLabel" class="col-sm-2 col-form-label">상세 주소</label>
 										  <div class="col-sm-10">
 										  	<div class="input-group has-validation">
-										    	<input type="text" class="form-control" style="color:black" name="accDetailAddr" value="${sessionScope.acc.accDetailAddr}" required>
+										    	<input type="text" class="form-control" id="accDetailAddr" style="color:black" name="accDetailAddr" value="${sessionScope.acc.accDetailAddr}" required>
 										  		<div class="invalid-feedback">상세 주소를 입력해주세요.</div>
 										  	</div>
 										  </div>										  
