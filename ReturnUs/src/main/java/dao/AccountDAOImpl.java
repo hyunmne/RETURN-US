@@ -38,4 +38,10 @@ public class AccountDAOImpl implements AccountDAO {
 		sqlSession.update("mapper.account.updateAccount", account);
 		sqlSession.commit();
 	}
+	
+	@Override
+	public void deleteAccount(String accId) throws Exception {
+		sqlSession.delete("mapper.account.deleteAccount", accId);
+		sqlSession.commit();
+	}
 }

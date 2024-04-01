@@ -122,7 +122,7 @@
 									  <div class="row mb-3 mt-4">								  	  
 										  <label for="colFormLabel" class="col-sm-2 col-form-label">아이디</label>
 										  <div class="col-sm-4">
-										    <input type="text" class="form-control" name="accId" value="${sessionScope.acc.accId}">
+										    <input type="text" readonly class="form-control" name="accId" value="${sessionScope.acc.accId}">
 										  </div>
 										  <label for="colFormLabel" class="col-sm-2 col-form-label">비밀번호</label>
 										  <div class="col-sm-4">

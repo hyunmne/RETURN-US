@@ -32,6 +32,9 @@
 	<update id="updateAccount" parameterType="Account">
 		update account set ACC_NAME = #{accName}, ACC_BIRTH = #{accBirth}, ACC_TEL = #{accTel}, ACC_EMAIL = #{accEmail},
 		ACC_POSTCODE = #{accPostCode}, ACC_ADDR = #{accAddr}, ACC_DETAIL_ADDR = #{accDetailAddr} where ACC_ID = #{accId}		
-	</update> 	
+	</update>
+	<delete id="deleteAccount" parameterType="String">
+		delete from account where ACC_ID = #{accId}		
+	</delete> 	
 </mapper>	
 	

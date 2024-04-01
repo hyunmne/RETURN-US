@@ -111,4 +111,17 @@ public class AccountServiceImpl implements AccountService {
 			session.setAttribute("adminCheck", adminCheck);
 		}		
 	}
+
+	@Override
+	public void closeAccount(HttpServletRequest request) throws Exception {
+		String id = request.getParameter("accId");
+		String pw = request.getParameter("accPassword");
+		Account account = accountDao.selectAccount(id);
+		
+		if(!account.getAccPassword().equals(pw)) throw new Exception("비밀번호 오류");		
+		
+		HttpSession session = request.getSession();
+		session.invalidate();
+		accountDao.deleteAccount(id);
+	}
 }

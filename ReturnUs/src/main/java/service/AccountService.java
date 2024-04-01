@@ -10,4 +10,5 @@ public interface AccountService {
 	boolean accountIdCheck(String id) throws Exception;
 	Account findId(String accName, String accBirth, String accEmail, String accEmailDo) throws Exception;
 	void modifyProfile(HttpServletRequest request) throws Exception;
+	void closeAccount(HttpServletRequest request) throws Exception;
 }
