@@ -157,7 +157,7 @@
 }
 
 </style>
-
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
 $(document).ready(function() {
@@ -179,6 +179,14 @@ $(document).ready(function() {
     var pwConditionMessage = $('#checkPw');
     // 비밀번호 일치성 메시지를 표시할 요소
     var pwCheckSameMessgae = $('#checkDoublePw');
+    //이메일 인증버튼
+    var emailBnt = $('#checkedemail');
+    //accEmail
+    var emailId = $('#email_id');
+    //accEmailDo
+    var emailDomain = $('#select');
+    //인증번호 입력 버튼
+    var authBtn = $('#checkauth');
     
     // 아이디 생성자 조건을 체크하여 중복체크 버튼 활성/비활성화 및 메시지 표시
     function checkIdCondition() {
@@ -187,63 +195,12 @@ $(document).ready(function() {
             // 아이디 생성자 조건을 만족하는 경우
             doubleIdCheckButton.prop('disabled', false);
             idConditionMessage.text('');
-        } else if(id === ''){
-        	doubleIdCheckButton.prop('disabled', false);
-            idConditionMessage.text('');	        	
-        }else {
-            // 아이디 생성자 조건을 만족하지 않는 경우
-            doubleIdCheckButton.prop('disabled', true);
-            idConditionMessage.text('영문자와 숫자로 이루어진 6~12자여야합니다.');
-            idConditionMessage.css('color', 'red');
+        }else{
+        	doubleIdCheckButton.prop('disabled', true);
+            idConditionMessage.text('영문 숫자로 이루어진 6~12자여야 합니다.');
+            idConditionMessage.css('color','red')
         }
     }
-
-    // 비밀번호 확인 일치 여부 검사 및 메시지 표시
-    function checkPasswordMatch() {
-        var password = passwordElement.val();
-        var passwordCheck = passwordCheckElement.val();
-        if (password !== passwordCheck) {
-            // 비밀번호 확인이 일치하지 않는 경우
-            pwCheckSameMessgae.text('비밀번호가 일치하지 않습니다.');
-            pwCheckSameMessgae.css('color', 'red');
-        } else {
-            // 비밀번호 확인이 일치하는 경우
-            pwCheckSameMessgae.text('비밀번호가 일치합니다.');
-            pwCheckSameMessgae.css('color', 'green');
-        }
-    }
-    
-    
-    // 비밀번호 유효성 검사 및 메시지 표시
-    function checkPasswordValidity() {
-        var password = passwordElement.val();
-        if(password === ''){
-        	pwConditionMessage.text('');
-        }else if (!pwRegex.test(password)) {
-            // 비밀번호 유효성 조건을 만족하지 않는 경우
-            pwConditionMessage.text('특수문자를 포함한 영문 숫자로 이루어진 6~12자여야 합니다.');
-            pwConditionMessage.css('color', 'red');
-        }else {
-            // 비밀번호 유효성 조건을 만족하는 경우
-            pwConditionMessage.text('사용할 수 있는 비밀번호입니다.');
-            pwConditionMessage.css('color', 'green');
-        }
-    }
-    
-    // 아이디 입력란에 입력할 때마다 아이디 생성자 조건 체크
-    inputIdElement.on('input', function() {
-        checkIdCondition();
-    });
-    
-    // 비밀번호 입력란에 입력할 때마다 비밀번호 유효성 검사 및 메시지 표시
-    passwordElement.on('input', function() {
-        checkPasswordValidity();
-    });
-    
-    // 비밀번호 확인 입력란에 입력할 때마다 비밀번호 확인 일치 여부 검사 및 메시지 표시
-    passwordCheckElement.on('input', function() {
-        checkPasswordMatch();
-    });
     
     // 중복체크 버튼 클릭 시
     doubleIdCheckButton.click(function(e) {
@@ -272,10 +229,96 @@ $(document).ready(function() {
             }
         });
     });
+        
+    // 비밀번호 유효성 검사 및 메시지 표시
+    function checkPasswordValidity() {
+        var password = passwordElement.val();
+        if(password === ''){
+        	pwConditionMessage.text('');
+        }else if (!pwRegex.test(password)) {
+            // 비밀번호 유효성 조건을 만족하지 않는 경우
+            pwConditionMessage.text('특수문자를 포함한 영문 숫자로 이루어진 6~12자여야 합니다.');
+            pwConditionMessage.css('color', 'red');
+        }else {
+            // 비밀번호 유효성 조건을 만족하는 경우
+            pwConditionMessage.text('사용할 수 있는 비밀번호입니다.');
+            pwConditionMessage.css('color', 'green');
+        }
+    }
     
+    // 비밀번호 확인 일치 여부 검사 및 메시지 표시
+    function checkPasswordMatch() {
+        var password = passwordElement.val();
+        var passwordCheck = passwordCheckElement.val();
+		if(!pwRegex.test(password) || passwordCheck == ''){
+			pwCheckSameMessgae.text('')
+    	}else if (password !== passwordCheck) {
+            // 비밀번호 확인이 일치하지 않는 경우
+            pwCheckSameMessgae.text('비밀번호가 일치하지 않습니다.');
+            pwCheckSameMessgae.css('color', 'red');
+        } else {
+            // 비밀번호 확인이 일치하는 경우
+            pwCheckSameMessgae.text('비밀번호가 일치합니다.');
+            pwCheckSameMessgae.css('color', 'green');
+        }
+    }
+    
+    //이메일 전송 버튼 활성화/비활성화
+    function checkEmailCondition(){
+    	var email = emailId.val();
+    	var emaildo = emailDomain.val();
+    	if(!idRegex.test(email) || emaildo == 'default'){
+    		emailBnt.prop('disabled', true)
+    	}else{
+    		emailBnt.prop('disabled', false)
+    	}
+    }
+   	function authemail(){
+   		var email = emailId.val();
+    	var emaildo = emailDomain.val();
+   		if(!idRegex.test(email) || emaildo == 'default'){
+   			authBtn.prop('disabled', true)
+   		}else{
+   			authBtn.prop('disabled', false)
+   		}
+   	}
+    
+    // 아이디 입력란에 입력할 때마다 아이디 생성자 조건 체크
+    inputIdElement.on('input', function() {
+        checkIdCondition();
+    });
+    
+    // 비밀번호 입력란에 입력할 때마다 비밀번호 유효성 검사 및 메시지 표시
+    // 비밀번호 변경시에 비밀번호 일치 여부 재확인    
+    passwordElement.on('input', function() {
+        checkPasswordValidity();
+        checkPasswordMatch();
+    });
+    
+    // 비밀번호 확인 입력란에 입력할 때마다 비밀번호 확인 일치 여부 검사 및 메시지 표시
+    passwordCheckElement.on('input', function() {
+        checkPasswordMatch();
+    });
+
+    //이메일 입력 할 때 마다 이메일 인증 버튼 활성화 가능 여부 확인
+    emailId.on('input', function(){
+    	checkEmailCondition();
+    });
+    
+    //도메인 변경하면 이메일 인증 버튼 활성화 가능 여부 확인
+    emailDomain.on('change', function(){
+    	checkEmailCondition();
+    });
+    
+    emailBnt.on('click', function(){
+    	authemail();
+    })
+   
     // 초기에 아이디 생성자 조건 체크 및 비밀번호 유효성 검사 및 메시지 표시
     checkIdCondition();
     checkPasswordValidity();
+    checkEmailCondition();
+    authemail();
 });
 
 
@@ -317,9 +360,6 @@ $(function() {
 		})
 	})
 })
-</script>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
     function daumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -346,10 +386,10 @@ $(function() {
             }
         }).open();
     }
-</script>
-<script>
 
 $(document).ready(function() {
+
+	
     // 회원가입 양식 submit 이벤트
     $('#signUpForm').submit(function(e) {
         // 아이디 체크
@@ -416,7 +456,6 @@ $(document).ready(function() {
             e.preventDefault(); 
             return;
         }
-        
         // 이메일 체크
         var emailId = $('#email_id').val();
         var emailDomain = $('#select').val();
@@ -425,6 +464,7 @@ $(document).ready(function() {
             e.preventDefault(); 
             return;
         }
+
         
         //인증 체크
         var emialCheck = $('#permitemail').text();
@@ -452,10 +492,7 @@ $(document).ready(function() {
 				<div class="col-6"></div>
 			</div>
 			<div class="row g-4">
-				<div class="col-lg-2 shadow-sm">
-					<%@include file="/views/common/sideBar.jsp"%>
-				</div>
-				<div class="col-lg-10">
+				<div class="col-lg-12">
 					<div style="height: 100%; padding: 0px 70px 0px 70px">
 						<!--큰 card ** 여기서부터 코딩하시면 됩니다!!! ** -->
 						<div id="big" class="card">

@@ -109,7 +109,7 @@
 	color: #FFFFFF;
 }
 .select {
-	width: 120px;
+	width: 45%;
 	height: 40px;
 	border: 0px solid #D0D0D0;
 	border-radius: 6px;
@@ -135,36 +135,36 @@
 	margin-left: 15px;
 }
 
-#email_id{
-	width: 130px;
+#accEmail{
+	width: 45%;
 }
 
-#CerNum{
+#checkauth{
 	width: 271px;
 }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-
-$(document).ready(function() {
-	 $('#findPwForm').submit(function(e) {
-		// 이름 체크
-	        var name = $('#accName').val();
-	        if (name === '' || !isNaN(name)) {
-	            alert('이름을 확인해주시기 바랍니다.');
-	            e.preventDefault(); 
-	            return;
-	        }
-	        
-	     // 전화번호 체크
-	        var email = $('#accEmail').val();
-	        if (email === '') {
-	            alert('이메일을 확인해주시기 바랍니다.');
-	            e.preventDefault(); 
-	            return;
-	        }
-     });
-}); 
+<script type="text/javascript">
+$(function(){
+	$('#findPw').click(function(){
+		$.ajax({
+			url:"findpw",
+			type:"post",
+			async:true,
+			data:{data: JSON.stringify({accId:$('#accId').val(),email:$('#accEmail').val()+"@"+$('#accEmailDo').val()})},
+			success:function(result){
+				var resData = JSON.parse(result);
+				alert(resData.msg);
+				if(resData.isSuccess == "true") {
+					document.location.href = "login"
+				}
+				$('#accId').val("");
+				$('#accEmail').val("");
+				$('#accEmailDo').val("");
+			}
+		})
+	})
+})
 </script>
 </head>
 
@@ -175,7 +175,6 @@ $(document).ready(function() {
 
 
 
-
 	<div class="container-fluid fruite py-5"
 		style="margin: 38px 100px; width: 90%;">
 		<div class="col-lg-12">
@@ -183,10 +182,7 @@ $(document).ready(function() {
 				<div class="col-6"></div>
 			</div>
 			<div class="row g-4">
-				<div class="col-lg-2 shadow-sm">
-					<%@include file="/views/common/sideBar.jsp"%>
-				</div>
-				<div class="col-lg-10">
+				<div class="col-lg-12">
 					<div style="height: 100%; padding: 0px 70px 0px 70px">
 						<!--큰 card ** 여기서부터 코딩하시면 됩니다!!! ** -->
 						<div id="big" class="card">
@@ -201,38 +197,19 @@ $(document).ready(function() {
 							<!--body ** 여기서부터 코딩하시면 됩니다!!! ** -->
 							<div id="sm">
 								<div class="smtitle">
-									<p class="smt">리터너스 회원정보에 등록되어 있는 <br>이메일과 생년월일로 비밀번호를 찾을 수 있습니다.</p>
+									<p class="smt">리터너스 회원정보에 등록되어 있는 <br>아이디와 이메일로 비밀번호를 재발급 받을 수 있습니다.</p>
 								</div>
-								<form id="findPwForm" action="findpw" method="post">
 									<div class="input-container">
-										<label for="name">성명<div class="star">*</div></label>
-										<input type="text" id="accName" name="accName" value="${accName }" placeholder="성명 입력">
+										<label for="name">아이디<div class="star">*</div></label>
+										<input type="text" id="accId" name="accId" value="${accId }" placeholder="아이디 입력">
 									</div>
-									<br>
-									<div class="input-container">
-										<label for="birth">생년월일<div class="star">*</div></label>
-										<input type="date" id="accBirth" name="accBirth" value="${accBirth }" placeholder="생년월일 8자리 (ex. YYYYMMDD)"required>
-									</div>
-									<script>
-    									// 현재 날짜를 가져오는 함수
-    										function getCurrentDate() {
-        										var today = new Date();
-        										var year = today.getFullYear(); // 연도
-        										var month = (today.getMonth() + 1).toString().padStart(2, '0'); // 월 (0부터 시작하기 때문에 +1 필요)
-        										var day = today.getDate().toString().padStart(2, '0'); // 일
-        										return year + '-' + month + '-' + day;
-    										}
-
-    										// 최대 날짜 설정
-    										document.getElementById('accBirth').setAttribute('max', getCurrentDate());
-										</script>
 									<br>
 									<div class="input-container">
 										<label for="email">이메일 <div class="star" >*</div></label>
 										<p class="email_tool" style="display:flex; align-items:center;">
-										<input type="text" id="email_id" name="accEmail" title="이메일 아이디" placeholder=" 이메일" maxlength="18" />&nbsp;&nbsp;@&nbsp;
-											<select class ="select" id="email_do" name="accEmailDo" title="이메일 도메인 주소 선택" onclick="setEmailDomain(this.value);return false;">
-												<option value=""> --------선택--------</option>
+										<input type="text" id="accEmail" name="accEmail" title="이메일 아이디" placeholder=" 이메일" maxlength="18" />&nbsp;&nbsp;@&nbsp;
+											<select class ="select" id="accEmailDo" name="accEmailDo" title="이메일 도메인 주소 선택">
+												<option value="default"> --------선택--------</option>
 												<option value="naver.com">naver.com</option>
 												<option value="gmail.com">gmail.com</option>
 												<option value="hanmail.net">hanmail.net</option>
@@ -241,21 +218,12 @@ $(document).ready(function() {
 												<option value="nate.com">nate.com</option>
 												<option value="yahoo.com">yahoo.com</option>
 											</select>
-											<button class="button" id="CerNumcall">번호발송</button>
 										</p>											
 									</div>
 									<br>
-									<div class="input-container">
-									<label for="CerNum">인증번호<div class="star">*</div></label>
-									<p>
-									<input type="text" id="CerNum" name="CerNum" value="${CerNum }" placeholder="인증번호 6자리">
-									<button class="button" id="CerNumcallDo">인증완료</button>
-									</p>						
-									</div>
 									<div>
-										<button type="submit" class="submit" id="findPw"><div class="findPwfont">비밀번호 찾기</div></button>
+										<button id="findPw" class="findPwfont">비밀번호 찾기</button>
 									</div>
-								</form>
 							</div>
 						</div>
 					</div>

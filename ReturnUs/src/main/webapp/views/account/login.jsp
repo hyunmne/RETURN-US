@@ -10,14 +10,12 @@
 	if(cookieHeader!=null){
 		Cookie[] cookies = request.getCookies();
 		for(Cookie cookie : cookies) {
-			if(cookie.getName().equals("autoLogin")) {
-				if (cookie.getValue().equals("true"))
+			if(cookie.getName().equals("autologin")) {
+				if (cookie.getValue()	.equals("true"))
 					autoLogin = true;
 				else autoLogin = false;
 			} else if (cookie.getName().equals("accId")) {
 				id = cookie.getValue();
-			} else if (cookie.getName().equals("accPassword")) {
-				password = cookie.getValue();
 			}
 		}
 	}
@@ -126,9 +124,9 @@
 								<br>
 								<div id="submit" class="submit_box">
 								<%if(autoLogin) { %>
-									<input type="checkbox" value="true" name="autoLogin" checked="checked">&nbsp;&nbsp;<span>remember me</span> 
+									<input type="checkbox" value="true" name="autoLogin" checked="checked">&nbsp;&nbsp;<span>자동로그인</span> 
 								<%} else { %>
-									<input type="checkbox" value="true" name="autoLogin">&nbsp;&nbsp;<span>remember me</span>
+									<input type="checkbox" value="true" name="autoLogin">&nbsp;&nbsp;<span>자동로그인</span>
 								<%} %>
 									<button type="submit" class="button">로그인</button>
 								</div>

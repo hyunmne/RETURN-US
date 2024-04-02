@@ -37,6 +37,14 @@ public class Account {
 
 	public Account() {}
 	
+	
+	
+	public Account(String accId, String accPassword) {
+		super();
+		this.accId = accId;
+		this.accPassword = accPassword;
+	}
+
 	public Account(String accId, String accPassword, String accName, Date accBirth, String accTel, String accEmail,
 			String accEmailDo, String accPostCode, String accAddr, String accDetailAddr) {
 		super();

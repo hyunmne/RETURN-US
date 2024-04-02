@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import dao.AccountDAO;
 import dao.AccountDAOImpl;
 import dto.Account;
+import util.NaverMailSendToChangePassword;
 
 public class AccountServiceImpl implements AccountService {
 	private AccountDAO accountDao = new AccountDAOImpl();
@@ -20,8 +21,12 @@ public class AccountServiceImpl implements AccountService {
 		  request.setCharacterEncoding("utf-8");
 
 	        String accId = request.getParameter("accId");
+	        String accEmail = request.getParameter("accEmail");
+	        String accEmailDo = request.getParameter("accEmailDo");
 	        Account sacc = accountDao.selectAccount(accId);
 	        if(sacc != null) throw new Exception("아이디가 중복됩니다");
+	        Account eacc = accountDao.checkedDoubleEmail(accEmail, accEmailDo);
+	        if(eacc != null) throw new Exception("등록된 이메일입니다.");
 
 	        String accPassword = request.getParameter("accPassword");
 	        String accName = request.getParameter("accName");
@@ -34,9 +39,7 @@ public class AccountServiceImpl implements AccountService {
 	        } catch (ParseException e) {
 	            e.printStackTrace();
 	        }
-	        String accTel = request.getParameter("accTel");
-	        String accEmail = request.getParameter("accEmail");
-	        String accEmailDo = request.getParameter("accEmailDo");
+	        String accTel = request.getParameter("accTel");;
 	        String accPostCode = request.getParameter("accPostCode");
 	        String accAddr = request.getParameter("accAddr");
 	        String accDetailAddr = request.getParameter("accDetailAddr");
@@ -61,7 +64,7 @@ public class AccountServiceImpl implements AccountService {
 		session.setAttribute("acc", acc);
 		
 		String adminCheck = accountDao.selectAdmin(id);
-		if(adminCheck.equals("admin")) {
+		if(adminCheck != null || adminCheck.equals("admin")) {
 			session.setAttribute("adminCheck", adminCheck);
 		}
 		
@@ -142,4 +145,22 @@ public class AccountServiceImpl implements AccountService {
 		sessionOld.invalidate();
 		
 	}
+	
+
+	@Override
+	public void checkPassword(String accId, String email) throws Exception {
+		Account sacc = accountDao.selectAccount(accId);
+		if(sacc==null) {
+			throw new Exception("아이디 오류");
+		}else if(!email.equals(sacc.getAccEmail()+"@"+sacc.getAccEmailDo())) {
+			throw new Exception("이메일 오류");
+		}
+		NaverMailSendToChangePassword naverMailSendToChangePassword = new NaverMailSendToChangePassword();
+		String authPassword = naverMailSendToChangePassword.sendEmail(email);
+		accountDao.updateAccountPassword(new Account(accId,authPassword));
+	}
+
+
+
+	
 }

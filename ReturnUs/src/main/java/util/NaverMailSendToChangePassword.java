@@ -12,8 +12,7 @@ import jakarta.mail.Transport;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 
-public final class NaverMailSend {
-
+public class NaverMailSendToChangePassword {
 	private final String host = "smtp.naver.com"; // SMTP 서버명
 	private final String user = "sortop@naver.com"; // 발신자의 이메일 계정
 	private final String password = "R2DYULC5V6X1"; // 발신자의 SMTP 패스워드
@@ -51,10 +50,10 @@ public final class NaverMailSend {
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
 			// 메일제목 설정
-			message.setSubject("ReturnUs :: 인증번호 발송 메일입니다.");
+			message.setSubject("ReturnUs :: 임시 비밀번호 발송 메일입니다.");
 
 			// 메일 내용 설정
-			message.setText("인증번호는 [ "+authenCode+" ] 입니다.");
+			message.setText("임시 비밀번호는 ["+authenCode+"] 입니다.");
 
 			// Send the message
 			Transport.send(message);
@@ -71,11 +70,11 @@ public final class NaverMailSend {
 	/** 인증코드 생성 메서드 */
 	private String makeAuthenticationCode() throws Exception {
 
-		int pwdLength = 8;
+		int pwdLength = 10;
 		final char[] pwdTable = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q',
 				'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
-				'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4', '5', '6', '7',
-				'8', '9', '0' };
+				'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '!', '@', '#', '$', '%', '^', '&',
+				'*', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
 
 		// System.currentTimeMillis(): 중복 방지 처리
 		Random ran = new Random(System.currentTimeMillis());
@@ -88,5 +87,6 @@ public final class NaverMailSend {
 
 		return bf.toString();
 	}
+
 
 }

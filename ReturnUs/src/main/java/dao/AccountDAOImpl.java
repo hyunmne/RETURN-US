@@ -49,4 +49,12 @@ public class AccountDAOImpl implements AccountDAO {
 		sqlSession.update("mapper.account.updateAccountPassword", account);
 		sqlSession.commit();
 	}
+	@Override
+	public Account checkedDoubleEmail(String accEmail, String accEmailDo) throws Exception {
+		Map<String,Object> param = new HashMap<>();
+		param.put("accEmail", accEmail);
+		param.put("accEmailDo", accEmailDo);
+		return sqlSession.selectOne("mapper.account.findEmAccount", param);
+		
+	}
 }

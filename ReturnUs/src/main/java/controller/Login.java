@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,12 +38,39 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		String accId = request.getParameter("accId");
+		String accPassword = request.getParameter("accPassword");
 		try {
-			AccountService service = new AccountServiceImpl();
-			System.out.println(request.getParameter("accId"));
-			System.out.println(request.getParameter("accPassword"));
-			service.login(request);
+			AccountService service = new AccountServiceImpl();			
+			//login success시 cookie check & 저장
+			String autologin = request.getParameter("autologin");
+			
+			Cookie autoLoginCookie = null;
+			Cookie accIdCookie = null;
+			Cookie accPasswordCookie = null;
+			if(autologin!=null) {
+				autoLoginCookie = new Cookie ("autologin", autologin);
+				autoLoginCookie.setMaxAge(365 * 24 * 60 * 60); 
+				accIdCookie = new Cookie("accId", accId);
+				accIdCookie.setMaxAge(365 * 24 * 60 * 60);                
+				accPasswordCookie = new Cookie("accPassword", accPassword);
+				accPasswordCookie.setMaxAge(365 * 24 * 60 * 60);
+			}else {
+				autoLoginCookie = new Cookie("autologin", "");
+                autoLoginCookie.setMaxAge(0);
+                accIdCookie = new Cookie("accId", "");   
+                accIdCookie.setMaxAge(0);
+                accPasswordCookie = new Cookie("accPassword", "");
+                accPasswordCookie.setMaxAge(0);
+			}
+			response.addCookie(autoLoginCookie);
+			response.addCookie(accIdCookie);
+			response.addCookie(accPasswordCookie);
+			//session 저장
+			request.getSession().setAttribute("account", accId);
 			request.getRequestDispatcher("/main.jsp").forward(request, response);
+			service.login(request);
 //			response.sendRedirect("main.jsp");
 		} catch(Exception e) {
 			e.printStackTrace();
