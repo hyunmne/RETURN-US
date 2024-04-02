@@ -6,6 +6,7 @@ public class Collection {
 	private String colNum;
 	private String accId;
 	private Date colDate;
+	private String colAddr;
 	private String colStatus;
 	private int colPost;
 	private int colUsePnt;
@@ -23,16 +24,18 @@ public class Collection {
 	private int colPlastic;
 	private int colCan;
 	private int colTotalPnt;
+	private String colRejection;
 	
 	public Collection() {}
 	
-	public Collection(String colNum, String accId, Date colDate, String colStatus, int colPost, int colUsePnt,
+	public Collection(String colNum, String accId, Date colDate, String colAddr, String colStatus, int colPost, int colUsePnt,
 			int colPrice, String colResult, Date colGetpntDt, int colPaper, int colPtBody, int colPtLid, int colBt190,
-			int colBt400, int colBt1000, int colBt1000Up, int colPpack, int colPlastic, int colCan, int colTotalPnt) {
+			int colBt400, int colBt1000, int colBt1000Up, int colPpack, int colPlastic, int colCan, int colTotalPnt, String colRejection) {
 		super();
 		this.colNum = colNum;
 		this.accId = accId;
 		this.colDate = colDate;
+		this.colAddr = colAddr;
 		this.colStatus = colStatus;
 		this.colPost = colPost;
 		this.colUsePnt = colUsePnt;
@@ -50,8 +53,35 @@ public class Collection {
 		this.colPlastic = colPlastic;
 		this.colCan = colCan;
 		this.colTotalPnt = colTotalPnt;
+		this.colRejection = colRejection;
 	}
 	
+	public Collection(String colNum, int colPaper, int colPtBody, int colPtLid, int colBt190, int colBt400,
+			int colBt1000, int colBt1000Up, int colPpack, int colPlastic, int colCan, int colTotalPnt,
+			String colRejection, String colStatus) {
+		super();
+		this.colNum = colNum;
+		this.colPaper = colPaper;
+		this.colPtBody = colPtBody;
+		this.colPtLid = colPtLid;
+		this.colBt190 = colBt190;
+		this.colBt400 = colBt400;
+		this.colBt1000 = colBt1000;
+		this.colBt1000Up = colBt1000Up;
+		this.colPpack = colPpack;
+		this.colPlastic = colPlastic;
+		this.colCan = colCan;
+		this.colTotalPnt = colTotalPnt;
+		this.colRejection = colRejection;
+		this.colStatus = colStatus;
+	}
+
+	public String getColAddr() {
+		return colAddr;
+	}
+	public void setColAddr(String colAddr) {
+		this.colAddr = colAddr;
+	}
 	public String getColNum() {
 		return colNum;
 	}
@@ -171,6 +201,12 @@ public class Collection {
 	}
 	public void setColTotalPnt(int colTotalPnt) {
 		this.colTotalPnt = colTotalPnt;
+	}
+	public String getColRejection() {
+		return colRejection;
+	}
+	public void setColRejection(String colRejection) {
+		this.colRejection = colRejection;
 	}
 	
 	
