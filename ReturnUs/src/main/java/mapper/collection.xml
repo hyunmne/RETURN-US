@@ -5,12 +5,14 @@
 
 	<insert id="insertCollect" parameterType="dto.Collection">
 		<![CDATA[
-			INSERT INTO collection (`ACC_ID`, `COL_DATE`, `COL_STATUS`, `COL_POST`, `COL_USE_PNT`, `COL_PRICE`, `COL_RESULT`, `COL_GETPNT_DT`, 
-									  `COL_PAPER`, `COL_PT_BODY`, `COL_PT_LID`, `COL_BT_190`, `COL_BT_400`, `COL_BT_1000`, `COL_BT_1000_UP`, 
-									  `COL_PPACK`, `COL_PLASTIC`, `COL_CAN`, `COL_TOTAL_PNT`) 
-			VALUES (#{accId},#{colDate},#{colStatus},#{colPost},#{colUsePt},#{colPrice},#{colResult},#{colGetpntDt},
-					#{colPaper},#{colPtBody},#{colPtLid},#{colBt190},#{colBt400},#{colBt400},#{colBt1000},#{colBt1000Up},
-					#{colPpack},#{colPlastic},#{colCan},#{colTatalPnt})
+			INSERT INTO collection (col_num, acc_id, col_date, col_status, col_addr,
+									col_post, col_use_pnt, col_price,
+									col_paper, col_pt_body, col_pt_lid, col_bt_190, col_bt_400, col_bt_1000, col_bt_1000_up,
+									col_ppack, col_plastic, col_can, col_total_pnt)
+			VALUES (CONCAT(DATE_FORMAT(CURDATE(), '%Y%m%d'), '-', LPAD(NEXT VALUE FOR colNum, 4, '0')), #{accId},CURDATE(),'수거준비중',#{colAddr},
+					#{colPost},#{colUsePnt},#{colPrice},
+					#{colPaper},#{colPtBody},#{colPtLid},#{colBt190},#{colBt400},#{colBt1000},#{colBt1000Up},
+					#{colPpack},#{colPlastic},#{colCan},#{colTotalPnt})
 		]]>
 	</insert>
 	

@@ -28,6 +28,28 @@ public class Collection {
 	
 	public Collection() {}
 	
+	public Collection(String accId, String colAddr, int colPost, int colUsePnt, int colPrice, 
+					  int colPaper, int colPtBody, int colPtLid, int colBt190, int colBt400, int colBt1000, int colBt1000Up, 
+					  int colPpack, int colPlastic, int colCan, int colTotalPnt) {
+		super();
+		this.accId = accId;
+		this.colAddr = colAddr;
+		this.colPost = colPost;
+		this.colUsePnt = colUsePnt;
+		this.colPrice = colPrice;
+		this.colPaper = colPaper;
+		this.colPtBody = colPtBody;
+		this.colPtLid = colPtLid;
+		this.colBt190 = colBt190;
+		this.colBt400 = colBt400;
+		this.colBt1000 = colBt1000;
+		this.colBt1000Up = colBt1000Up;
+		this.colPpack = colPpack;
+		this.colPlastic = colPlastic;
+		this.colCan = colCan;
+		this.colTotalPnt = colTotalPnt;
+	}
+	
 	public Collection(String colNum, String accId, Date colDate, String colAddr, String colStatus, int colPost, int colUsePnt,
 			int colPrice, String colResult, Date colGetpntDt, int colPaper, int colPtBody, int colPtLid, int colBt190,
 			int colBt400, int colBt1000, int colBt1000Up, int colPpack, int colPlastic, int colCan, int colTotalPnt, String colRejection) {

@@ -1,11 +1,15 @@
 package controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import service.CollectionService;
+import service.CollectionServiceImpl;
 
 /**
  * Servlet implementation class InsertCol3
@@ -38,27 +42,57 @@ public class InsertCol5 extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		// 인서트 해야됨 여기서 
 		try {
+//			
+//			request.setAttribute("accName", request.getParameter("accName"));
+//			request.setAttribute("accTel", request.getParameter("accTel"));
+//			request.setAttribute("accPostCode", request.getParameter("accPostCode"));
+//			request.setAttribute("accAddr", request.getParameter("accAddr"));
+//			request.setAttribute("accDetailAddr", request.getParameter("accDetailAddr"));
+//			request.setAttribute("boxSize", request.getParameter("boxSize"));
+//
+//			request.setAttribute("colPaper", request.getParameter("colPaper"));
+//			request.setAttribute("colCan", request.getParameter("colCan"));
+//			request.setAttribute("colBt190", request.getParameter("colBt190"));
+//			request.setAttribute("colBt400", request.getParameter("colBt400"));
+//			request.setAttribute("colBt1000", request.getParameter("colBt1000"));
+//			request.setAttribute("colBt1000Up", request.getParameter("colBt1000Up"));
+//			request.setAttribute("colPlastic", request.getParameter("colPlastic"));
+//			request.setAttribute("colPtLid", request.getParameter("colPtLid"));
+//			request.setAttribute("colPtBody", request.getParameter("colPtBody"));
+//			request.setAttribute("colPpack", request.getParameter("colPpack"));
+//			
+//			request.setAttribute("colUsePnt", request.getParameter("colUsePnt"));
+//			request.setAttribute("colTotalPnt", request.getParameter("colTotalPnt"));
+//			request.setAttribute("colPrice", request.getParameter("colPrice"));
 			
-			request.setAttribute("accName", request.getParameter("accName"));
-			request.setAttribute("accTel", request.getParameter("accTel"));
-			request.setAttribute("accPostCode", request.getParameter("accPostCode"));
-			request.setAttribute("accAddr", request.getParameter("accAddr"));
-			request.setAttribute("accDetailAddr", request.getParameter("accDetailAddr"));
-			request.setAttribute("boxSize", request.getParameter("boxSize"));
-
-			request.setAttribute("colPaper", request.getParameter("colPaper"));
-			request.setAttribute("colCan", request.getParameter("colCan"));
-			request.setAttribute("colBt190", request.getParameter("colBt190"));
-			request.setAttribute("colBt400", request.getParameter("colBt400"));
-			request.setAttribute("colBt1000", request.getParameter("colBt1000"));
-			request.setAttribute("colBt1000Up", request.getParameter("colBt1000Up"));
-			request.setAttribute("colPlastic", request.getParameter("colPlastic"));
-			request.setAttribute("colPtLid", request.getParameter("colPtLid"));
-			request.setAttribute("colPtBody", request.getParameter("colPtBody"));
-			request.setAttribute("colPpack", request.getParameter("colPpack"));
 			
+			CollectionService service = new CollectionServiceImpl();
+			service.insertCollect(request);
 			
-			request.getRequestDispatcher("/수거신청끝").forward(request, response);
+			System.out.println("InsertCol5 doPost");
+			System.out.println("accName:" + request.getParameter("accName"));
+			System.out.println("accTel:" + request.getParameter("accTel"));
+			System.out.println("accPostCode:" + request.getParameter("accPostCode"));
+			System.out.println("accAddr:" + request.getParameter("accAddr"));
+			System.out.println("accDetailAddr:" + request.getParameter("accDetailAddr"));
+			System.out.println("boxSize:" + request.getParameter("boxSize"));
+			
+			System.out.println("colPaper:" + request.getParameter("colPaper"));
+			System.out.println("colCan:" + request.getParameter("colCan"));
+			System.out.println("colBt190:" + request.getParameter("colBt190"));
+			System.out.println("colBt400:" + request.getParameter("colBt400"));
+			System.out.println("colBt1000:" + request.getParameter("colBt1000"));
+			System.out.println("colBt1000Up:" + request.getParameter("colBt1000Up"));
+			System.out.println("colPlastic:" + request.getParameter("colPlastic"));
+			System.out.println("colPtLid:" + request.getParameter("colPtLid"));
+			System.out.println("colPtBody:" + request.getParameter("colPtBody"));
+			System.out.println("colPpack:" + request.getParameter("colPpack"));
+			
+			System.out.println("colTotalPnt:" + request.getParameter("colTotalPnt"));
+			System.out.println("colUsePnt:" + request.getParameter("colUsePnt"));
+			System.out.println("colPrice:" + request.getParameter("colPrice"));
+			
+			request.getRequestDispatcher("/main.jsp").forward(request, response);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

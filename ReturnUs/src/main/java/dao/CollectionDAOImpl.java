@@ -14,7 +14,7 @@ public class CollectionDAOImpl implements CollectionDAO {
 	
 	@Override
 	public void insertCollect(Collection col) throws Exception {
-		sqlSession.insert("mapper.board.insertCollect", col);
+		sqlSession.insert("mapper.collection.insertCollect", col);
 		sqlSession.commit();
 	}
 

@@ -75,7 +75,6 @@ public class InsertCol4 extends HttpServlet {
 			request.setAttribute("colPtBody", colPtBody);
 			request.setAttribute("colPpack", colPpack);
 			
-			
 			request.getRequestDispatcher("/views/collection/pickForm(5).jsp").forward(request, response);
 		} catch(Exception e) {
 			e.printStackTrace();

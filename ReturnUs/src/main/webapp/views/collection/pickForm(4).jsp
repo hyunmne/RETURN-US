@@ -369,10 +369,10 @@ function getCntBtn() {
     var exSpan = targetDiv.querySelector("span"); // targetDiv의 첫번째 span 요소를 가르킴
     
     if (exSpan !== null) { // exSpan의 요소가 있으면 
-        var exText = exSpan.textContent.trim(); // span의 텍스트를 공백 제거 해서 받음
-        var exNum = parseInt(exText.match(/\d+/)[0]); // 텍스트에서 숫자만 골라냄
-        var updateNum = exNum + count; // 기존 값과 새 입력 값을 더함
-        exSpan.textContent = exText.replace(/\d+/, updateNum); // 숫자였던 부분 자리를 updateNum으로 변경 
+        var exText = exSpan.textContent.trim(); // span의 텍스트를 공백 제거 해서 받음 > ㅁ개
+        var exNum = parseInt(exText.match(/\d+/)[0]); // 텍스트에서 숫자만 골라냄 > 기존 수량 ㅁ 
+//         var updateNum = exNum + count; // 기존 값과 새 입력 값을 더함
+        exSpan.textContent = exText.replace(/\d+/, count); // 숫자였던 부분 자리를 updateNum으로 변경 
     } else {
     	var newSpan = document.createElement('span');
     	
@@ -446,7 +446,7 @@ function nextBtn() {
         input.value = value ? value : 0;
         form.appendChild(input);
     }
-
+    
     function addColValue(name, classNm) {
         var elements = document.getElementsByClassName(classNm);
         if (elements.length > 0) {
@@ -457,7 +457,7 @@ function nextBtn() {
         }
     }
 
-    addColValue('colPaper', 'paperCol');
+    addColValue('colPaper', 'paperCol'); // newSpan의 값에서 텍스트를 가지고 옴,,, 
     addColValue('colCan', 'canCol');
     addColValue('colBt190', 'bt190Col');
     addColValue('colBt400', 'bt400Col');

@@ -68,24 +68,27 @@ input[type='number']::-webkit-inner-spin-button {
 <script src="sweetalert2.min.js"></script>
 <!-- 헤더 파일 include -->
 <%@include file="/views/common/header.jsp" %>
-<%-- <input id="accName" type="hidden" name="accName" value="<%= request.getParameter("accName") %>" /> --%>
-<%-- <input id="accTel" type="hidden" name="accTel" value="<%= request.getParameter("accTel") %>" /> --%>
-<%-- <input id="accPostCode" type="hidden" name="accPostCode" value="<%= request.getParameter("accPostCode") %>" /> --%>
-<%-- <input id="accAddr" type="hidden" name="accAddr" value="<%= request.getParameter("accAddr") %>" /> --%>
-<%-- <input id="accDetailAddr" type="hidden" name="accDetailAddr" value="<%= request.getParameter("accDetailAddr") %>" /> --%>
-<%-- <input id="boxSize" type="hidden" name="boxSize" value="<%= request.getParameter("boxSize") %>" /> --%>
+<input id="accName" type="hidden" name="accName" value="<%= request.getParameter("accName") %>" />
+<input id="accTel" type="hidden" name="accTel" value="<%= request.getParameter("accTel") %>" />
+<input id="accPostCode" type="hidden" name="accPostCode" value="<%= request.getParameter("accPostCode") %>" />
+<input id="accAddr" type="hidden" name="accAddr" value="<%= request.getParameter("accAddr") %>" />
+<input id="accDetailAddr" type="hidden" name="accDetailAddr" value="<%= request.getParameter("accDetailAddr") %>" />
+<input id="boxSize" type="hidden" name="boxSize" value="<%= request.getParameter("boxSize") %>" />
 
-<%-- <input id="colPaper" type="hidden" name="colPaper" value="<%= request.getParameter("colPaper") %>" /> --%>
-<%-- <input id="colCan" type="hidden" name="colCan" value="<%= request.getParameter("colCan") %>" /> --%>
-<%-- <input id="colBt190" type="hidden" name="colBt190" value="<%= request.getParameter("colBt190") %>" /> --%>
-<%-- <input id="colBt400" type="hidden" name="colBt400" value="<%= request.getParameter("colBt400") %>" /> --%>
-<%-- <input id="colBt1000" type="hidden" name="colBt1000" value="<%= request.getParameter("colBt1000") %>" /> --%>
-<%-- <input id="colBt1000Up" type="hidden" name="colBt1000Up" value="<%= request.getParameter("colBt1000Up") %>" /> --%>
-<%-- <input id="colPlastic" type="hidden" name="colPlastic" value="<%= request.getParameter("colPlastic") %>" /> --%>
-<%-- <input id="colPtLid" type="hidden" name="colPtLid" value="<%= request.getParameter("colPtLid") %>" /> --%>
-<%-- <input id="colPtBody" type="hidden" name="colPtBody" value="<%= request.getParameter("colPtBody") %>" /> --%>
-<%-- <input id="colPpack" type="hidden" name="colPpack" value="<%= request.getParameter("colPpack") %>" /> --%>
+<input id="colPaper" type="hidden" name="colPaper" value="<%= request.getParameter("colPaper") %>" />
+<input id="colCan" type="hidden" name="colCan" value="<%= request.getParameter("colCan") %>" />
+<input id="colBt190" type="hidden" name="colBt190" value="<%= request.getParameter("colBt190") %>" />
+<input id="colBt400" type="hidden" name="colBt400" value="<%= request.getParameter("colBt400") %>" />
+<input id="colBt1000" type="hidden" name="colBt1000" value="<%= request.getParameter("colBt1000") %>" />
+<input id="colBt1000Up" type="hidden" name="colBt1000Up" value="<%= request.getParameter("colBt1000Up") %>" />
+<input id="colPlastic" type="hidden" name="colPlastic" value="<%= request.getParameter("colPlastic") %>" />
+<input id="colPtLid" type="hidden" name="colPtLid" value="<%= request.getParameter("colPtLid") %>" />
+<input id="colPtBody" type="hidden" name="colPtBody" value="<%= request.getParameter("colPtBody") %>" />
+<input id="colPpack" type="hidden" name="colPpack" value="<%= request.getParameter("colPpack") %>" />
+
 	<div class="container-fluid fruite py-5"
+	
+	
 		style="margin: 38px 100px; width: 90%;">
 		<div class="col-lg-12">
 			<div class="row g-4">
@@ -131,16 +134,16 @@ input[type='number']::-webkit-inner-spin-button {
 										    <tr id="paper">
 										      <td>종이류</td>
 										      <td></td>
-										      <td>5000p</td>
+										      <td>500p</td>
 										      <td>${colPaper }kg</td>
-										      <td>${colPaper * 5000}p </td>
+										      <td>${colPaper * 500}p </td>
 										    </tr>
 										    <tr id="can">
 										      <td>캔류</td>
 										      <td></td>
-										      <td>500p</td>
+										      <td>50p</td>
 										      <td>${colCan }개</td>
-										      <td>${colCan * 500 }p</td>
+										      <td>${colCan * 50 }p</td>
 										    </tr>
 										    <tr id="bottle">
 										      <td>병류</td>
@@ -151,10 +154,10 @@ input[type='number']::-webkit-inner-spin-button {
 										      	1L 이상<br>
 										      </td>
 										      <td>
-										      	70p<br>
-										      	100P<br>
-										      	130P<br>
-										      	350P<br>
+										      	7p<br>
+										      	10P<br>
+										      	13P<br>
+										      	35P<br>
 										      </td>
 										      <td>
 										      	${colBt190}개<br>
@@ -163,38 +166,38 @@ input[type='number']::-webkit-inner-spin-button {
 										      	${colBt1000Up}개<br>
 										      </td>
 										      <td>
-										      	${colBt190 * 70}p<br>
-										      	${colBt400 * 100}p<br>
-										      	${colBt1000*130}p<br>
-										      	${colBt1000Up*350}p<br>
+										      	${colBt190 * 7}p<br>
+										      	${colBt400 * 10}p<br>
+										      	${colBt1000*13}p<br>
+										      	${colBt1000Up*35}p<br>
 										      </td>
 										      
 										    </tr>
 										    <tr id="plastic">
 										      <td>플라스틱</td>
 										      <td></td>
-										      <td>200p</td>
+										      <td>20p</td>
 										      <td>${colPlastic }개</td>
-										      <td>${colPlastic * 200 }p</td>
+										      <td>${colPlastic * 20 }p</td>
 										    </tr>
 										    <tr id="pett">
 										      <td>페트병</td>
 										      <td>뚜껑 <br> 본체</td>
-										      <td>100p<br>500p</td>
+										      <td>10p<br>50p</td>
 										      <td>${colPtLid }개<br>${colPtBody }개</td>
-										      <td>${colPtLid*100 }p<br>${colPtBody*500 }p</td>
+										      <td>${colPtLid*10 }p<br>${colPtBody*50 }p</td>
 										    </tr>
 										    <tr id="paperPack">
 										      <td>종이팩</td>
 										      <td></td>
-										      <td>300p</td>
+										      <td>30p</td>
 										      <td>${colPpack }개</td>
-										      <td>${colPpack*300 }p</td>
+										      <td>${colPpack*30 }p</td>
 										    </tr>
 										  </tbody>
 										 </table>
 									  <div style="display:flex; justify-content: center; font-size: x-large; align-items:center; padding:30px">
-									  	${acc.accName }> 님께 환급될 포인트는&nbsp;&nbsp;
+									  	${acc.accName } 님께 환급될 포인트는&nbsp;&nbsp;
 									  	<h4 class="noto-sans" id="totalSum" style="margin:0px"></h4>&nbsp;&nbsp; 입니다.
 									  </div>
 									</div>
@@ -231,28 +234,32 @@ input[type='number']::-webkit-inner-spin-button {
 										<div class="dd">
 											<div>원가</div>								
 											<div class="money" style="display:flex; align-items:center; ">
-												<span style="font-weight:300; padding-right:10px">${boxSize }</span>원
+												<span id="colPost" style="font-weight:300; padding-right:10px">${boxSize }</span>원
 											</div>								
 										</div>
 										<div class="dd" style="padding:0px 20px">
 											<div >사용 가능 포인트</div>								
 											<div class="money">
-												<span style="font-weight:300; padding-right:10px">${acc.accPnt }</span>원
+												<span id="accPnt" style="font-weight:300; padding-right:10px">${acc.accPnt }</span>원
 											</div>								
 										</div>
-											<div class="dd" style="padding:0px 15px 20px; font-weight:400; font-size:medium; justify-content:flex-end; flex-direction:row;">
-												1,000p 이상일 때부터 사용 가능합니다.								
-											</div>
-										<div class="dd" style="padding-bottom:30px;">
+										<div class="dd" style="padding:0px 15px 20px; font-weight:400; font-size:medium; justify-content:flex-end; flex-direction:row;">
+											1,000p 이상부터 사용 가능합니다.							
+										</div>
+										<div class="dd" style="padding:0px 20px;">
 											<div>사용 포인트</div>								
 											<div class="money">
-												<input type="number" min="0" style="font-weight:300;  width:140px; margin-right:10px; padding:5px; text-align:right">원
+												<input oninput="updateTotal()" type="number" id="usePnt" value="0" min="1000" max="${acc.accPnt }" style="width:140px; margin-right:10px; padding-right:5px; text-align:right">원
 											</div>
 										</div>
-										<div class="dd" style="background-color:#f5f9f1; border-radius:15px; padding:20px ">
+										<div class="dd" id="msg" style="display:none; padding:0px 15px; font-weight:400; font-size:medium; color:red; justify-content:flex-end; flex-direction:row;">
+											포인트의 최소 사용 금액은 1000p 입니다.		
+										</div>
+										
+										<div class="dd" style="background-color:#f5f9f1; border-radius:15px; padding:20px; margin-top: 30px;  ">
 											<div>총 결제 금액</div>								
 											<div class="money">
-												<span style="font-weight:300; padding-right:10px">${colPrice }1234</span>원
+												<span id="colPrice" style="font-weight:300; padding-right:10px">${colPrice }</span>원
 											</div>								
 										</div>
 										
@@ -279,26 +286,45 @@ input[type='number']::-webkit-inner-spin-button {
 
 	<%@ include file="/views/common/footer.jsp" %>
 
+
 <script>
 // 11. hidden input 데이터를 다시 받아오고 다시 데이터를 담아 collect5 doPost로 이동해서 DB에 데이터를 저장한다. 
+
+var totalAmount;
+var totalSum;
+var usePnt;
+
+// 최종 결제 금액 계산하기 
+async function updateTotal() {
+    usePnt = parseInt(document.getElementById("usePnt").value); // 고객이 입력한 사용 포인트 값을 받아옴
+    
+    if (usePnt >= 1000) {
+        var colPost = parseInt(document.getElementById("colPost").innerText); // 원가
+        totalAmount = colPost - usePnt; // 최종 결제 금액
+        document.getElementById("colPrice").innerText = totalAmount; 
+		document.getElementById("msg").style.display="none"; // 경고 문구 제거 
+    } else {
+		document.getElementById("msg").style.display="flex";
+    }
+}
+
+// 결제 api 
 function requestPay() {
   IMP.init('imp60400838'); //iamport 대신 자신의 "가맹점 식별코드"를 사용
   IMP.request_pay({
     pg: "html5_inicis",
     pay_method: "card",
     merchant_uid : 'merchant_'+new Date().getTime(),
-    name : '결제테스트',
-    amount : 100,
-    buyer_email : 'iamport@siot.do',
-    buyer_name : '구매자',
-    buyer_tel : '010-1234-5678',
-    buyer_addr : '서울특별시 강남구 삼성동',
-    buyer_postcode : '123-456'
+    name : 'Return:Us 수거 신청',
+    amount : totalAmount, // 가격
+    buyer_name: $("#accName").val(),
+    buyer_tel: $("#accTel").val(),
+    buyer_addr: $("#accAddr").val(), // accDetailAddr를 포함하지 않습니다.
+    buyer_postcode: $("#accPostCode").val()
   }, function (rsp) { // callback
 	  console.log(rsp);
       if (rsp.success) {
         // 결제 성공 시 로직
-     // sweet alert
         let timerInterval;
         Swal.fire({
           icon:"success",	 	
@@ -325,8 +351,6 @@ function requestPay() {
           }
         });
       } else { // 결제 실패 
-
-        // sweet alert
         let timerInterval;
         Swal.fire({
           icon:"error",
@@ -355,36 +379,33 @@ function requestPay() {
       }
   });
 }
-</script>
 
 
-
-<script>
+// 총합 포인트 계산
 window.onload = function(){
-	//모든 tbody 안의 tr 태그를 선택합니다.
-	var tableRows = document.querySelectorAll('tbody tr');
-	// 총합을 저장할 변수를 초기화합니다.
-	var totalSum = 0;
-	// 각 테이블 행을 순회하면서 마지막 열의 값을 더합니다.
-	tableRows.forEach(function(row) {
-	    // 현재 행의 마지막 td 태그를 가져옵니다.
-	    var lastCell = row.querySelector('td:last-child');
+	var tableRows = document.querySelectorAll('tbody tr'); // tbody안의 tr 태그 선택
+	totalSum = 0; // 변수 초기화
 	
-	    if (lastCell!==null){
-		    var value = parseInt(lastCell.textContent.replace('p', '').trim()); // 'p'를 제거하고 공백 제거
-	    } else {
-	    	var value = 0;
-	    }
-	    // 해당 td 태그의 텍스트 값을 가져와서 숫자로 변환한 뒤 더합니다.
-	    if (!isNaN(value)) { // value가 숫자면
-	        totalSum += value;
-	    }
+	tableRows.forEach(function(row) { // 테이블 행(세로)를 순회하며 마지막 열의 값을 더함
+	    var lastCell = row.querySelector('td:last-child'); // td의 마지막 행
+	    if (lastCell !== null) {
+            // 텍스트를 <br>로 분리하여 배열로 만듭니다.
+            var values = lastCell.innerHTML.split('<br>');
+            // 각 값을 처리하면서 총합을 계산합니다.
+            values.forEach(function(value) {
+                // 숫자로 변환하고 'p'를 제거하고 공백을 제거합니다.
+                var numericValue = parseInt(value.replace('p', '').trim());
+                // 숫자이면 총합에 더합니다.
+                if (!isNaN(numericValue)) {
+                    totalSum += numericValue;
+                }
+            });
+        }
+	    
 	});
 	document.getElementById('totalSum').textContent = totalSum+'p';
 }
-</script>
 
-<script>
 function requestCol() {
     // 폼 생성
     var form = document.createElement('form');
@@ -401,26 +422,30 @@ function requestCol() {
         form.appendChild(input);
     }
 
-    function addColValue(name, classNm) {
-        var elements = document.getElementsByClassName(classNm);
-        if (elements.length > 0) {
-            var cnt = elements[0].innerText.match(/\d+/)?.[0];
+    function addColValue(name, idName) {
+        var element = document.getElementById(idName);
+        if (element !== null) {
+            var cnt = element.value; // input 요소의 값은 value 속성을 통해 가져옵니다.
             addHiddenInput(name, cnt);
         } else {
             addHiddenInput(name, 0);
         }
     }
 
-    addColValue('colPaper', 'paperCol');
-    addColValue('colCan', 'canCol');
-    addColValue('colBt190', 'bt190Col');
-    addColValue('colBt400', 'bt400Col');
-    addColValue('colBt1000', 'bt1000Col');
-    addColValue('colBt1000Up', 'bt1000UpCol');
-    addColValue('colPlastic', 'plasticCol');
-    addColValue('colPtLid', 'ptLidCol');
-    addColValue('colPtBody', 'ptBodyCol');
-    addColValue('colPpack', 'paperPackCol');
+    addColValue('colPaper', 'colPaper');
+    addColValue('colCan', 'colCan');
+    addColValue('colBt190', 'colBt190');
+    addColValue('colBt400', 'colBt400');
+    addColValue('colBt1000', 'colBt1000');
+    addColValue('colBt1000Up', 'colBt1000Up');
+    addColValue('colPlastic', 'colPlastic');
+    addColValue('colPtLid', 'colPtLid');
+    addColValue('colPtBody', 'colPtBody');
+    addColValue('colPpack', 'colPpack');
+    
+    addHiddenInput('colTotalPnt', totalSum);    
+	addHiddenInput('colPrice', totalAmount);    
+	addHiddenInput('colUsePnt', usePnt);    
 
     // 추가로 hidden 값들도 폼 데이터로 추가
     var hiddenInputs = document.querySelectorAll('input[type=hidden]');
