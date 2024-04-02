@@ -1,6 +1,8 @@
 package dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -17,8 +19,36 @@ public class CollectionDAOImpl implements CollectionDAO {
 	}
 
 	@Override
-	public List<Collection> selectCollectionList(String colStatus) throws Exception {
-		return sqlSession.selectList("mapper.collection.selectCollectionList", colStatus);
+	public List<Map<String, Object>> selectCollectionList(String colStatus, Integer row) throws Exception {
+		Map<String, Object> params = new HashMap<>();
+		params.put("colStatus", colStatus);
+		params.put("row", row);
+		return sqlSession.selectList("mapper.collection.selectCollectionList", params);
+	}
+
+	@Override
+	public Integer selectCollectionCount(String colStatus) throws Exception {
+		return sqlSession.selectOne("mapper.collection.selectCollectionCount", colStatus);
+	}
+
+	@Override
+	public Map<String, Object> selectCollectionDetail(String colNum) throws Exception {
+		return sqlSession.selectOne("mapper.collection.selectCollectionDetail", colNum);
+	}
+
+	@Override
+	public void updateColStatus(String colNum, String colStatus) throws Exception {
+		Map<String, Object> params = new HashMap<>();
+		params.put("colNum", colNum);
+		params.put("colStatus", colStatus);
+		sqlSession.update("mapper.collection.updateColStatus", params);
+		sqlSession.commit();
+	}
+
+	@Override
+	public void updateCollection(Collection collection) throws Exception {
+		sqlSession.update("mapper.collection.updateCollection", collection);
+		sqlSession.commit();
 	}
 
 }

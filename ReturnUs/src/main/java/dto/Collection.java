@@ -56,11 +56,12 @@ public class Collection {
 		this.colRejection = colRejection;
 	}
 	
-	public Collection(String colNum, int colPaper, int colPtBody, int colPtLid, int colBt190, int colBt400,
+	public Collection(String colNum, String colResult, int colPaper, int colPtBody, int colPtLid, int colBt190, int colBt400,
 			int colBt1000, int colBt1000Up, int colPpack, int colPlastic, int colCan, int colTotalPnt,
 			String colRejection, String colStatus) {
 		super();
 		this.colNum = colNum;
+		this.colResult = colResult;
 		this.colPaper = colPaper;
 		this.colPtBody = colPtBody;
 		this.colPtLid = colPtLid;

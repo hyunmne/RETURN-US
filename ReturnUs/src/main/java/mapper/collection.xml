@@ -14,14 +14,47 @@
 		]]>
 	</insert>
 	
-	<select id="selectCollectionList" parameterType="String" resultType="dto.Collection">
-		select col.col_num as colNum, col.acc_id as addId, acc.ACC_NAME AS accName, col.col_date as colDate, col.col_status as colStatus, 
-				col.col_post as colPost, col.col_use_pnt as colUsePnt, col.col_price as colPrice, col.col_result as colResult, 
+	<select id="selectCollectionList" parameterType="Map" resultType="Map">
+		select col.col_num as colNum, col.acc_id as accId, acc.ACC_NAME AS accName, col.col_date as colDate, col.col_addr as colAddr, 
+				col.col_status as colStatus, col.col_post as colPost, col.col_use_pnt as colUsePnt, col.col_price as colPrice, col.col_result as colResult, 
 				col.col_getpnt_dt as colGetpntDt, col.col_paper as colPaper, col.col_pt_body as colPtBody, col.col_pt_lid as colPtLid, 
 				col.col_bt_190 as colBt190, col.col_bt_400 as colBt400, col.col_bt_1000 as colBt1000, col.col_bt_1000_Up as colBt1000Up, 
 				col.col_ppack as colPpack, col.col_plastic as colPlastic, col.col_can as colCan, col.col_total_pnt as colTotalPnt
 		from collection col LEFT  JOIN account acc ON col.ACC_ID = acc.ACC_ID
 		where col.col_status = #{colStatus}
+		order by col.col_num DESC
+		limit #{row}, 10
 	</select>
+	
+	<select id="selectCollectionCount" parameterType="String" resultType="Integer">
+		SELECT COUNT(*)
+		FROM collection
+		WHERE col_status = #{colStatus}
+	</select>
+	
+	<select id="selectCollectionDetail" parameterType="String" resultType="Map">
+		SELECT col.col_num as colNum, col.acc_id as addId, acc.ACC_NAME AS accName, acc.ACC_TEL AS accTel, col.col_date as colDate, col.col_addr as colAddr, 
+				col.col_status as colStatus, col.col_post as colPost, col.col_use_pnt as colUsePnt, col.col_price as colPrice, col.col_result as colResult, 
+				col.col_getpnt_dt as colGetpntDt, col.col_paper as colPaper, col.col_pt_body as colPtBody, col.col_pt_lid as colPtLid, 
+				col.col_bt_190 as colBt190, col.col_bt_400 as colBt400, col.col_bt_1000 as colBt1000, col.col_bt_1000_Up as colBt1000Up, 
+						col.col_ppack as colPpack, col.col_plastic as colPlastic, col.col_can as colCan, col.col_total_pnt as colTotalPnt, col.col_rejection as colRejection
+		FROM collection col LEFT JOIN account acc ON col.ACC_ID = acc.ACC_ID
+		WHERE col.col_num = #{colNum}
+	</select>
+	
+	<update id="updateColStatus" parameterType="Map">
+		update collection 
+		set col_status = #{colStatus}
+		where col_num = #{colNum}
+	</update>
+	
+	<update id="updateCollection" parameterType="dto.Collection">
+		update collection
+		set col_status = #{colStatus}, col_result = #{colResult}, col_getpnt_dt = curdate(), col_paper = #{colPaper}, 
+			col_pt_body = #{colPtBody}, col_pt_lid = #{colPtLid}, col_bt_190 = #{colBt190}, col_bt_400 = #{colBt400}, 
+			col_bt_1000 = #{colBt1000}, col_bt_1000_up = #{colBt1000Up}, col_ppack = #{colPpack}, col_plastic = #{colPlastic}, 
+			col_can = #{colCan}, col_total_pnt = #{colTotalPnt}, col_rejection = #{colRejection}
+		where col_num = #{colNum}
+	</update>
 
 </mapper>
