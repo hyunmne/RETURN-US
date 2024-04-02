@@ -42,29 +42,6 @@ public class InsertCol5 extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		// 인서트 해야됨 여기서 
 		try {
-//			
-//			request.setAttribute("accName", request.getParameter("accName"));
-//			request.setAttribute("accTel", request.getParameter("accTel"));
-//			request.setAttribute("accPostCode", request.getParameter("accPostCode"));
-//			request.setAttribute("accAddr", request.getParameter("accAddr"));
-//			request.setAttribute("accDetailAddr", request.getParameter("accDetailAddr"));
-//			request.setAttribute("boxSize", request.getParameter("boxSize"));
-//
-//			request.setAttribute("colPaper", request.getParameter("colPaper"));
-//			request.setAttribute("colCan", request.getParameter("colCan"));
-//			request.setAttribute("colBt190", request.getParameter("colBt190"));
-//			request.setAttribute("colBt400", request.getParameter("colBt400"));
-//			request.setAttribute("colBt1000", request.getParameter("colBt1000"));
-//			request.setAttribute("colBt1000Up", request.getParameter("colBt1000Up"));
-//			request.setAttribute("colPlastic", request.getParameter("colPlastic"));
-//			request.setAttribute("colPtLid", request.getParameter("colPtLid"));
-//			request.setAttribute("colPtBody", request.getParameter("colPtBody"));
-//			request.setAttribute("colPpack", request.getParameter("colPpack"));
-//			
-//			request.setAttribute("colUsePnt", request.getParameter("colUsePnt"));
-//			request.setAttribute("colTotalPnt", request.getParameter("colTotalPnt"));
-//			request.setAttribute("colPrice", request.getParameter("colPrice"));
-			
 			
 			CollectionService service = new CollectionServiceImpl();
 			service.insertCollect(request);
