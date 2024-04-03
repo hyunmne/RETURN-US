@@ -41,7 +41,7 @@
 			</div>
 			<div class="row g-4">
 				<div class="col-lg-2 shadow-sm">
-					<%@include file="/views/common/sideBar.jsp"%>
+					<%@include file="/views/common/colSideBar.jsp"%>
 				</div>
 				<div class="col-lg-10">
 					<div style="height: 100%; padding: 0px 70px 0px 70px">
@@ -58,7 +58,7 @@
 									<span style="color: gray;">
 										안내된 사항을 숙지하지 않고 발생하는 불이익에 대해서는 리터너스는 책임지지 않고 있습니다. <br>
 										이용 약관을 꼭 확인하시고 서비스 신청을 진행해주세요. <br>
-										자세한 분리수거 가이드는 <b>여기</b>를 확인하세요. <br>
+										자세한 분리수거 가이드는 <b><a href="collection-guide" style="padding:0px; display:;">여기</a></b>를 확인하세요. <br>
 									</span>
 								</div>
  								<div class="col-12" style="padding:35px 40px 20px"> <!-- 약관 div -->

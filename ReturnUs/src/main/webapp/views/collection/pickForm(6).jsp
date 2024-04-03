@@ -50,7 +50,7 @@
 				<div class="col-lg-2">
 					<div class="row g-4 shadow-sm">
 						<div class="col-lg-12">
-							<%@include file="/views/common/sideBar.jsp"%>
+							<%@include file="/views/common/colSideBar.jsp"%>
 						</div>
 					</div>
 				</div>
