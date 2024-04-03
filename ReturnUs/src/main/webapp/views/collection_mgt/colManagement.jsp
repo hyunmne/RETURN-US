@@ -25,11 +25,12 @@
 	width: 100%;
 }
 #listDiv table th{
-	padding-bottom: 10px;
-	border-bottom: solid 1px #3E6D10;
+    padding: 8px;
+    border-bottom: 1px solid rgba(62, 109, 16, 0.5);
+    background-color: rgba(129, 182, 34, 0.2);
 }
 #listDiv table td{
-	padding: 7px;
+	padding: 9px;
     border-bottom: 1px solid #ddd;
 }
 .collectionBtn {
@@ -41,7 +42,7 @@
     border: none;
 }
 .collectionBtn:hover {
-    background-color: #45a049;
+    background-color: #579934;
 }
 #pageDiv {
     margin-top: -15px;
@@ -54,6 +55,23 @@
 	color: white;
 	background: #81c408;
 	border: 1px solid var(--bs-light);
+}
+#listTitle {
+	color: #59981A;
+    font-weight: 500;
+    margin: -10px 0 20px 10px;
+}
+#listTitle img {
+	margin-bottom: 4px;
+    margin-right: 5px;
+    width: 20px;
+}
+#listDiv a {
+	color: #0091ea;
+	text-decoration: none;
+}
+#listDiv a:hover {
+	color: #005082;
 }
 </style>
    
@@ -77,10 +95,23 @@
 					<div style="height: 100%; padding: 0px 70px 0px 70px">
 						<div id="big" class="card">
 							<div style="padding: 50px 0px 30px; color: #3E6D10;">
-								<h3 class="noto-sans" style="color: #3E6D10;">신청내역 관리</h3>
-								<span style="color: #3E6D10;">리터너스가 집 앞까지 찾아가 손쉽게 분리수거 해드립니다!</span>
+								<h3 class="noto-sans" style="color: #3E6D10;">${colStatus }</h3>
+								<span style="color: #3E6D10;">${colStatus } 상태의 신청내역 확인할 수 있습니다</span>
 							</div>
-							<div id="sm" class="card" style="height: 640px;">
+							<div id="sm" class="card" style="height: 730px;">
+								<div id="listTitle">
+									<c:choose>
+										<c:when test="${colStatus eq '수거준비중'}">
+											<img src="resources/img/mgt_preparing.png">${colStatus }
+										</c:when>
+										<c:when test="${colStatus eq '수거진행중'}">
+											<img src="resources/img/mgt_progress.png">${colStatus }
+										</c:when>
+										<c:when test="${colStatus eq '수거완료'}">
+											<img src="resources/img/mgt_completed.png">${colStatus }
+										</c:when>
+									</c:choose>
+								</div>
 								<div id="listDiv">
 									<table>
 										<thead>
@@ -105,7 +136,16 @@
 											<c:forEach items="${collectionList }" var="col" varStatus="i">
 												<tr>
 													<td>${i.index + 1 }</td>
-													<td>${col.colNum }</td>
+													<td style="color: #0091ea;">
+														<c:choose>
+															<c:when test="${col.colStatus eq '수거완료'}">
+																<a href="col-completion?colNum=${col.colNum}">${col.colNum }</a>
+															</c:when>
+															<c:otherwise>
+																${col.colNum }
+															</c:otherwise>
+														</c:choose>
+													</td>
 													<td>${col.accName }</td>
 													<td>${col.colAddr }</td>
 													<td>${col.colStatus }</td>
@@ -119,10 +159,10 @@
 														<c:if test="${col.colStatus eq '수거완료'}">
 															<c:choose>
 														        <c:when test="${col.colResult eq '정상지급'}">
-														            <span style="color: green">${col.colResult}</span>
+														            <span style="color: #4caf50">${col.colResult}</span>
 														        </c:when>
 														        <c:when test="${col.colResult eq '부분반려'}">
-														            <span style="color: darkorange">${col.colResult}</span>
+														            <span style="color: #f9aB25">${col.colResult}</span>
 														        </c:when>
 														        <c:otherwise>
 														            <span style="color: red">${col.colResult}</span>

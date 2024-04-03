@@ -147,12 +147,26 @@
 		                                 <th>택배비용</th>
 		                                 <th>포인트할인</th>
 		                                 <th>결제금액</th>
+		                                 <th>신청결과</th>
 		                              </tr>
 		                              <tr class="col-6">
 		                                 <td>${colDetail.colStatus }</td>
 		                                 <td>${colDetail.colPost }</td>
 		                                 <td>${colDetail.colUsePnt }</td>
 		                                 <td>${colDetail.colPrice }</td>
+		                                 <td>
+		                                 	<c:choose>
+										        <c:when test="${colDetail.colResult eq '정상지급'}">
+										            <span style="color: #4caf50">${colDetail.colResult}</span>
+										        </c:when>
+										        <c:when test="${colDetail.colResult eq '부분반려'}">
+										            <span style="color: #f9aB25">${colDetail.colResult}</span>
+										        </c:when>
+										        <c:otherwise>
+										            <span style="color: red">${colDetail.colResult}</span>
+										        </c:otherwise>
+										    </c:choose>
+		                                 </td>
 		                              </tr>
 		                           </table>
 		                        </div>
@@ -166,6 +180,8 @@
 									            <th></th>
 									            <th>구분</th>
 									            <th>신청수량</th>
+									            <th>수거수량</th>
+									            <th>적립포인트</th>
 									        </tr>
 									    </thead>
 									    <tbody>
@@ -173,64 +189,96 @@
 									            <th>종이팩</th>
 									            <td></td>
 									            <td>${colDetail.colPpack }</td>
+									            <td>${colDetail.colPpackFin }</td>
+									            <td>${colDetail.colPpackFin *30}p</td>
 									        </tr>
 									        <tr>
 									            <th rowspan="2">페트병</th>
 									            <td>페트병 몸체</td>
 									            <td>${colDetail.colPtBody }</td>
+									            <td>${colDetail.colPtBodyFin }</td>
+									            <td>${colDetail.colPtBodyFin *50 }p</td>
 									        </tr>
 									        <tr>
 											    <td>뚜껑</td>
 											    <td>${colDetail.colPtLid }</td>
+											    <td>${colDetail.colPtLidFin }</td>
+											    <td>${colDetail.colPtLidFin *10}p</td>
 											</tr>
 											<tr>
 									            <th rowspan="4">공병</th>
 									            <td>190ml 이하</td>
 									            <td>${colDetail.colBt190 }</td>
+									            <td>${colDetail.colBt190Fin }</td>
+									            <td>${colDetail.colBt190Fin *7}p</td>
 									        </tr>
 									        <tr>
 											    <td>400ml 이하</td>
 											    <td>${colDetail.colBt400 }</td>
+											    <td>${colDetail.colBt400Fin }</td>
+											    <td>${colDetail.colBt400Fin *10}p</td>
 											</tr>
 									        <tr>
 											    <td>1000ml 이하</td>
 											    <td>${colDetail.colBt1000 }</td>
+											    <td>${colDetail.colBt1000Fin }</td>
+											    <td>${colDetail.colBt1000Fin *13}p</td>
 											</tr>
 									        <tr>
 											    <td>1000ml 이상</td>
 											    <td>${colDetail.colBt1000Up }</td>
+											    <td>${colDetail.colBt1000UpFin }</td>
+											    <td>${colDetail.colBt1000UpFin *35}p</td>
 											</tr>
 											<tr>
 									            <th>종이</th>
 									            <td></td>
 									            <td>${colDetail.colPaper }</td>
+									            <td>${colDetail.colPaperFin }</td>
+									            <td>${colDetail.colPaperFin *500}p</td>
 									        </tr>
 											<tr>
 									            <th>플라스틱</th>
 									            <td></td>
 									            <td>${colDetail.colPlastic }</td>
+									            <td>${colDetail.colPlasticFin }</td>
+									            <td>${colDetail.colPlasticFin *20}p</td>
 									        </tr>
 											<tr>
 									            <th>캔</th>
 									            <td></td>
 									            <td>${colDetail.colCan }</td>
+									            <td>${colDetail.colCanFin }</td>
+									            <td>${colDetail.colCanFin *50}p</td>
 									        </tr>
 											<tr>
 									            <th>합계</th>
 									            <td></td>
 									            <td id="totalCell"></td>
+									            <td id="totalCount"></td>
+									            <td id="totalPoint">${colDetail.colTotalPnt }p</td>
 									        </tr>
 									    </tbody>
 									</table>
 									<div id="rejectionDiv" class="col-5">
-										<div id="title">
-				                            <i class="fas fa-grip-lines-vertical"></i>&nbsp;&nbsp;포인트 지급
-				                        </div>
-										<textarea name="colRejection" readonly>포인트 지급을 위해 수거를 진행해주세요</textarea>
+			                        	<c:choose>
+			                        		<c:when test="${empty colDetail.colRejection }">
+												<div id="title">
+						                            <i class="fas fa-grip-lines-vertical"></i>&nbsp;&nbsp;포인트 지급
+						                        </div>
+												<textarea name="colRejection" readonly>포인트가 정상 지급되었습니다</textarea>
+			                        		</c:when>
+			                        		<c:otherwise>
+												<div id="title">
+						                            <i class="fas fa-grip-lines-vertical"></i>&nbsp;&nbsp;반려사유
+						                        </div>
+												<textarea name="colRejection" readonly>${colDetail.colRejection }</textarea>
+			                        		</c:otherwise>
+			                        	</c:choose>
 									</div>
 									<div id="btnDiv">
-										<button id="collectionBtn" class="btnStyle" onclick="location.href='col-management?colNum=${colDetail.colNum}&colStatus=수거진행중'">수거진행</button>
-										<button class="btnStyle" onclick="location.href='col-management?colStatus=수거준비중'">목록으로</button>
+										<button id="modifyBtn" class="btnStyle" onclick="location.href='col-modify-mgt?colNum=${colDetail.colNum}'">수정</button>
+										<button class="btnStyle" onclick="location.href='col-management?colStatus=수거완료'">목록으로</button>
 									</div>
 		                        </div>
 							</div>
@@ -242,7 +290,6 @@
 	</div>
 	<%@ include file="/views/common/footer.jsp" %>
 <script>
-	//신청수량 합계
 	var total = 0;
 	
 	total += parseInt('${colDetail.colPpack }') || 0;
@@ -259,17 +306,21 @@
 	var totalCell = document.getElementById('totalCell');
 	totalCell.textContent = total;
 	
-	//수거진행 버튼
-	var collectionBtn = document.getElementById('collectionBtn');
-	collectionBtn.addEventListener("click", function() {
-		confirmAlert = confirm("수거를 진행하시겠습니까?");
-		if(confirmAlert) {
-			window.location.href = 'col-management?colStatus=수거준비중';
-		} else {
-			window.location.href = 'col-detail-mgt?colNum=${colDetail.colNum}';
-		}
-	})
-
+	var totalFin = 0;
+	
+	totalFin += parseInt('${colDetail.colPpackFin }') || 0;
+	totalFin += parseInt('${colDetail.colPtBodyFin }') || 0;
+	totalFin += parseInt('${colDetail.colPtLidFin }') || 0;
+	totalFin += parseInt('${colDetail.colBt190Fin }') || 0;
+	totalFin += parseInt('${colDetail.colBt400Fin }') || 0;
+	totalFin += parseInt('${colDetail.colBt1000Fin }') || 0;
+	totalFin += parseInt('${colDetail.colBt1000UpFin }') || 0;
+	totalFin += parseInt('${colDetail.colPaperFin }') || 0;
+	totalFin += parseInt('${colDetail.colPlasticFin }') || 0;
+	totalFin += parseInt('${colDetail.colCanFin }') || 0;
+	
+	var totalCount = document.getElementById('totalCount');
+	totalCount.textContent = totalFin;
 </script>
 </body>
 </html>

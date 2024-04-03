@@ -68,8 +68,8 @@
 }
 #btnDiv {
 	position: absolute;
-	right: 0;
-	bottom: 0;
+	right: 7px;
+    bottom: -7px;
 }
 .btnStyle {
 	font-size: small;
@@ -80,7 +80,7 @@
     border: none;
 }
 .btnStyle:hover {
-    background-color: #45a049;
+    background-color: #579934;
     color: white;
 }
 
@@ -95,16 +95,17 @@ input[type="number"] {
     margin: -79px 0 0 54px;
     position: relative;
 }
-#rejectionDiv input[type="text"] {
+#rejectionDiv textarea {
 	width: 97%;
-    height: 77%;
+    height: 78%;
     margin: 20px 0 0 20px;
     border-radius: 15px;
     border: 1px solid #ccc;
-    padding: 10px;
+    padding: 20px;
     outline: none;
+    resize: none;
 }
-#rejectionDiv input[type="text"]::placeholder {
+#rejectionDiv textarea::placeholder {
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -147,7 +148,7 @@ input[type="number"] {
 		                                 <th>신청주소</th>
 		                              </tr>
 		                              <tr class="col-9">
-		                                 <td style="color: blue;">${colDetail.colNum }</td>
+		                                 <td style="color: #0091ea;">${colDetail.colNum }</td>
 		                                 <td>${colDetail.colDate }</td>
 		                                 <td>${colDetail.accName }</td>
 		                                 <td>${colDetail.accTel }</td>
@@ -178,16 +179,16 @@ input[type="number"] {
 		                        		<input type="hidden" value="수거완료" name="colStatus">
 		                        		<input type="hidden" id="totalPointInput" name="colTotalPnt">
 		                        		<!-- 수량 변경 전 데이터도 같이 넘겨주기 (변경 여부 판단하기 위해) -->
-		                        		<input type="hidden" id="prevColPpack" name="prevColPpack" value="${colDetail.colPpack }">
-		                        		<input type="hidden" id="prevColPtBody" name="prevColPtBody" value="${colDetail.colPtBody }">
-		                        		<input type="hidden" id="prevColPtLid" name="prevColPtLid" value="${colDetail.colPtLid }">
-		                        		<input type="hidden" id="prevColBt190" name="prevColBt190" value="${colDetail.colBt190 }">
-		                        		<input type="hidden" id="prevColBt400" name="prevColBt400" value="${colDetail.colBt400 }">
-		                        		<input type="hidden" id="prevColBt1000" name="prevColBt1000" value="${colDetail.colBt1000 }">
-		                        		<input type="hidden" id="prevColBt1000Up" name="prevColBt1000Up" value="${colDetail.colBt1000Up }">
-		                        		<input type="hidden" id="prevColPaper" name="prevColPaper" value="${colDetail.colPaper }">
-		                        		<input type="hidden" id="prevColPlastic" name="prevColPlastic" value="${colDetail.colPlastic }">
-		                        		<input type="hidden" id="prevColCan" name="prevColCan" value="${colDetail.colCan }">
+		                        		<input type="hidden" name="colPpack" value="${colDetail.colPpack }">
+		                        		<input type="hidden" name="colPtBody" value="${colDetail.colPtBody }">
+		                        		<input type="hidden" name="colPtLid" value="${colDetail.colPtLid }">
+		                        		<input type="hidden" name="colBt190" value="${colDetail.colBt190 }">
+		                        		<input type="hidden" name="colBt400" value="${colDetail.colBt400 }">
+		                        		<input type="hidden" name="colBt1000" value="${colDetail.colBt1000 }">
+		                        		<input type="hidden" name="colBt1000Up" value="${colDetail.colBt1000Up }">
+		                        		<input type="hidden" name="colPaper" value="${colDetail.colPaper }">
+		                        		<input type="hidden" name="colPlastic" value="${colDetail.colPlastic }">
+		                        		<input type="hidden" name="colCan" value="${colDetail.colCan }">
 			                        	<table class="col-5">
 										    <thead>
 										        <tr>
@@ -203,67 +204,207 @@ input[type="number"] {
 										            <th>종이팩</th>
 										            <td></td>
 										            <td>${colDetail.colPpack }</td>
-										            <td><input type="number" id="colPpack" name="colPpack" value="${colDetail.colPpack }" onchange="updatePoints('colPpack', 300)"></td>
-										            <td id="colPpackPoint">${colDetail.colPpack *300}p</td>
+										            <c:choose>
+										            	<c:when test="${empty colDetail.colResult }">
+												            <td>
+												            	<input type="number" id="colPpack" name="colPpackFin" value="${colDetail.colPpack }" 
+												            		min="0" max="${colDetail.colPpack }" onchange="checkInput('colPpack', 30, this.min, this.max)">
+										            		</td>
+												            <td id="colPpackPoint">${colDetail.colPpack *30}p</td>
+										            	</c:when>
+										            	<c:otherwise>
+												            <td>
+												            	<input type="number" id="colPpackFin" name="colPpackFin" value="${colDetail.colPpackFin }" 
+												            		min="0" max="${colDetail.colPpack }" onchange="checkInput('colPpackFin', 30, this.min, this.max)">
+										            		</td>
+												            <td id="colPpackFinPoint">${colDetail.colPpackFin *30}p</td>
+										            	</c:otherwise>
+										            </c:choose>
 										        </tr>
 										        <tr>
 										            <th rowspan="2">페트병</th>
 										            <td>페트병 몸체</td>
 										            <td>${colDetail.colPtBody }</td>
-										            <td><input type="number" id="colPtBody" name="colPtBody" value="${colDetail.colPtBody }" onchange="updatePoints('colPtBody', 500)"></td>
-										            <td id="colPtBodyPoint">${colDetail.colPtBody *500}p</td>
+										            <c:choose>
+										            	<c:when test="${empty colDetail.colResult }">
+												            <td>
+												            	<input type="number" id="colPtBody" name="colPtBodyFin" value="${colDetail.colPtBody }" 
+												            		min="0" max="${colDetail.colPtBody }" onchange="checkInput('colPtBody', 50, this.min, this.max)">
+										            		</td>
+												            <td id="colPtBodyPoint">${colDetail.colPtBody *50}p</td>
+										            	</c:when>
+										            	<c:otherwise>
+												            <td>
+												            	<input type="number" id="colPtBodyFin" name="colPtBodyFin" value="${colDetail.colPtBodyFin }" 
+												            		min="0" max="${colDetail.colPtBody }" onchange="checkInput('colPtBodyFin', 50, this.min, this.max)">
+										            		</td>
+												            <td id="colPtBodyFinPoint">${colDetail.colPtBodyFin *50}p</td>
+										            	</c:otherwise>
+										            </c:choose>
 										        </tr>
 										        <tr>
 												    <td>뚜껑</td>
 												    <td>${colDetail.colPtLid }</td>
-										            <td><input type="number" id="colPtLid" name="colPtLid" value="${colDetail.colPtLid }" onchange="updatePoints('colPtLid', 100)"></td>
-										            <td id="colPtLidPoint">${colDetail.colPtLid *100}p</td>
+										            <c:choose>
+										            	<c:when test="${empty colDetail.colResult }">
+												            <td>
+												            	<input type="number" id="colPtLid" name="colPtLidFin" value="${colDetail.colPtLid }" 
+												            		min="0" max="${colDetail.colPtLid }" onchange="checkInput('colPtLid', 10, this.min, this.max)">
+										            		</td>
+												            <td id="colPtLidPoint">${colDetail.colPtLid *10}p</td>
+										            	</c:when>
+										            	<c:otherwise>
+												            <td>
+												            	<input type="number" id="colPtLidFin" name="colPtLidFin" value="${colDetail.colPtLidFin }" 
+												            		min="0" max="${colDetail.colPtLid }" onchange="checkInput('colPtLidFin', 10, this.min, this.max)">
+										            		</td>
+												            <td id="colPtLidFinPoint">${colDetail.colPtLidFin *10}p</td>
+										            	</c:otherwise>
+										            </c:choose>
 												</tr>
 												<tr>
 										            <th rowspan="4">공병</th>
 										            <td>190ml 이하</td>
 										            <td>${colDetail.colBt190 }</td>
-										            <td><input type="number" id="colBt190" name="colBt190" value="${colDetail.colBt190 }" onchange="updatePoints('colBt190', 70)"></td>
-										            <td id="colBt190Point">${colDetail.colBt190 *70}p</td>
+										            <c:choose>
+										            	<c:when test="${empty colDetail.colResult }">
+												            <td>
+												            	<input type="number" id="colBt190" name="colBt190Fin" value="${colDetail.colBt190 }" 
+												            		min="0" max="${colDetail.colBt190 }" onchange="checkInput('colBt190', 7, this.min, this.max)">
+										            		</td>
+												            <td id="colBt190Point">${colDetail.colBt190 *7}p</td>
+										            	</c:when>
+										            	<c:otherwise>
+												            <td>
+												            	<input type="number" id="colBt190Fin" name="colBt190Fin" value="${colDetail.colBt190Fin }" 
+												            		min="0" max="${colDetail.colBt190 }" onchange="checkInput('colBt190Fin', 7, this.min, this.max)">
+										            		</td>
+												            <td id="colBt190FinPoint">${colDetail.colBt190Fin *7}p</td>
+										            	</c:otherwise>
+										            </c:choose>
 										        </tr>
 										        <tr>
 												    <td>400ml 이하</td>
 												    <td>${colDetail.colBt400 }</td>
-										            <td><input type="number" id="colBt400" name="colBt400" value="${colDetail.colBt400 }" onchange="updatePoints('colBt400', 100)"></td>
-										            <td id="colBt400Point">${colDetail.colBt400 *100}p</td>
+							                        <c:choose>
+										            	<c:when test="${empty colDetail.colResult }">
+												            <td>
+												            	<input type="number" id="colBt400" name="colBt400Fin" value="${colDetail.colBt400 }" 
+												            		min="0" max="${colDetail.colBt400 }" onchange="checkInput('colBt400', 10, this.min, this.max)">
+										            		</td>
+												            <td id="colBt400Point">${colDetail.colBt400 *10}p</td>
+										            	</c:when>
+										            	<c:otherwise>
+												            <td>
+												            	<input type="number" id="colBt400Fin" name="colBt400Fin" value="${colDetail.colBt400Fin }" 
+												            		min="0" max="${colDetail.colBt400 }" onchange="checkInput('colBt400Fin', 10, this.min, this.max)">
+										            		</td>
+												            <td id="colBt400FinPoint">${colDetail.colBt400Fin *10}p</td>
+										            	</c:otherwise>
+										            </c:choose>
 												</tr>
 										        <tr>
 												    <td>1000ml 이하</td>
 												    <td>${colDetail.colBt1000 }</td>
-										            <td><input type="number" id="colBt1000" name="colBt1000" value="${colDetail.colBt1000 }" onchange="updatePoints('colBt1000', 130)"></td>
-										            <td id="colBt1000Point">${colDetail.colBt1000 *130}p</td>
+										            <c:choose>
+										            	<c:when test="${empty colDetail.colResult }">
+												            <td>
+												            	<input type="number" id="colBt1000" name="colBt1000Fin" value="${colDetail.colBt1000 }" 
+												            		min="0" max="${colDetail.colBt1000 }" onchange="checkInput('colBt1000', 13, this.min, this.max)">
+										            		</td>
+												            <td id="colBt1000Point">${colDetail.colBt1000 *13}p</td>
+										            	</c:when>
+										            	<c:otherwise>
+												            <td>
+												            	<input type="number" id="colBt1000Fin" name="colBt1000Fin" value="${colDetail.colBt1000Fin }" 
+												            		min="0" max="${colDetail.colBt1000 }" onchange="checkInput('colBt1000Fin', 13, this.min, this.max)">
+										            		</td>
+												            <td id="colBt1000FinPoint">${colDetail.colBt1000Fin *13}p</td>
+										            	</c:otherwise>
+										            </c:choose>
 												</tr>
 										        <tr>
 												    <td>1000ml 이상</td>
 												    <td>${colDetail.colBt1000Up }</td>
-										            <td><input type="number" id="colBt1000Up" name="colBt1000Up" value="${colDetail.colBt1000Up }" onchange="updatePoints('colBt1000Up', 350)"></td>
-										            <td id="colBt1000UpPoint">${colDetail.colBt1000Up *350}p</td>
+										            <c:choose>
+										            	<c:when test="${empty colDetail.colResult }">
+												            <td>
+												            	<input type="number" id="colBt1000Up" name="colBt1000UpFin" value="${colDetail.colBt1000Up }" 
+												            		min="0" max="${colDetail.colBt1000Up }" onchange="checkInput('colBt1000Up', 35, this.min, this.max)">
+										            		</td>
+												            <td id="colBt1000UpPoint">${colDetail.colBt1000 *35}p</td>
+										            	</c:when>
+										            	<c:otherwise>
+												            <td>
+												            	<input type="number" id="colBt1000UpFin" name="colBt1000UpFin" value="${colDetail.colBt1000UpFin }" 
+												            		min="0" max="${colDetail.colBt1000Up }" onchange="checkInput('colBt1000UpFin', 35, this.min, this.max)">
+										            		</td>
+												            <td id="colBt1000UpFinPoint">${colDetail.colBt1000UpFin *35}p</td>
+										            	</c:otherwise>
+										            </c:choose>
 												</tr>
 												<tr>
 										            <th>종이</th>
 										            <td></td>
 										            <td>${colDetail.colPaper }</td>
-										            <td><input type="number" id="colPaper" name="colPaper" value="${colDetail.colPaper }" onchange="updatePoints('colPaper', 5000)"></td>
-										            <td id="colPaperPoint">${colDetail.colPaper *5000}p</td>
+										            <c:choose>
+										            	<c:when test="${empty colDetail.colResult }">
+												            <td>
+												            	<input type="number" id="colPaper" name="colPaperFin" value="${colDetail.colPaper }" 
+												            		min="0" max="${colDetail.colPaper }" onchange="checkInput('colPaper', 500, this.min, this.max)">
+										            		</td>
+												            <td id="colPaperPoint">${colDetail.colPaper *500}p</td>
+										            	</c:when>
+										            	<c:otherwise>
+												            <td>
+												            	<input type="number" id="colPaperFin" name="colPaperFin" value="${colDetail.colPaperFin }" 
+												            		min="0" max="${colDetail.colPaper }" onchange="checkInput('colPaperFin', 500, this.min, this.max)">
+										            		</td>
+												            <td id="colPaperFinPoint">${colDetail.colPaperFin *500}p</td>
+										            	</c:otherwise>
+										            </c:choose>
 										        </tr>
 												<tr>
 										            <th>플라스틱</th>
 										            <td></td>
 										            <td>${colDetail.colPlastic }</td>
-										            <td><input type="number" id="colPlastic" name="colPlastic" value="${colDetail.colPlastic }" onchange="updatePoints('colPlastic', 200)"></td>
-										            <td id="colPlasticPoint">${colDetail.colPlastic *200}p</td>
+										            <c:choose>
+										            	<c:when test="${empty colDetail.colResult }">
+												            <td>
+												            	<input type="number" id="colPlastic" name="colPlasticFin" value="${colDetail.colPlastic }" 
+												            		min="0" max="${colDetail.colPlastic }" onchange="checkInput('colPlastic', 20, this.min, this.max)">
+										            		</td>
+												            <td id="colPlasticPoint">${colDetail.colPlastic *20}p</td>
+										            	</c:when>
+										            	<c:otherwise>
+												            <td>
+												            	<input type="number" id="colPlasticFin" name="colPlasticFin" value="${colDetail.colPlasticFin }" 
+												            		min="0" max="${colDetail.colPlastic }" onchange="checkInput('colPlasticFin', 20, this.min, this.max)">
+										            		</td>
+												            <td id="colPlasticFinPoint">${colDetail.colPlasticFin *20}p</td>
+										            	</c:otherwise>
+										            </c:choose>
 										        </tr>
 												<tr>
 										            <th>캔</th>
 										            <td></td>
 										            <td>${colDetail.colCan }</td>
-										            <td><input type="number" id="colCan" name="colCan" value="${colDetail.colCan }" onchange="updatePoints('colCan', 500)"></td>
-										            <td id="colCanPoint">${colDetail.colCan *500}p</td>
+										            <c:choose>
+										            	<c:when test="${empty colDetail.colResult }">
+												            <td>
+												            	<input type="number" id="colCan" name="colCanFin" value="${colDetail.colCan }" 
+												            		min="0" max="${colDetail.colCan }" onchange="checkInput('colCan', 50, this.min, this.max)">
+										            		</td>
+												            <td id="colCanPoint">${colDetail.colCan *50}p</td>
+										            	</c:when>
+										            	<c:otherwise>
+												            <td>
+												            	<input type="number" id="colCanFin" name="colCanFin" value="${colDetail.colCanFin }" 
+												            		min="0" max="${colDetail.colCan }" onchange="checkInput('colCanFin', 50, this.min, this.max)">
+										            		</td>
+												            <td id="colCanFinPoint">${colDetail.colCanFin *50}p</td>
+										            	</c:otherwise>
+										            </c:choose>
 										        </tr>
 												<tr>
 										            <th>합계</th>
@@ -278,11 +419,25 @@ input[type="number"] {
 											<div id="title">
 					                            <i class="fas fa-grip-lines-vertical"></i>&nbsp;&nbsp;반려사유
 					                        </div>
-											<input type="text" name="colRejection" placeholder="반려사유를 입력하세요">
+					                        <c:choose>
+			                        		<c:when test="${empty colDetail.colRejection }">
+												<textarea name="colRejection" placeholder="반려사유를 입력하세요"></textarea>
+			                        		</c:when>
+			                        		<c:otherwise>
+												<textarea name="colRejection">${colDetail.colRejection }</textarea>
+			                        		</c:otherwise>
+			                        		</c:choose>
 										</div>
 										<div id="btnDiv">
-											<button type="submit" id="collectionBtn" class="btnStyle">수거완료</button>
-											<a href="col-management?colStatus=수거진행중" class="btnStyle">목록으로</a>
+											<c:choose>
+												<c:when test="${empty colDetail.colResult }">
+													<button type="submit" id="collectionBtn" class="btnStyle">수거완료</button>
+													<a href="col-management?colStatus=수거진행중" class="btnStyle">목록으로</a>
+												</c:when>
+												<c:otherwise>
+													<button type="submit" id="modifyBtn" class="btnStyle">저장</button>
+												</c:otherwise>
+											</c:choose>
 										</div>
 									</form>
 		                        </div>
@@ -311,15 +466,46 @@ input[type="number"] {
 	var totalCell = document.getElementById('totalCell');
 	totalCell.textContent = total;
 	
+	//수거 완료 버튼
 	var collectionBtn = document.getElementById('collectionBtn');
-	collectionBtn.addEventListener("click", function() {
-		confirmAlert = confirm("수거를 진행하시겠습니까?");
-		if(confirmAlert) {
-			window.location.href = 'col-management?colStatus=수거진행중';
-		} else {
-			window.location.href = 'col-detail-mgt?colNum=${colDetail.colNum}';
-		}
-	})
+	if(collectionBtn) {
+		collectionBtn.addEventListener("click", function() {
+			confirmAlert = confirm("수거를 완료하시겠습니까?");
+			if(confirmAlert) {
+				window.location.href = 'col-management?colStatus=수거진행중';
+			} else {
+				event.preventDefault();
+				window.location.href = 'col-modify-mgt?colNum=${colDetail.colNum}';
+			}
+		})
+	}
+
+	//저장 버튼 (수정 폼일때)
+	var modifyBtn = document.getElementById('modifyBtn');
+	if(modifyBtn) {
+		modifyBtn.addEventListener("click", function() {
+			confirmAlert = confirm("변경된 내용을 저장하시겠습니까?");
+			if(confirmAlert) {
+				window.location.href = 'col-completion?colNum=${col.colNum}';
+			} else {
+				event.preventDefault();
+				window.location.href = 'col-completion?colNum=${col.colNum}';
+			}
+		})
+	}
+	
+	//수거수량 변경시
+	function checkInput(inputId, pointNum, min, max) {
+		var input = document.getElementById(inputId);
+        var inputVal = parseInt(input.value);
+        
+        if (inputVal < min || inputVal > max) {
+            alert('신청수량 범위를 벗어났습니다');
+            input.value = max;
+            return;
+        }
+        updatePoints(inputId, pointNum);
+	}
 	
 	//수거수량 변경될 때마다 해당 적립 포인트도 변경
 	function updatePoints(inputId, pointNum) {
@@ -368,6 +554,13 @@ input[type="number"] {
         document.getElementById('totalPointInput').value = totalPoint;
     }
     document.getElementById('modifyForm').addEventListener('submit', setTotalPointInput);
+    
+    //input태그 입력 후 엔터 누를시 폼 전송 막기
+    document.addEventListener('keydown', function(event) {
+   	  if (event.keyCode === 13) {
+   	    event.preventDefault();
+   	  };
+   	}, true);
 	
 </script>
 </body>
