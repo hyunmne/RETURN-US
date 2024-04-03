@@ -250,7 +250,7 @@
 	total += parseInt('${colDetail.colPtLid }') || 0;
 	total += parseInt('${colDetail.colBt190 }') || 0;
 	total += parseInt('${colDetail.colBt400 }') || 0;
-	total += parseInt('${colDetail.colbt1000 }') || 0;
+	total += parseInt('${colDetail.colBt1000 }') || 0;
 	total += parseInt('${colDetail.colBt1000Up }') || 0;
 	total += parseInt('${colDetail.colPaper }') || 0;
 	total += parseInt('${colDetail.colPlastic }') || 0;
