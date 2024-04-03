@@ -60,7 +60,6 @@ public class AccountServiceImpl implements AccountService {
 		if(!acc.getAccPassword().equals(pw)) throw new Exception("비밀번호 오류");
 		
 		HttpSession session = request.getSession();
-		acc.setAccPassword("");
 		session.setAttribute("acc", acc);
 		
 		String adminCheck = accountDao.selectAdmin(id);

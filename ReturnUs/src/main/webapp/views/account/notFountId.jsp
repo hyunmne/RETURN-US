@@ -70,7 +70,6 @@
 	font-weight: 800;
     font-size: 24px; /* 폰트 크기 설정 */
     line-height: 40px; /* 버튼 높이와 맞추기 위해 줄 높이 설정 */
-    font-family: sans-serif; /* 폰트 설정 */
 }
 .hr-custom2{
 	height: 20px;
@@ -119,7 +118,7 @@
 							<hr class="hr-custom">
 							<!--body ** 여기서부터 코딩하시면 됩니다!!! ** -->
 							<div id="sm">
-								<p style="font-size: 22px; font-family: 'DM Sans'; color: black; font-weight: 500;">
+								<p style="font-size: color: black; font-weight: 500;">
 									등록된 정보를 찾을 수 없습니다.
 								
 								</p>

@@ -4,18 +4,20 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <%
 	String cookieHeader = request.getHeader("Cookie");
-	boolean autoLogin = false;
+	boolean autologin = false;
 	String id = "";
 	String password = "";
 	if(cookieHeader!=null){
 		Cookie[] cookies = request.getCookies();
 		for(Cookie cookie : cookies) {
 			if(cookie.getName().equals("autologin")) {
-				if (cookie.getValue()	.equals("true"))
-					autoLogin = true;
-				else autoLogin = false;
+				if (cookie.getValue().equals("true"))
+					autologin = true;
+				else autologin = false;
 			} else if (cookie.getName().equals("accId")) {
 				id = cookie.getValue();
+			} else if (cookie.getName().equals("accPassword")){
+				password = cookie.getValue();
 			}
 		}
 	}
@@ -44,14 +46,14 @@
 }
 
 .button {
-	margin-left:178px;
-    width: 80px; /* 버튼의 너비 조정 */
+	margin-left: 50%;
+    width: 25%; /* 버튼의 너비 조정 */
     height: 40px; /* 버튼의 높이 조정 */
     background-color: #59981A; /* 배경색 설정 */
     color: white; /* 글자색 설정 */
     border: none; /* 테두리 제거 */
     border-radius: 10px; /* 버튼 모서리를 둥글게 만듦 */
-    font-size: 16px; /* 폰트 크기 조정 */
+    font-size: 18px; /* 폰트 크기 조정 */
     cursor: pointer; /* 커서 스타일 변경 */
 }
 
@@ -69,7 +71,6 @@
 }
 #linked a {
 	color: #AFAFAF;
-    font-family: Arial, sans-serif; /* 글꼴 설정 (Arial 또는 sans-serif) */
     font-size: 18px; /* 글꼴 크기 설정 (16px) */
 }
 .submit_box span{
@@ -122,11 +123,11 @@
 									<input type="password" class="input" id="accPassword" name="accPassword" value="<%=password %>" placeholder="비밀번호를 입력하세요.."/>
 								</div>
 								<br>
-								<div id="submit" class="submit_box">
-								<%if(autoLogin) { %>
-									<input type="checkbox" value="true" name="autoLogin" checked="checked">&nbsp;&nbsp;<span>자동로그인</span> 
+								<div id="loginbox" class="login_box">
+								<%if(autologin) { %>
+									<input type="checkbox" value="true" name="autologin" checked="checked">&nbsp;&nbsp;<span>자동로그인</span> 
 								<%} else { %>
-									<input type="checkbox" value="true" name="autoLogin">&nbsp;&nbsp;<span>자동로그인</span>
+									<input type="checkbox" value="true" name="autologin">&nbsp;&nbsp;<span>자동로그인</span>
 								<%} %>
 									<button type="submit" class="button">로그인</button>
 								</div>

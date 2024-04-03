@@ -119,7 +119,7 @@
 							<hr class="hr-custom">
 							<!--body ** 여기서부터 코딩하시면 됩니다!!! ** -->
 							<div id="sm">
-								<p style="font-size: 22px; font-family: 'DM Sans'; color: black; font-weight: 500;">
+								<p style="font-size: 22px; color: black; font-weight: 500;">
 								회원님의 아이디는 <span class="account" id="accountId">${accId}</span>(으)로 등록되어 있습니다 <br>
 								가입 일자는 <span class="account">${accJoinDt }</span>입니다.
 								</p>

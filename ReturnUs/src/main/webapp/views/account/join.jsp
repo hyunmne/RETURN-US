@@ -92,10 +92,9 @@
 	width: 25%;
 	border: solid 0px;
 	padding: 13px 13px;
-	font-family: 'Inter';
-	font-style: normal;
+/* 	font-style: normal; */
 	font-weight: 600;
-	font-size: 16px;
+	font-size: 18px;
 	line-height: 18px;
 	background: #D1E7DD;
 	flex: none;
@@ -110,7 +109,7 @@
 }
 
 #email_id {
-	width: 30%;
+	width: 31%;
 	height: 50px;
 	border: 1px solid #D0D0D0;
 	border-radius: 6px;
@@ -127,26 +126,25 @@
 }
 
 .submit {
+	width: 25%;
 	border: solid 0px;
 	padding: 13px 13px;
-	font-family: 'Inter';
-	font-style: normal;
+/* 	font-style: normal; */
 	font-weight: 600;
 	font-size: 16px;
-	line-height: 18px;
+	line-height: 20px;
 	background: #146C43;
 	flex: none;
 	order: 0;
 	flex-grow: 0;
 	border-radius: 6px;
 	float: right;
-	height: -150px;
-	margin-top: 50px;
+	height: -15%;
+	margin-top: 10%;
 	margin-right: 2%;
 }
 .little-title{
 	color: #000000;
-    font-family: DM Sans; /* 글꼴 설정 (Arial 또는 sans-serif) */
     font-size: 18px; /* 글꼴 크기 설정 (16px) */
     margin-left: 4px;
     margin-bottom: 5px;
@@ -195,6 +193,9 @@ $(document).ready(function() {
             // 아이디 생성자 조건을 만족하는 경우
             doubleIdCheckButton.prop('disabled', false);
             idConditionMessage.text('');
+        }else if(id == ''){
+        	doubleIdCheckButton.prop('disabled', true);
+        	idConditionMessage.text('');
         }else{
         	doubleIdCheckButton.prop('disabled', true);
             idConditionMessage.text('영문 숫자로 이루어진 6~12자여야 합니다.');

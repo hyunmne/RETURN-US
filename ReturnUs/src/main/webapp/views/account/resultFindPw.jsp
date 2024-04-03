@@ -119,7 +119,7 @@
 							<hr class="hr-custom">
 							<!--body ** 여기서부터 코딩하시면 됩니다!!! ** -->
 							<div id="sm">
-								<p style="font-size: 22px; font-family: 'DM Sans'; color: black; font-weight: 500;">
+								<p style="font-size: 22px; color: black; font-weight: 500;">
 									등록된 이메일로 새로운 비밀번호를 발송해 드렸습니다
 									<br>이메일을 확인해주시기 바랍니다.
 								

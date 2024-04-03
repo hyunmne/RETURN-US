@@ -55,13 +55,7 @@ public class Login extends HttpServlet {
 				accIdCookie = new Cookie("accId", accId);
 				accIdCookie.setMaxAge(365 * 24 * 60 * 60);                
 				accPasswordCookie = new Cookie("accPassword", accPassword);
-				accPasswordCookie.setMaxAge(365 * 24 * 60 * 60);
-				response.addCookie(autoLoginCookie);
-				response.addCookie(accIdCookie);
-				response.addCookie(accPasswordCookie);
-				//session 저장
-				request.getSession().setAttribute("account", accId);
-				
+				accPasswordCookie.setMaxAge(365 * 24 * 60 * 60);	
 			}else {
 				autoLoginCookie = new Cookie("autologin", "");
                 autoLoginCookie.setMaxAge(0);
@@ -70,9 +64,13 @@ public class Login extends HttpServlet {
                 accPasswordCookie = new Cookie("accPassword", "");
                 accPasswordCookie.setMaxAge(0);
 			}			
+			response.addCookie(autoLoginCookie);
+			response.addCookie(accIdCookie);
+			response.addCookie(accPasswordCookie);
+			//session 저장
+			request.getSession().setAttribute("account", accId);
 			service.login(request);
 			request.getRequestDispatcher("/main.jsp").forward(request, response);
-//			response.sendRedirect("main.jsp");
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

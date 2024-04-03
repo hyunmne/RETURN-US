@@ -59,7 +59,6 @@
 	margin-top: -20px;
 	color: black;
 	font-weight: 500;
-    font-family: sans-serif; /* 글꼴 설정 (Arial 또는 sans-serif) */
     font-size: 20px; /* 글꼴 크기 설정 (16px) */
 }
 .input-container {
@@ -92,10 +91,8 @@
 	width: 400px;
 	border: solid 0px;
 	padding: 13px 13px;
-	font-family: 'Inter';
-	font-style: normal;
 	font-weight: 600;
-	font-size: 16px;
+	font-size: 18px;
 	line-height: 18px;
 	background: #146C43;
 	flex: none;
@@ -120,8 +117,6 @@
 	height: 40px;
 	display: inline-block; /* 인라인-블록 요소로 설정 */
 	vertical-align: top; /* 위쪽 정렬 */
-	font-family: 'Inter';
-	font-style: normal;
 	font-weight: 600;
 	font-size: 16px;
 	line-height: 18px;

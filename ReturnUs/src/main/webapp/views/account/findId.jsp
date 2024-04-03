@@ -59,7 +59,6 @@
 	margin-top: -20px;
 	color: black;
 	font-weight: 500;
-    font-family: sans-serif; /* 글꼴 설정 (Arial 또는 sans-serif) */
     font-size: 20px; /* 글꼴 크기 설정 (16px) */
 }
 .input-container {
@@ -90,10 +89,8 @@
 	width: 100%;
 	border: solid 0px;
 	padding: 13px 13px;
-	font-family: 'Inter';
-	font-style: normal;
 	font-weight: 600;
-	font-size: 16px;
+	font-size: 18px;
 	line-height: 18px;
 	background: #146C43;
 	flex: none;
@@ -162,10 +159,7 @@ $(document).ready(function() {
 				<div class="col-6"></div>
 			</div>
 			<div class="row g-4">
-				<div class="col-lg-2 shadow-sm">
-					<%@include file="/views/common/sideBar.jsp"%>
-				</div>
-				<div class="col-lg-10">
+				<div class="col-lg-12">
 					<div style="height: 100%; padding: 0px 70px 0px 70px">
 						<!--큰 card ** 여기서부터 코딩하시면 됩니다!!! ** -->
 						<div id="big" class="card">
