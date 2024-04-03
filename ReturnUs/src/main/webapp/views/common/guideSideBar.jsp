@@ -2,12 +2,12 @@
     pageEncoding="UTF-8"%>
 
 <style>
-  a{
+  .padding{
   	   padding: .5rem 1rem;
   	   display:block;
   	   color:black;
   }
-  a:hover {
+  .padding:hover {
     color: #59981A;
   }
 </style>
@@ -16,17 +16,17 @@
 	<h5 class="noto-sans" style="padding-bottom:10px; color:#81B622">가이드</h5>	
 		<ul class="nav nav-pills flex-column mb-auto">
 			<li>
-				<a href="recycling-guide">
+				<a href="recycling-guide" class="padding">
 					<i class="fas fa-seedling" style="color: #59981A"></i>&nbsp;&nbsp;&nbsp;재활용 안내
 				</a>
 			</li>
 			<li>
-				<a href="collection-guide">
+				<a href="collection-guide" class="padding">
 					<i class="fas fa-seedling" style="color: #59981A"></i>&nbsp;&nbsp;&nbsp;수거신청 안내
 				</a>
 			</li>
 			<li>
-				<a href="point-guide">
+				<a href="point-guide" class="padding">
 					<i class="fas fa-seedling" style="color: #59981A"></i>&nbsp;&nbsp;&nbsp;포인트 안내
 				</a>
 			</li>

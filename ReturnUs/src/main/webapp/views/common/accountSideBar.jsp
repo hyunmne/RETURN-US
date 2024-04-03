@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <style>
-  a{
+  .padding{
   	   padding: .5rem 1rem;
   	   display:block;
   	   color:black;
   }
-  a:hover {
-    color: #59981A; 
+  .padding:hover {
+    color: #59981A;
   }
 </style>
 
@@ -15,17 +15,17 @@
 	<h5 class="noto-sans" style="padding-bottom:10px; color:#81B622">마이 페이지</h5>	
 		<ul class="nav nav-pills flex-column mb-auto">
 			<li>
-				<a href="modify-profile">
+				<a href="modify-profile" class="padding">
 					<i class="fas fa-seedling" style="color: #59981A"></i>&nbsp;&nbsp;&nbsp;정보 수정
 				</a>
 			</li>
 			<li>
-				<a href="change-password">
+				<a href="change-password" class="padding">
 					<i class="fas fa-seedling" style="color: #59981A"></i>&nbsp;&nbsp;&nbsp;비밀번호 변경
 				</a>
 			</li>
 			<li>
-				<a href="my-collection">
+				<a href="my-collection" class="padding">
 					<i class="fas fa-seedling" style="color: #59981A"></i>&nbsp;&nbsp;&nbsp;신청 내역
 				</a>
 			</li>
