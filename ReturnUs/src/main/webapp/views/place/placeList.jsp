@@ -58,7 +58,7 @@
     margin: 5px 0 -5px 30px
 }
 .imgStyle {
-	width: 2.5%; 
+	width: 22px; 
 	margin-right: 5px;
 }
 .placeBox {
@@ -143,7 +143,7 @@
 						<!--큰 card ** 여기서부터 코딩하시면 됩니다!!! ** -->
 						<div id="big" class="card">
 							<div style="padding: 50px 0px 30px; color: #3E6D10;">
-								<h3 class="noto-sans" style="color: #3E6D10;">장소 검색</h3>
+								<h3 class="noto-sans" style="color: #3E6D10;">${plaType }</h3>
 								<span style="color: #3E6D10;">지구를 지키기위한 한 걸음, ${plaType }의 장소를 검색해보세요!</span>
 							</div>
 							<!--body ** 여기서부터 코딩하시면 됩니다!!! ** -->
