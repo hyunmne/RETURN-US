@@ -64,7 +64,7 @@ public class AccountServiceImpl implements AccountService {
 		session.setAttribute("acc", acc);
 		
 		String adminCheck = accountDao.selectAdmin(id);
-		if(adminCheck != null || adminCheck.equals("admin")) {
+		if(adminCheck != null && adminCheck.equals("admin")) {
 			session.setAttribute("adminCheck", adminCheck);
 		}
 		
