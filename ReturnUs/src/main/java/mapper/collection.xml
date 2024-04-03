@@ -59,5 +59,25 @@
 			col_plastic_fin=#{colPlasticFin}, col_can_fin=#{colCanFin}, col_total_pnt = #{colTotalPnt}, col_rejection = #{colRejection}
 		WHERE col_num = #{colNum}
 	</update>
+	
+	<select id="selectCollectionListById" parameterType="Map" resultType="Map">
+		select col_num as colNum, col_date as colDate, col_addr as colAddr, col_status as colStatus, col_result as colResult				
+		from collection
+		where acc_id = #{accId}
+		order by col_date desc
+		limit #{row}, 10
+	</select>
+	
+	<select id="selectCollectionCountByIdInPreparation" parameterType="String" resultType="Integer">
+		select count(col_num) from collection where acc_id = #{accId} and col_status = "수거준비중"
+	</select>
+	
+	<select id="selectCollectionCountByIdInProgress" parameterType="String" resultType="Integer">
+		select count(col_num) from collection where acc_id = #{accId} and col_status = "수거진행중"
+	</select>
+	
+	<select id="selectCollectionCountByIdFinished" parameterType="String" resultType="Integer">
+		select count(col_num) from collection where acc_id = #{accId} and col_status = "수거완료"
+	</select>
 
 </mapper>

@@ -51,4 +51,27 @@ public class CollectionDAOImpl implements CollectionDAO {
 		sqlSession.commit();
 	}
 
+	@Override
+	public List<Map<String, Object>> selectCollectionListById(String accId, Integer row) throws Exception {
+		Map<String, Object> params = new HashMap<>();
+		params.put("accId", accId);
+		params.put("row", row);
+		return sqlSession.selectList("mapper.collection.selectCollectionListById", params);
+	}
+
+	@Override
+	public Integer selectCollectionCountByIdInPreparation(String accId) throws Exception {
+		return sqlSession.selectOne("mapper.collection.selectCollectionCountByIdInPreparation", accId);
+	}
+	
+	@Override
+	public Integer selectCollectionCountByIdInProgress(String accId) throws Exception {
+		return sqlSession.selectOne("mapper.collection.selectCollectionCountByIdInProgress", accId);
+	}
+	
+	@Override
+	public Integer selectCollectionCountByIdFinished(String accId) throws Exception {
+		return sqlSession.selectOne("mapper.collection.selectCollectionCountByIdFinished", accId);
+	}
+
 }

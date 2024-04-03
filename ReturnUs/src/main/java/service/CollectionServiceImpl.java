@@ -103,4 +103,45 @@ public class CollectionServiceImpl implements CollectionService {
 		colDao.updateCollectionFin(col);
 	}
 
+	@Override
+	public void showMyCollection(HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		Account account = (Account) session.getAttribute("acc");
+		String accId = account.getAccId();
+		int collectionCountInPreparation = colDao.selectCollectionCountByIdInPreparation(accId);
+		int collectionCountInProgress = colDao.selectCollectionCountByIdInProgress(accId);
+		int collectionCountFinished = colDao.selectCollectionCountByIdFinished(accId);
+		int collectionCount = collectionCountInPreparation + collectionCountInProgress + collectionCountFinished;
+		
+		Integer page = 1;
+		String pageNo = request.getParameter("page");
+		
+		if(pageNo != null) {
+			page = Integer.parseInt(pageNo);
+		}
+		
+		int maxPage = (int)Math.ceil((double) collectionCount /10);
+		int startPage = (page-1)/10*10+1;
+		int endPage = startPage+10-1;
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+
+		PageInfo pageInfo = new PageInfo();
+		pageInfo.setAllPage(maxPage);
+		pageInfo.setCurPage(page);
+		pageInfo.setStartPage(startPage);
+		pageInfo.setEndPage(endPage);
+		
+		int row = (page-1)*10;
+		
+		List<Map<String, Object>> collectionList = colDao.selectCollectionListById(accId, row);
+		
+		request.setAttribute("pageInfo", pageInfo);
+		request.setAttribute("collectionCount", collectionCount);
+		request.setAttribute("collectionCountInPreparation", collectionCountInPreparation);
+		request.setAttribute("collectionCountInProgress", collectionCountInProgress);
+		request.setAttribute("collectionCountFinished", collectionCountFinished);
+		request.setAttribute("collectionList", collectionList);		
+	}
 }

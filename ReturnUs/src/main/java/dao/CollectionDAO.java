@@ -12,5 +12,9 @@ public interface CollectionDAO {
 	Map<String, Object> selectCollectionDetail(String colNum) throws Exception;
 	void updateColStatus(String colNum, String colStatus) throws Exception;
 	void updateCollectionFin(Collection collection) throws Exception;
+	List<Map<String, Object>> selectCollectionListById(String colId, Integer row) throws Exception;
+	Integer selectCollectionCountByIdInPreparation(String accId) throws Exception;
+	Integer selectCollectionCountByIdInProgress(String accId) throws Exception;
+	Integer selectCollectionCountByIdFinished(String accId) throws Exception;
 }
 
