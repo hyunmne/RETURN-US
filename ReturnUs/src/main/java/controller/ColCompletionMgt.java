@@ -11,16 +11,16 @@ import service.CollectionService;
 import service.CollectionServiceImpl;
 
 /**
- * Servlet implementation class ColDetailManagement
+ * Servlet implementation class ColCompletionMgt
  */
-@WebServlet("/col-detail-mgt")
-public class ColDetailManagement extends HttpServlet {
+@WebServlet("/col-completion")
+public class ColCompletionMgt extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ColDetailManagement() {
+    public ColCompletionMgt() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,10 +32,9 @@ public class ColDetailManagement extends HttpServlet {
 		try {
 			CollectionService service = new CollectionServiceImpl();
 			service.collectionDetail(request);
-			request.getRequestDispatcher("/views/collection_mgt/colDetailManagement.jsp").forward(request, response);
+			request.getRequestDispatcher("/views/collection_mgt/colCompletionForm.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
 }
