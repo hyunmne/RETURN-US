@@ -148,7 +148,7 @@ input[type="number"] {
 		                                 <th>신청주소</th>
 		                              </tr>
 		                              <tr class="col-9">
-		                                 <td style="color: #0091ea;">${colDetail.colNum }</td>
+		                                 <td style="color: #3D550C;">${colDetail.colNum }</td>
 		                                 <td>${colDetail.colDate }</td>
 		                                 <td>${colDetail.accName }</td>
 		                                 <td>${colDetail.accTel }</td>

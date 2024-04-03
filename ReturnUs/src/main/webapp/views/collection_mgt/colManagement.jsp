@@ -73,6 +73,9 @@
 #listDiv a:hover {
 	color: #005082;
 }
+.linkStyle {
+	color: #3D550C;
+}
 </style>
    
 </head>
@@ -136,10 +139,10 @@
 											<c:forEach items="${collectionList }" var="col" varStatus="i">
 												<tr>
 													<td>${i.index + 1 }</td>
-													<td style="color: #0091ea;">
+													<td style="color: #3D550C;font-weight: 450;">
 														<c:choose>
 															<c:when test="${col.colStatus eq '수거완료'}">
-																<a href="col-completion?colNum=${col.colNum}">${col.colNum }</a>
+																<a class="linkStyle" href="col-completion?colNum=${col.colNum}">${col.colNum }</a>
 															</c:when>
 															<c:otherwise>
 																${col.colNum }
