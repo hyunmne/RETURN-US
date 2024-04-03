@@ -57,4 +57,18 @@ public class AccountDAOImpl implements AccountDAO {
 		return sqlSession.selectOne("mapper.account.findEmAccount", param);
 		
 	}
+	@Override
+	public void updatePoint(Integer pnt, String id) throws Exception {
+		Map<String,Object> params = new HashMap<>();
+		params.put("accPnt", pnt);
+		params.put("accId", id);
+		sqlSession.update("mapper.account.updatePoint", params);
+		sqlSession.commit();
+	}
+	
+	@Override
+	public void updateBasicDel(Account acc) throws Exception {
+		sqlSession.update("mapper.account.updateBasicDel", acc);
+		sqlSession.commit();
+	}
 }

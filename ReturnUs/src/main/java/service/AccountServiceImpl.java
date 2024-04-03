@@ -159,8 +159,5 @@ public class AccountServiceImpl implements AccountService {
 		String authPassword = naverMailSendToChangePassword.sendEmail(email);
 		accountDao.updateAccountPassword(new Account(accId,authPassword));
 	}
-
-
-
 	
 }

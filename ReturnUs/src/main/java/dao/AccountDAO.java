@@ -11,4 +11,7 @@ public interface AccountDAO {
 	void deleteAccount(String accId) throws Exception;
 	void updateAccountPassword(Account account) throws Exception;
 	Account checkedDoubleEmail(String accEmail, String accEmailDo) throws Exception;
+	
+	void updatePoint(Integer pnt, String id) throws Exception;
+	void updateBasicDel(Account acc) throws Exception;
 }

@@ -59,8 +59,15 @@ public class Account {
 		this.accAddr = accAddr;
 		this.accDetailAddr = accDetailAddr;
 	}
-
-
+	
+	public Account(String accId, String accTel, String accPostCode, String accAddr, String accDetailAddr) {
+		super();
+		this.accId = accId;
+		this.accTel = accTel;
+		this.accPostCode = accPostCode;
+		this.accAddr = accAddr;
+		this.accDetailAddr = accDetailAddr;
+	}
 
 	public String getAccId() {
 		return accId;

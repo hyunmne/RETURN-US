@@ -39,5 +39,17 @@
 	<update id="updateAccountPassword" parameterType="Account">
 		update account set ACC_PASSWORD = #{accPassword} where ACC_ID = #{accId}		
 	</update> 	
+	
+	<update id="updatePoint" parameterType="Map">
+		update account
+		set acc_pnt = #{accPnt}
+		where acc_id = #{accId}
+	</update>
+	
+	<update id="updateBasicDel" parameterType="Account">
+		update account
+		set acc_tel = #{accTel}, acc_postcode = #{accPostCode}, acc_addr = #{accAddr}, acc_detail_addr = #{accDetailAddr}
+		where acc_id = #{accId}
+	</update>
 </mapper>	
 	

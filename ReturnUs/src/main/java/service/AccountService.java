@@ -13,4 +13,5 @@ public interface AccountService {
 	void closeAccount(HttpServletRequest request) throws Exception;
 	void changePassword(HttpServletRequest request) throws Exception;
 	void checkPassword(String accId, String email) throws Exception;
+	
 }
