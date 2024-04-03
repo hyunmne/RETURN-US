@@ -63,7 +63,7 @@
 								</div>
  								<div class="col-12" style="padding:35px 40px 20px"> <!-- 약관 div -->
  									<div class="col-12 " style="display: flex; justify-content: right; margin-bottom:5px;" >
-										<a href="#" style="color:#198754; ">
+										<a href="collection-guide" style="color:#198754; ">
 										    <i class="fas fa-info-circle"></i><span class="ms-2" style="text-decoration: underline;">분리수거 가이드 보기</span>
 										</a>
 									</div>

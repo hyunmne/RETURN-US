@@ -45,31 +45,31 @@ public class InsertCol5 extends HttpServlet {
 			
 			CollectionService service = new CollectionServiceImpl();
 			service.insertCollect(request);
+//			
+//			System.out.println("InsertCol5 doPost");
+//			System.out.println("accName:" + request.getParameter("accName"));
+//			System.out.println("accTel:" + request.getParameter("accTel"));
+//			System.out.println("accPostCode:" + request.getParameter("accPostCode"));
+//			System.out.println("accAddr:" + request.getParameter("accAddr"));
+//			System.out.println("accDetailAddr:" + request.getParameter("accDetailAddr"));
+//			System.out.println("boxSize:" + request.getParameter("boxSize"));
+//			
+//			System.out.println("colPaper:" + request.getParameter("colPaper"));
+//			System.out.println("colCan:" + request.getParameter("colCan"));
+//			System.out.println("colBt190:" + request.getParameter("colBt190"));
+//			System.out.println("colBt400:" + request.getParameter("colBt400"));
+//			System.out.println("colBt1000:" + request.getParameter("colBt1000"));
+//			System.out.println("colBt1000Up:" + request.getParameter("colBt1000Up"));
+//			System.out.println("colPlastic:" + request.getParameter("colPlastic"));
+//			System.out.println("colPtLid:" + request.getParameter("colPtLid"));
+//			System.out.println("colPtBody:" + request.getParameter("colPtBody"));
+//			System.out.println("colPpack:" + request.getParameter("colPpack"));
+//			
+//			System.out.println("colTotalPnt:" + request.getParameter("colTotalPnt"));
+//			System.out.println("colUsePnt:" + request.getParameter("colUsePnt"));
+//			System.out.println("colPrice:" + request.getParameter("colPrice"));
 			
-			System.out.println("InsertCol5 doPost");
-			System.out.println("accName:" + request.getParameter("accName"));
-			System.out.println("accTel:" + request.getParameter("accTel"));
-			System.out.println("accPostCode:" + request.getParameter("accPostCode"));
-			System.out.println("accAddr:" + request.getParameter("accAddr"));
-			System.out.println("accDetailAddr:" + request.getParameter("accDetailAddr"));
-			System.out.println("boxSize:" + request.getParameter("boxSize"));
-			
-			System.out.println("colPaper:" + request.getParameter("colPaper"));
-			System.out.println("colCan:" + request.getParameter("colCan"));
-			System.out.println("colBt190:" + request.getParameter("colBt190"));
-			System.out.println("colBt400:" + request.getParameter("colBt400"));
-			System.out.println("colBt1000:" + request.getParameter("colBt1000"));
-			System.out.println("colBt1000Up:" + request.getParameter("colBt1000Up"));
-			System.out.println("colPlastic:" + request.getParameter("colPlastic"));
-			System.out.println("colPtLid:" + request.getParameter("colPtLid"));
-			System.out.println("colPtBody:" + request.getParameter("colPtBody"));
-			System.out.println("colPpack:" + request.getParameter("colPpack"));
-			
-			System.out.println("colTotalPnt:" + request.getParameter("colTotalPnt"));
-			System.out.println("colUsePnt:" + request.getParameter("colUsePnt"));
-			System.out.println("colPrice:" + request.getParameter("colPrice"));
-			
-			request.getRequestDispatcher("/main.jsp").forward(request, response);
+			request.getRequestDispatcher("/views/collection/pickForm(6).jsp").forward(request, response);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

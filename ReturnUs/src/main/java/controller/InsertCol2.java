@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dto.Delivery;
+import service.DeliveryService;
+import service.DeliveryServiceImpl;
 
 
 /**
@@ -44,17 +44,13 @@ public class InsertCol2 extends HttpServlet {
 		// 6-2. 세팅한 데이터들을 pickForm3 으로 보내준다. (화면 이동)
 		request.setCharacterEncoding("UTF-8");
 		try {
-			String accName = request.getParameter("accName");
-			String accTel = request.getParameter("accTel");
-			String accPc = request.getParameter("accPostCode");
-			String accAddr = request.getParameter("accAddr");
-			String accDAdr = request.getParameter("accDetailAddr");
+			String isChecked = request.getParameter("radio");
+			System.out.println(isChecked);
 			
-			request.setAttribute("accName", accName);
-			request.setAttribute("accTel", accTel);
-			request.setAttribute("accPostCode", accPc);
-			request.setAttribute("accAddr", accAddr);
-			request.setAttribute("accDetailAddr", accDAdr);
+			if (isChecked.equals("basic")) {
+				DeliveryService delService = new DeliveryServiceImpl();
+				delService.insertDelivery(request);
+			}
 			
 			request.getRequestDispatcher("/views/collection/pickForm(3).jsp").forward(request, response);
 		} catch(Exception e) {

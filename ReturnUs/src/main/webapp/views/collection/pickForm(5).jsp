@@ -255,6 +255,9 @@ input[type='number']::-webkit-inner-spin-button {
 										<div class="dd" id="msg" style="display:none; padding:0px 15px; font-weight:400; font-size:medium; color:red; justify-content:flex-end; flex-direction:row;">
 											포인트의 최소 사용 금액은 1000p 입니다.		
 										</div>
+										<div class="dd" id="msgPnt" style="display:none; padding:0px 15px; font-weight:400; font-size:medium; color:red; justify-content:flex-end; flex-direction:row;">
+											보유 포인트보다 많은 금액을 입력하셨습니다.
+										</div>
 										
 										<div class="dd" style="background-color:#f5f9f1; border-radius:15px; padding:20px; margin-top: 30px;  ">
 											<div>총 결제 금액</div>								
@@ -293,11 +296,19 @@ input[type='number']::-webkit-inner-spin-button {
 var totalAmount;
 var totalSum;
 var usePnt;
+var accPnt; 
 
 // 최종 결제 금액 계산하기 
 async function updateTotal() {
     usePnt = parseInt(document.getElementById("usePnt").value); // 고객이 입력한 사용 포인트 값을 받아옴
+    accPnt = parseInt(document.getElementById("accPnt").innerText);
     
+    if (usePnt > accPnt) { // 사용포인트 > 보유 포인트 > 실행 ㄴㄴ 
+    	document.getElementById("msgPnt").style.display="flex";
+    } else {
+    	document.getElementById("msgPnt").style.display="none";
+    }
+    	
     if (usePnt >= 1000) {
         var colPost = parseInt(document.getElementById("colPost").innerText); // 원가
         totalAmount = colPost - usePnt; // 최종 결제 금액
@@ -306,6 +317,7 @@ async function updateTotal() {
     } else {
 		document.getElementById("msg").style.display="flex";
     }
+	
 }
 
 // 결제 api 

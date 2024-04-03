@@ -18,7 +18,7 @@
 #sm {
 	background-color: white; 
 	height: 100%; 
-	padding: 45px 50px 0px 50px;
+	padding: 55px 50px 150px 50px;
 }
 #title {
 	color: #3E6D10;
@@ -32,16 +32,6 @@
 	 color:black;
 	 border-color:#c3d7af;
 }
-.info tr {
-  display: block;
-  float: left;
-  padding-left: 20px;
-}
-
-.info th, .info td {
-  display: block;
-  padding: 10px;
-}
 </style>
    
 </head>
@@ -50,23 +40,6 @@
 
 <!-- 헤더 파일 include -->
 <%@include file="/views/common/header.jsp" %>
-<%-- <input id="accName" type="hidden" name="accName" value="<%= request.getParameter("accName") %>" /> --%>
-<%-- <input id="accTel" type="hidden" name="accTel" value="<%= request.getParameter("accTel") %>" /> --%>
-<%-- <input id="accPostCode" type="hidden" name="accPostCode" value="<%= request.getParameter("accPostCode") %>" /> --%>
-<%-- <input id="accAddr" type="hidden" name="accAddr" value="<%= request.getParameter("accAddr") %>" /> --%>
-<%-- <input id="accDetailAddr" type="hidden" name="accDetailAddr" value="<%= request.getParameter("accDetailAddr") %>" /> --%>
-<%-- <input id="boxSize" type="hidden" name="boxSize" value="<%= request.getParameter("boxSize") %>" /> --%>
-
-<%-- <input id="colPaper" type="hidden" name="colPaper" value="<%= request.getParameter("colPaper") %>" /> --%>
-<%-- <input id="colCan" type="hidden" name="colCan" value="<%= request.getParameter("colCan") %>" /> --%>
-<%-- <input id="colBt190" type="hidden" name="colBt190" value="<%= request.getParameter("colBt190") %>" /> --%>
-<%-- <input id="colBt400" type="hidden" name="colBt400" value="<%= request.getParameter("colBt400") %>" /> --%>
-<%-- <input id="colBt1000" type="hidden" name="colBt1000" value="<%= request.getParameter("colBt1000") %>" /> --%>
-<%-- <input id="colBt1000Up" type="hidden" name="colBt1000Up" value="<%= request.getParameter("colBt1000Up") %>" /> --%>
-<%-- <input id="colPlastic" type="hidden" name="colPlastic" value="<%= request.getParameter("colPlastic") %>" /> --%>
-<%-- <input id="colPtLid" type="hidden" name="colPtLid" value="<%= request.getParameter("colPtLid") %>" /> --%>
-<%-- <input id="colPtBody" type="hidden" name="colPtBody" value="<%= request.getParameter("colPtBody") %>" /> --%>
-<%-- <input id="colPpack" type="hidden" name="colPpack" value="<%= request.getParameter("colPpack") %>" /> --%>
 	<div class="container-fluid fruite py-5"
 		style="margin: 38px 100px; width: 90%;">
 		<div class="col-lg-12">
@@ -84,7 +57,7 @@
 				<div class="col-lg-10">
 					<div style="height: 100%; padding: 0px 70px 0px 70px">
 						<!--큰 card ** 여기서부터 코딩하시면 됩니다!!! ** -->
-						<div id="big" class="card" style="text-align:center">
+						<div id="big" class="card" >
 							<div style="padding: 50px 0px 30px; color: #3E6D10;">
 								<h3 class="noto-sans" style="color: #3E6D10;">방문 수거 신청</h3>
 								<span style="color: #3E6D10;">리터너스가 집 앞까지 찾아가 손쉽게 분리수거 해드립니다!</span>
@@ -92,15 +65,17 @@
 							<!--body ** 여기서부터 코딩하시면 됩니다!!! ** -->
 							<div id="sm" class="card d-flex">
 								<div class="col-12" style="padding-bottom:50px;">
-									<h3 class="noto-sans" style="color:#3E6D10;">STEP 04 결제하기</h3>
-									<span style="color: #3E6D10;">
-										보유 포인트에서 결제 금액을 차감할 수 있어요! <br>
-										(적립 예정 포인트는 해당되지 않습니다.)
-									</span>
+									<h3 class="noto-sans" style="color:#3E6D10;">STEP 04<br>서비스 신청 완료!</h3>
 								</div>	
 								
-								<div class="col-12">
-									수거신청 완료
+								<div class="col-12" style="text-align:center; font-size:xx-large" >
+									<div style="color:#45595b; font-size:xx-large;"><b>${acc.accName }</b> 님, </div> 
+									방문 수거 서비스 신청이 완료되었습니다. <br>
+									리터너스를 이용해주셔서 감사합니다. <br><br>
+									<div style="font-size:large">
+									<a href="main" style="text-decoration:underline;">메인으로 돌아가기</a> <br>
+									<a href="#" style="text-decoration:underline;">신청 내역 확인하기</a>
+									</div>
 								</div>
 							</div>
 						</div>

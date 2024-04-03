@@ -133,7 +133,7 @@
 												</div>
 												<div class="col-7 d-flex justify-content-center">
 							                        <div class="d-flex align-items-center">
-							                            <input type="text" id="addrNm" placeholder="주소지 선택" class="rounded-input" style="width:108px;">
+							                            <input type="text" name="addrNm" id="addrNm" placeholder="주소지 선택" class="rounded-input" style="width:108px;">
 														<a href="javascript:;" class="status-button btn-green" data-bs-toggle="modal" data-acc-id="${acc.accId }"
 																						data-bs-target="#verticalycentered">배송지 목록 조회</a>
 							                        </div>
@@ -174,7 +174,7 @@
 											
 											<div class="col-12 d-flex" style="padding:10px;">
 												<div class="col-5 d-flex justify-content-center" style="align-items:center;">
-													<input type="radio" style="accent-color: #198754;"> &nbsp;&nbsp; 위 주소를 기본 주소지로 저장
+													<input id="delChk" type="radio" name="delChk" style="accent-color: #198754;"> &nbsp;&nbsp; 위 주소를 기본 주소지로 저장
 												</div>
 												<div id="nextBtn" class="col-7 d-flex" style="padding:10px; margin:10px;">
 													<input type="submit" value="다음" id="nextBtn" class="btn-green" style="color: #3E6D10; text-decoration:underline;">
@@ -230,10 +230,12 @@
 
 <script>
 // 5. 입력 받은 신청자 정보를 input hidden에 숨겨 collect2 doPost로 이동한다.
-
     document.getElementById('colForm').addEventListener('submit', function(event) {
         event.preventDefault(); // 기본 제출 동작 방지
-
+		
+        var isChecked = document.getElementById('delChk').checked;
+        var radioValue = isChecked ? 'basic' : 'none';
+        
         // 입력 필드들의 값을 가져와 hidden input으로 추가
         var accName = document.getElementById('accName').value;
         var accTel = document.getElementById('accTel').value;
@@ -247,6 +249,7 @@
         addHiddenInput('accPostCode', accPostCode);
         addHiddenInput('accAddr', accAddr);
         addHiddenInput('accDetailAddr', accDetailAddr);
+        addHiddenInput('radio', radioValue);
 
         // 폼 제출
         this.submit();
@@ -261,7 +264,6 @@
         document.getElementById('colForm').appendChild(input);
     }
 </script>
-
 
 
 <script>
