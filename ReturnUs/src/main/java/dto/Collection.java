@@ -25,6 +25,16 @@ public class Collection {
 	private int colCan;
 	private int colTotalPnt;
 	private String colRejection;
+	private int colPaperFin;
+	private int colPtBodyFin;
+	private int colPtLidFin;
+	private int colBt190Fin;
+	private int colBt400Fin;
+	private int colBt1000Fin;
+	private int colBt1000UpFin;
+	private int colPpackFin;
+	private int colPlasticFin;
+	private int colCanFin;
 	
 	public Collection() {}
 	
@@ -77,26 +87,106 @@ public class Collection {
 		this.colTotalPnt = colTotalPnt;
 		this.colRejection = colRejection;
 	}
-	
-	public Collection(String colNum, String colResult, int colPaper, int colPtBody, int colPtLid, int colBt190, int colBt400,
-			int colBt1000, int colBt1000Up, int colPpack, int colPlastic, int colCan, int colTotalPnt,
-			String colRejection, String colStatus) {
+
+	public Collection(String colNum, String colStatus, int colPaperFin, int colPtBodyFin, int colPtLidFin, int colBt190Fin,
+			int colBt400Fin, int colBt1000Fin, int colBt1000UpFin, int colPpackFin, int colPlasticFin, int colCanFin,
+			String colRejection, int colTotalPnt, String colResult) {
 		super();
 		this.colNum = colNum;
-		this.colResult = colResult;
-		this.colPaper = colPaper;
-		this.colPtBody = colPtBody;
-		this.colPtLid = colPtLid;
-		this.colBt190 = colBt190;
-		this.colBt400 = colBt400;
-		this.colBt1000 = colBt1000;
-		this.colBt1000Up = colBt1000Up;
-		this.colPpack = colPpack;
-		this.colPlastic = colPlastic;
-		this.colCan = colCan;
-		this.colTotalPnt = colTotalPnt;
-		this.colRejection = colRejection;
 		this.colStatus = colStatus;
+		this.colPaperFin = colPaperFin;
+		this.colPtBodyFin = colPtBodyFin;
+		this.colPtLidFin = colPtLidFin;
+		this.colBt190Fin = colBt190Fin;
+		this.colBt400Fin = colBt400Fin;
+		this.colBt1000Fin = colBt1000Fin;
+		this.colBt1000UpFin = colBt1000UpFin;
+		this.colPpackFin = colPpackFin;
+		this.colPlasticFin = colPlasticFin;
+		this.colCanFin = colCanFin;
+		this.colRejection = colRejection;
+		this.colTotalPnt = colTotalPnt;
+		this.colResult = colResult;
+	}
+
+	public int getColPaperFin() {
+		return colPaperFin;
+	}
+
+	public void setColPaperFin(int colPaperFin) {
+		this.colPaperFin = colPaperFin;
+	}
+
+	public int getColPtBodyFin() {
+		return colPtBodyFin;
+	}
+
+	public void setColPtBodyFin(int colPtBodyFin) {
+		this.colPtBodyFin = colPtBodyFin;
+	}
+
+	public int getColPtLidFin() {
+		return colPtLidFin;
+	}
+
+	public void setColPtLidFin(int colPtLidFin) {
+		this.colPtLidFin = colPtLidFin;
+	}
+
+	public int getColBt190Fin() {
+		return colBt190Fin;
+	}
+
+	public void setColBt190Fin(int colBt190Fin) {
+		this.colBt190Fin = colBt190Fin;
+	}
+
+	public int getColBt400Fin() {
+		return colBt400Fin;
+	}
+
+	public void setColBt400Fin(int colBt400Fin) {
+		this.colBt400Fin = colBt400Fin;
+	}
+
+	public int getColBt1000Fin() {
+		return colBt1000Fin;
+	}
+
+	public void setColBt1000Fin(int colBt1000Fin) {
+		this.colBt1000Fin = colBt1000Fin;
+	}
+
+	public int getColBt1000UpFin() {
+		return colBt1000UpFin;
+	}
+
+	public void setColBt1000UpFin(int colBt1000UpFin) {
+		this.colBt1000UpFin = colBt1000UpFin;
+	}
+
+	public int getColPpackFin() {
+		return colPpackFin;
+	}
+
+	public void setColPpackFin(int colPpackFin) {
+		this.colPpackFin = colPpackFin;
+	}
+
+	public int getColPlasticFin() {
+		return colPlasticFin;
+	}
+
+	public void setColPlasticFin(int colPlasticFin) {
+		this.colPlasticFin = colPlasticFin;
+	}
+
+	public int getColCanFin() {
+		return colCanFin;
+	}
+
+	public void setColCanFin(int colCanFin) {
+		this.colCanFin = colCanFin;
 	}
 
 	public String getColAddr() {
