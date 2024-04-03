@@ -52,7 +52,7 @@
 
 
         <div class="container-fluid fixed-top">
-            <div class="container topbar d-none d-lg-block" style="background-color:#579934">
+            <div class="topbar d-lg-block" style="background-color:#579934; margin: 0px 83px">
                     <c:choose>
                     	<c:when test="${not empty acc.accId}">
 			                <div class="d-flex justify-content-between">
@@ -74,14 +74,14 @@
 			                    </div>
 			                    <div class="top-link pe-2">
 			                    		<i class="fas fa-user text-secondary"></i>
-				                        <a href="login" class="text-white"><small class="text-white ms-2"> &nbsp;&nbsp;로그인 </small>/</a>
+				                        <a href="login" class="text-white"><small class="text-white ms-2"> &nbsp;&nbsp;로그인 </small>&nbsp;&nbsp;&nbsp;&nbsp;/</a>
 				                        <a href="join" class="text-white"><small class="text-white ms-2">회원가입 </small></a>
 			                    </div>
 			                </div>
                     	</c:otherwise>
                     </c:choose>
             </div>
-            <div class="container px-0">
+            <div class="px-0" style="margin: 0px 83px">
                 <nav class="navbar navbar-light bg-white navbar-expand-xl">
 <!--                     <a href="index.jsp" class="navbar-brand"><h1 class="text-primary display-6">Return:us</h1></a> -->
                     <a href="main" class="navbar-brand"><img src="./resources/img/logo.png" style="width:180px" class="img-fluid" alt="logo"></a>
