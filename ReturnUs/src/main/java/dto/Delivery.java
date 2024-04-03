@@ -4,12 +4,24 @@ public class Delivery {
 	private Integer delNo;
 	private String delName;
 	private String delTel;
+	private String accId;
 	private String delType;
 	private String delPostCode;
 	private String delAddr;
 	private String delDetailAddr;
 	
 	public Delivery() {}
+	
+	public Delivery (String accId, String delName, String delTel, String delType, String delPostCode, String delAddr, String delDetailAddr) {
+		super();
+		this.delName = delName;
+		this.delTel = delTel;
+		this.delType = delType;
+		this.delPostCode = delPostCode;
+		this.delAddr = delAddr;
+		this.delDetailAddr = delDetailAddr;
+	}
+	
 	public Delivery(Integer delNo, String delName, String delTel, String delType, String delPostCode, String delAddr,
 			String delDetailAddr) {
 		super();
@@ -21,6 +33,15 @@ public class Delivery {
 		this.delAddr = delAddr;
 		this.delDetailAddr = delDetailAddr;
 	}
+	
+	public String getAccId() {
+		return accId;
+	}
+
+	public void setAccId(String accId) {
+		this.accId = accId;
+	}
+
 	public Integer getDelNo() {
 		return delNo;
 	}

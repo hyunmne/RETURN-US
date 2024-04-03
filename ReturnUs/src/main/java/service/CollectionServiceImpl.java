@@ -6,6 +6,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import dao.AccountDAO;
+import dao.AccountDAOImpl;
 import dao.CollectionDAO;
 import dao.CollectionDAOImpl;
 import dto.Account;
@@ -21,7 +23,6 @@ public class CollectionServiceImpl implements CollectionService {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		Account acc = (Account)session.getAttribute("acc");
-		System.out.println(acc.getAccId());
 		String colAddr = request.getParameter("accAddr") + " "+request.getParameter("accDetailAddr");
 		int colPost = Integer.parseInt(request.getParameter("boxSize"));
 		
@@ -43,6 +44,10 @@ public class CollectionServiceImpl implements CollectionService {
 		Collection col = new Collection(acc.getAccId(), colAddr, colPost, colUsePnt, colPrice, 
 										colPaper, colPtBody, colPtLid, colBt190, colBt400, colBt1000, colBt1000Up,
 										colPpack, colPlastic, colCan, colTotalPnt);
+		AccountDAO accDao = new AccountDAOImpl();
+		Integer pnt = acc.getAccPnt() - colUsePnt; 
+		
+		accDao.updatePoint(pnt, acc.getAccId());
 		colDao.insertCollect(col);
 	}
 

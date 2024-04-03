@@ -5,6 +5,8 @@
 
 	<insert id="insertDelivery" parameterType="dto.Delivery">
 		<![CDATA[
+			INSERT INTO DELIVERY (ACC_ID, DEL_NAME, DEL_TEL, DEL_TYPE, DEL_POSTCODE, DEL_ADDR, DEL_DETAIL_ADDR)
+			VALUES (#{accId}, #{delName},#{delTel},#{delType},#{delPostCode},#{delAddr},#{delDetailAddr})
 		]]>
 	</insert>
 	

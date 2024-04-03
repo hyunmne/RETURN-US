@@ -4,7 +4,6 @@
 <mapper namespace="mapper.collection">
 
 	<insert id="insertCollect" parameterType="dto.Collection">
-		<![CDATA[
 			INSERT INTO collection (col_num, acc_id, col_date, col_status, col_addr,
 									col_post, col_use_pnt, col_price,
 									col_paper, col_pt_body, col_pt_lid, col_bt_190, col_bt_400, col_bt_1000, col_bt_1000_up,
@@ -13,9 +12,8 @@
 					#{colPost},#{colUsePnt},#{colPrice},
 					#{colPaper},#{colPtBody},#{colPtLid},#{colBt190},#{colBt400},#{colBt1000},#{colBt1000Up},
 					#{colPpack},#{colPlastic},#{colCan},#{colTotalPnt})
-		]]>
 	</insert>
-	
+
 	<select id="selectCollectionList" parameterType="Map" resultType="Map">
 		select col.col_num as colNum, col.acc_id as accId, acc.ACC_NAME AS accName, col.col_date as colDate, col.col_addr as colAddr, 
 				col.col_status as colStatus, col.col_post as colPost, col.col_use_pnt as colUsePnt, col.col_price as colPrice, col.col_result as colResult, 

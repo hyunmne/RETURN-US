@@ -16,4 +16,10 @@ public class DeliveryDAOImpl implements DeliveryDAO {
 		return sqlSession.selectList("mapper.delivery.selectDelList", id);
 	}
 
+	@Override
+	public void insertDelivery(Delivery del) throws Exception {
+		sqlSession.insert("mapper.delivery.insertDelivery", del);
+		sqlSession.commit();
+	}
+
 }
