@@ -1,32 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<!-- side bar start -->
+<style>
+  a{
+  	   padding: .5rem 1rem;
+  	   display:block;
+  	   color:black;
+  }
+  a:hover {
+    color: #59981A;
+  }
+</style>
 
-	<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-white" style="width: 280px; height: 100%;">		
+<div class="flex-shrink-0 bg-white" style="width: 280px; height:100%; padding:30px">
+	<h5 class="noto-sans" style="padding-bottom:10px; color:#81B622">가이드</h5>	
 		<ul class="nav nav-pills flex-column mb-auto">
 			<li>
-				<a href="recycling-guide" class="nav-link">
-					<svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home" /></svg> 재활용 안내
+				<a href="recycling-guide">
+					<i class="fas fa-seedling" style="color: #59981A"></i>&nbsp;&nbsp;&nbsp;재활용 안내
 				</a>
 			</li>
 			<li>
-				<a href="collection-guide" class="nav-link">
-					<svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2" /></svg> 수거신청 안내
+				<a href="collection-guide">
+					<i class="fas fa-seedling" style="color: #59981A"></i>&nbsp;&nbsp;&nbsp;수거신청 안내
 				</a>
 			</li>
 			<li>
-				<a href="point-guide" class="nav-link">
-					<svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table" /></svg> 포인트 안내
+				<a href="point-guide">
+					<i class="fas fa-seedling" style="color: #59981A"></i>&nbsp;&nbsp;&nbsp;포인트 안내
 				</a>
 			</li>
 			<li>
-				<a href="faq" class="nav-link">
-					<svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid" /></svg> 자주묻는 질문
+				<a href="faq">
+					<i class="fas fa-seedling" style="color: #59981A"></i>&nbsp;&nbsp;&nbsp;자주 묻는 질문
 				</a>
 			</li>			
 		</ul>	
 	</div>
 
-	<!-- side bar end -->
 
