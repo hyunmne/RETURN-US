@@ -11,6 +11,6 @@ public interface CollectionDAO {
 	Integer selectCollectionCount(String colStatus) throws Exception;
 	Map<String, Object> selectCollectionDetail(String colNum) throws Exception;
 	void updateColStatus(String colNum, String colStatus) throws Exception;
-	void updateCollection(Collection collection) throws Exception;
+	void updateCollectionFin(Collection collection) throws Exception;
 }
 

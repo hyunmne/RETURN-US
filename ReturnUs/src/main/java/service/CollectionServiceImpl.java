@@ -89,19 +89,18 @@ public class CollectionServiceImpl implements CollectionService {
 
 	@Override
 	public void collectionDetail(HttpServletRequest request) throws Exception {
-		request.setCharacterEncoding("utf-8");;
+		request.setCharacterEncoding("utf-8");
 		String colNum = request.getParameter("colNum");
 		
 		Map<String, Object> collectionDetail = colDao.selectCollectionDetail(colNum);
-		
+
 		request.setAttribute("colNum", colNum);
 		request.setAttribute("colDetail", collectionDetail);
-
 	}
 
 	@Override
-	public void modifyCollection(Collection collection) throws Exception {
-		colDao.updateCollection(collection);
+	public void modifyCollectionFin(Collection col) throws Exception {
+		colDao.updateCollectionFin(col);
 	}
 
 }

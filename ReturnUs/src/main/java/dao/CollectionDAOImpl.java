@@ -46,8 +46,8 @@ public class CollectionDAOImpl implements CollectionDAO {
 	}
 
 	@Override
-	public void updateCollection(Collection collection) throws Exception {
-		sqlSession.update("mapper.collection.updateCollection", collection);
+	public void updateCollectionFin(Collection collection) throws Exception {
+		sqlSession.update("mapper.collection.updateCollectionFin", collection);
 		sqlSession.commit();
 	}
 
