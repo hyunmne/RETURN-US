@@ -61,7 +61,7 @@
 			                        <span class="text-white">&nbsp;&nbsp;리터너스와 지구를 지킨 지 ${acc.accJoinDays }일 째</span></small>
 			                    </div>
 			                    <div class="top-link pe-2">
-				                        <a href="#" class="text-white"><i class="fas fa-user"></i><small class="text-white mx-2">${acc.accName} 님</small>/</a>
+				                        <a href="#" class="text-white"><i class="fas fa-user text-secondary"></i><small class="text-white mx-2">${acc.accName} 님</small>/</a>
 				                        <a href="logout" class="text-white"><small class="text-white ms-2">로그아웃 </small></a>
 			                    </div>
 			                </div>
@@ -74,7 +74,7 @@
 			                    </div>
 			                    <div class="top-link pe-2">
 			                    		<i class="fas fa-user text-secondary"></i>
-				                        <a href="login" class="text-white"><small class="text-white ms-2"> &nbsp;&nbsp;로그인 </small>&nbsp;&nbsp;&nbsp;&nbsp;/</a>
+				                        <a href="login" class="text-white"><small class="text-white ms-2"> &nbsp;&nbsp;로그인 </small>&nbsp;/</a>
 				                        <a href="join" class="text-white"><small class="text-white ms-2">회원가입 </small></a>
 			                    </div>
 			                </div>
