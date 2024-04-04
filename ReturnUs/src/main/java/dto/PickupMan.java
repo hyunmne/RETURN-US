@@ -7,9 +7,9 @@ public class PickupMan {
 	private String pmTel;
 	private String pmStatus;
 	private String pmRegion;
+	private String pmProfile;
 	
-	
-	public PickupMan(int pmNo, String colNum, String pmName, String pmTel, String pmStatus, String pmRegion) {
+	public PickupMan(int pmNo, String colNum, String pmName, String pmTel, String pmStatus, String pmRegion, String pmProfile) {
 		super();
 		this.pmNo = pmNo;
 		this.colNum = colNum;
@@ -17,6 +17,15 @@ public class PickupMan {
 		this.pmTel = pmTel;
 		this.pmStatus = pmStatus;
 		this.pmRegion = pmRegion;
+		this.pmProfile = pmProfile;
+	}
+	
+	
+	public String getPmProfile() {
+		return pmProfile;
+	}
+	public void setPmProfile(String pmProfile) {
+		this.pmProfile = pmProfile;
 	}
 	public int getPmNo() {
 		return pmNo;
