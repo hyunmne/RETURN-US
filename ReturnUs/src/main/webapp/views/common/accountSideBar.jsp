@@ -30,7 +30,7 @@
 				</a>
 			</li>
 			<li>
-				<a href="my-point">
+				<a href="my-point" class="padding">
 					<i class="fas fa-seedling" style="color: #59981A"></i>&nbsp;&nbsp;&nbsp;포인트 내역
 				</a>
 			</li>			
