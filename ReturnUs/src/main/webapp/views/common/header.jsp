@@ -142,7 +142,7 @@
         
         var curURL = window.location.href;
         
-        $('.nav-item.nav-link').each(function() {
+        $('.menu').each(function() {
             var link = $(this).attr('href'); // 현재 URL link 반환
             
             if (link.includes('plaType=')) {
