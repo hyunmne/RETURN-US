@@ -262,7 +262,7 @@ input[type='number']::-webkit-inner-spin-button {
 										<div class="dd" style="background-color:#f5f9f1; border-radius:15px; padding:20px; margin-top: 30px;  ">
 											<div>총 결제 금액</div>								
 											<div class="money">
-												<span id="colPrice" style="font-weight:300; padding-right:10px">${colPrice }</span>원
+												<span id="colPrice" style="font-weight:300; padding-right:10px">${boxSize }</span>원
 											</div>								
 										</div>
 										
@@ -309,9 +309,10 @@ async function updateTotal() {
     	document.getElementById("msgPnt").style.display="none";
     }
     	
-    if (usePnt >= 1000) {
+    if (usePnt >= 1000 || usePnt === 0) {
         var colPost = parseInt(document.getElementById("colPost").innerText); // 원가
         totalAmount = colPost - usePnt; // 최종 결제 금액
+        document.getElementById("colPrice").innerText = ""; // 기존 입력 값 제거 
         document.getElementById("colPrice").innerText = totalAmount; 
 		document.getElementById("msg").style.display="none"; // 경고 문구 제거 
     } else {
@@ -328,7 +329,7 @@ function requestPay() {
     pay_method: "card",
     merchant_uid : 'merchant_'+new Date().getTime(),
     name : 'Return:Us 수거 신청',
-    amount : totalAmount, // 가격
+    amount : $("#colPrice").text(), // 가격
     buyer_name: $("#accName").val(),
     buyer_tel: $("#accTel").val(),
     buyer_addr: $("#accAddr").val(), // accDetailAddr를 포함하지 않습니다.
@@ -456,7 +457,7 @@ function requestCol() {
     addColValue('colPpack', 'colPpack');
     
     addHiddenInput('colTotalPnt', totalSum);    
-	addHiddenInput('colPrice', totalAmount);    
+	addHiddenInput('colPrice', $("#colPrice").text());    
 	addHiddenInput('colUsePnt', usePnt);    
 
     // 추가로 hidden 값들도 폼 데이터로 추가
