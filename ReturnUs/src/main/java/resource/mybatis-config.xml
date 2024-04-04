@@ -27,6 +27,7 @@
 	</environments>
 	
 	<mappers>
+		<mapper resource="mapper/pickupman.xml"/>
 		<mapper resource="mapper/account.xml"/>
 		<mapper resource="mapper/delivery.xml"/>
 		<mapper resource="mapper/collection.xml"/>
