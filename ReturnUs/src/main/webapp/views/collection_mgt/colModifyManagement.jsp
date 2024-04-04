@@ -114,7 +114,8 @@ input[type="number"] {
 </style>
 </head>
 <body class="noto-sans">
-
+<script src="sweetalert2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- 헤더 파일 include -->
 <%@include file="/views/common/header.jsp" %>
 	<div class="container-fluid fruite py-5"
@@ -148,7 +149,7 @@ input[type="number"] {
 		                                 <th>신청주소</th>
 		                              </tr>
 		                              <tr class="col-9">
-		                                 <td style="color: #3D550C;">${colDetail.colNum }</td>
+		                                 <td style="color: #3D550C;font-weight: 450;">${colDetail.colNum }</td>
 		                                 <td>${colDetail.colDate }</td>
 		                                 <td>${colDetail.accName }</td>
 		                                 <td>${colDetail.accTel }</td>
@@ -431,11 +432,11 @@ input[type="number"] {
 										<div id="btnDiv">
 											<c:choose>
 												<c:when test="${empty colDetail.colResult }">
-													<button type="submit" id="collectionBtn" class="btnStyle">수거완료</button>
+													<button type="button" id="collectionBtn" class="btnStyle" onclick="confirmSubmit()">수거완료</button>
 													<a href="col-management?colStatus=수거진행중" class="btnStyle">목록으로</a>
 												</c:when>
 												<c:otherwise>
-													<button type="submit" id="modifyBtn" class="btnStyle">저장</button>
+													<button type="button" id="modifyBtn" class="btnStyle" onclick="confirmSave()">저장</button>
 												</c:otherwise>
 											</c:choose>
 										</div>
@@ -466,32 +467,52 @@ input[type="number"] {
 	var totalCell = document.getElementById('totalCell');
 	totalCell.textContent = total;
 	
-	//수거 완료 버튼
-	var collectionBtn = document.getElementById('collectionBtn');
-	if(collectionBtn) {
-		collectionBtn.addEventListener("click", function() {
-			confirmAlert = confirm("수거를 완료하시겠습니까?");
-			if(confirmAlert) {
-				window.location.href = 'col-management?colStatus=수거진행중';
-			} else {
-				event.preventDefault();
-				window.location.href = 'col-modify-mgt?colNum=${colDetail.colNum}';
-			}
-		})
+	//수거완료 버튼
+	function confirmSubmit() {
+		Swal.fire({
+	        title: "수거를 완료하시겠습니까?",
+	        icon: "question",
+	        showCancelButton: true,
+	        confirmButtonColor: "#3085d6",
+	        cancelButtonColor: "#d33",
+	        confirmButtonText: '확인',
+            cancelButtonText: '취소'
+	    }).then((result) => {
+	    	if (result.isConfirmed) {
+	            Swal.fire({
+	                title: "수거 완료",
+	                icon: "success",
+	                confirmButtonText: '확인',
+	            }).then(() => {
+	            	setTotalPointInput();
+	            	document.getElementById("modifyForm").submit();
+	            });
+	        }
+	    });
 	}
 
 	//저장 버튼 (수정 폼일때)
-	var modifyBtn = document.getElementById('modifyBtn');
-	if(modifyBtn) {
-		modifyBtn.addEventListener("click", function() {
-			confirmAlert = confirm("변경된 내용을 저장하시겠습니까?");
-			if(confirmAlert) {
-				window.location.href = 'col-completion?colNum=${col.colNum}';
-			} else {
-				event.preventDefault();
-				window.location.href = 'col-completion?colNum=${col.colNum}';
-			}
-		})
+	function confirmSave() {
+		Swal.fire({
+	        title: "변경된 내용을 저장하시겠습니까?",
+	        icon: "question",
+	        showCancelButton: true,
+	        confirmButtonColor: "#3085d6",
+	        cancelButtonColor: "#d33",
+	        confirmButtonText: '확인',
+            cancelButtonText: '취소'
+	    }).then((result) => {
+	    	if (result.isConfirmed) {
+	            Swal.fire({
+	                title: "저장 완료",
+	                icon: "success",
+	                confirmButtonText: '확인',
+	            }).then(() => {
+	            	setTotalPointInput();
+	            	document.getElementById("modifyForm").submit();
+	            });
+	        }
+	    });
 	}
 	
 	//수거수량 변경시
@@ -500,10 +521,19 @@ input[type="number"] {
         var inputVal = parseInt(input.value);
         
         if (inputVal < min || inputVal > max) {
-            alert('신청수량 범위를 벗어났습니다');
-            input.value = max;
-            return;
+        	Swal.fire({
+       	        title: "신청수량 범위를 벗어났습니다",
+       	        icon: "warning",
+       	        confirmButtonColor: "#3085d6",
+       	        confirmButtonText: '확인',
+       	    }).then((result) => {
+       	    	if (result.isConfirmed) {
+       	    		input.value = max;
+       	            return;
+       	        }
+       	    });
         }
+        
         updatePoints(inputId, pointNum);
 	}
 	
@@ -548,12 +578,12 @@ input[type="number"] {
         document.getElementById('totalPoint').textContent = totalPoint + 'p';
 	}
 	
+	//포인트합계 값 설정
     function setTotalPointInput() {
         const totalPointStr = document.getElementById('totalPoint').textContent;
         const totalPoint = parseInt(totalPointStr.replace('p', ''), 10);
         document.getElementById('totalPointInput').value = totalPoint;
     }
-    document.getElementById('modifyForm').addEventListener('submit', setTotalPointInput);
     
     //input태그 입력 후 엔터 누를시 폼 전송 막기
     document.addEventListener('keydown', function(event) {

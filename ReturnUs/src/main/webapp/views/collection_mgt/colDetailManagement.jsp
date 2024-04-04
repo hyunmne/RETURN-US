@@ -100,7 +100,8 @@
 </style>
 </head>
 <body class="noto-sans">
-
+<script src="sweetalert2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- 헤더 파일 include -->
 <%@include file="/views/common/header.jsp" %>
 	<div class="container-fluid fruite py-5"
@@ -134,7 +135,7 @@
 		                                 <th>신청주소</th>
 		                              </tr>
 		                              <tr class="col-9">
-		                                 <td style="color: #3D550C;">${colDetail.colNum }</td>
+		                                 <td style="color: #3D550C;font-weight: 450;">${colDetail.colNum }</td>
 		                                 <td>${colDetail.colDate }</td>
 		                                 <td>${colDetail.accName }</td>
 		                                 <td>${colDetail.accTel }</td>
@@ -229,7 +230,7 @@
 										<textarea name="colRejection" readonly>포인트 지급을 위해 수거를 진행해주세요</textarea>
 									</div>
 									<div id="btnDiv">
-										<button id="collectionBtn" class="btnStyle" onclick="location.href='col-management?colNum=${colDetail.colNum}&colStatus=수거진행중'">수거진행</button>
+										<button id="collectionBtn" class="btnStyle" onclick="confirmAlert()">수거진행</button>
 										<button class="btnStyle" onclick="location.href='col-management?colStatus=수거준비중'">목록으로</button>
 									</div>
 		                        </div>
@@ -260,15 +261,28 @@
 	totalCell.textContent = total;
 	
 	//수거진행 버튼
-	var collectionBtn = document.getElementById('collectionBtn');
-	collectionBtn.addEventListener("click", function() {
-		confirmAlert = confirm("수거를 진행하시겠습니까?");
-		if(confirmAlert) {
-			window.location.href = 'col-management?colStatus=수거준비중';
-		} else {
-			window.location.href = 'col-detail-mgt?colNum=${colDetail.colNum}';
-		}
-	})
+	function confirmAlert() {
+		Swal.fire({
+	        title: "수거를 진행하시겠습니까?",
+	        icon: "question",
+	        showCancelButton: true,
+	        confirmButtonColor: "#3085d6",
+	        cancelButtonColor: "#d33",
+	        confirmButtonText: '확인',
+            cancelButtonText: '취소'
+	    }).then((result) => {
+	    	if (result.isConfirmed) {
+	            Swal.fire({
+	                title: "수거 진행 완료",
+	                icon: "success",
+	                confirmButtonText: '확인',
+	            }).then(() => {
+                    window.location.href = 'col-management?colNum=${colDetail.colNum}&colStatus=수거진행중';
+                    window.location.href = 'col-management?colStatus=수거준비중';
+	            });
+	        }
+	    });
+	}
 
 </script>
 </body>

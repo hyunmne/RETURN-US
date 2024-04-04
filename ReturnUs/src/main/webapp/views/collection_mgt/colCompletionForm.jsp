@@ -135,7 +135,7 @@
 		                                 
 		                              </tr>
 		                              <tr class="col-9">
-		                                 <td style="color: #3D550C;">${colDetail.colNum }</td>
+		                                 <td style="color: #3D550C;font-weight: 450;">${colDetail.colNum }</td>
 		                                 <td>${colDetail.colDate }</td>
 		                                 <td>${colDetail.accName }</td>
 		                                 <td>${colDetail.accTel }</td>
