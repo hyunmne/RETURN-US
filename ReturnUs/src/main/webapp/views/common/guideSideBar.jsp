@@ -31,7 +31,7 @@
 				</a>
 			</li>
 			<li>
-				<a href="faq">
+				<a href="faq" class="padding">
 					<i class="fas fa-seedling" style="color: #59981A"></i>&nbsp;&nbsp;&nbsp;자주 묻는 질문
 				</a>
 			</li>			

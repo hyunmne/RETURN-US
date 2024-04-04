@@ -37,6 +37,10 @@
 			  font-weight: <weight>;
 			  font-style: normal;
 			}
+			.menu{
+			  width:200px; 
+			  text-align:center;
+			}
 		</style>
 </head>
 
@@ -92,34 +96,24 @@
                         <div class="navbar-nav mx-auto">
                         	<c:choose>
                         		<c:when test="${adminCheck eq 'admin' }">
-		                            <a href="col-management?colStatus=수거준비중" class="nav-item nav-link active" style="width:200px; text-align:center;"><b>신청내역 관리</b></a>
+		                            <a href="col-management?colStatus=수거준비중" class="nav-item nav-link menu"><b>신청내역 관리</b></a>
                         		</c:when>
                         		<c:otherwise>
-		                            <a href="collect1" class="nav-item nav-link active" style="width:200px; text-align:center;"><b>방문수거 신청</b></a>
+		                            <a href="collect1" class="nav-item nav-link menu"><b>방문수거 신청</b></a>
                         		</c:otherwise>
                         	</c:choose>
-                            <a href="recycling-guide" class="nav-item nav-link" style="width:200px; text-align:center;"><b>가이드</b></a>
-                            <a href="placeList?plaType=재활용정거장" class="nav-item nav-link" style="width:200px; text-align:center;"><b>주변탐색</b></a>
+                            <a href="recycling-guide" class="nav-item nav-link menu"><b>가이드</b></a>
+                            <a href="placeList?plaType=재활용정거장" class="nav-item nav-link menu"><b>주변탐색</b></a>
                             <c:choose>
 		                    	<c:when test="${not empty acc.accId}">
-					                <a href="modify-profile" class="nav-item nav-link" style="width:200px; text-align:center;"><b>마이페이지</b></a>
+					                <a href="modify-profile" class="nav-item nav-link menu"><b>마이페이지</b></a>
 		                    	</c:when>
 		                    	<c:otherwise>
-		                    		<a href="login" class="nav-item nav-link" style="width:200px; text-align:center;"><b>마이페이지</b></a>
+		                    		<a href="login" class="nav-item nav-link menu"><b>마이페이지</b></a>
 		                    	</c:otherwise>
 		                    </c:choose>
                             
                         </div>
-<!--                         <div class="d-flex m-3 me-0"> -->
-<!--                             <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button> -->
-<!--                             <a href="#" class="position-relative me-4 my-auto"> -->
-<!--                                 <i class="fa fa-shopping-bag fa-2x"></i> -->
-<!--                                 <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span> -->
-<!--                             </a> -->
-<!--                             <a href="#" class="my-auto"> -->
-<!--                                 <i class="fas fa-user fa-2x"></i> -->
-<!--                             </a> -->
-<!--                         </div> -->
                     </div>
                 </nav>
             </div>
@@ -128,12 +122,6 @@
 
         <!-- Single Page Header start -->
         <div class="container-fluid py-5">
-<!--             <h1 class="text-center text-white display-6">Shop</h1> -->
-<!--             <ol class="breadcrumb justify-content-center mb-0"> -->
-<!--                 <li class="breadcrumb-item"><a href="#">Home</a></li> -->
-<!--                 <li class="breadcrumb-item"><a href="#">Pages</a></li> -->
-<!--                 <li class="breadcrumb-item active text-white">Shop</li> -->
-<!--             </ol> -->
         </div>
         <!-- Single Page Header End -->
         
@@ -147,6 +135,29 @@
 
     <!-- Template Javascript -->
     <script src="./resources/js/main.js"></script>
+    
+    <script>
+    
+    $(document).ready(function() {
+        
+        var curURL = window.location.href;
+        
+        $('.nav-item.nav-link').each(function() {
+            var link = $(this).attr('href'); // 현재 URL link 반환
+            
+            if (link.includes('plaType=')) {
+                var placeLink = link.split('plaType=')[0];
+                if (curURL.includes(placeLink)) {
+                    $(this).addClass('active');
+                }
+            } else {
+                if (curURL.includes(link)) {
+                    $(this).addClass('active');
+                }
+            }
+        });
+    });
+    </script>
 </body>
 
 </html>
