@@ -97,6 +97,7 @@
                         	<c:choose>
                         		<c:when test="${adminCheck eq 'admin' }">
 		                            <a href="col-management?colStatus=수거준비중" class="nav-item nav-link menu"><b>신청내역 관리</b></a>
+		                            <a href="joinPick" class="nav-item nav-link menu"><b>픽업맨</b></a>
                         		</c:when>
                         		<c:otherwise>
 		                            <a href="collect1" class="nav-item nav-link menu"><b>방문수거 신청</b></a>
@@ -147,6 +148,11 @@
             
             if (link.includes('plaType=')) {
                 var placeLink = link.split('plaType=')[0];
+                if (curURL.includes(placeLink)) {
+                    $(this).addClass('active');
+                }
+            } else if (link.includes('colStatus=')) {
+            	var placeLink = link.split('colStatus=')[0];
                 if (curURL.includes(placeLink)) {
                     $(this).addClass('active');
                 }
