@@ -107,11 +107,6 @@ public class AccountServiceImpl implements AccountService {
 		HttpSession session = request.getSession();
 		account.setAccPassword("");
 		session.setAttribute("acc", account);
-		
-		String adminCheck = accountDao.selectAdmin(id);
-		if(adminCheck.equals("admin")) {
-			session.setAttribute("adminCheck", adminCheck);
-		}		
 	}
 
 	@Override
@@ -141,8 +136,7 @@ public class AccountServiceImpl implements AccountService {
 		accountDao.updateAccountPassword(account);
 		
 		HttpSession sessionOld = request.getSession();
-		sessionOld.invalidate();
-		
+		sessionOld.invalidate();		
 	}
 	
 
