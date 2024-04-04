@@ -16,4 +16,20 @@ public class PickupmanDAOImpl implements PickupmanDAO {
 		return sqlSession.selectList("mapper.pickupman.selectPickupManList", colNum);
 	}
 
+	@Override
+	public void insertPickMan(PickupMan pm) throws Exception {
+		sqlSession.insert("mapper.pickupman.insertPickMan", pm);
+		sqlSession.commit();
+	}
+
+	@Override
+	public List<PickupMan> selectAllPMList(Integer row) throws Exception {
+		return sqlSession.selectList("mapper.pickupman.selectAllPMList", row);
+	}
+
+	@Override
+	public Integer selectAllPMCnt() throws Exception {
+		return sqlSession.selectOne("mapper.pickupman.selectAllPMCnt");
+	}
+
 }

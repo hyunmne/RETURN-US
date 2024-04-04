@@ -1,7 +1,7 @@
 package dto;
 
 public class PickupMan {
-	private int pmNo;
+	private Integer pmNo;
 	private String colNum;
 	private String pmName;
 	private String pmTel;
@@ -9,7 +9,18 @@ public class PickupMan {
 	private String pmRegion;
 	private String pmProfile;
 	
-	public PickupMan(int pmNo, String colNum, String pmName, String pmTel, String pmStatus, String pmRegion, String pmProfile) {
+	public PickupMan() {}
+	
+	public PickupMan(String pmName, String pmTel, String pmRegion, String pmProfile) {
+		super();
+		this.pmName = pmName;
+		this.pmTel = pmTel;
+		this.pmRegion = pmRegion;
+		this.pmProfile = pmProfile;
+	}
+	
+	public PickupMan(Integer pmNo, String colNum, String pmName, String pmTel, String pmStatus, String pmRegion,
+			String pmProfile) {
 		super();
 		this.pmNo = pmNo;
 		this.colNum = colNum;
@@ -19,18 +30,17 @@ public class PickupMan {
 		this.pmRegion = pmRegion;
 		this.pmProfile = pmProfile;
 	}
-	
-	
+
 	public String getPmProfile() {
 		return pmProfile;
 	}
 	public void setPmProfile(String pmProfile) {
 		this.pmProfile = pmProfile;
 	}
-	public int getPmNo() {
+	public Integer getPmNo() {
 		return pmNo;
 	}
-	public void setPmNo(int pmNo) {
+	public void setPmNo(Integer pmNo) {
 		this.pmNo = pmNo;
 	}
 	public String getColNum() {

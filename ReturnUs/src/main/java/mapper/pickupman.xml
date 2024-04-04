@@ -3,5 +3,20 @@
 
 <mapper namespace="mapper.pickupman">
 
+	<insert id="insertPickMan" parameterType="dto.PickupMan">
+			INSERT INTO pickupman (PM_NAME, PM_TEL, PM_REGION, PM_PROFILE) 
+			VALUES (#{pmName}, #{pmTel}, #{pmRegion}, #{pmProfile})
+	</insert>
+	
+	<select id="selectAllPMList" parameterType="Integer" resultType="dto.PickupMan">
+		select pm_name as pmName, pm_tel as pmTel, pm_status as pmStatus, pm_region as pmRegion, pm_profile as pmProfile
+		from pickupman
+		order by pm_no
+		limit #{row}, 10 
+	</select>
+	
+	<select id="selectAllPMCnt" resultType="Integer">
+		select count(*) from pickupman;
+	</select>
 </mapper>	
 	
