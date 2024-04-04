@@ -18,5 +18,17 @@
 	<select id="selectAllPMCnt" resultType="Integer">
 		select count(*) from pickupman;
 	</select>
+	
+	<select id="selectPickupManList" parameterType="String" resultType="dto.PickupMan">
+		select pm.pm_no as pmNo, pm.pm_name as pmName, pm.pm_tel as pmTel, pm.pm_status as pmStatus,
+			   pm.pm_region as pmRegion, pm.pm_profile as pmProfile
+		from pickupman pm
+		WHERE pm.PM_REGION = (
+			SELECT SUBSTRING(col.col_addr, 1, 2)
+			FROM collection col LEFT JOIN pickupman pm ON pm.PM_NO = col.COL_PM_NO
+			WHERE col.col_num = #{colNum}
+		)
+	</select>
+
 </mapper>	
 	

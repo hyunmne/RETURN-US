@@ -14,9 +14,20 @@ public class PickupmanServiceImpl implements PickupmanService {
 	PickupmanDAO pmDao = new PickupmanDAOImpl();
 	
 	@Override
-	public List<PickupMan> pickupManList(String colNum) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public void pickupManList(HttpServletRequest request) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		String colNum = request.getParameter("colNum");
+		System.out.println("픽업서비스"+colNum);
+		List<PickupMan> pmList = pmDao.selectPickupManList(colNum);
+		
+		for(PickupMan pm : pmList) {
+			System.out.println(pm.getPmName());
+			System.out.println(pm.getPmNo());
+			System.out.println(pm.getPmRegion());
+			System.out.println(pm.getPmStatus());
+		}
+		
+		request.setAttribute("pmList", pmList);
 	}
 
 	@Override

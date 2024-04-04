@@ -2,12 +2,12 @@ package dto;
 
 public class PickupMan {
 	private Integer pmNo;
-	private String colNum;
 	private String pmName;
 	private String pmTel;
 	private String pmStatus;
 	private String pmRegion;
 	private String pmProfile;
+	private Integer colPmNo;
 	
 	public PickupMan() {}
 	
@@ -19,18 +19,15 @@ public class PickupMan {
 		this.pmProfile = pmProfile;
 	}
 	
-	public PickupMan(Integer pmNo, String colNum, String pmName, String pmTel, String pmStatus, String pmRegion,
-			String pmProfile) {
+	public PickupMan(Integer pmNo, String pmName, String pmTel, String pmStatus, String pmRegion, String pmProfile) {
 		super();
 		this.pmNo = pmNo;
-		this.colNum = colNum;
 		this.pmName = pmName;
 		this.pmTel = pmTel;
 		this.pmStatus = pmStatus;
 		this.pmRegion = pmRegion;
 		this.pmProfile = pmProfile;
 	}
-
 	public String getPmProfile() {
 		return pmProfile;
 	}
@@ -42,12 +39,6 @@ public class PickupMan {
 	}
 	public void setPmNo(Integer pmNo) {
 		this.pmNo = pmNo;
-	}
-	public String getColNum() {
-		return colNum;
-	}
-	public void setColNum(String colNum) {
-		this.colNum = colNum;
 	}
 	public String getPmName() {
 		return pmName;
@@ -73,6 +64,11 @@ public class PickupMan {
 	public void setPmRegion(String pmRegion) {
 		this.pmRegion = pmRegion;
 	}
-	
+	public int getColPmNo() {
+		return colPmNo;
+	}
+	public void setColPmNo(int colPmNo) {
+		this.colPmNo = colPmNo;
+	}
 	
 }
