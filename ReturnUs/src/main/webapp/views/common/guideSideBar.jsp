@@ -17,7 +17,7 @@
 		<ul class="nav nav-pills flex-column mb-auto">
 			<li>
 				<a href="recycling-guide" class="padding">
-					<i class="fas fa-seedling" style="color: #59981A"></i>&nbsp;&nbsp;&nbsp;재활용 안내
+					<i class="fas fa-seedling" style="color: #59981A"></i>&nbsp;&nbsp;&nbsp;분리배출 안내
 				</a>
 			</li>
 			<li>

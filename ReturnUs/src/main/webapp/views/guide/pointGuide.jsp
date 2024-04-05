@@ -7,7 +7,7 @@
 <head>
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>포인트안내</title>
+    <title>Return:Us</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 	<style>
   		.card-img-top {
@@ -78,7 +78,7 @@
 						<!--큰 card ** 여기서부터 코딩하시면 됩니다!!! ** -->
 						<div id="big" class="card">
 							<div style="padding: 50px 0px 30px; color: #3E6D10;">
-								<h3 class="noto-sans" style="color: #3E6D10;">포인트 지급 안내</h3>
+								<h3 class="noto-sans" style="color: #3E6D10;">포인트 안내</h3>
 								<span style="color: #3E6D10;">포인트 부여대상 및 지급기준을 안내해드립니다</span>
 							</div>
 							<!--body ** 여기서부터 코딩하시면 됩니다!!! ** -->						  	
