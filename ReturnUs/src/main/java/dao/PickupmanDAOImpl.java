@@ -43,4 +43,18 @@ public class PickupmanDAOImpl implements PickupmanDAO {
 		return sqlSession.selectOne("mapper.pickupman.selectAllPMCnt", map);
 	}
 
+	@Override
+	public void updatePickupManStatus(String pmStatus, Integer pmNo) throws Exception {
+		Map<String, Object> params = new HashMap<>();
+		params.put("pmStatus", pmStatus);
+		params.put("pmNo", pmNo);
+		sqlSession.update("mapper.pickupman.updatePickupManStatus", params);
+		sqlSession.commit();
+	}
+
+	@Override
+	public Map<String, Object> selectPickupMan(String colNum) throws Exception {
+		return sqlSession.selectOne("mapper.pickupman.selectPickupMan", colNum);
+	}
+
 }

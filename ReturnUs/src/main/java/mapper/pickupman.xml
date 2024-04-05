@@ -37,6 +37,26 @@
 			FROM collection col LEFT JOIN pickupman pm ON pm.PM_NO = col.COL_PM_NO
 			WHERE col.col_num = #{colNum}
 		)
+		ORDER BY 
+	    CASE 
+	        WHEN pm.pm_status = '수거중' THEN 2
+	        WHEN pm.pm_status = '수거완료' THEN 1
+	        ELSE 0
+	    END
+	</select>
+	
+	<update id="updatePickupManStatus" parameterType="Map">
+		UPDATE pickupman
+		SET pm_status = #{pmStatus}
+		WHERE pm_no = #{pmNo}
+	</update>
+	
+	<select id="selectPickupMan" parameterType="String" resultType="Map">
+		SELECT pm.pm_no as pmNo, pm.pm_name as pmName, pm.pm_tel as pmTel, pm.pm_status as pmStatus,
+			   pm.pm_region as pmRegion, pm.pm_profile as pmProfile
+		FROM collection col JOIN pickupman pm
+		ON col.col_pm_no = pm.pm_no
+		WHERE col.COL_NUM = #{colNum}
 	</select>
 
 

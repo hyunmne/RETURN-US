@@ -1,11 +1,12 @@
 package service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.json.simple.JSONObject;
-
+import dao.CollectionDAO;
+import dao.CollectionDAOImpl;
 import dao.PickupmanDAO;
 import dao.PickupmanDAOImpl;
 import dto.PickupMan;
@@ -14,20 +15,13 @@ import util.PageInfo;
 public class PickupmanServiceImpl implements PickupmanService {
 	
 	PickupmanDAO pmDao = new PickupmanDAOImpl();
+	CollectionDAO colDao = new CollectionDAOImpl();
 	
 	@Override
 	public void pickupManList(HttpServletRequest request) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		String colNum = request.getParameter("colNum");
-		System.out.println("픽업서비스"+colNum);
 		List<PickupMan> pmList = pmDao.selectPickupManList(colNum);
-		
-		for(PickupMan pm : pmList) {
-			System.out.println(pm.getPmName());
-			System.out.println(pm.getPmNo());
-			System.out.println(pm.getPmRegion());
-			System.out.println(pm.getPmStatus());
-		}
 		
 		request.setAttribute("pmList", pmList);
 	}
@@ -82,6 +76,21 @@ public class PickupmanServiceImpl implements PickupmanService {
 		
 		
 		return pmList;
+	}
+
+	@Override
+	public void allocationPickupMan(String colNum, Integer pmNo, String pmStatus) throws Exception {
+		pmDao.updatePickupManStatus(pmStatus, pmNo);
+		colDao.updateColPmNo(pmNo, colNum);
+	}
+
+	@Override
+	public void pickupManInfo(HttpServletRequest request) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		String colNum = request.getParameter("colNum");
+		 Map<String, Object> pmInfo = pmDao.selectPickupMan(colNum);
+		 
+		request.setAttribute("pmInfo", pmInfo);
 	}
 
 
