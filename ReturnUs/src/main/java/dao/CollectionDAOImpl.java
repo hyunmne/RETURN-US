@@ -82,7 +82,6 @@ public class CollectionDAOImpl implements CollectionDAO {
 		return sqlSession.selectList("mapper.collection.selectCollectionListForPoint", params);
 	}
 
-	@Override
 	public List<Map<String, Object>> selectCollectionListForUsingPoint(String accId, Integer row) throws Exception {
 		Map<String, Object> params = new HashMap<>();
 		params.put("accId", accId);
@@ -123,4 +122,14 @@ public class CollectionDAOImpl implements CollectionDAO {
 		sqlSession.update("mapper.collection.updateCollectionItemQuantity", collection);
 		sqlSession.commit();
 	}
+	
+	@Override
+	public void updateColPmNo(Integer colPmNo, String colNum) throws Exception {
+		Map<String, Object> params = new HashMap<>();
+		params.put("colPmNo", colPmNo);
+		params.put("colNum", colNum);
+		sqlSession.update("mapper.collection.updateColPmNo", params);
+		sqlSession.commit();
+	}
+
 }

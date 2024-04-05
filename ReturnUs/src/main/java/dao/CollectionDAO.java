@@ -24,5 +24,6 @@ public interface CollectionDAO {
 	Integer selectCollectionCountForGettingPoint(String accId) throws Exception;
 	Collection selectCollection(String colNum) throws Exception;
 	void updateCollectionItemQuantity(Collection collection) throws Exception;
+	void updateColPmNo(Integer colPmNo, String colNum) throws Exception;
 }
 

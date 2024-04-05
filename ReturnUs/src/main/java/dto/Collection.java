@@ -35,6 +35,7 @@ public class Collection {
 	private int colPpackFin;
 	private int colPlasticFin;
 	private int colCanFin;
+	private int colPmNo;
 	
 	public Collection() {}
 	
@@ -109,6 +110,13 @@ public class Collection {
 		this.colResult = colResult;
 	}
 
+	public int getColPmNo() {
+		return colPmNo;
+	}
+	public void setColPmNo(int colPmNo) {
+		this.colPmNo = colPmNo;
+	}
+	
 	public int getColPaperFin() {
 		return colPaperFin;
 	}

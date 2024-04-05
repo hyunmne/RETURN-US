@@ -51,6 +51,7 @@
 		where col_num = #{colNum}
 	</update>
 	
+	
 	<update id="updateCollectionFin" parameterType="dto.Collection">
 		UPDATE collection
 		SET col_status = #{colStatus}, col_result = #{colResult}, col_getpnt_dt = curdate(), col_paper_fin=#{colPaperFin},
@@ -133,6 +134,12 @@
 		SET col_paper = #{colPaper}, col_pt_body=#{colPtBody}, col_pt_lid=#{colPtLid}, col_bt_190=#{colBt190},
 			col_bt_400=#{colBt400}, col_bt_1000=#{colBt1000}, col_bt_1000_Up=#{colBt1000Up}, col_ppack=#{colPpack}, 
 			col_plastic=#{colPlastic}, col_can=#{colCan}, col_total_pnt = #{colTotalPnt}
+		WHERE col_num = #{colNum}
+	</update>
+
+	<update id="updateColPmNo" parameterType="Map">
+		UPDATE collection
+		SET col_pm_no = #{colPmNo}
 		WHERE col_num = #{colNum}
 	</update>
 
