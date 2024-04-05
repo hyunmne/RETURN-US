@@ -8,7 +8,18 @@ public class PickupMan {
 	private String pmRegion;
 	private String pmProfile;
 	private Integer colPmNo;
+	private String colNum;
 	
+	
+	
+	public String getColNum() {
+		return colNum;
+	}
+
+	public void setColNum(String colNum) {
+		this.colNum = colNum;
+	}
+
 	public PickupMan() {}
 	
 	public PickupMan(String pmName, String pmTel, String pmRegion, String pmProfile) {

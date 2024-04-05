@@ -8,15 +8,24 @@
 			VALUES (#{pmName}, #{pmTel}, #{pmRegion}, #{pmProfile})
 	</insert>
 	
-	<select id="selectAllPMList" parameterType="Integer" resultType="dto.PickupMan">
-		select pm_name as pmName, pm_tel as pmTel, pm_status as pmStatus, pm_region as pmRegion, pm_profile as pmProfile
-		from pickupman
+	<select id="selectAllPMList" parameterType="java.util.Map" resultType="dto.PickupMan">
+		SELECT pm.pm_no as pmNo, pm.pm_name as pmName, pm.pm_tel as pmTel, pm.pm_status as pmStatus,
+               pm.pm_region as pmRegion, pm.pm_profile as pmProfile, col.col_num AS colNum
+		FROM pickupman pm left join collection col
+		ON col.col_pm_no = pm.pm_no 
+		<if test="pmRegion != null and !pmRegion.equals('none')">
+			where pm.pm_region = #{pmRegion}
+		</if>
 		order by pm_no
-		limit #{row}, 10 
+		limit #{row}, 10
 	</select>
 	
-	<select id="selectAllPMCnt" resultType="Integer">
-		select count(*) from pickupman;
+	<select id="selectAllPMCnt" resultType="Integer" parameterType="java.util.Map">
+		select count(*) 
+		from pickupman
+		<if test="pmRegion != null">
+			where pm_region = #{pmRegion}
+		</if>
 	</select>
 	
 	<select id="selectPickupManList" parameterType="String" resultType="dto.PickupMan">
@@ -29,6 +38,7 @@
 			WHERE col.col_num = #{colNum}
 		)
 	</select>
+
 
 </mapper>	
 	

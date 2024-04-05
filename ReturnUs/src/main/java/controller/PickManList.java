@@ -1,12 +1,19 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
+import dao.PickupmanDAO;
+import dao.PickupmanDAOImpl;
+import dto.PickupMan;
 import service.PickupmanService;
 import service.PickupmanServiceImpl;
 
@@ -33,7 +40,8 @@ public class PickManList extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		try {
 			PickupmanService service = new PickupmanServiceImpl();
-			service.allPMList(request);
+			List<PickupMan> pmList = service.allPMList(request);
+	        request.setAttribute("pmList", pmList);
 			request.getRequestDispatcher("/views/pickupMan/selectPmList.jsp").forward(request, response);
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -46,7 +54,21 @@ public class PickManList extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		request.setCharacterEncoding("utf-8");
+		try {
+			PickupmanService service = new PickupmanServiceImpl();
+			List<PickupMan> pmList = service.allPMList(request);
+			request.setAttribute("cnt", request.getParameter("count"));
+			Gson gson = new Gson();
+			String data = gson.toJson(pmList);
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().write(data);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("errTitle", "조회실패");
+			request.getRequestDispatcher("/views/common/error.jsp").forward(request, response);
+		}
 	}
 
 }

@@ -1,6 +1,8 @@
 package dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -23,13 +25,22 @@ public class PickupmanDAOImpl implements PickupmanDAO {
 	}
 
 	@Override
-	public List<PickupMan> selectAllPMList(Integer row) throws Exception {
-		return sqlSession.selectList("mapper.pickupman.selectAllPMList", row);
+	public List<PickupMan> selectAllPMList(Integer row, String pmRegion) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		if (pmRegion != null) {
+			map.put("pmRegion", pmRegion);
+		}
+		map.put("row", row);
+		return sqlSession.selectList("mapper.pickupman.selectAllPMList", map);
 	}
 
 	@Override
-	public Integer selectAllPMCnt() throws Exception {
-		return sqlSession.selectOne("mapper.pickupman.selectAllPMCnt");
+	public Integer selectAllPMCnt(String pmRegion) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		if (pmRegion != null) {
+			map.put("pmRegion", pmRegion);
+		}
+		return sqlSession.selectOne("mapper.pickupman.selectAllPMCnt", map);
 	}
 
 }

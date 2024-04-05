@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.simple.JSONObject;
+
 import dao.PickupmanDAO;
 import dao.PickupmanDAOImpl;
 import dto.PickupMan;
@@ -44,8 +46,10 @@ public class PickupmanServiceImpl implements PickupmanService {
 	}
 
 	@Override
-	public void allPMList(HttpServletRequest request) throws Exception {
+	public List<PickupMan> allPMList(HttpServletRequest request) throws Exception {
 		request.setCharacterEncoding("utf-8");
+		String pmRegion = request.getParameter("pmRegion");
+		System.out.println("serviceImpl pmRegion : " + pmRegion);
 		
 		Integer page = 1;
 		String pageNo = request.getParameter("page");
@@ -53,7 +57,7 @@ public class PickupmanServiceImpl implements PickupmanService {
 			page = Integer.parseInt(pageNo);
 		}
 		
-		int maxPage = (int) Math.ceil((double)pmDao.selectAllPMCnt()/10);
+		int maxPage = (int) Math.ceil((double)pmDao.selectAllPMCnt(pmRegion)/10);
 		int startPage = (page-1)/10*10+1;
 		int endPage = startPage+10-1;
 		if(endPage > maxPage) endPage = maxPage;
@@ -65,10 +69,19 @@ public class PickupmanServiceImpl implements PickupmanService {
 		pageInfo.setEndPage(endPage);
 		
 		int row = (page-1)*10;
-		List<PickupMan> allPmList = pmDao.selectAllPMList(row);
 		
+		List<PickupMan> pmList = pmDao.selectAllPMList(row, pmRegion);
+		
+		int count = pmDao.selectAllPMCnt(pmRegion);
+		System.out.println(count);
+		request.setAttribute("count",  count);
 		request.setAttribute("pageInfo", pageInfo);
-		request.setAttribute("pmList", allPmList);
+		request.setAttribute("pmList", pmList);
+//		request.setAttribute("regionList", regionList);C
+		request.setAttribute("region", pmRegion);
+		
+		
+		return pmList;
 	}
 
 
