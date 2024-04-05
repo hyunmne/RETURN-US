@@ -23,11 +23,11 @@
 	}
 %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-   <meta charset="utf-8">
-   <title>Return:Us</title>
-<style>
+<meta charset="UTF-8">
+<title>Return:Us</title>
+<style type = "text/css">
    
 .logBox {
     display: flex;
@@ -46,7 +46,7 @@
 }
 
 .button {
-	margin-left: 50%;
+	margin-left: 75%;
     width: 25%; /* 버튼의 너비 조정 */
     height: 40px; /* 버튼의 높이 조정 */
     background-color: #59981A; /* 배경색 설정 */
@@ -55,6 +55,7 @@
     border-radius: 10px; /* 버튼 모서리를 둥글게 만듦 */
     font-size: 18px; /* 폰트 크기 조정 */
     cursor: pointer; /* 커서 스타일 변경 */
+    margin-top: -10%;
 }
 
 /* 추가로 필요한 스타일 */
@@ -80,7 +81,38 @@
 	margin-left: 34px;
 }
 </style>
-   
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(function() {
+	$("#login").click(function(e){
+		var login = {}
+		login.accId = $("#accId").val();
+		login.accPassword = $("#accPassword").val();
+		login.autologin = $("#autologin").val();
+		console.log(login);
+		$.ajax({
+			url : "login",
+			type: "post",
+			async: true,
+			data:{login:JSON.stringify(login)},
+			success:function(result){
+				console.log(result)
+				if(result=='true'){
+					location.href="main";
+				}else{
+					alert(result);
+				}
+			},
+			error:function(result){
+				alert("로그인실패");
+			}
+		})
+	})
+});
+
+</script>        
 </head>
     
 <body class="noto-sans">
@@ -113,7 +145,6 @@
 								</div>
 							</div>
 							<!--body ** 여기서부터 코딩하시면 됩니다!!! ** -->
-							<form action="login" method="post">
 							<div id="sm">
 								<div id="id">
 									<input type="text" class="input" id="accId" name="accId" value="<%=id %>" placeholder="ID를 입력하세요..."/>
@@ -125,17 +156,16 @@
 								<br>
 								<div id="loginbox" class="login_box">
 								<%if(autologin) { %>
-									<input type="checkbox" value="true" name="autologin" checked="checked">&nbsp;&nbsp;<span>자동로그인</span> 
+									<input type="checkbox" id="autologin" value="true" name="autologin" checked="checked">&nbsp;&nbsp;<span>자동로그인</span> 
 								<%} else { %>
-									<input type="checkbox" value="true" name="autologin">&nbsp;&nbsp;<span>자동로그인</span>
+									<input type="checkbox" id="autologin" value="true" name="autologin">&nbsp;&nbsp;<span>자동로그인</span>
 								<%} %>
-									<button type="submit" class="button">로그인</button>
+									<button type="submit" class="button" id="login">로그인</button>
 								</div>
 								<div id="linked">
 									<a id="joinhref" href="join">회원가입</a><a class="blank"></a><a href="findid">ID찾기</a><a class="blank"></a><a href="findpw">PW찾기</a>
 								</div>
 							</div>
-							</form>
 						</div>
 					</div>
 				</div>

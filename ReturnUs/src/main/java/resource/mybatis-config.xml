@@ -8,6 +8,7 @@
 	<typeAliases>
 		<typeAlias type="dto.Account" alias="Account" />
 		<typeAlias type="dto.Place" alias="place" />
+		<typeAlias type="dto.Faq" alias="Faq" />
 	</typeAliases>
 	
 	<environments default="development">
@@ -32,5 +33,6 @@
 		<mapper resource="mapper/delivery.xml"/>
 		<mapper resource="mapper/collection.xml"/>
 		<mapper resource="mapper/place.xml"/>
+		<mapper resource="mapper/faq.xml"/>
 	</mappers>
 </configuration>

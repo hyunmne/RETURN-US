@@ -396,7 +396,11 @@ $(document).ready(function() {
         // 아이디 체크
         var idMessage = $('#checkId').text();
         if (idMessage !== '사용할 수 있는 아이디입니다.') {
-            alert('아이디를 확인해주시기 바랍니다.');
+        	Swal.fire({
+                title: "아이디 중복",
+                text: "아이디를 확인해주시기 바랍니다.",
+                icon: "warning"
+              });
             e.preventDefault(); 
             return;
         }
@@ -404,7 +408,11 @@ $(document).ready(function() {
         // 비밀번호 체크
         var pwMessage = $('#checkPw').text();
         if (pwMessage !== '사용할 수 있는 비밀번호입니다.') {
-            alert('비밀번호를 확인해 주시기 바랍니다.');
+            Swal.fire({
+                title: "비밀번호 확인",
+                text: "비밀번호를 확인해 주시기 바랍니다.",
+                icon: "warning"
+              });
             e.preventDefault(); 
             return;
         }
@@ -412,7 +420,11 @@ $(document).ready(function() {
         // 비밀번호 확인 체크
         var pwCheckMessage = $('#checkDoublePw').text();
         if (pwCheckMessage !== '비밀번호가 일치합니다.') {
-            alert('비밀번호를 확인해 주시기 바랍니다.');
+        	Swal.fire({
+                title: "비밀번호 확인",
+                text: "비밀번호를 확인해 주시기 바랍니다.",
+                icon: "warning"
+              });
             e.preventDefault();
             return;
         }
@@ -590,7 +602,7 @@ $(document).ready(function() {
 												<font id="permitemail"></font>
 											</div>										
 											<div>
-											<button type="submit" class="submit"><div class="joinBtn">회원가입</div></button>
+											<button type="submit" class="submit" onclick="checkSubmit()"><div class="joinBtn">회원가입</div></button>
 											</div>											
 										</div>
 								</div>

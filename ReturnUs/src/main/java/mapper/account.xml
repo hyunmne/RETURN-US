@@ -51,5 +51,13 @@
 		set acc_tel = #{accTel}, acc_postcode = #{accPostCode}, acc_addr = #{accAddr}, acc_detail_addr = #{accDetailAddr}
 		where acc_id = #{accId}
 	</update>
+		<select id="findEmAccount" parameterType="Map" resultType="Account">
+		<![CDATA[
+			select ACC_ID as accId, ACC_PASSWORD as accPassword, ACC_NAME as accName, ACC_BIRTH as accBirth, ACC_TEL as accTel, ACC_EMAIL as accEmail,
+			ACC_EMAIL_DO as accEmailDo, ACC_ADMIN as accAdmin, ACC_POSTCODE as accPostCode, ACC_ADDR as accAddr, ACC_DETAIL_ADDR as accDetailAddr, 
+			ACC_PNT as accPnt, DATEDIFF(CURDATE(), ACC_JOIN_DT)+1 as accJoinDays, ACC_JOIN_DT as accJoinDt
+			from account where ACC_EMAIL = #{accEmail} and ACC_EMAIL_DO = #{accEmailDo}
+		]]>
+	</select>
 </mapper>	
 	

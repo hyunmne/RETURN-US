@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="mapper.faq">
+ 	<insert id="insertFaq" parameterType="Faq">
+ 		<![CDATA[
+ 			insert into faq (FAQ_TITLE, FAQ_CONTENT)
+ 				values (#{faqTitle}, #{faqContent})
+ 		]]>
+ 	</insert>
+ 	<select id="selectFaqList" parameterType="Integer" resultType="Faq">
+ 		<![CDATA[
+ 			select FAQ_NO as faqNo, FAQ_TITLE as faqTitle, FAQ_CONTENT as faqContent
+ 			from faq order by FAQ_NO limit #{row}, 10
+ 		]]>
+ 	</select>
+ 	<select id="selectFaqCount" resultType="Integer">
+ 		<![CDATA[
+ 			select count(*) from faq
+ 		]]>
+ 	</select>
+ 	<select id="selectFaq" parameterType="Integer" resultType="Faq">
+ 		<![CDATA[
+ 			select FAQ_NO as faqNo, FAQ_TITLE as faqTitle, FAQ_CONTENT as faqContent
+ 			from faq where FAQ_NO = #{faqNo}
+ 		]]>
+ 	</select>
+ 	<delete id="deleteFaq" parameterType="Integer">
+		delete from FAQ where FAQ_NO = #{faqNo}	
+	</delete>
+ 	<update id="updateFaq" parameterType="Faq">
+ 		update FAQ
+ 		<trim prefix="SET" suffixOverrides=",">
+ 			<if test="faqTitle != null">FAQ_TITLE=#{faqTitle},</if>
+ 			<if test="faqContent != null">FAQ_CONTENT=#{faqContent}</if>
+ 		</trim>
+ 		where FAQ_NO = #{faqNo}
+ 	</update>
+ </mapper>

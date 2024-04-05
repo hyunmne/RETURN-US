@@ -73,19 +73,49 @@
 	font-size: 28px;
 	color: black;
 } 
-h5{
+h4{
 	display: inline;
 	padding-bottom: 10px;
 }
 .content{
+
+
+}
+p{
 	font-size: 20px;
 	flex-grow: 1;
-
 }
 .redemp{
 	color: red;
 	
 }
+
+.button{
+	width: 10%;
+	border: solid 0px;
+	padding: 8px 8px;
+	font-weight: 600;
+	font-size: 18px;
+	line-height: 18px;
+	background: #D1E7DD;
+	flex: none;
+	border-radius: 6px;
+	color: #146C43;
+
+}
+#emptyArea { margin: auto; width: 800px; text-align: center; }
+	#emptyArea a {
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		text-decoration: none;
+	}
+	#emptyArea .btn {
+		background: lightgray;
+	}
+	#emptyArea .select {
+		background: lightblue;
+	}
 </style>   
 </head>
     
@@ -104,12 +134,8 @@ h5{
 				<div class="col-6"></div>
 			</div>
 			<div class="row g-4">
-				<div class="col-lg-2">
-					<div class="row g-4 shadow-sm">
-						<div class="col-lg-12">
-							<%@include file="/views/common/guideSideBar.jsp"%>
-						</div>
-					</div>
+				<div class="col-lg-2 shadow-sm">
+					<%@include file="/views/common/guideSideBar.jsp"%>
 				</div>
 				<div class="col-lg-10">
 					<div style="height: 100%; padding: 0px 70px 0px 70px">
@@ -120,73 +146,40 @@ h5{
 								<span style="color: #3E6D10;">&nbsp;</span>
 							</div>
 							<!--body ** 여기서부터 코딩하시면 됩니다!!! ** -->
-							<div id="sm" class="card">   									
-								<div class="accordion" style="margin-bottom: 10%;padding-top: 1%l">
-									<input type="radio" name="accordion" class="odd" id="answer01">
-									<label for="answer01" style="border-top-left-radius: 13px; border-top-right-radius: 6px;"><span class="Q">Q</span><h5 class="noto-sans">포인트가 지급 되지 않았습니다.</h5></label>						
-									<div><p><span class="A">A</span> &nbsp;<span class="content">
-									<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;고객님의 수거항목 수거를 완료하고 아직 리너터스 분류 장소에서 <strong>검수가 완료되지 않아 지급되지 않았을 수 있습니다</strong> 
-									<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;검수 후 고객님께서 보내주신 수거항목이 <strong>지급 기준에 부합 할 시에 포인트가 지급 됩니다</strong> 
-		 							<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;포인트 지급 기준에 <strong class="redemp">부합하지 않으면 포인트 지급이 반려</strong>될 수 있습니다
-		 							<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;포인트 지급 기준은 <strong>가이드 > 분리배출 가이드</strong>에서 확인하실 수 있습니다.  
-		 							<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;포인트 지급은 수거 일자로부터 영업일기준 약 2~3일가량 소요됩니다 
-		 							<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주말 또는 연휴시에는 포인트 지급이 지연 될 수 있습니다		 							
-		 							</span>
-		 							</p></div>
-		 							<input type="radio" name="accordion" class="even" id="answer02">
-									<label for="answer02"><span class="Q">Q</span><h5 class="noto-sans">부분 반려는 무엇인가요?</h5></label>						
-									<div><p><span class="A">A</span> &nbsp;<span class="content">
-									<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;포인트 지급 가능한 고객님의 수거항목 중에 <strong class="redemp">포인트 지급 기준에 부적합한</strong> 항목이 있을경우
-									<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;검수 과정에서 그 <strong>항목을 제외하고 포인트를 지급해 드립니다</strong> 자세한 내용은 이용약관을 확인해주시기 바랍니다. 
-									<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;포인트 지급 기준은 <strong>가이드 > 분리배출 가이드</strong>에서 확인하실 수 있습니다.							
-		 							</span>
-		 							</p></div>	
-									<input type="radio" name="accordion" class="odd" id="answer03">
-									<label for="answer03"><span class="Q">Q</span><h5 class="noto-sans">회원가입은 어떻게 하나요?</h5></label>						
-									<div><p><span class="A">A</span> &nbsp;<span class="content">
-									<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;회원가입은 <strong>홈페이지 상단의 "회원가입" 버튼을 클릭</strong>한 후 필수 정보를 입력하여 진행할 수 있습니다. 
-									<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;또는 <strong>로그인 > 회원가입</strong>으로 회원가입이 가능합니다												 							
-		 							</span>
-		 							</p></div>
-		 							<input type="radio" name="accordion" class="even" id="answer04">
-									<label for="answer04"><span class="Q">Q</span><h5 class="noto-sans">아이디를 잊어버렸을 때 어떻게 찾을 수 있나요?</h5></label>						
-									<div><p><span class="A">A</span> &nbsp;<span class="content">
-									<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;아이디를 잊어버리셨을 경우 <strong>로그인 > 아이디 찾기</strong>를 통해 <strong>이름과 생년월일 이메일을 입력하여</strong> 확인하실 수 있습니다.						
-		 							</span>
-		 							</p></div>
-		 							<input type="radio" name="accordion" class="odd" id="answer05">
-									<label for="answer05"><span class="Q">Q</span><h5 class="noto-sans">비밀번호를 잊어버렸을 때 어떻게 복구하나요?</h5></label>						
-									<div><p><span class="A">A</span> &nbsp;<span class="content">
-									<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;고객님의 수거항목 수거를 완료하고 아직 리너터스 분류 장소에서 <strong>검수가 완료되지 않아 지급되지 않았을 수 있습니다</strong> 
-									<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;검수 후 고객님께서 보내주신 수거항목이 <strong>지급 기준에 부합 할 시에 포인트가 지급 됩니다</strong> 
-		 							<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;포인트 지급 기준에 <strong class="redemp">부합하지 않으면 포인트 지급이 반려</strong>될 수 있습니다
-		 							<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;포인트 지급 기준은 <strong>가이드 > 분리배출 가이드</strong>에서 확인하실 수 있습니다.  
-		 							<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;포인트 지급은 수거 일자로부터 영업일기준 약 2~3일가량 소요됩니다 
-		 							<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주말 또는 연휴시에는 포인트 지급이 지연 될 수 있습니다		 							
-		 							</span>
-		 							</p></div>
-		 							<input type="radio" name="accordion" class="even" id="answer06">
-									<label for="answer02"><span class="Q">Q</span><h5 class="noto-sans">부분 반려는 무엇인가요?</h5></label>						
-									<div><p><span class="A">A</span> &nbsp;<span class="content">
-									<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;포인트 지급 가능한 고객님의 수거항목 중에 <strong class="redemp">포인트 지급 기준에 부적합한</strong> 항목이 있을경우
-									<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;검수 과정에서 그 <strong>항목을 제외하고 포인트를 지급해 드립니다</strong> 자세한 내용은 이용약관을 확인해주시기 바랍니다. 
-									<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;포인트 지급 기준은 <strong>가이드 > 분리배출 가이드</strong>에서 확인하실 수 있습니다.							
-		 							</span>
-		 							</p></div>	
-									<input type="radio" name="accordion" class="odd" id="answer07">
-									<label for="answer03"><span class="Q">Q</span><h5 class="noto-sans">회원가입은 어떻게 하나요?</h5></label>						
-									<div><p><span class="A">A</span> &nbsp;<span class="content">
-									<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;회원가입은 <strong>홈페이지 상단의 "회원가입" 버튼을 클릭</strong>한 후 필수 정보를 입력하여 진행할 수 있습니다. 
-									<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;또는 <strong>로그인 > 회원가입</strong>으로 회원가입이 가능합니다												 							
-		 							</span>
-		 							</p></div>
-		 							<input type="radio" name="accordion" class="even" id="answer08">
-									<label for="answer04"><span class="Q">Q</span><h5 class="noto-sans"></h5></label>						
-									<div><p><span class="A">A</span> &nbsp;<span class="content">
-									<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;						
-		 							</span>
-		 							</p></div>		
-								</div>
+							<div id="sm" class="card">
+								<c:if test="${admin eq 'admin' }">
+									<a href="writefaq"><button class="button">글쓰기</button></a>
+								</c:if>  								
+								<c:forEach items="${faqList }" var="faq">
+									<div class="accordion" style="padding-top: 1%">
+										<input type="radio" name="accordion" >
+										<label for="answer?faqNo=${faq.faqNo }"><span class="Q">Q</span><h4 class="noto-sans" >${faq.faqTitle }</h4>
+										<c:if test="${admin eq 'admin' }">
+										<a href="faqmodify?faqNo=${faq.faqNo }"><button class="button" style="float: right; ">수정</button></a>
+										</c:if>
+										<c:if test="${admin eq 'admin' }">
+										<a href="deletefaq?faqNo=${faq.faqNo }"><button class="button" style="float: right; margin-right:1%;">삭제</button></a>
+										</c:if>  
+										</label>						
+										<div><p><span class="A">A</span><br>
+										<span class="content">${faq.faqContent }</span>
+		 								</p></div>
+		 							</div>
+		 						</c:forEach>	
+		 						<div id="emptyArea" style="margin-top: 10%; margin-bottom: 5%;">
+									<a>&lt;</a>
+										<c:forEach begin="${pageInfo.startPage }" end="${pageInfo.endPage }" var="i">
+											<c:choose>
+												<c:when test="${i==pageInfo.curPage}">
+													<a href="faq?page=${i}" class="select">${i }</a>
+												</c:when>
+												<c:otherwise>
+													<a href="faq?page=${i}" class="btn">${i }</a>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
+									<a>&gt;</a>
+								</div>	
 							</div>
 						</div>
 					</div>

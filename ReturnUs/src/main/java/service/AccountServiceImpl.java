@@ -4,8 +4,14 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.catalina.connector.Response;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import dao.AccountDAO;
 import dao.AccountDAOImpl;
@@ -49,20 +55,50 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public void login(HttpServletRequest request) throws Exception {
+	public void login(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		
-		String id = request.getParameter("accId");
-		String pw = request.getParameter("accPassword");
-		Account acc = accountDao.selectAccount(id);
+		String login = request.getParameter("login");
+		JSONParser parser = new JSONParser();
+		JSONObject jobj = (JSONObject)parser.parse(login);
 		
-		if (acc == null) throw new Exception("아이디 오류");
-		if(!acc.getAccPassword().equals(pw)) throw new Exception("비밀번호 오류");
+		String accId = (String)jobj.get("accId");
+		String accPassword = (String)jobj.get("accPassword");
+		String autologin = (String)jobj.get("autologin");
+
+		// 자동로그인 쿠키 처리
+		Cookie autoLoginCookie = null;
+		Cookie accIdCookie = null;
+		Cookie accPasswordCookie = null;
+		if(autologin=="true") {
+			autoLoginCookie = new Cookie ("autologin", autologin);
+			autoLoginCookie.setMaxAge(365 * 24 * 60 * 60); 
+			accIdCookie = new Cookie("accId", accId);
+			accIdCookie.setMaxAge(365 * 24 * 60 * 60);                
+			accPasswordCookie = new Cookie("accPassword", accPassword);
+			accPasswordCookie.setMaxAge(365 * 24 * 60 * 60);	
+		}else {
+			autoLoginCookie = new Cookie("autologin", "");
+            autoLoginCookie.setMaxAge(0);
+            accIdCookie = new Cookie("accId", "");   
+            accIdCookie.setMaxAge(0);
+            accPasswordCookie = new Cookie("accPassword", "");
+            accPasswordCookie.setMaxAge(0);
+		}			
+		response.addCookie(autoLoginCookie);
+		response.addCookie(accIdCookie);
+		response.addCookie(accPasswordCookie);
+		/////////////////////////
+		
+		Account acc = accountDao.selectAccount(accId);
+		
+		if (acc == null) throw new Exception("아이디를 확인해주시기 바랍니다.");
+		if(!acc.getAccPassword().equals(accPassword)) throw new Exception("비밀번호를 확인해주시기 바랍니다.");
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("acc", acc);
 		
-		String adminCheck = accountDao.selectAdmin(id);
+		String adminCheck = accountDao.selectAdmin(accId);
 		if(adminCheck != null && adminCheck.equals("admin")) {
 			session.setAttribute("adminCheck", adminCheck);
 		}
