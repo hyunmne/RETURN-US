@@ -92,9 +92,9 @@
 										<div id="guide" class="card" style="width: 17rem;">
 										  	<img src='<c:url value="/resources/img/point-type4.png"/>' class="card-img-top" alt="can"/>
 										  	<div class="card-body">
-											    <h4 class="card-title-wh">캔 (500P)</h4>
+											    <h4 class="card-title-wh noto-sans">캔 (50P)</h4>
 											    <ul class="text-list">
-												  <li>캔 1개당 500P 지급</li>
+												  <li>캔 1개당 50P 지급</li>
 												  <li>음료수캔, 통조림, 참치캔 가능</li>
 												  <li>이물질이 묻어있는 캔 불가능</li>
 												  <li>폭발 위험이 있는 캔종류 불가능</li>
@@ -110,9 +110,9 @@
 										<div id="guide" class="card" style="width: 17rem;">
 										  	<img src='<c:url value="/resources/img/point-type5.png"/>' class="card-img-top" alt="paper">
 										  	<div class="card-body">
-											    <h4 class="card-title">종이 (5000P)</h4>
+											    <h4 class="card-title noto-sans">종이 (500P)</h4>
 											    <ul class="text-list">
-												  <li>종이 1kg 당 5000P 지급</li>
+												  <li>종이 1kg 당 500P 지급</li>
 												  <li>코팅된 종이 불가능</li>
 												  <li>종이컵, 컵라면 용기 불가능</li>
 												  <li>재사용 가능한 책 불가능</li>
@@ -128,9 +128,9 @@
 										<div id="guide" class="card" style="width: 17rem;">
 										  	<img src='<c:url value="/resources/img/point-type6.png"/>' class="card-img-top" alt="plastic">
 										  	<div class="card-body">
-											    <h4 class="card-title-wh">플라스틱 (200P)</h4>
+											    <h4 class="card-title-wh noto-sans">플라스틱 (20P)</h4>
 										    	<ul class="text-list">
-												  <li>플라스틱 1개당 200P 지급</li>
+												  <li>플라스틱 1개당 20P 지급</li>
 												  <li>모든 플라스틱 가능</li>
 												  <li>스티커 등이 부착된 플라스틱 불가능</li>
 												  <li>이물질이 묻어있는 플라스틱 불가능</li>
@@ -148,10 +148,10 @@
 											<div id="guide" class="card" style="width: 17rem;">
 											  	<img src='<c:url value="/resources/img/point-type1.png"/>' class="card-img-top" alt="pet">
 											  	<div class="card-body">
-												    <h4 class="card-title">페트병 (600P)</h4>
+												    <h4 class="card-title noto-sans">페트병 (60P)</h4>
 											    	<ul class="text-list">
-													  <li>페트병 본체 1개당 500P 지급</li>
-													  <li>페트병 뚜껑 1개당 100P 지급</li>
+													  <li>페트병 본체 1개당 50P 지급</li>
+													  <li>페트병 뚜껑 1개당 10P 지급</li>
 													  <li>섞이지 않은 단일 재질 페트만 가능</li>
 													  <li>PETE, PET 종류 가능</li>
 													  <li>세제통, 음료수병, 화장품용기 가능</li>
@@ -168,9 +168,9 @@
 										<div id="guide" class="card" style="width: 17rem;">
 										  	<img src='<c:url value="/resources/img/point-type2.png"/>' class="card-img-top" alt="paper-pack">
 										  	<div class="card-body">
-											    <h4 class="card-title">종이팩 (500P)</h4>
+											    <h4 class="card-title noto-sans">종이팩 (50P)</h4>
 											    <ul class="text-list">
-												  <li>종이팩 1개당 500P 지급</li><br>
+												  <li>종이팩 1개당 50P 지급</li><br>
 												  <li>우유, 주스 등의 일반 종이팩 수거</li><br>
 												  <li>내부가 호일인 멸균팩 수거</li>					  
 												</ul>  
@@ -185,12 +185,12 @@
 										<div id="guide" class="card" style="width: 17rem;">
 										  	<img src='<c:url value="/resources/img/point-type3.png"/>' class="card-img-top" alt="bottle">
 										  	<div class="card-body">
-											    <h4 class="card-title-wh">공병</h4>
+											    <h4 class="card-title-wh noto-sans">공병</h4>
 											    <ul class="text-list">
-												  <li>공병 190ml 이하 1개당 70P 지급</li>
-												  <li>공병 400ml 이하 1개당 100P 지급</li>
-												  <li>공병 1000ml 이하 1개당 130P 지급</li>
-												  <li>공병 1000ml 이상 1개당 350P 지급</li>
+												  <li>공병 190ml 이하 1개당 10P 지급</li>
+												  <li>공병 400ml 이하 1개당 50P 지급</li>
+												  <li>공병 1000ml 이하 1개당 100P 지급</li>
+												  <li>공병 1000ml 이상 1개당 200P 지급</li>
 												  <li>이물질이 묻어있는 공병 불가능</li>
 												</ul>  
 										  	</div>

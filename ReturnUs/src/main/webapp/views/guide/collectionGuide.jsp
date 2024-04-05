@@ -122,28 +122,28 @@
 								    		<div class="box" style="background-color:#D4E5C4">
 									    		<p>STEP 1</p>
 									    		<h6 class="noto-sans">박스 포장</h6>
-									    		<p>보낼 수량에 맞는<br>박스 준비 및 포장</p>
+									    		<p class="mb-1">보낼 수량에 맞는<br>박스 준비 및 포장</p>
 									    	</div>
 								    	</div>
 								    	<div class="col-sm-2">
 								    		<div class="box" style="background-color:#ABCB8B">
 									    		<p>STEP 2</p>
 									    		<h6 class="noto-sans">수거 신청</h6>
-									    		<p>방문 택배 상품을<br>결제해주세요</p>
+									    		<p class="mb-1">방문 택배 상품을<br>결제해주세요</p>
 									    	</div>
 								    	</div>
 								    	<div class="col-sm-2">
 								    		<div class="box" style="background-color:#82B153">
 									    		<p>STEP 3</p>
 									    		<h6 class="noto-sans">방문 수거</h6>
-									    		<p>포장한 박스를<br>문 앞에 놓아주세요</p>
+									    		<p class="mb-1">포장한 박스를<br>문 앞에 놓아주세요</p>
 									    	</div>
 								    	</div>
 								    	<div class="col-sm-2">
 								    		<div class="box" style="background-color:#59981A">
 									    		<p id="last">STEP 4</p>
 									    		<h6 class="noto-sans" id="last">수거 완료</h6>
-									    		<p id="last">품목 수량만큼<br>포인트 적립</p>
+									    		<p class="mb-1" id="last">품목 수량만큼<br>포인트 적립</p>
 									    	</div>
 								    	</div>
 								    	<div class="col-sm-1"></div>
@@ -160,7 +160,7 @@
 									    <div class="col-7">
 									    	<table class="table">
 											  <thead>
-											    <tr>
+											    <tr style="background-color:#f5f9f1">
 											      <th scope="col">사이즈</th>
 											      <th scope="col">가로 + 세로 + 높이</th>
 											      <th scope="col">중량</th>

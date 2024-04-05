@@ -93,17 +93,17 @@
 									  <div class="row">
 										<div class="col-4">
 											<img src='<c:url value="/resources/img/paper1.png"/>' class="pills-img" alt="paper">
-											<h3 class="step-title">STEP 1</h3>
+											<h3 class="step-title noto-sans">STEP 1</h3>
 											<p class="step-content">물에 젖지않게 해주세요</p>
 										</div>
 									    <div class="col-4">
 									    	<img src='<c:url value="/resources/img/paper2.png"/>' class="pills-img" alt="paper">
-									    	<h3 class="step-title">STEP 2</h3>
+									    	<h3 class="step-title noto-sans">STEP 2</h3>
 											<p class="step-content">테이프 등 다른 재질을 제거해주세요</p>
 									    </div>
 									    <div class="col-4">
 									    	<img src='<c:url value="/resources/img/paper3.png"/>' class="pills-img" alt="paper">
-									    	<h3 class="step-title">STEP 3</h3>
+									    	<h3 class="step-title noto-sans">STEP 3</h3>
 											<p class="step-content">차곡차곡 쌓아서 배출해주세요</p>
 									    </div>									    						  
 									  </div>
@@ -116,17 +116,17 @@
 									  <div class="row">
 										<div class="col-4">
 											<img src='<c:url value="/resources/img/can1.png"/>' class="pills-img" alt="can">
-											<h3 class="step-title">STEP 1</h3>
+											<h3 class="step-title noto-sans">STEP 1</h3>
 											<p class="step-content">내용물을 비워주세요</p>
 										</div>
 									    <div class="col-4">
 									    	<img src='<c:url value="/resources/img/can2.png"/>' class="pills-img" alt="can">
-									    	<h3 class="step-title">STEP 2</h3>
+									    	<h3 class="step-title noto-sans">STEP 2</h3>
 											<p class="step-content">물로 깨끗하게 씻어주세요</p>
 									    </div>
 									    <div class="col-4">
 									    	<img src='<c:url value="/resources/img/can3.png"/>' class="pills-img" alt="can">
-									    	<h3 class="step-title">STEP 3</h3>
+									    	<h3 class="step-title noto-sans">STEP 3</h3>
 											<p class="step-content">담배 등의 이물질을 넣지않고 배출해주세요</p>
 									    </div>									    						  
 									  </div>
@@ -139,17 +139,17 @@
 									  <div class="row">
 										<div class="col-4">
 											<img src='<c:url value="/resources/img/bottle1.png"/>' class="pills-img" alt="bottle">
-											<h3 class="step-title">STEP 1</h3>
+											<h3 class="step-title noto-sans">STEP 1</h3>
 											<p class="step-content">물로 깨끗하게 씻어주세요</p>
 										</div>
 									    <div class="col-4">
 									    	<img src='<c:url value="/resources/img/bottle2.png"/>' class="pills-img" alt="bottle">
-									    	<h3 class="step-title">STEP 2</h3>
+									    	<h3 class="step-title noto-sans">STEP 2</h3>
 											<p class="step-content">유리병이 깨지지않게 주의해주세요</p>
 									    </div>
 									    <div class="col-4">
 									    	<img src='<c:url value="/resources/img/bottle3.png"/>' class="pills-img" alt="bottle">
-									    	<h3 class="step-title">STEP 3</h3>
+									    	<h3 class="step-title noto-sans">STEP 3</h3>
 											<p class="step-content">담배 등의 이물질을 넣지않고 배출해주세요</p>
 									    </div>									    						  
 									  </div>
@@ -161,22 +161,22 @@
 									  <div class="row">
 									    <div class="col-3">
 											<img src='<c:url value="/resources/img/pet1.png"/>' class="pills-img" alt="pet">
-											<h3 class="step-title">STEP 1</h3>
+											<h3 class="step-title noto-sans">STEP 1</h3>
 											<p class="step-content">물로 깨끗하게 씻어주세요</p>
 										</div>
 									    <div class="col-3">
 									    	<img src='<c:url value="/resources/img/pet2.png"/>' class="pills-img" alt="pet">
-									    	<h3 class="step-title">STEP 2</h3>
+									    	<h3 class="step-title noto-sans">STEP 2</h3>
 											<p class="step-content">라벨을 제거해주세요</p>
 									    </div>
 									    <div class="col-3">
 									    	<img src='<c:url value="/resources/img/pet3.png"/>' class="pills-img" alt="pet">
-									    	<h3 class="step-title">STEP 3</h3>
+									    	<h3 class="step-title noto-sans">STEP 3</h3>
 											<p class="step-content">물기를 말려주세요</p>
 									    </div>
 									    <div class="col-3">
 									    	<img src='<c:url value="/resources/img/pet4.png"/>' class="pills-img" alt="pet">
-									    	<h3 class="step-title">STEP 4</h3>
+									    	<h3 class="step-title noto-sans">STEP 4</h3>
 											<p class="step-content">압축해서 배출해주세요</p>
 									    </div>
 									  </div>								  
@@ -188,22 +188,22 @@
 									  <div class="row">
 									    <div class="col-3">
 											<img src='<c:url value="/resources/img/pack1.png"/>' class="pills-img" alt="pack">
-											<h3 class="step-title">STEP 1</h3>
+											<h3 class="step-title noto-sans">STEP 1</h3>
 											<p class="step-content">물로 깨끗하게 씻어주세요</p>
 										</div>
 									    <div class="col-3">
 									    	<img src='<c:url value="/resources/img/pack2.png"/>' class="pills-img" alt="pack">
-									    	<h3 class="step-title">STEP 2</h3>
+									    	<h3 class="step-title noto-sans">STEP 2</h3>
 											<p class="step-content">팩을 펼쳐주세요</p>
 									    </div>
 									    <div class="col-3">
 									    	<img src='<c:url value="/resources/img/pack3.png"/>' class="pills-img" alt="pack">
-									    	<h3 class="step-title">STEP 3</h3>
+									    	<h3 class="step-title noto-sans">STEP 3</h3>
 											<p class="step-content">물기를 말려주세요</p>
 									    </div>
 									    <div class="col-3">
 									    	<img src='<c:url value="/resources/img/pack4.png"/>' class="pills-img" alt="pack">
-									    	<h3 class="step-title">STEP 4</h3>
+									    	<h3 class="step-title noto-sans">STEP 4</h3>
 											<p class="step-content">차곡차곡 쌓아서 배출해주세요</p>
 									    </div>
 									  </div>								  
@@ -216,12 +216,12 @@
 									  <div class="row">
 										<div class="col-6">
 											<img src='<c:url value="/resources/img/plastic1.png"/>' class="pills-img" alt="plastic">
-											<h3 class="step-title">STEP 1</h3>
+											<h3 class="step-title noto-sans">STEP 1</h3>
 											<p class="step-content">물로 깨끗하게 씻어주세요</p>
 										</div>
 									    <div class="col-6">
 									    	<img src='<c:url value="/resources/img/plastic2.png"/>' class="pills-img" alt="plastic">
-									    	<h3 class="step-title">STEP 2</h3>
+									    	<h3 class="step-title noto-sans">STEP 2</h3>
 											<p class="step-content">라벨을 제거하여 배출해주세요</p>
 									    </div>									    								    						  
 									  </div>
