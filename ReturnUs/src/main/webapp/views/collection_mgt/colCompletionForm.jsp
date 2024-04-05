@@ -50,7 +50,7 @@
 }
 #pointContent {
     margin-top: 20px;
-    margin-bottom: 50px;
+    margin-bottom: 90px;
     position: relative;
     display: flex;
 }
@@ -58,7 +58,7 @@
     width: 50%;
 }
 #pointContent th, #pointContent td {
-    padding: 8px;
+    padding: 10px;
     text-align: center;
 }
 #pointContent th {
@@ -67,13 +67,43 @@
 #pointContent tr {
     border-bottom: 1px solid #dddddd;
 }
-#rejectionDiv {
+#pickupManDiv {
     margin: -79px 0 0 54px;
     position: relative;
 }
+.pickupManBox {
+    display: flex;
+    margin: 20px 0 0 20px;
+    border-radius: 15px;
+    box-shadow: 3px 4px 9px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+}
+.pickupManBox img {
+	width: 50px;
+    border-radius: 50%;
+}
+.pickupManBox input[type="radio"] {
+	margin-left: 30px;
+}
+#pickupManProfile {
+	padding-right: 30px;
+    padding-left: 20px;
+}
+#pickupManInfo span {
+	font-size: smaller;
+}
+#pickupManInfo strong {
+	font-size: medium;
+    margin-right: 10px;
+}
+#rejectionDiv {
+	margin-top: 40px;
+    height: 70%;
+    width: 100%;
+}
 #rejectionDiv textarea {
 	width: 97%;
-    height: 78%;
+    height: 77%;
     margin: 20px 0 0 20px;
     border-radius: 15px;
     border: 1px solid #ccc;
@@ -83,8 +113,8 @@
 }
 #btnDiv {
 	position: absolute;
-	right: 7px;
-    bottom: -7px;
+	right: 20px;
+    bottom: -60px;
 }
 .btnStyle {
 	font-size: small;
@@ -261,8 +291,23 @@
 									        </tr>
 									    </tbody>
 									</table>
-									<div id="rejectionDiv" class="col-5">
-			                        	<c:choose>
+									<div id="pickupManDiv" class="col-5">
+										<div id="title">
+				                            <i class="fas fa-grip-lines-vertical"></i>&nbsp;&nbsp;픽업맨
+				                        </div>
+										<div class="pickupManBox">
+											<div id="pickupManProfile">
+												<img alt="" src="${pmInfo.pmProfile }">
+											</div>
+											<div id="pickupManInfo">
+												<strong>${pmInfo.pmName }</strong>
+												<span style="color: #006cb7;">${pmInfo.pmStatus }</span>
+												<br>
+												<span>(${pmInfo.pmRegion })&nbsp;${pmInfo.pmTel }</span>
+											</div>
+										</div>
+										<div id="rejectionDiv" class="col-5">
+											<c:choose>
 			                        		<c:when test="${empty colDetail.colRejection }">
 												<div id="title">
 						                            <i class="fas fa-grip-lines-vertical"></i>&nbsp;&nbsp;포인트 지급
@@ -276,6 +321,7 @@
 												<textarea name="colRejection" readonly>${colDetail.colRejection }</textarea>
 			                        		</c:otherwise>
 			                        	</c:choose>
+										</div>
 									</div>
 									<div id="btnDiv">
 										<button id="modifyBtn" class="btnStyle" onclick="location.href='col-modify-mgt?colNum=${colDetail.colNum}'">수정</button>

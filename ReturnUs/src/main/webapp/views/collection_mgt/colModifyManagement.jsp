@@ -50,7 +50,7 @@
 }
 #pointDiv {
     margin-top: 20px;
-    margin-bottom: 50px;
+    margin-bottom: 90px;
     position: relative;
 }
 #pointDiv table {
@@ -66,24 +66,6 @@
 #pointDiv tr {
     border-bottom: 1px solid #dddddd;
 }
-#btnDiv {
-	position: absolute;
-	right: 7px;
-    bottom: -7px;
-}
-.btnStyle {
-	font-size: small;
-    border-radius: 10px;
-    background-color: #3D550C;
-    color: white;
-    padding: 5px 15px;
-    border: none;
-}
-.btnStyle:hover {
-    background-color: #579934;
-    color: white;
-}
-
 input[type="number"] {
     width: 70px;
     text-align: center;
@@ -91,13 +73,43 @@ input[type="number"] {
 #modifyForm {
 	display: flex;
 }
-#rejectionDiv {
+#pickupManDiv {
     margin: -79px 0 0 54px;
     position: relative;
 }
+.pickupManBox {
+    display: flex;
+    margin: 20px 0 0 20px;
+    border-radius: 15px;
+    box-shadow: 3px 4px 9px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+}
+.pickupManBox img {
+	width: 50px;
+    border-radius: 50%;
+}
+.pickupManBox input[type="radio"] {
+	margin-left: 30px;
+}
+#pickupManProfile {
+	padding-right: 30px;
+    padding-left: 20px;
+}
+#pickupManInfo span {
+	font-size: smaller;
+}
+#pickupManInfo strong {
+	font-size: medium;
+    margin-right: 10px;
+}
+#rejectionDiv {
+	margin-top: 40px;
+    height: 70%;
+    width: 100%;
+}
 #rejectionDiv textarea {
 	width: 97%;
-    height: 78%;
+    height: 77%;
     margin: 20px 0 0 20px;
     border-radius: 15px;
     border: 1px solid #ccc;
@@ -110,6 +122,23 @@ input[type="number"] {
 	left: 0;
 	top: 0;
 	padding: 20px;
+}
+#btnDiv {
+	position: absolute;
+	right: 20px;
+    bottom: -60px;
+}
+.btnStyle {
+	font-size: small;
+    border-radius: 10px;
+    background-color: #3D550C;
+    color: white;
+    padding: 5px 15px;
+    border: none;
+}
+.btnStyle:hover {
+    background-color: #579934;
+    color: white;
 }
 </style>
 </head>
@@ -416,18 +445,36 @@ input[type="number"] {
 										        </tr>
 										    </tbody>
 										</table>
-										<div id="rejectionDiv" class="col-5">
+										<div id="pickupManDiv" class="col-5">
 											<div id="title">
-					                            <i class="fas fa-grip-lines-vertical"></i>&nbsp;&nbsp;반려사유
+					                            <i class="fas fa-grip-lines-vertical"></i>&nbsp;&nbsp;픽업맨
 					                        </div>
-					                        <c:choose>
-			                        		<c:when test="${empty colDetail.colRejection }">
-												<textarea name="colRejection" placeholder="반려사유를 입력하세요"></textarea>
-			                        		</c:when>
-			                        		<c:otherwise>
-												<textarea name="colRejection">${colDetail.colRejection }</textarea>
-			                        		</c:otherwise>
-			                        		</c:choose>
+											<div class="pickupManBox">
+												<div id="pickupManProfile">
+													<img alt="" src="${pmInfo.pmProfile }">
+												</div>
+												<div id="pickupManInfo">
+													<strong>${pmInfo.pmName }</strong>
+													<span style="color: #109010;">${pmInfo.pmStatus }</span>
+													<br>
+													<span>(${pmInfo.pmRegion })&nbsp;${pmInfo.pmTel }</span>
+												</div>
+												<input type="hidden" id="pmNo" name="pmNo" value="${pmInfo.pmNo}">
+											 	<input type="hidden" id="pmStatus" name="pmStatus" value="수거완료">
+											</div>
+											<div id="rejectionDiv" class="col-5">
+												<div id="title">
+						                            <i class="fas fa-grip-lines-vertical"></i>&nbsp;&nbsp;반려사유
+						                        </div>
+						                        <c:choose>
+				                        		<c:when test="${empty colDetail.colRejection }">
+													<textarea name="colRejection" placeholder="반려사유를 입력하세요"></textarea>
+				                        		</c:when>
+				                        		<c:otherwise>
+													<textarea name="colRejection">${colDetail.colRejection }</textarea>
+				                        		</c:otherwise>
+				                        		</c:choose>
+											</div>
 										</div>
 										<div id="btnDiv">
 											<c:choose>
@@ -586,11 +633,16 @@ input[type="number"] {
     }
     
     //input태그 입력 후 엔터 누를시 폼 전송 막기
-    document.addEventListener('keydown', function(event) {
-   	  if (event.keyCode === 13) {
-   	    event.preventDefault();
-   	  };
-   	}, true);
+//     document.addEventListener('keydown', function(event) {
+// 	    if (event.keyCode === 13) {
+// 	        if (event.target.tagName === 'textarea') {
+// 	            return;
+// 	        } else {
+// 	            event.preventDefault();
+// 	        }
+// 	    }
+// 	}, true);
+
 	
 </script>
 </body>

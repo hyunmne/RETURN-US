@@ -1,8 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.net.URLEncoder;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import dto.Collection;
 import service.CollectionService;
 import service.CollectionServiceImpl;
+import service.PickupmanService;
+import service.PickupmanServiceImpl;
 
 /**
  * Servlet implementation class ColModifyManagement
@@ -34,8 +34,10 @@ public class ColModifyMgt extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			CollectionService service = new CollectionServiceImpl();
-			service.collectionDetail(request);
+			CollectionService colService = new CollectionServiceImpl();
+			PickupmanService pmService = new PickupmanServiceImpl();
+			colService.collectionDetail(request);
+			pmService.pickupManInfo(request);
 			request.getRequestDispatcher("/views/collection_mgt/colModifyManagement.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -88,13 +90,20 @@ public class ColModifyMgt extends HttpServlet {
 		    colResult = "부분반려";
 		} 
 		
+		//픽업맨 업무상태 변경을 위해 받아온 파라미터
+		Integer pmNo = Integer.parseInt(request.getParameter("pmNo"));
+		String pmStatus = request.getParameter("pmStatus");
+		
 		try {
-			CollectionService service = new CollectionServiceImpl();
+			CollectionService colService = new CollectionServiceImpl();
+			PickupmanService pmService = new PickupmanServiceImpl();
 			
 			Collection col = new Collection(colNum, colStatus, colPaperFin, colPtBodyFin, colPtLidFin, colBt190Fin, colBt400Fin, colBt1000Fin, 
 											colBt1000UpFin, colPpackFin, colPlasticFin, colCanFin,colRejection, colTotalPnt, colResult);
-			service.modifyCollectionFin(col);
-			service.collectionDetail(request);
+			colService.modifyCollectionFin(col);
+			colService.collectionDetail(request);
+			pmService.allocationPickupMan(colNum, pmNo, pmStatus);
+			pmService.pickupManInfo(request);
 			request.getRequestDispatcher("/views/collection_mgt/colCompletionForm.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();

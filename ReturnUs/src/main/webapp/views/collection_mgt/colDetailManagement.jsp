@@ -50,7 +50,7 @@
 }
 #pointContent {
     margin-top: 20px;
-    margin-bottom: 50px;
+    margin-bottom: 90px;
     position: relative;
     display: flex;
 }
@@ -67,24 +67,48 @@
 #pointContent tr {
     border-bottom: 1px solid #dddddd;
 }
-#rejectionDiv {
+#pickupManDiv {
     margin: -79px 0 0 54px;
     position: relative;
 }
-#rejectionDiv textarea {
-	width: 97%;
-    height: 78%;
+#pickupManList {
     margin: 20px 0 0 20px;
+    height: 86%;
     border-radius: 15px;
-    border: 1px solid #ccc;
+    box-shadow: 3px 4px 9px rgba(0, 0, 0, 0.2);
     padding: 20px;
     outline: none;
-    resize: none;
+    max-height: 495px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.pickupManBox {
+	padding: 13px;
+    display: flex;
+    border-bottom: solid 1px #ddd;
+}
+.pickupManBox img {
+	width: 50px;
+    border-radius: 50%;
+}
+.pickupManBox input[type="radio"] {
+	margin-left: 30px;
+}
+#pickupManProfile {
+	padding-right: 30px;
+    padding-left: 20px;
+}
+#pickupManInfo span {
+	font-size: smaller;
+}
+#pickupManInfo strong {
+	font-size: medium;
+    margin-right: 10px;
 }
 #btnDiv {
 	position: absolute;
-	right: 7px;
-    bottom: -7px;
+    right: 70px;
+    bottom: 30px;
 }
 .btnStyle {
 	font-size: small;
@@ -102,6 +126,8 @@
 <body class="noto-sans">
 <script src="sweetalert2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
 <!-- 헤더 파일 include -->
 <%@include file="/views/common/header.jsp" %>
 	<div class="container-fluid fruite py-5"
@@ -223,17 +249,44 @@
 									        </tr>
 									    </tbody>
 									</table>
-									<div id="rejectionDiv" class="col-5">
+									<div id="pickupManDiv" class="col-5">
 										<div id="title">
-				                            <i class="fas fa-grip-lines-vertical"></i>&nbsp;&nbsp;포인트 지급
+				                            <i class="fas fa-grip-lines-vertical"></i>&nbsp;&nbsp;픽업맨
 				                        </div>
-										<textarea name="colRejection" readonly>포인트 지급을 위해 수거를 진행해주세요</textarea>
-									</div>
-									<div id="btnDiv">
-										<button id="collectionBtn" class="btnStyle" onclick="confirmAlert()">수거진행</button>
-										<button class="btnStyle" onclick="location.href='col-management?colStatus=수거준비중'">목록으로</button>
+										<div id="pickupManList">
+											<c:forEach items="${pmList }" var="pm" varStatus="i">
+												<div class="pickupManBox">
+													<div id="pickupManProfile">
+														<img alt="" src="${pm.pmProfile }">
+													</div>
+													<div id="pickupManInfo">
+														<strong>${pm.pmName }</strong>
+														<c:choose>
+										                    <c:when test="${empty pm.pmStatus}">
+										                        <span style="color: blue">수거준비</span>
+										                    </c:when>
+										                    <c:when test="${pm.pmStatus == '수거중'}">
+										                        <span class="pmProgress" style="color: #109010;">${pm.pmStatus}</span>
+										                    </c:when>
+										                    <c:when test="${pm.pmStatus == '수거완료'}">
+										                        <span style="color: #006cb7;">${pm.pmStatus}</span>
+										                    </c:when>
+										                </c:choose>
+														<br>
+														<span>(${pm.pmRegion })&nbsp;${pm.pmTel }</span>
+													</div>
+												 	<input type="radio" id="pmNo" name="pmNo" value="${pm.pmNo}">
+												 	<input type="hidden" id="colNum" name="colNum" value="${colNum }">
+												 	<input type="hidden" id="pmStatus" name="pmStatus" value="수거중">
+												</div>
+											</c:forEach>
+										</div>
 									</div>
 		                        </div>
+								<div id="btnDiv">
+									<button type="button" id="collectionBtn" class="btnStyle" onclick="colProgress()">수거진행</button>
+									<button class="btnStyle" onclick="location.href='col-management?colStatus=수거준비중'">목록으로</button>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -260,8 +313,8 @@
 	var totalCell = document.getElementById('totalCell');
 	totalCell.textContent = total;
 	
-	//수거진행 버튼
-	function confirmAlert() {
+	//수거진행 버튼 클릭시
+	function colProgress() {
 		Swal.fire({
 	        title: "수거를 진행하시겠습니까?",
 	        icon: "question",
@@ -272,17 +325,41 @@
             cancelButtonText: '취소'
 	    }).then((result) => {
 	    	if (result.isConfirmed) {
-	            Swal.fire({
-	                title: "수거 진행 완료",
-	                icon: "success",
-	                confirmButtonText: '확인',
-	            }).then(() => {
-                    window.location.href = 'col-management?colNum=${colDetail.colNum}&colStatus=수거진행중';
-                    window.location.href = 'col-management?colStatus=수거준비중';
-	            });
+				var pickman = {};
+				pickman.pmNo = $('#pmNo').val();
+				pickman.colNum = $('#colNum').val();
+				pickman.pmStatus = $('#pmStatus').val();
+				
+				$.ajax({
+					url:'col-detail-mgt',
+					type:'post',
+					async:true,
+					data:{pickman:JSON.stringify(pickman)},
+					success:function(data) {
+						Swal.fire({
+			                title: "수거 진행 완료",
+			                icon: "success",
+			                confirmButtonText: '확인',
+			            }).then(() => {
+		                    window.location.href = 'col-management?colStatus=수거준비중';
+			            });
+					},
+					error:function(err) {
+						alert("에러");
+					}
+				})
 	        }
 	    });
 	}
+	
+	//'수거중'인 것들은 선택 못하게
+	var pmProgress = document.querySelectorAll('.pmProgress');
+	pmProgress.forEach(function(element) {
+	    var box = element.closest('.pickupManBox');
+	    box.style.backgroundColor = '#f1f3f5';
+	    var radioBtn = box.querySelector('input[type="radio"]');
+	    radioBtn.disabled = true;
+	});
 
 </script>
 </body>

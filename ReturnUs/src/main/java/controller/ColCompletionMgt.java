@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import service.CollectionService;
 import service.CollectionServiceImpl;
+import service.PickupmanService;
+import service.PickupmanServiceImpl;
 
 /**
  * Servlet implementation class ColCompletionMgt
@@ -30,8 +32,11 @@ public class ColCompletionMgt extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			CollectionService service = new CollectionServiceImpl();
-			service.collectionDetail(request);
+			CollectionService colService = new CollectionServiceImpl();
+			PickupmanService pmService = new PickupmanServiceImpl();
+			colService.collectionDetail(request);
+			pmService.pickupManInfo(request);
+			
 			request.getRequestDispatcher("/views/collection_mgt/colCompletionForm.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
