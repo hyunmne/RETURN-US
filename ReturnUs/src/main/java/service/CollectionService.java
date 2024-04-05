@@ -10,4 +10,6 @@ public interface CollectionService {
 	void collectionDetail(HttpServletRequest request) throws Exception;
 	void modifyCollectionFin(Collection collection) throws Exception;
 	void showMyCollection(HttpServletRequest request) throws Exception;
+	void modifyMyCollection(HttpServletRequest request) throws Exception;
+	void showMyPoint(HttpServletRequest request) throws Exception;
 }

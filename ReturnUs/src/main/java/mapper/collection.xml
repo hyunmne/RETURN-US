@@ -64,7 +64,7 @@
 		select col_num as colNum, col_date as colDate, col_addr as colAddr, col_status as colStatus, col_result as colResult				
 		from collection
 		where acc_id = #{accId}
-		order by col_date desc
+		order by col_num desc
 		limit #{row}, 10
 	</select>
 	
@@ -79,5 +79,61 @@
 	<select id="selectCollectionCountByIdFinished" parameterType="String" resultType="Integer">
 		select count(col_num) from collection where acc_id = #{accId} and col_status = "수거완료"
 	</select>
+	
+	<select id="selectCollectionListForPoint" parameterType="Map" resultType="Map">
+		select col_num as colNum, col_date as colDate, col_use_pnt as colUsePnt, col_getpnt_dt as colGetpntDt, col_total_pnt as colTotalPnt				
+		from collection
+		where acc_id = #{accId}
+		order by col_num desc
+		limit #{row}, 10
+	</select>
+	
+	<select id="selectCollectionListForUsingPoint" parameterType="Map" resultType="Map">
+		select col_num as colNum, col_date as colDate, col_use_pnt as colUsePnt				
+		from collection
+		where acc_id = #{accId}
+		order by col_num desc
+		limit #{row}, 10
+	</select>
+	
+	<select id="selectCollectionListForGettingPoint" parameterType="Map" resultType="Map">
+		select col_num as colNum, col_getpnt_dt as colGetpntDt, col_total_pnt as colTotalPnt				
+		from collection
+		where acc_id = #{accId}
+		order by col_num desc
+		limit #{row}, 10
+	</select>
+	
+	<select id="selectCollectionCountForPoint" parameterType="String" resultType="Integer">
+		select count(col_num) from collection where acc_id = #{accId}
+	</select>
+	
+	<select id="selectCollectionCountForUsingPoint" parameterType="String" resultType="Integer">
+		select count(col_num) from collection where acc_id = #{accId} and (col_use_pnt != 0)
+	</select>
+	
+	<select id="selectCollectionCountForGettingPoint" parameterType="String" resultType="Integer">
+		select count(col_num) from collection where acc_id = #{accId} and (col_total_pnt != 0)
+	</select>
+	
+	<select id="selectCollection" parameterType="String" resultType="dto.Collection">
+		select col_num as colNum, acc_id as accId, col_date as colDate, col_addr as colAddr, 
+				col_status as colStatus, col_post as colPost, col_use_pnt as colUsePnt, col_price as colPrice, col_result as colResult, 
+				col_getpnt_dt as colGetpntDt, col_paper as colPaper, col_pt_body as colPtBody, col_pt_lid as colPtLid, 
+				col_bt_190 as colBt190, col_bt_400 as colBt400, col_bt_1000 as colBt1000, col_bt_1000_Up as colBt1000Up, 
+				col_ppack as colPpack, col_plastic as colPlastic, col_can as colCan, col_total_pnt as colTotalPnt, col_rejection as colRejection,
+				col_paper_fin as colPaperFin, col_pt_body_fin as colPtBodyFin, col_pt_lid_fin as colPtLidFin, col_bt_190_fin as colBt190Fin,
+				col_bt_400_fin as colBt400Fin, col_bt_1000_fin as colBt1000Fin, col_bt_1000_Up_fin as colBt1000UpFin,
+				col_ppack_fin as colPpackFin, col_plastic_fin as colPlasticFin, col_can_fin as colCanFin
+			from collection where col_num = #{colNum}
+	</select>
+	
+	<update id="updateCollectionItemQuantity" parameterType="dto.Collection">
+		UPDATE collection
+		SET col_paper = #{colPaper}, col_pt_body=#{colPtBody}, col_pt_lid=#{colPtLid}, col_bt_190=#{colBt190},
+			col_bt_400=#{colBt400}, col_bt_1000=#{colBt1000}, col_bt_1000_Up=#{colBt1000Up}, col_ppack=#{colPpack}, 
+			col_plastic=#{colPlastic}, col_can=#{colCan}, col_total_pnt = #{colTotalPnt}
+		WHERE col_num = #{colNum}
+	</update>
 
 </mapper>

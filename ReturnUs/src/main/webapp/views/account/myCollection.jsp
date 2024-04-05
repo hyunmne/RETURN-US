@@ -83,14 +83,14 @@
 							<!--body ** 여기서부터 코딩하시면 됩니다!!! ** -->
 							<div id="sm" class="card">
 								<div class="row">
-									<p>총 ${collectionCount}건의 신청내역이 있습니다. (수거준비중 ${collectionCountInPreparation} / 수거진행중 ${collectionCountInProgress} / 수거완료 ${collectionCountFinished} )</p>
+									<p><span>총 ${collectionCount}건의 신청내역이 있습니다. (</span><span style="color: #FB6714">수거준비중 ${collectionCountInPreparation}</span><span> / </span><span style="color: #40A23E">수거진행중 ${collectionCountInProgress}</span><span> / </span><span style="color: #3B83B7">수거완료 ${collectionCountFinished}</span> )</p>
 								</div>
 								<div class="row text-center mt-1 mb-5">
 									<div class="col-12">
 										<!-- table start -->
 										<table class="table">
 										  <thead>
-										    <tr>
+										    <tr style="background-color:#f5f9f1">
 										      <th scope="col">NO</th>
 										      <th scope="col">신청번호</th>
 										      <th scope="col">신청일</th>
@@ -111,8 +111,32 @@
 											      <td>${coll.colNum }</td>
 											      <td>${coll.colDate }</td>
 											      <td>${coll.colAddr }</td>
-											      <td>${coll.colStatus }</td>
-											      <td>${coll.colResult }</td>
+											      <td>
+											      	<c:choose>
+												        <c:when test="${coll.colStatus eq '수거준비중'}">
+												            <span style="color: #FB6714">${coll.colStatus}</span>
+												        </c:when>
+												        <c:when test="${coll.colStatus eq '수거진행중'}">
+												            <span style="color: #40A23E">${coll.colStatus}</span>
+												        </c:when>
+												        <c:otherwise>
+												            <span style="color: #3B83B7">${coll.colStatus}</span>
+												        </c:otherwise>
+												    </c:choose>
+											      </td>
+											      <td>
+											      	<c:choose>
+												        <c:when test="${coll.colResult eq '정상지급'}">
+												            <span style="color: #4caf50">${coll.colResult}</span>
+												        </c:when>
+												        <c:when test="${coll.colResult eq '부분반려'}">
+												            <span style="color: #f9aB25">${coll.colResult}</span>
+												        </c:when>
+												        <c:otherwise>
+												            <span style="color: red">${coll.colResult}</span>
+												        </c:otherwise>
+												    </c:choose>
+											      </td>
 											    </tr>
 										  	</c:forEach>								    
 										  </tbody>

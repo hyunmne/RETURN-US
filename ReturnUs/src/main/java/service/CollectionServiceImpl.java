@@ -144,4 +144,77 @@ public class CollectionServiceImpl implements CollectionService {
 		request.setAttribute("collectionCountFinished", collectionCountFinished);
 		request.setAttribute("collectionList", collectionList);		
 	}
+	
+	public void modifyMyCollection(HttpServletRequest request) throws Exception {		
+		String colNum = request.getParameter("colNum");
+		Collection collection = colDao.selectCollection(colNum);
+		
+		Integer colPaperInputted = Integer.parseInt(request.getParameter("colPaperInputted"));
+		Integer colPtBodyInputted = Integer.parseInt(request.getParameter("colPtBodyInputted"));
+		Integer colPtLidInputted = Integer.parseInt(request.getParameter("colPtLidInputted"));
+		Integer colBt190Inputted = Integer.parseInt(request.getParameter("colBt190Inputted"));
+		Integer colBt400Inputted = Integer.parseInt(request.getParameter("colBt400Inputted"));
+		Integer colBt1000Inputted = Integer.parseInt(request.getParameter("colBt1000Inputted"));
+		Integer colBt1000UpInputted = Integer.parseInt(request.getParameter("colBt1000UpInputted"));
+		Integer colPpackInputted = Integer.parseInt(request.getParameter("colPpackInputted"));
+		Integer colPlasticInputted = Integer.parseInt(request.getParameter("colPlasticInputted"));
+		Integer colCanInputted = Integer.parseInt(request.getParameter("colCanInputted"));
+		Integer colTotalPnt = Integer.parseInt(request.getParameter("colTotalPnt"));
+		
+		collection.setColPaper(colPaperInputted);
+		collection.setColPtBody(colPtBodyInputted);
+		collection.setColPtLid(colPtLidInputted);
+		collection.setColBt190(colBt190Inputted);
+		collection.setColBt400(colBt400Inputted);
+		collection.setColBt1000(colBt1000Inputted);
+		collection.setColBt1000Up(colBt1000UpInputted);
+		collection.setColPpack(colPpackInputted);
+		collection.setColPlastic(colPlasticInputted);
+		collection.setColCan(colCanInputted);
+		collection.setColTotalPnt(colTotalPnt);
+		
+		colDao.updateCollectionItemQuantity(collection);
+	}
+
+	@Override
+	public void showMyPoint(HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		Account account = (Account) session.getAttribute("acc");
+		String accId = account.getAccId();
+		
+		int usingPointCount = colDao.selectCollectionCountForUsingPoint(accId);
+		int gettingPointCount = colDao.selectCollectionCountForGettingPoint(accId);
+		int pointCount = colDao.selectCollectionCountForPoint(accId);
+		
+		Integer page = 1;
+		String pageNo = request.getParameter("page");
+		
+		if(pageNo != null) {
+			page = Integer.parseInt(pageNo);
+		}
+		
+		int maxPage = (int)Math.ceil((double) pointCount /10);
+		int startPage = (page-1)/10*10+1;
+		int endPage = startPage+10-1;
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+
+		PageInfo pageInfo = new PageInfo();
+		pageInfo.setAllPage(maxPage);
+		pageInfo.setCurPage(page);
+		pageInfo.setStartPage(startPage);
+		pageInfo.setEndPage(endPage);
+		
+		int row = (page-1)*10;
+		List<Map<String, Object>> pointList = colDao.selectCollectionListForPoint(accId, row);
+		List<Map<String, Object>> usingPointList = colDao.selectCollectionListForUsingPoint(accId, row);
+		List<Map<String, Object>> gettingPointList = colDao.selectCollectionListForGettingPoint(accId, row);
+		
+		
+		request.setAttribute("pageInfo", pageInfo);
+		request.setAttribute("pointList", pointList);
+		request.setAttribute("usingPointCount", usingPointCount);		
+		request.setAttribute("usingPointList", usingPointList);
+	}
 }

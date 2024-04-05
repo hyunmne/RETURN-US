@@ -73,5 +73,54 @@ public class CollectionDAOImpl implements CollectionDAO {
 	public Integer selectCollectionCountByIdFinished(String accId) throws Exception {
 		return sqlSession.selectOne("mapper.collection.selectCollectionCountByIdFinished", accId);
 	}
+	
+	@Override
+	public List<Map<String, Object>> selectCollectionListForPoint(String accId, Integer row) throws Exception {
+		Map<String, Object> params = new HashMap<>();
+		params.put("accId", accId);
+		params.put("row", row);
+		return sqlSession.selectList("mapper.collection.selectCollectionListForPoint", params);
+	}
 
+	@Override
+	public List<Map<String, Object>> selectCollectionListForUsingPoint(String accId, Integer row) throws Exception {
+		Map<String, Object> params = new HashMap<>();
+		params.put("accId", accId);
+		params.put("row", row);
+		return sqlSession.selectList("mapper.collection.selectCollectionListForUsingPoint", params);
+	}
+	
+	@Override
+	public List<Map<String, Object>> selectCollectionListForGettingPoint(String accId, Integer row) throws Exception {
+		Map<String, Object> params = new HashMap<>();
+		params.put("accId", accId);
+		params.put("row", row);
+		return sqlSession.selectList("mapper.collection.selectCollectionListForGettingPoint", params);
+	}
+	
+	@Override
+	public Integer selectCollectionCountForPoint(String accId) throws Exception {
+		return sqlSession.selectOne("mapper.collection.selectCollectionCountForPoint", accId);
+	}
+
+	@Override
+	public Integer selectCollectionCountForUsingPoint(String accId) throws Exception {
+		return sqlSession.selectOne("mapper.collection.selectCollectionCountForUsingPoint", accId);
+	}
+	
+	@Override
+	public Integer selectCollectionCountForGettingPoint(String accId) throws Exception {
+		return sqlSession.selectOne("mapper.collection.selectCollectionCountForGettingPoint", accId);
+	}
+
+	@Override
+	public Collection selectCollection(String colNum) throws Exception {
+		return sqlSession.selectOne("mapper.collection.selectCollection", colNum);
+	}
+
+	@Override
+	public void updateCollectionItemQuantity(Collection collection) throws Exception {
+		sqlSession.update("mapper.collection.updateCollectionItemQuantity", collection);
+		sqlSession.commit();
+	}
 }
