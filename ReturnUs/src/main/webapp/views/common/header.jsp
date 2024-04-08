@@ -100,20 +100,24 @@
 		                            <a href="joinPick" class="nav-item nav-link menu"><b>픽업맨</b></a>
                         		</c:when>
                         		<c:otherwise>
-		                            <a href="collect1" class="nav-item nav-link menu"><b>방문수거 신청</b></a>
+			                        <c:choose>
+				                       	<c:when test="${not empty acc.accId }">
+						                        <a href="collect1" class="nav-item nav-link menu"><b>방문수거 신청</b></a>
+						                    </c:when>
+						                    <c:otherwise>
+						                        <a href="login" class="nav-item nav-link menu"><b>방문수거 신청</b></a>
+						                    </c:otherwise>
+			                        </c:choose>
                         		</c:otherwise>
                         	</c:choose>
+                        	
                             <a href="recycling-guide" class="nav-item nav-link menu"><b>가이드</b></a>
                             <a href="placeList?plaType=재활용정거장" class="nav-item nav-link menu"><b>주변탐색</b></a>
                             <c:choose>
 		                    	<c:when test="${not empty acc.accId}">
 					                <a href="modify-profile" class="nav-item nav-link menu"><b>마이페이지</b></a>
 		                    	</c:when>
-		                    	<c:otherwise>
-		                    		<a href="login" class="nav-item nav-link menu"><b>마이페이지</b></a>
-		                    	</c:otherwise>
 		                    </c:choose>
-                            
                         </div>
                     </div>
                 </nav>
