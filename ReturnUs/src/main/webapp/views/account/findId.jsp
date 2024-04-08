@@ -120,7 +120,13 @@ $(document).ready(function() {
 		// 이름 체크
 	        var name = $('#accName').val();
 	        if (name === '' || !isNaN(name)) {
-	            alert('이름을 확인해주시기 바랍니다.');
+	            /* alert('이름을 확인해주시기 바랍니다.'); */
+	            Swal.fire({
+		                 title: "이름을 확인해주시기 바랍니다.",
+		                 icon: "warning",
+		                 timer: 1500,
+		                 showConfirmButton: false
+		               });
 	            e.preventDefault(); 
 	            return;
 	        }
@@ -128,14 +134,26 @@ $(document).ready(function() {
 	     // 이메일 체크
 	        var email = $('#accEmail').val();
 	        if (email === '') {
-	            alert('이메일을 확인해주시기 바랍니다.');
+	           /*  alert('이메일을 확인해주시기 바랍니다.'); */
+	            Swal.fire({
+		                 title: "이메일을 확인해주시기 바랍니다.",
+		                 icon: "warning",
+		                 timer: 1500,
+		                 showConfirmButton: false
+		               });
 	            e.preventDefault(); 
 	            return;
 	        }
 	        // 이메일 도메인 체크
 	        var emailDo = $('#accEmailDo').val();
 	        if (emailDo ==='none'){
-	        	alert('이메일을 확인해주시기 바랍니다.')
+	        	/* alert('이메일을 확인해주시기 바랍니다.') */
+	        	Swal.fire({
+		                 title: "이메일을 확인해주시기 바랍니다.",
+		                 icon: "warning",
+		                 timer: 1500,
+		                 showConfirmButton: false
+		               });
 	        	e.preventDefault();
 	        	return;
 	        }

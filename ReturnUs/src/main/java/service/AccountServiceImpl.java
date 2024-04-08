@@ -65,12 +65,14 @@ public class AccountServiceImpl implements AccountService {
 		String accId = (String)jobj.get("accId");
 		String accPassword = (String)jobj.get("accPassword");
 		String autologin = (String)jobj.get("autologin");
-
+		System.out.println(accId);
+		System.out.println(accPassword);
+		System.out.println(autologin);
 		// 자동로그인 쿠키 처리
 		Cookie autoLoginCookie = null;
 		Cookie accIdCookie = null;
 		Cookie accPasswordCookie = null;
-		if(autologin=="true") {
+		if(autologin.trim().equals("true")) {
 			autoLoginCookie = new Cookie ("autologin", autologin);
 			autoLoginCookie.setMaxAge(365 * 24 * 60 * 60); 
 			accIdCookie = new Cookie("accId", accId);
@@ -91,7 +93,6 @@ public class AccountServiceImpl implements AccountService {
 		/////////////////////////
 		
 		Account acc = accountDao.selectAccount(accId);
-		
 		if (acc == null) throw new Exception("아이디를 확인해주시기 바랍니다.");
 		if(!acc.getAccPassword().equals(accPassword)) throw new Exception("비밀번호를 확인해주시기 바랍니다.");
 		

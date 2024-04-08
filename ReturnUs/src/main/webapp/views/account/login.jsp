@@ -84,9 +84,31 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="sweetalert2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 $(function() {
 	$("#login").click(function(e){
+		if($("#accId").val().trim() == "") {
+			 Swal.fire({
+                 title: "아이디를 입력하세요",
+                 icon: "warning",
+                 timer: 1500,
+                 showConfirmButton: false
+               });	
+			 $("#accId").focus();
+			 return false;
+		} 
+		if($("#accPassword").val().trim() == "") {
+			 Swal.fire({
+                 title: "비밀번호를 입력하세요",
+                 icon: "warning",
+                 timer: 1500,
+                 showConfirmButton: false
+               });		
+			 $("#accPassword").focus();
+			 return false;
+		}
 		var login = {}
 		login.accId = $("#accId").val();
 		login.accPassword = $("#accPassword").val();
@@ -102,7 +124,13 @@ $(function() {
 				if(result=='true'){
 					location.href="main";
 				}else{
-					alert(result);
+					/* alert(result); */	
+					 Swal.fire({
+		                 title: result,
+		                 icon: "warning",
+		                 timer: 1500,
+		                 showConfirmButton: false
+		               });
 				}
 			},
 			error:function(result){
@@ -110,7 +138,8 @@ $(function() {
 			}
 		})
 	})
-});
+	
+});		
 
 </script>        
 </head>
@@ -147,11 +176,11 @@ $(function() {
 							<!--body ** 여기서부터 코딩하시면 됩니다!!! ** -->
 							<div id="sm">
 								<div id="id">
-									<input type="text" class="input" id="accId" name="accId" value="<%=id %>" placeholder="ID를 입력하세요..."/>
+									<input type="text" class="input" id="accId" name="accId" value="<%=id %>" placeholder="ID를 입력하세요..." required="required"/>
 								</div>
 									<br>
 								<div id="password">
-									<input type="password" class="input" id="accPassword" name="accPassword" value="<%=password %>" placeholder="비밀번호를 입력하세요.."/>
+									<input type="password" class="input" id="accPassword" name="accPassword" value="<%=password %>" placeholder="비밀번호를 입력하세요.." required="required"/>
 								</div>
 								<br>
 								<div id="loginbox" class="login_box">

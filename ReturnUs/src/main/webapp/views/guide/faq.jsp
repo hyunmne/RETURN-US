@@ -116,7 +116,8 @@ p{
 	#emptyArea .select {
 		background: lightblue;
 	}
-</style>   
+</style>
+
 </head>
     
 <body class="noto-sans">
@@ -155,10 +156,11 @@ p{
 										<input type="radio" name="accordion" >
 										<label for="answer?faqNo=${faq.faqNo }"><span class="Q">Q</span><h4 class="noto-sans" >${faq.faqTitle }</h4>
 										<c:if test="${admin eq 'admin' }">
-										<a href="faqmodify?faqNo=${faq.faqNo }"><button class="button" style="float: right; ">수정</button></a>
+										<a href="deletefaq?faqNo=${faq.faqNo }"><button class="button" style="float: right;" onclick="deletefaq()">삭제</button></a>										
+										<!-- <button class="button" style="float: right;" onclick="rudeletefaq()">삭제</button> -->
 										</c:if>
 										<c:if test="${admin eq 'admin' }">
-										<a href="deletefaq?faqNo=${faq.faqNo }"><button class="button" style="float: right; margin-right:1%;">삭제</button></a>
+										<a href="faqmodify?faqNo=${faq.faqNo }"><button class="button" style="float: right; margin-right:1%;; ">수정</button></a>
 										</c:if>  
 										</label>						
 										<div><p><span class="A">A</span><br>
@@ -191,7 +193,25 @@ p{
 
 
 	<%@ include file="/views/common/footer.jsp" %>
+<script src="sweetalert2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+function rudeletefaq() {
+	Swal.fire({
+		  title: "삭제하시겠습니까?",
+		  showDenyButton: true,
+		  confirmButtonText: "삭제",
+		  denyButtonText: `취소`
+	}).then((result) => {
+		  if (result.isConfirmed) {
+		    Swal.fire("삭제됐습니다!", "<a href="deletefaq?faqNo=${faq.faqNo }"></a>", "success");
+		 } else if (result.isDenied) {
+		    Swal.fire("취소했습니다", "", "error");
+		 }
+	});
+}
 
+</script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -220,6 +240,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
+
+
 
 
 

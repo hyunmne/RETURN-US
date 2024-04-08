@@ -149,7 +149,13 @@ $(function(){
 			data:{data: JSON.stringify({accId:$('#accId').val(),email:$('#accEmail').val()+"@"+$('#accEmailDo').val()})},
 			success:function(result){
 				var resData = JSON.parse(result);
-				alert(resData.msg);
+				/* alert(resData.msg); */
+				Swal.fire({
+		                 title: resData.msg,
+		                 icon: "warning",
+		                 timer: 1500,
+		                 showConfirmButton: false
+		               });
 				if(resData.isSuccess == "true") {
 					document.location.href = "login"
 				}
