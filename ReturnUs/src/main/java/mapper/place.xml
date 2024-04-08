@@ -23,7 +23,7 @@
 	      	case 
 		        when pla_region = '서울특별시' then 1
 		        else 2
-		    end, pla_region
+		    end, pla_region, pla_district
 	     limit #{row}, 8
  	</select>
  	

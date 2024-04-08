@@ -177,11 +177,11 @@
 									// 마커 이미지의 이미지 주소입니다
 									var imageSrc = "";
 									if(type == "재활용정거장") {
-										imageSrc = "./resources/img/mark_recycle_shadow.png";
+										imageSrc = "./resources/img/mark_recycle_green_shadow.png";
 									} else if(type == "의류수거함") {
-										imageSrc = "./resources/img/mark_clothes_shadow.png";
+										imageSrc = "./resources/img/mark_clothes_green_shadow.png";
 									} else {
-										imageSrc = "./resources/img/mark_battery_shadow.png";
+										imageSrc = "./resources/img/mark_battery_green_shadow.png";
 									}
 									
 									
@@ -229,6 +229,17 @@
 									
 									map.setBounds(bounds);
 									
+									//리스트 박스 클릭했을 때 해당 위치로 지도 이동
+									window.onload = function() {
+										$('.placeBox').click(function() {
+									        var index = $(this).index();
+									        var lat = placeList[index].plaLat;
+									        var lng = placeList[index].plaLong;
+									        var newCenter = new kakao.maps.LatLng(lat, lng);
+									        map.setCenter(newCenter);
+									        map.setLevel(5);
+									    });
+									};
 								</script>
 								<hr style="margin-top: 30px;">
 								<div class="typeTitle">
