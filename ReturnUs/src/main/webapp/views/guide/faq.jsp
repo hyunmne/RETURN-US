@@ -198,17 +198,21 @@ p{
 <script>
 function rudeletefaq() {
 	Swal.fire({
-		  title: "삭제하시겠습니까?",
-		  showDenyButton: true,
-		  confirmButtonText: "삭제",
-		  denyButtonText: `취소`
-	}).then((result) => {
+		  title: "삭제 하시겠습니까?",
+		  icon: "warning",
+		  showCancelButton: true,
+		  confirmButtonColor: "#3085d6",
+		  cancelButtonColor: "#d33",
+		  confirmButtonText: "Yes, delete it!"
+		}).then((result) => {
 		  if (result.isConfirmed) {
-		    Swal.fire("삭제됐습니다!", "<a href="deletefaq?faqNo=${faq.faqNo }"></a>", "success");
-		 } else if (result.isDenied) {
-		    Swal.fire("취소했습니다", "", "error");
-		 }
-	});
+		    Swal.fire({
+		      title: "Deleted!",
+		      text: "Your file has been deleted.",
+		      icon: "success"
+		    });
+		  }
+		});
 }
 
 </script>

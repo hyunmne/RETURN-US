@@ -13,7 +13,6 @@ import org.json.simple.parser.JSONParser;
 
 import service.AccountService;
 import service.AccountServiceImpl;
-import util.NaverMailSendToChangePassword;
 
 /**
  * Servlet implementation class FindPw

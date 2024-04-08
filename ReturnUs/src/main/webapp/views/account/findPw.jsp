@@ -139,6 +139,8 @@
 }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="sweetalert2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
 $(function(){
 	$('#findPw').click(function(){
@@ -150,14 +152,11 @@ $(function(){
 			success:function(result){
 				var resData = JSON.parse(result);
 				/* alert(resData.msg); */
-				Swal.fire({
-		                 title: resData.msg,
-		                 icon: "warning",
-		                 timer: 1500,
-		                 showConfirmButton: false
-		               });
+				Swal.fire(resData.msg);
 				if(resData.isSuccess == "true") {
 					document.location.href = "login"
+				}else{
+					
 				}
 				$('#accId').val("");
 				$('#accEmail').val("");

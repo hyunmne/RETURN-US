@@ -181,9 +181,9 @@ public class AccountServiceImpl implements AccountService {
 	public void checkPassword(String accId, String email) throws Exception {
 		Account sacc = accountDao.selectAccount(accId);
 		if(sacc==null) {
-			throw new Exception("아이디 오류");
+			throw new Exception("아이디를 확인해 주시기 바랍니다.");
 		}else if(!email.equals(sacc.getAccEmail()+"@"+sacc.getAccEmailDo())) {
-			throw new Exception("이메일 오류");
+			throw new Exception("이메일을 확인해 주시기 바랍니다.");
 		}
 		NaverMailSendToChangePassword naverMailSendToChangePassword = new NaverMailSendToChangePassword();
 		String authPassword = naverMailSendToChangePassword.sendEmail(email);

@@ -91,18 +91,16 @@
 
 
 
-	<div class="container-fluid fruite py-5"
-		style="margin: 38px 100px; width: 90%;">
-		<div class="col-lg-12">
-			<div class="row g-4">
-				<div class="col-6"></div>
-			</div>
-			<div class="row g-4">
-				<div class="col-lg-2 shadow-sm">
-					<%@include file="/views/common/sideBar.jsp"%>
-				</div>
-				<div class="col-lg-10">
-					<div style="height: 100%; padding: 0px 70px 0px 70px">
+
+   <div class="container-fluid fruite py-5"
+      style="margin: 38px 100px; width: 90%;">
+      <div class="col-lg-12">
+         <div class="row g-4">
+            <div class="col-6"></div>
+         </div>
+         <div class="row g-4">
+            <div class="col-lg-12">
+               <div style="height: 100%; padding: 0px 70px 0px 70px">
 						<!--큰 card ** 여기서부터 코딩하시면 됩니다!!! ** -->
 						<div id="big" class="card">
 							<div style="padding: 50px 0px 30px; color: #3E6D10;">
