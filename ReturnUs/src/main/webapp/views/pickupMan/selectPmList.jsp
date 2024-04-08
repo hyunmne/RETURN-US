@@ -99,8 +99,16 @@
 														<td>${i.index + 1 }</td>
 														<td>${pml.pmName }</td>
 														<td>${pml.pmTel }</td>
-														<td>${pml.pmStatus }</td>
-														<td>${pml.colNum }</td>
+														<c:choose>
+															<c:when test="${empty pml.pmStatus }">
+																<td>수거준비</td>
+																<td>-</td>
+															</c:when>
+															<c:otherwise>
+																<td>${pml.pmStatus }</td>
+																<td>${pml.colNum }</td>
+															</c:otherwise>
+														</c:choose>
 														<td>${pml.pmRegion }</td>
 													</tr>
 												</c:forEach>
