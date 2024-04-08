@@ -85,6 +85,7 @@ input[type="number"] {
     padding: 20px;
 }
 .pickupManBox img {
+	height: 50px;
 	width: 50px;
     border-radius: 50%;
 }
@@ -139,6 +140,10 @@ input[type="number"] {
 .btnStyle:hover {
     background-color: #579934;
     color: white;
+}
+.highlightCnt {
+    font-weight: 500;
+    color: #0091ea;
 }
 </style>
 </head>
@@ -254,7 +259,7 @@ input[type="number"] {
 										        <tr>
 										            <th rowspan="2">페트병</th>
 										            <td>페트병 몸체</td>
-										            <td>${colDetail.colPtBody }</td>
+										            <td class="colCnt">${colDetail.colPtBody }</td>
 										            <c:choose>
 										            	<c:when test="${empty colDetail.colResult }">
 												            <td>
@@ -274,7 +279,7 @@ input[type="number"] {
 										        </tr>
 										        <tr>
 												    <td>뚜껑</td>
-												    <td>${colDetail.colPtLid }</td>
+												    <td class="colCnt">${colDetail.colPtLid }</td>
 										            <c:choose>
 										            	<c:when test="${empty colDetail.colResult }">
 												            <td>
@@ -295,7 +300,7 @@ input[type="number"] {
 												<tr>
 										            <th rowspan="4">공병</th>
 										            <td>190ml 이하</td>
-										            <td>${colDetail.colBt190 }</td>
+										            <td class="colCnt">${colDetail.colBt190 }</td>
 										            <c:choose>
 										            	<c:when test="${empty colDetail.colResult }">
 												            <td>
@@ -315,7 +320,7 @@ input[type="number"] {
 										        </tr>
 										        <tr>
 												    <td>400ml 이하</td>
-												    <td>${colDetail.colBt400 }</td>
+												    <td class="colCnt">${colDetail.colBt400 }</td>
 							                        <c:choose>
 										            	<c:when test="${empty colDetail.colResult }">
 												            <td>
@@ -335,7 +340,7 @@ input[type="number"] {
 												</tr>
 										        <tr>
 												    <td>1000ml 이하</td>
-												    <td>${colDetail.colBt1000 }</td>
+												    <td class="colCnt">${colDetail.colBt1000 }</td>
 										            <c:choose>
 										            	<c:when test="${empty colDetail.colResult }">
 												            <td>
@@ -355,7 +360,7 @@ input[type="number"] {
 												</tr>
 										        <tr>
 												    <td>1000ml 이상</td>
-												    <td>${colDetail.colBt1000Up }</td>
+												    <td class="colCnt">${colDetail.colBt1000Up }</td>
 										            <c:choose>
 										            	<c:when test="${empty colDetail.colResult }">
 												            <td>
@@ -376,7 +381,7 @@ input[type="number"] {
 												<tr>
 										            <th>종이</th>
 										            <td></td>
-										            <td>${colDetail.colPaper }</td>
+										            <td class="colCnt">${colDetail.colPaper }</td>
 										            <c:choose>
 										            	<c:when test="${empty colDetail.colResult }">
 												            <td>
@@ -397,7 +402,7 @@ input[type="number"] {
 												<tr>
 										            <th>플라스틱</th>
 										            <td></td>
-										            <td>${colDetail.colPlastic }</td>
+										            <td class="colCnt">${colDetail.colPlastic }</td>
 										            <c:choose>
 										            	<c:when test="${empty colDetail.colResult }">
 												            <td>
@@ -418,7 +423,7 @@ input[type="number"] {
 												<tr>
 										            <th>캔</th>
 										            <td></td>
-										            <td>${colDetail.colCan }</td>
+										            <td class="colCnt">${colDetail.colCan }</td>
 										            <c:choose>
 										            	<c:when test="${empty colDetail.colResult }">
 												            <td>
@@ -439,7 +444,7 @@ input[type="number"] {
 												<tr>
 										            <th>합계</th>
 										            <td></td>
-										            <td id="totalCell"></td>
+										            <td id="totalCell" class="colCnt"></td>
 										            <td id="totalCount"></td>
 										            <td id="totalPoint"></td>
 										        </tr>
@@ -500,19 +505,30 @@ input[type="number"] {
 <script>
 	//신청수량 합계
 	var total = 0;
-	total += parseInt('${colDetail.colPpack }') || 0;
-	total += parseInt('${colDetail.colPtBody }') || 0;
-	total += parseInt('${colDetail.colPtLid }') || 0;
-	total += parseInt('${colDetail.colBt190 }') || 0;
-	total += parseInt('${colDetail.colBt400 }') || 0;
-	total += parseInt('${colDetail.colBt1000 }') || 0;
-	total += parseInt('${colDetail.colBt1000Up }') || 0;
-	total += parseInt('${colDetail.colPaper }') || 0;
-	total += parseInt('${colDetail.colPlastic }') || 0;
-	total += parseInt('${colDetail.colCan }') || 0;
+	var colPpack = parseInt('${colDetail.colPpack }');
+	var colPtBoby = parseInt('${colDetail.colPtBody }');
+	var colPtLid = parseInt('${colDetail.colPtLid }');
+	var colBt190 = parseInt('${colDetail.colBt190 }');
+	var colBt400 = parseInt('${colDetail.colBt400 }');
+	var colBt1000 = parseInt('${colDetail.colBt1000 }');
+	var colBt1000Up = parseInt('${colDetail.colBt1000Up }');
+	var colPaper = parseInt('${colDetail.colPaper }');
+	var colPlastic = parseInt('${colDetail.colPlastic }');
+	var colCan = parseInt('${colDetail.colCan }');
+	total += (colPpack + colPtBoby + colPtLid + colBt190 + colBt400 + colBt1000 + colBt1000Up + colPaper + colPlastic +colCan);
 	
 	var totalCell = document.getElementById('totalCell');
 	totalCell.textContent = total;
+	
+	//신청수량 0이 아닌 것만 강조(class 적용)
+	var colCnt = document.querySelectorAll('.colCnt');
+
+	colCnt.forEach(function(td) {
+		var val = parseInt(td.textContent);
+		if(val != 0) {
+			td.classList.add('highlightCnt');
+		}
+	});
 	
 	//수거완료 버튼
 	function confirmSubmit() {
@@ -632,18 +648,6 @@ input[type="number"] {
         document.getElementById('totalPointInput').value = totalPoint;
     }
     
-    //input태그 입력 후 엔터 누를시 폼 전송 막기
-//     document.addEventListener('keydown', function(event) {
-// 	    if (event.keyCode === 13) {
-// 	        if (event.target.tagName === 'textarea') {
-// 	            return;
-// 	        } else {
-// 	            event.preventDefault();
-// 	        }
-// 	    }
-// 	}, true);
-
-	
 </script>
 </body>
 </html>

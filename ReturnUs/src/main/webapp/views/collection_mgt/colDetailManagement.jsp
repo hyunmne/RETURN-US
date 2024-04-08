@@ -88,6 +88,7 @@
     border-bottom: solid 1px #ddd;
 }
 .pickupManBox img {
+	height: 50px;
 	width: 50px;
     border-radius: 50%;
 }
@@ -120,6 +121,10 @@
 }
 .btnStyle:hover {
     background-color: #579934;
+}
+.highlightCnt {
+    font-weight: 500;
+    color: #0091ea;
 }
 </style>
 </head>
@@ -199,53 +204,53 @@
 									        <tr>
 									            <th>종이팩</th>
 									            <td></td>
-									            <td>${colDetail.colPpack }</td>
+									            <td class="colCnt">${colDetail.colPpack }</td>
 									        </tr>
 									        <tr>
 									            <th rowspan="2">페트병</th>
 									            <td>페트병 몸체</td>
-									            <td>${colDetail.colPtBody }</td>
+									            <td class="colCnt">${colDetail.colPtBody }</td>
 									        </tr>
 									        <tr>
 											    <td>뚜껑</td>
-											    <td>${colDetail.colPtLid }</td>
+											    <td class="colCnt">${colDetail.colPtLid }</td>
 											</tr>
 											<tr>
 									            <th rowspan="4">공병</th>
 									            <td>190ml 이하</td>
-									            <td>${colDetail.colBt190 }</td>
+									            <td class="colCnt">${colDetail.colBt190 }</td>
 									        </tr>
 									        <tr>
 											    <td>400ml 이하</td>
-											    <td>${colDetail.colBt400 }</td>
+											    <td class="colCnt">${colDetail.colBt400 }</td>
 											</tr>
 									        <tr>
 											    <td>1000ml 이하</td>
-											    <td>${colDetail.colBt1000 }</td>
+											    <td class="colCnt">${colDetail.colBt1000 }</td>
 											</tr>
 									        <tr>
 											    <td>1000ml 이상</td>
-											    <td>${colDetail.colBt1000Up }</td>
+											    <td class="colCnt">${colDetail.colBt1000Up }</td>
 											</tr>
 											<tr>
 									            <th>종이</th>
 									            <td></td>
-									            <td>${colDetail.colPaper }</td>
+									            <td class="colCnt">${colDetail.colPaper }</td>
 									        </tr>
 											<tr>
 									            <th>플라스틱</th>
 									            <td></td>
-									            <td>${colDetail.colPlastic }</td>
+									            <td class="colCnt">${colDetail.colPlastic }</td>
 									        </tr>
 											<tr>
 									            <th>캔</th>
 									            <td></td>
-									            <td>${colDetail.colCan }</td>
+									            <td class="colCnt">${colDetail.colCan }</td>
 									        </tr>
 											<tr>
 									            <th>합계</th>
 									            <td></td>
-									            <td id="totalCell"></td>
+									            <td id="totalCell" class="colCnt"></td>
 									        </tr>
 									    </tbody>
 									</table>
@@ -254,7 +259,7 @@
 				                            <i class="fas fa-grip-lines-vertical"></i>&nbsp;&nbsp;픽업맨
 				                        </div>
 										<div id="pickupManList">
-											<c:forEach items="${pmList }" var="pm" varStatus="i">
+											<c:forEach items="${pmList }" var="pm">
 												<div class="pickupManBox">
 													<div id="pickupManProfile">
 														<img alt="" src="${pm.pmProfile }">
@@ -299,19 +304,30 @@
 	//신청수량 합계
 	var total = 0;
 	
-	total += parseInt('${colDetail.colPpack }') || 0;
-	total += parseInt('${colDetail.colPtBody }') || 0;
-	total += parseInt('${colDetail.colPtLid }') || 0;
-	total += parseInt('${colDetail.colBt190 }') || 0;
-	total += parseInt('${colDetail.colBt400 }') || 0;
-	total += parseInt('${colDetail.colBt1000 }') || 0;
-	total += parseInt('${colDetail.colBt1000Up }') || 0;
-	total += parseInt('${colDetail.colPaper }') || 0;
-	total += parseInt('${colDetail.colPlastic }') || 0;
-	total += parseInt('${colDetail.colCan }') || 0;
+	var colPpack = parseInt('${colDetail.colPpack }');
+	var colPtBoby = parseInt('${colDetail.colPtBody }');
+	var colPtLid = parseInt('${colDetail.colPtLid }');
+	var colBt190 = parseInt('${colDetail.colBt190 }');
+	var colBt400 = parseInt('${colDetail.colBt400 }');
+	var colBt1000 = parseInt('${colDetail.colBt1000 }');
+	var colBt1000Up = parseInt('${colDetail.colBt1000Up }');
+	var colPaper = parseInt('${colDetail.colPaper }');
+	var colPlastic = parseInt('${colDetail.colPlastic }');
+	var colCan = parseInt('${colDetail.colCan }');
+	total += (colPpack + colPtBoby + colPtLid + colBt190 + colBt400 + colBt1000 + colBt1000Up + colPaper + colPlastic +colCan);
 	
 	var totalCell = document.getElementById('totalCell');
 	totalCell.textContent = total;
+	
+	//신청수량 0이 아닌 것만 강조(class 적용)
+	var colCnt = document.querySelectorAll('.colCnt');
+
+	colCnt.forEach(function(td) {
+		var val = parseInt(td.textContent);
+		if(val != 0) {
+			td.classList.add('highlightCnt');
+		}
+	});
 	
 	//수거진행 버튼 클릭시
 	function colProgress() {
@@ -326,7 +342,7 @@
 	    }).then((result) => {
 	    	if (result.isConfirmed) {
 				var pickman = {};
-				pickman.pmNo = $('#pmNo').val();
+				pickman.pmNo = $('input[name=pmNo]:checked').val();
 				pickman.colNum = $('#colNum').val();
 				pickman.pmStatus = $('#pmStatus').val();
 				

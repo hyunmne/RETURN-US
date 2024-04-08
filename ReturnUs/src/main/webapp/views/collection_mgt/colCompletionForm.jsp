@@ -79,6 +79,7 @@
     padding: 20px;
 }
 .pickupManBox img {
+	height: 50px;
 	width: 50px;
     border-radius: 50%;
 }
@@ -126,6 +127,14 @@
 }
 .btnStyle:hover {
     background-color: #579934;
+}
+.highlightCnt {
+    font-weight: 600;
+    color: #0091ea;
+}
+.highlightFinCnt {
+	font-weight: 500;
+    color: red;
 }
 </style>
 </head>
@@ -219,74 +228,74 @@
 									        <tr>
 									            <th>종이팩</th>
 									            <td></td>
-									            <td>${colDetail.colPpack }</td>
-									            <td>${colDetail.colPpackFin }</td>
+									            <td class="colCnt">${colDetail.colPpack }</td>
+									            <td class="colFinCnt">${colDetail.colPpackFin }</td>
 									            <td>${colDetail.colPpackFin *30}p</td>
 									        </tr>
 									        <tr>
 									            <th rowspan="2">페트병</th>
 									            <td>페트병 몸체</td>
-									            <td>${colDetail.colPtBody }</td>
-									            <td>${colDetail.colPtBodyFin }</td>
+									            <td class="colCnt">${colDetail.colPtBody }</td>
+									            <td class="colFinCnt">${colDetail.colPtBodyFin }</td>
 									            <td>${colDetail.colPtBodyFin *50 }p</td>
 									        </tr>
 									        <tr>
 											    <td>뚜껑</td>
-											    <td>${colDetail.colPtLid }</td>
-											    <td>${colDetail.colPtLidFin }</td>
+											    <td class="colCnt">${colDetail.colPtLid }</td>
+											    <td class="colFinCnt">${colDetail.colPtLidFin }</td>
 											    <td>${colDetail.colPtLidFin *10}p</td>
 											</tr>
 											<tr>
 									            <th rowspan="4">공병</th>
 									            <td>190ml 이하</td>
-									            <td>${colDetail.colBt190 }</td>
-									            <td>${colDetail.colBt190Fin }</td>
+									            <td class="colCnt">${colDetail.colBt190 }</td>
+									            <td class="colFinCnt">${colDetail.colBt190Fin }</td>
 									            <td>${colDetail.colBt190Fin *7}p</td>
 									        </tr>
 									        <tr>
 											    <td>400ml 이하</td>
-											    <td>${colDetail.colBt400 }</td>
-											    <td>${colDetail.colBt400Fin }</td>
+											    <td class="colCnt">${colDetail.colBt400 }</td>
+											    <td class="colFinCnt">${colDetail.colBt400Fin }</td>
 											    <td>${colDetail.colBt400Fin *10}p</td>
 											</tr>
 									        <tr>
 											    <td>1000ml 이하</td>
-											    <td>${colDetail.colBt1000 }</td>
-											    <td>${colDetail.colBt1000Fin }</td>
+											    <td class="colCnt">${colDetail.colBt1000 }</td>
+											    <td class="colFinCnt">${colDetail.colBt1000Fin }</td>
 											    <td>${colDetail.colBt1000Fin *13}p</td>
 											</tr>
 									        <tr>
 											    <td>1000ml 이상</td>
-											    <td>${colDetail.colBt1000Up }</td>
-											    <td>${colDetail.colBt1000UpFin }</td>
+											    <td class="colCnt">${colDetail.colBt1000Up }</td>
+											    <td class="colFinCnt">${colDetail.colBt1000UpFin }</td>
 											    <td>${colDetail.colBt1000UpFin *35}p</td>
 											</tr>
 											<tr>
 									            <th>종이</th>
 									            <td></td>
-									            <td>${colDetail.colPaper }</td>
-									            <td>${colDetail.colPaperFin }</td>
+									            <td class="colCnt">${colDetail.colPaper }</td>
+									            <td class="colFinCnt">${colDetail.colPaperFin }</td>
 									            <td>${colDetail.colPaperFin *500}p</td>
 									        </tr>
 											<tr>
 									            <th>플라스틱</th>
 									            <td></td>
-									            <td>${colDetail.colPlastic }</td>
-									            <td>${colDetail.colPlasticFin }</td>
+									            <td class="colCnt">${colDetail.colPlastic }</td>
+									            <td class="colFinCnt">${colDetail.colPlasticFin }</td>
 									            <td>${colDetail.colPlasticFin *20}p</td>
 									        </tr>
 											<tr>
 									            <th>캔</th>
 									            <td></td>
-									            <td>${colDetail.colCan }</td>
-									            <td>${colDetail.colCanFin }</td>
+									            <td class="colCnt">${colDetail.colCan }</td>
+									            <td class="colFinCnt">${colDetail.colCanFin }</td>
 									            <td>${colDetail.colCanFin *50}p</td>
 									        </tr>
 											<tr>
 									            <th>합계</th>
 									            <td></td>
-									            <td id="totalCell"></td>
-									            <td id="totalCount"></td>
+									            <td id="totalCell" class="colCnt"></td>
+									            <td id="totalCount" class="colFinCnt"></td>
 									            <td id="totalPoint">${colDetail.colTotalPnt }p</td>
 									        </tr>
 									    </tbody>
@@ -337,8 +346,8 @@
 	</div>
 	<%@ include file="/views/common/footer.jsp" %>
 <script>
+	//신청수량, 수거수량 합계
 	var total = 0;
-	
 	total += parseInt('${colDetail.colPpack }') || 0;
 	total += parseInt('${colDetail.colPtBody }') || 0;
 	total += parseInt('${colDetail.colPtLid }') || 0;
@@ -354,7 +363,6 @@
 	totalCell.textContent = total;
 	
 	var totalFin = 0;
-	
 	totalFin += parseInt('${colDetail.colPpackFin }') || 0;
 	totalFin += parseInt('${colDetail.colPtBodyFin }') || 0;
 	totalFin += parseInt('${colDetail.colPtLidFin }') || 0;
@@ -368,6 +376,30 @@
 	
 	var totalCount = document.getElementById('totalCount');
 	totalCount.textContent = totalFin;
+	
+	//신청수량 0이 아닌 것만 강조(class 적용)
+	var colCnt = document.querySelectorAll('.colCnt');
+
+	colCnt.forEach(function(td) {
+		console.log(td);
+		var val = parseInt(td.textContent);
+		if(val != 0) {
+			td.classList.add('highlightCnt');
+		}
+	});
+	
+	//신청수량과 수거수량이 다른 것만 강조(class 적용)
+	var colFinCnt = document.querySelectorAll('.colFinCnt');
+
+ 	for (var i = 0; i < colCnt.length; i++) {
+        var val = parseInt(colCnt[i].textContent);
+        var finVal = parseInt(colFinCnt[i].textContent);
+
+        if (val !== finVal) {
+        	colFinCnt[i].classList.add("highlightFinCnt");
+        }
+    }
+	
 </script>
 </body>
 </html>
