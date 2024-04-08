@@ -473,10 +473,10 @@ input[type="number"] {
 						                        </div>
 						                        <c:choose>
 				                        		<c:when test="${empty colDetail.colRejection }">
-													<textarea name="colRejection" placeholder="반려사유를 입력하세요"></textarea>
+													<textarea name="colRejection" spellcheck="false" placeholder="반려사유를 입력하세요"></textarea>
 				                        		</c:when>
 				                        		<c:otherwise>
-													<textarea name="colRejection">${colDetail.colRejection }</textarea>
+													<textarea name="colRejection" spellcheck="false">${colDetail.colRejection }</textarea>
 				                        		</c:otherwise>
 				                        		</c:choose>
 											</div>
