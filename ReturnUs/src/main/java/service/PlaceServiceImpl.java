@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -53,7 +54,7 @@ public class PlaceServiceImpl implements PlaceService {
 		List<Place> categoryList = placeDao.selectCategoryList(plaType);
 		
 		//지역 카테고리(중복X)
-		Set<String> regionCategory = new HashSet<>();
+		Set<String> regionCategory = new TreeSet<>();
 		//구 카테고리(중복X)
 		Map<String, List<String>> districtCategory = new HashMap<>();
 		
