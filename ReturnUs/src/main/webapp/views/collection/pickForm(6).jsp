@@ -70,7 +70,7 @@
 									리터너스를 이용해주셔서 감사합니다. <br><br>
 									<div style="font-size:large">
 									<a href="main" style="text-decoration:underline;">메인으로 돌아가기</a> <br>
-									<a href="#" style="text-decoration:underline;">신청 내역 확인하기</a>
+									<a href="my-collection" style="text-decoration:underline;">신청 내역 확인하기</a>
 									</div>
 								</div>
 							</div>

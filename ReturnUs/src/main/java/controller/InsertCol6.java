@@ -28,7 +28,7 @@ public class InsertCol6 extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
-		request.getRequestDispatcher("/views/collection/pickForm(6).jsp").forward(request, response);
+		request.getRequestDispatcher("/views/common/realmain.jsp").forward(request, response);
 	}
 
 	/**

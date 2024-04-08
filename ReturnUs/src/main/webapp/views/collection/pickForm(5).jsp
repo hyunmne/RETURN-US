@@ -359,7 +359,6 @@ function requestPay() {
           }
         }).then((result) => {
           if (result.dismiss === Swal.DismissReason.timer) { // 모달이 타이머에 의해 닫혔을 때
-            location.href="main"
             requestCol();
           }
         });
