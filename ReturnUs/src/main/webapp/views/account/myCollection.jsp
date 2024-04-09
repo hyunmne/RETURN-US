@@ -106,9 +106,9 @@
 										  		</tr>
 										  	</c:if>
 										  	<c:forEach items="${collectionList }" var="coll" varStatus="i">
-										  		<tr onclick="location.href='col-detail?colNum=${coll.colNum}'" style="cursor: pointer">
+										  		<tr>
 										  		  <td>${i.count }</td>
-											      <td>${coll.colNum }</td>
+											      <td onclick="location.href='col-detail?colNum=${coll.colNum}'" style="cursor: pointer; color:#9c35fb">${coll.colNum }</td>
 											      <td>${coll.colDate }</td>
 											      <td>${coll.colAddr }</td>
 											      <td>
