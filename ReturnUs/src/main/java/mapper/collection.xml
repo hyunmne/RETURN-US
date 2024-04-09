@@ -92,7 +92,7 @@
 	<select id="selectCollectionListForUsingPoint" parameterType="Map" resultType="Map">
 		select col_num as colNum, col_date as colDate, col_use_pnt as colUsePnt				
 		from collection
-		where acc_id = #{accId} and (col_use_pnt is not null)
+		where acc_id = #{accId} and (col_use_pnt != 0)
 		order by col_num desc
 		limit #{row}, 10
 	</select>
@@ -100,7 +100,7 @@
 	<select id="selectCollectionListForGettingPoint" parameterType="Map" resultType="Map">
 		select col_num as colNum, col_getpnt_dt as colGetpntDt, col_total_pnt as colTotalPnt				
 		from collection
-		where acc_id = #{accId} and (col_total_pnt is not null)
+		where acc_id = #{accId} and (col_total_pnt != 0) and (col_getpnt_dt is not null)
 		order by col_num desc
 		limit #{row}, 10
 	</select>
@@ -114,7 +114,7 @@
 	</select>
 	
 	<select id="selectCollectionCountForGettingPoint" parameterType="String" resultType="Integer">
-		select count(col_num) from collection where acc_id = #{accId} and (col_total_pnt != 0)
+		select count(col_num) from collection where acc_id = #{accId} and (col_total_pnt != 0) and (col_getpnt_dt is not null)
 	</select>
 	
 	<select id="selectCollection" parameterType="String" resultType="dto.Collection">

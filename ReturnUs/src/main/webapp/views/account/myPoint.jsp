@@ -177,7 +177,7 @@ button {
 														<c:choose>
 															<c:when test="${pointType=='received'}">
 																<c:forEach items="${pointList }" var="coll">
-																	<c:if test="${coll.colTotalPnt ne 0}">
+																	<c:if test="${coll.colGetpntDt ne null && coll.colTotalPnt ne 0}">
 																		<tr>
 																			<td>${coll.colGetpntDt }</td>
 																			<td>${coll.colNum }</td>
@@ -204,7 +204,7 @@ button {
 															<c:otherwise>
 																<c:forEach items="${pointList }" var="coll">
 																	<c:choose>
-																		<c:when test="${coll.colTotalPnt ne 0 && coll.colUsePnt ne 0}">
+																		<c:when test="${coll.colTotalPnt ne 0 && coll.colUsePnt ne 0 && coll.colGetpntDt ne null}">
 																			<tr>
 																				<td>${coll.colGetpntDt }</td>
 																				<td>${coll.colNum }</td>
@@ -220,7 +220,7 @@ button {
 																						value="${coll.colUsePnt }" /></td>
 																			</tr>
 																		</c:when>
-																		<c:when test="${coll.colTotalPnt ne 0}">
+																		<c:when test="${coll.colGetpntDt ne null && coll.colTotalPnt ne 0}">
 																			<tr>
 																				<td>${coll.colGetpntDt }</td>
 																				<td>${coll.colNum }</td>
