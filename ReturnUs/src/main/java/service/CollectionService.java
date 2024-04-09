@@ -12,6 +12,4 @@ public interface CollectionService {
 	void showMyCollection(HttpServletRequest request) throws Exception;
 	void modifyMyCollection(HttpServletRequest request) throws Exception;
 	void showMyPoint(HttpServletRequest request) throws Exception;
-	void showMyReceivedPoint(HttpServletRequest request) throws Exception;
-	void showMyUsedPoint(HttpServletRequest request) throws Exception;
 }

@@ -182,15 +182,25 @@ public class CollectionServiceImpl implements CollectionService {
 		Account account = (Account) session.getAttribute("acc");
 		String accId = account.getAccId();
 		
-		int usingPointCount = colDao.selectCollectionCountForUsingPoint(accId);
-		int gettingPointCount = colDao.selectCollectionCountForGettingPoint(accId);
-		int pointCount = colDao.selectCollectionCountForPoint(accId);
-		
 		Integer page = 1;
 		String pageNo = request.getParameter("page");
-		
 		if(pageNo != null) {
 			page = Integer.parseInt(pageNo);
+		}		
+		int pointCount=0;
+		List<Map<String, Object>> pointList = null;
+		int row = (page-1)*10;
+		
+		String pointType = request.getParameter("pointType");
+		if(pointType==null) {
+			pointCount = colDao.selectCollectionCountForPoint(accId);
+			pointList = colDao.selectCollectionListForPoint(accId, row);
+		} else if(pointType.trim().equals("used")) {
+			pointCount = colDao.selectCollectionCountForUsingPoint(accId);
+			pointList = colDao.selectCollectionListForUsingPoint(accId, row);
+		} else if(pointType.trim().equals("received")) {
+			pointCount = colDao.selectCollectionCountForGettingPoint(accId);
+			pointList = colDao.selectCollectionListForGettingPoint(accId, row);
 		}
 		
 		int maxPage = (int)Math.ceil((double) pointCount /10);
@@ -206,78 +216,9 @@ public class CollectionServiceImpl implements CollectionService {
 		pageInfo.setStartPage(startPage);
 		pageInfo.setEndPage(endPage);
 		
-		int row = (page-1)*10;
-		List<Map<String, Object>> pointList = colDao.selectCollectionListForPoint(accId, row);
-		List<Map<String, Object>> usingPointList = colDao.selectCollectionListForUsingPoint(accId, row);
-		List<Map<String, Object>> gettingPointList = colDao.selectCollectionListForGettingPoint(accId, row);
-		
 		
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("pointList", pointList);
-		request.setAttribute("usingPointCount", usingPointCount);		
-		request.setAttribute("usingPointList", usingPointList);
-	}
-	@Override
-	public void showMyReceivedPoint(HttpServletRequest request) throws Exception {
-		HttpSession session = request.getSession();
-		Account account = (Account) session.getAttribute("acc");
-		String accId = account.getAccId();
-		
-		int receivedPointCount = colDao.selectCollectionCountForGettingPoint(accId);
-		
-		Integer page = 1;
-		String pageNo = request.getParameter("page");		
-		if(pageNo != null) {
-			page = Integer.parseInt(pageNo);
-		}		
-		int maxPage = (int)Math.ceil((double) receivedPointCount /10);
-		int startPage = (page-1)/10*10+1;
-		int endPage = startPage+10-1;
-		if(endPage > maxPage) {
-			endPage = maxPage;
-		}
-
-		PageInfo pageInfo = new PageInfo();
-		pageInfo.setAllPage(maxPage);
-		pageInfo.setCurPage(page);
-		pageInfo.setStartPage(startPage);
-		pageInfo.setEndPage(endPage);
-		
-		int row = (page-1)*10;
-		List<Map<String, Object>> receivedPointList = colDao.selectCollectionListForGettingPoint(accId, row);		
-		request.setAttribute("pageInfo", pageInfo);
-		request.setAttribute("receivedPointList", receivedPointList);
-	}
-	
-	@Override
-	public void showMyUsedPoint(HttpServletRequest request) throws Exception {
-		HttpSession session = request.getSession();
-		Account account = (Account) session.getAttribute("acc");
-		String accId = account.getAccId();
-		
-		int usedPointCount = colDao.selectCollectionCountForUsingPoint(accId);
-		
-		Integer page = 1;
-		String pageNo = request.getParameter("page");		
-		if(pageNo != null) {
-			page = Integer.parseInt(pageNo);
-		}		
-		int maxPage = (int)Math.ceil((double) usedPointCount /10);
-		int startPage = (page-1)/10*10+1;
-		int endPage = startPage+10-1;
-		if(endPage > maxPage) {
-			endPage = maxPage;
-		}
-
-		PageInfo pageInfo = new PageInfo();
-		pageInfo.setAllPage(maxPage);
-		pageInfo.setCurPage(page);
-		pageInfo.setStartPage(startPage);
-		pageInfo.setEndPage(endPage);
-		
-		int row = (page-1)*10;
-		List<Map<String, Object>> usedPointList = colDao.selectCollectionListForUsingPoint(accId, row);		
-		request.setAttribute("pageInfo", pageInfo);
-		request.setAttribute("usedPointList", usedPointList);
+		request.setAttribute("pointType", pointType);
 	}
 }

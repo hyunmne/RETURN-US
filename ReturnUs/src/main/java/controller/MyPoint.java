@@ -22,7 +22,7 @@ public class MyPoint extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
+    	try {
 			request.setCharacterEncoding("utf-8");
 			CollectionService service = new CollectionServiceImpl();
 			service.showMyPoint(request);
@@ -31,24 +31,4 @@ public class MyPoint extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-    
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			request.setCharacterEncoding("utf-8");
-			CollectionService service = new CollectionServiceImpl();
-			String pointType = request.getParameter("pointType");
-			System.out.println(pointType);
-			
-			if(pointType.equals("received")) {
-				service.showMyReceivedPoint(request);
-				request.getRequestDispatcher("/views/account/myReceivedPoint.jsp").forward(request, response);
-			} else if(pointType.equals("used")) {
-				service.showMyUsedPoint(request);
-				request.getRequestDispatcher("/views/account/myUsedPoint.jsp").forward(request, response);
-			}			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 }
