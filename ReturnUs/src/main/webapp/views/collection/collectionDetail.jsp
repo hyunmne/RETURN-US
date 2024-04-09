@@ -151,7 +151,17 @@
 		                                 <th>신청결과</th>
 		                              </tr>
 		                              <tr class="col-6">
-		                                 <td>${colDetail.colStatus }</td>
+		                              	 <c:choose>
+									        <c:when test="${colDetail.colStatus eq '수거준비중'}">
+									            <td style="color: #FB6714">${colDetail.colStatus}</td>
+									        </c:when>
+									        <c:when test="${colDetail.colStatus eq '수거진행중'}">
+									            <td style="color: #40A23E">${colDetail.colStatus}</td>
+									        </c:when>
+									        <c:otherwise>
+									            <td style="color: #3B83B7">${colDetail.colStatus}</td>
+									        </c:otherwise>
+									     </c:choose>
 		                                 <td>${colDetail.colPost }</td>
 		                                 <td>${colDetail.colUsePnt }</td>
 		                                 <td>${colDetail.colPrice }</td>
