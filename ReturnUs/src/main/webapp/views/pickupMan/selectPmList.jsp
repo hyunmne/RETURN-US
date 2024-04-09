@@ -96,6 +96,8 @@ document.getElementById('selRegion').addEventListener('change', function() {
          }
      }
 });
+
+
 </script>
 
 
