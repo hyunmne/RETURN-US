@@ -67,8 +67,8 @@
 	margin-top: 40px;
 }
 .blank{
-	margin-left: 33px;
-	margin-right: 33px;
+	margin-left: 8%;
+	margin-right: 8%;
 }
 #linked a {
 	color: #AFAFAF;
@@ -78,7 +78,7 @@
 	color: #AFAFAF;
 }
 #joinhref{
-	margin-left: 34px;
+	/* margin-left: 34px; */
 }
 </style>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -192,7 +192,7 @@ $(function() {
 									<button type="submit" class="button" id="login">로그인</button>
 								</div>
 								<div id="linked">
-									<a id="joinhref" href="join">회원가입</a><a class="blank"></a><a href="findid">ID찾기</a><a class="blank"></a><a href="findpw">PW찾기</a>
+									<a id="joinhref" href="join">회원가입</a><a class="blank"></a><a href="findid">아이디 찾기</a><a class="blank"></a><a href="findpw">비밀번호 찾기</a>
 								</div>
 							</div>
 						</div>

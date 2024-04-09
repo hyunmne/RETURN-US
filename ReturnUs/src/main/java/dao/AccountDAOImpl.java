@@ -20,13 +20,8 @@ public class AccountDAOImpl implements AccountDAO {
 		return sqlSession.selectOne("mapper.account.selectAccount", accId);	
 	}
 	@Override
-	public Account findIdAccount(String accName, String accBirth, String accEmail, String accEmailDo) throws Exception {		
-		Map<String,Object> param = new HashMap<>();
-		param.put("accName", accName);
-		param.put("accBirth", accBirth);
-		param.put("accEmail", accEmail);
-		param.put("accEmailDo", accEmailDo);
-		return sqlSession.selectOne("mapper.account.findIdAccount", param);	
+	public Account findIdAccount(String accName) throws Exception {		
+		return sqlSession.selectOne("mapper.account.findIdAccount", accName);	
 	}
 	
 	@Override

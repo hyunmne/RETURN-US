@@ -54,6 +54,7 @@ public class NaverMailSendToChangePassword {
 
 			// 메일 내용 설정
 			message.setText("임시 비밀번호는 ["+authenCode+"] 입니다.");
+			message.setText("마이페이지 > 비밀번호 변경 에서 비밀번호를 재설정 해주시기 바랍니다.");
 
 			// Send the message
 			Transport.send(message);

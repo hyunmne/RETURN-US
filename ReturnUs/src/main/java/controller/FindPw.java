@@ -54,7 +54,7 @@ public class FindPw extends HttpServlet {
 			accountSerivce.checkPassword(accId,email);
 			JSONObject res = new JSONObject();
 			res.put("isSuccess", "true");
-			res.put("msg", "비밀번호가 재설정 되었습니다. 이메일을 확인하세요.");
+			res.put("msg", "비밀번호가 재설정 되었습니다.<br> 이메일을 확인하세요.");
 			response.getWriter().write(res.toJSONString());
 		}catch (Exception e) {
 			e.printStackTrace();

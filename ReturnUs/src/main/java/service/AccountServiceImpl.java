@@ -114,9 +114,22 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public Account findId(String accName, String accBirth, String accEmail, String accEmailDo) throws Exception {
+	public Account findId(String accName, String accBirth, String email) throws Exception {
+		Account sacc = accountDao.findIdAccount(accName);
 		
-		return accountDao.findIdAccount(accName, accBirth, accEmail, accEmailDo);
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		String birth = null;
+		if(sacc==null) {
+			throw new Exception("기입하신 성명으로 가입된 <br> 회원정보가 없습니다.");
+		}else if(!accBirth.equals(birth=format.format(sacc.getAccBirth()))){
+			throw new Exception("생년월일을 확인해 주시기 바랍니다.");
+		}else if(!email.equals(sacc.getAccEmail()+"@"+sacc.getAccEmailDo())) {
+			throw new Exception("이메일을 확인해 주시기 바랍니다.");
+		}else {
+			System.out.println(sacc);
+			return sacc;
+		}
+		
 	}
 
 	@Override

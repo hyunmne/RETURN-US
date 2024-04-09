@@ -70,7 +70,6 @@
 	font-weight: 800;
     font-size: 24px; /* 폰트 크기 설정 */
     line-height: 40px; /* 버튼 높이와 맞추기 위해 줄 높이 설정 */
-    font-family: sans-serif; /* 폰트 설정 */
 }
 .hr-custom2{
 	height: 20px;

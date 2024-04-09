@@ -70,7 +70,6 @@
 	font-weight: 800;
     font-size: 24px; /* 폰트 크기 설정 */
     line-height: 40px; /* 버튼 높이와 맞추기 위해 줄 높이 설정 */
-    font-family: sans-serif; /* 폰트 설정 */
 }
 .hr-custom2{
 	height: 20px;
@@ -118,8 +117,8 @@
 							<!--body ** 여기서부터 코딩하시면 됩니다!!! ** -->
 							<div id="sm">
 								<p style="font-size: 22px; color: black; font-weight: 500;">
-								회원님의 아이디는 <span class="account" id="accountId">${accId}</span>(으)로 등록되어 있습니다 <br>
-								가입 일자는 <span class="account">${accJoinDt }</span>입니다.
+								회원님의 아이디는 <span class="account" id="accId">${accId}</span>(으)로 등록되어 있습니다<br>
+								가입 일자는 <span class="account">${accJoinDt}</span>입니다.
 								</p>
 								<div style="margin-top: 40px;">
 								<a href="login"><button id="login" class="button"><div class="buttonfont">로그인</div></button></a>
@@ -135,6 +134,7 @@
 	</div>
 
 <script>
+
 // 끝에 두 글자를 ** 처리하여 표시하는 함수
 function showHiddenChars(elementId) {
   const element = document.getElementById(elementId);
@@ -143,13 +143,11 @@ function showHiddenChars(elementId) {
     if (accountId.length >= 2) {
       const hiddenPart = accountId.substring(accountId.length - 2).replace(/./g, '*');
       const visiblePart = accountId.substring(0, accountId.length - 2);
-      element.innerHTML = visiblePart + '<span class="account">' + hiddenPart + '</span>';
+      element.innerHTML = visiblePart +  hiddenPart ;
     }
   }
 }
-
-// 아이디를 표시하는 요소의 ID를 인수로 전달하여 함수 호출
-showHiddenChars('accountId');
+showHiddenChars("accId")
 </script>
 
 

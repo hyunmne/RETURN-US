@@ -155,17 +155,18 @@ p{
 									<div class="accordion" style="padding-top: 1%">
 										<input type="radio" name="accordion" >
 										<label for="answer?faqNo=${faq.faqNo }"><span class="Q">Q</span><h4 class="noto-sans" >${faq.faqTitle }</h4>
-										<c:if test="${admin eq 'admin' }">
-										<a href="deletefaq?faqNo=${faq.faqNo }"><button class="button" style="float: right;" onclick="deletefaq()">삭제</button></a>										
-										<!-- <button class="button" style="float: right;" onclick="rudeletefaq()">삭제</button> -->
-										</c:if>
-										<c:if test="${admin eq 'admin' }">
-										<a href="faqmodify?faqNo=${faq.faqNo }"><button class="button" style="float: right; margin-right:1%;; ">수정</button></a>
-										</c:if>  
 										</label>						
 										<div><p><span class="A">A</span><br>
 										<span class="content">${faq.faqContent }</span>
-		 								</p></div>
+		 								</p>
+		 								<c:if test="${admin eq 'admin' }">
+											<form id="deleteForm" method="get" action="deletefaq?faqNo">
+												<input type="hidden" name="faqNo" id="faqNoInput" value="${faq.faqNo }">
+   												<button type="button" class="button" style="float: right;" onclick="rudeletefaq()">삭제</button>
+											</form>
+											<a href="faqmodify?faqNo=${faq.faqNo }"><button class="button" style="float: right; margin-right:1%;; ">수정</button></a>
+										</c:if> 
+		 								</div>
 		 							</div>
 		 						</c:forEach>	
 		 						<div id="emptyArea" style="margin-top: 10%; margin-bottom: 5%;">
@@ -197,22 +198,28 @@ p{
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 function rudeletefaq() {
-	Swal.fire({
-		  title: "삭제 하시겠습니까?",
-		  icon: "warning",
-		  showCancelButton: true,
-		  confirmButtonColor: "#3085d6",
-		  cancelButtonColor: "#d33",
-		  confirmButtonText: "Yes, delete it!"
-		}).then((result) => {
-		  if (result.isConfirmed) {
-		    Swal.fire({
-		      title: "Deleted!",
-		      text: "Your file has been deleted.",
-		      icon: "success"
-		    });
-		  }
-		});
+    var deleteForm = document.getElementById("deleteForm");
+    var faqNo = document.getElementById("faqNoInput").value; 
+    Swal.fire({
+        title: "삭제 하시겠습니까?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "삭제",
+        cancelButtonText: "취소",
+    }).then((result) => {
+        if (result.isConfirmed) {
+        	deleteForm.method = "get";
+            deleteForm.action = "deletefaq";
+            var faqNoInput = document.createElement("input");
+            faqNoInput.setAttribute("type", "hidden");
+            faqNoInput.setAttribute("name", "faqNo");
+            faqNoInput.setAttribute("value", faqNo);
+            deleteForm.appendChild(faqNoInput);
+            deleteForm.submit();
+        }
+    });
 }
 
 </script>

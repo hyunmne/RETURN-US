@@ -86,20 +86,20 @@
     border: 0;
 }	
 
-#findPw{
-	height: 50px;
-	width: 400px;
-	border: solid 0px;
-	padding: 13px 13px;
-	font-weight: 600;
-	font-size: 18px;
-	line-height: 18px;
-	background: #146C43;
-	flex: none;
-	order: 0;
-	flex-grow: 0;
-	border-radius: 10px;
-	margin-bottom: 100px;
+#findPw {
+    height: 50px;
+    width: 400px;
+    border: solid 0px;
+    padding: 13px 13px;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 18px;
+    background: #146C43;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    border-radius: 10px;
+    margin-bottom: 100px;
 
 }
 .findPwfont{
@@ -152,15 +152,23 @@ $(function(){
 			success:function(result){
 				var resData = JSON.parse(result);
 				/* alert(resData.msg); */
-				Swal.fire(resData.msg);
 				if(resData.isSuccess == "true") {
-					document.location.href = "login"
+					Swal.fire({
+						  icon: "success",
+						  title: resData.msg,
+						  showConfirmButton: false,
+						  timer: 2500
+						});
+					setTimeout(function(){
+						document.location.href = "login";
+					}, 3000);
 				}else{
-					
+					Swal.fire({
+						  icon: "error",
+						  title: resData.msg,
+						});					
 				}
-				$('#accId').val("");
-				$('#accEmail').val("");
-				$('#accEmailDo').val("");
+
 			}
 		})
 	})

@@ -1,13 +1,16 @@
 package controller;
 
-import java.io.Console;
 import java.io.IOException;
+import java.sql.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import dto.Account;
 import service.AccountService;
@@ -40,25 +43,36 @@ public class FindId extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		AccountService accountService = new AccountServiceImpl();
+		response.setCharacterEncoding("utf-8");
+		String data = request.getParameter("data");
+		System.out.println(data);
 		
 		try {
-			String accName = request.getParameter("accName");
-			String accBirth = request.getParameter("accBirth");
-			String accEmail = request.getParameter("accEmail");
-			String accEmailDo = request.getParameter("accEmailDo");
-			System.out.println(accName);
-			System.out.println(accBirth);
-			System.out.println(accEmail);
-			System.out.println(accEmailDo);
-			Account account = accountService.findId(accName,accBirth,accEmail,accEmailDo);
-			System.out.println(account);
-			request.setAttribute("accId", account.getAccId());
-			request.setAttribute("accJoinDt", account.getAccJoinDt());
-			request.getRequestDispatcher("/views/account/resultFindId.jsp").forward(request, response);
+			JSONParser parser = new JSONParser();
+			JSONObject jobj = (JSONObject)parser.parse(data);
+			String accName = (String)jobj.get("accName");
+			String accBirth = (String)jobj.get("accBirth");
+			String email = (String)jobj.get("email");
+			
+			AccountService accountService = new AccountServiceImpl();
+			Account account = accountService.findId(accName,accBirth,email);
+			String accId = account.getAccId();
+			Date accJoinDt = account.getAccJoinDt();
+			
+			System.out.println("findidaccId:"+accId);
+			System.out.println("findidaccJoinDt:"+accJoinDt);
+			JSONObject res = new JSONObject();
+			res.put("isSuccess", "true");
+			res.put("accId", accId);
+			res.put("accJoinDt", accJoinDt.toString());
+			response.getWriter().write(res.toJSONString());
+			
 		}catch (Exception e) {
 			e.printStackTrace(); 
-			request.getRequestDispatcher("views/account/notFountId.jsp").forward(request, response);
+			JSONObject res = new JSONObject();
+			res.put("isSuccess", "false");
+			res.put("msg", e.getMessage());
+			response.getWriter().write(res.toJSONString());
 		}
 		
 	}

@@ -14,7 +14,6 @@
 	background-color: #F5F9F1;
 	height: 100%;
 	padding: 0px 50px 0px 50px;
-	
 }
 
 #sm {
@@ -22,13 +21,15 @@
 	height: 100%;
 	padding: 45px 50px 0px 50px;
 	display: flex; /* 부모 요소를 플렉스 박스로 설정하여 내부 요소들을 정렬하기 쉽게 합니다 */
-    flex-direction: column; /* 요소들을 세로로 정렬합니다 */
-    align-items: center; /* 가로 방향 가운데 정렬합니다 */
+	flex-direction: column; /* 요소들을 세로로 정렬합니다 */
+	align-items: center; /* 가로 방향 가운데 정렬합니다 */
 }
-.hr-custom{
+
+.hr-custom {
 	height: 20px;
 	background-color: #59981A;
 }
+
 #container {
 	display: flex; /* 부모 요소를 플렉스 박스로 설정하여 내부 요소들을 정렬하기 쉽게 합니다 */
 	flex-direction: column; /* 요소들을 세로로 정렬합니다 */
@@ -45,48 +46,51 @@
 	margin-bottom: 20px; /* 제목과 폼 사이의 간격 조정 */
 }
 
-#bigtitle{
+#bigtitle {
 	text-align: center;
 	margin-right: 20px;
 }
-.smtitle{
+
+.smtitle {
 	text-align: center;
-	margin : 5px
-	
+	margin: 5px
 }
 
-.smt{
+.smt {
 	margin-top: -20px;
 	color: black;
 	font-weight: 500;
-    font-size: 20px; /* 글꼴 크기 설정 (16px) */
+	font-size: 20px; /* 글꼴 크기 설정 (16px) */
 }
+
 .input-container {
-	width: 100%;
-	height:85px;
-    display: inline-block; /* 인라인-블록 요소로 설정하여 가로로 나열 */
-    background-color: #ffffff; /* 하얀색 배경 설정 */
-    border: 1px solid #ccc; /* 테두리 추가 */
-    border-radius: 12px; /* 둥근 테두리 설정 */
-    margin-bottom: 4%;
+	width: 400px;
+	height: 85px;
+	display: inline-block; /* 인라인-블록 요소로 설정하여 가로로 나열 */
+	background-color: #ffffff; /* 하얀색 배경 설정 */
+	border: 1px solid #ccc; /* 테두리 추가 */
+	border-radius: 12px; /* 둥근 테두리 설정 */
+	padding: 10px; /* 내부 여백 추가 */
+	margin-bottom: 10px;
 }
 
 .input-container label {
 	color: black;
-    display: block; /* 블록 요소로 설정하여 세로로 배치 */
-    margin-bottom: 5px; /* 레이블 아래 여백 추가 */
-    margin-left: 8px;
+	display: block; /* 블록 요소로 설정하여 세로로 배치 */
+	margin-bottom: 5px; /* 레이블 아래 여백 추가 */
+	margin-left: 8px;
 }
 
 .input-container input {
-    width: 100%; /* 입력 필드의 너비를 부모 요소에 맞춤 */
-    padding: 8px; /* 내부 여백 추가 */
-    border: 0;
+	width: 100%; /* 입력 필드의 너비를 부모 요소에 맞춤 */
+	box-sizing: border-box; /* 테두리와 여백을 포함하여 너비 설정 */
+	padding: 8px; /* 내부 여백 추가 */
+	border: 0;
 }
 
-#findId{
+#findId {
 	height: 50px;
-	width: 100%;
+	width: 400px;
 	border: solid 0px;
 	padding: 13px 13px;
 	font-weight: 600;
@@ -98,67 +102,69 @@
 	flex-grow: 0;
 	border-radius: 10px;
 	margin-bottom: 100px;
-
 }
-.findIdfont{
+
+.findIdfont {
+	margin-top: 5%;
 	color: #FFFFFF;
 }
+
 .select {
-	width: 100%;
+	width: 45%;
 	height: 40px;
-	border: 1px solid #D0D0D0;
+	border: 0px solid #D0D0D0;
 	border-radius: 6px;
 }
 
+.button {
+	border: solid 0px;
+	height: 40px;
+	display: inline-block; /* 인라인-블록 요소로 설정 */
+	vertical-align: top; /* 위쪽 정렬 */
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 18px;
+	flex-direction: row;
+	align-items: flex-start;
+	padding: 10px 10px;
+	gap: 8px;
+	background: #D1E7DD;
+	border-radius: 6px;
+	color: #146C43;
+	margin-left: 15px;
+}
 
+#accEmail {
+	width: 45%;
+}
 </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="sweetalert2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-
-$(document).ready(function() {
-	 $('#findIdForm').submit(function(e) {
-		// 이름 체크
-	        var name = $('#accName').val();
-	        if (name === '' || !isNaN(name)) {
-	            /* alert('이름을 확인해주시기 바랍니다.'); */
-	            Swal.fire({
-		                 title: "이름을 확인해주시기 바랍니다.",
-		                 icon: "warning",
-		                 timer: 1500,
-		                 showConfirmButton: false
-		               });
-	            e.preventDefault(); 
-	            return;
-	        }
-	        
-	     // 이메일 체크
-	        var email = $('#accEmail').val();
-	        if (email === '') {
-	           /*  alert('이메일을 확인해주시기 바랍니다.'); */
-	            Swal.fire({
-		                 title: "이메일을 확인해주시기 바랍니다.",
-		                 icon: "warning",
-		                 timer: 1500,
-		                 showConfirmButton: false
-		               });
-	            e.preventDefault(); 
-	            return;
-	        }
-	        // 이메일 도메인 체크
-	        var emailDo = $('#accEmailDo').val();
-	        if (emailDo ==='none'){
-	        	/* alert('이메일을 확인해주시기 바랍니다.') */
-	        	Swal.fire({
-		                 title: "이메일을 확인해주시기 바랍니다.",
-		                 icon: "warning",
-		                 timer: 1500,
-		                 showConfirmButton: false
-		               });
-	        	e.preventDefault();
-	        	return;
-	        }
-     });
-}); 
+$(function(){
+	$('#findId').click(function(){
+		$.ajax({
+			url:"findid",
+			type:"post",
+			async:true,
+			data: {data: JSON.stringify({accName:$('#accName').val(),accBirth:$('#accBirth').val(),email:$('#accEmail').val()+"@"+$('#accEmailDo').val()})},
+			success:function(result){
+				console.log(result)
+				var resData = JSON.parse(result);
+				if(resData.isSuccess == "false"){
+					Swal.fire({
+						  icon: "error",
+						  title: resData.msg,
+					});					
+				} else {
+					window.location.href="${path}/resultfindid?accId="+resData.accId+"&accJoinDt="+resData.accJoinDt;
+				}
+			}
+		})
+	})
+})
 </script>
 </head>
 
@@ -183,8 +189,9 @@ $(document).ready(function() {
 						<div id="big" class="card">
 							<div style="padding: 50px 0px 30px; color: #3E6D10;">
 								<div class="title">
-									<div class="bgtitle" >
-										<h1 id="bigtitle" class="noto-sans"style="color: #59981A">아이디 찾기</h1>
+									<div class="bgtitle">
+										<h1 id="bigtitle" class="noto-sans" style="color: #59981A">아이디
+											찾기</h1>
 									</div>
 								</div>
 							</div>
@@ -192,19 +199,25 @@ $(document).ready(function() {
 							<!--body ** 여기서부터 코딩하시면 됩니다!!! ** -->
 							<div id="sm">
 								<div class="smtitle">
-									<p class="smt">리터너스 회원정보에 등록되어 있는 <br>이메일과 생년월일로 ID를 찾을 수 있습니다.</p>
+									<p class="smt">
+										리터너스 회원정보에 등록되어 있는 <br>이메일과 생년월일로 ID를 찾을 수 있습니다.
+									</p>
 								</div>
-								<form id="findIdForm" action="findid" method="post">
-									<div class="input-container">
-										<label for="name">성명<div class="star">*</div></label>
-										<input type="text" id="accName" name="accName" value="${accName }" placeholder="성명 입력">
-									</div>
-									<br>
-									<div class="input-container">
-										<label for="birth">생년월일<div class="star">*</div></label>
-										<input type="date" id="accBirth" name="accBirth" value="${accBirth }" placeholder="생년월일 8자리 (ex. YYYYMMDD)"required>
-									</div>
-									<script>
+								<div class="input-container">
+									<label for="name">성명
+										<div class="star">*</div>
+									</label> <input type="text" id="accName" name="accName"
+										value="${accName }" placeholder="성명 입력">
+								</div>
+								<br>
+								<div class="input-container">
+									<label for="birth">생년월일
+										<div class="star">*</div>
+									</label> <input type="date" id="accBirth" name="accBirth"
+										value="${accBirth }" placeholder="생년월일 8자리 (ex. YYYYMMDD)"
+										required>
+								</div>
+								<script>
     									// 현재 날짜를 가져오는 함수
     										function getCurrentDate() {
         										var today = new Date();
@@ -217,28 +230,32 @@ $(document).ready(function() {
     										// 최대 날짜 설정
     										document.getElementById('accBirth').setAttribute('max', getCurrentDate());
 										</script>
-									<br>
-									<div class="input-container">
-										<label for="email">이메일 <div class="star" >*</div></label>
-										<p class="email_tool" style="display:flex; align-items:center;">
-										<input type="text" id="accEmail" name="accEmail" title="이메일 아이디" placeholder=" 이메일" maxlength="18" />&nbsp;&nbsp;@&nbsp;
-											<select class ="select" id="accEmailDo" name="accEmailDo" title="이메일 도메인 주소 선택" onclick="setEmailDomain(this.value);return false;">
-												<option value="none"> --------선택--------</option>
-												<option value="naver.com">naver.com</option>
-												<option value="gmail.com">gmail.com</option>
-												<option value="hanmail.net">hanmail.net</option>
-												<option value="hotmail.com">hotmail.com</option>
-												<option value="korea.com">korea.com</option>
-												<option value="nate.com">nate.com</option>
-												<option value="yahoo.com">yahoo.com</option>
-											</select>
-											 	
-										</p>	
-									</div>
-									<div>
-										<button type="submit" class="submit" id="findId"><div class="findIdfont">아이디 찾기</div></button>
-									</div>
-								</form>
+								<br>
+								<div class="input-container">
+									<label for="email">이메일
+										<div class="star">*</div>
+									</label>
+									<p class="email_tool"
+										style="display: flex; align-items: center;">
+										<input type="text" id="accEmail" name="accEmail"
+											title="이메일 아이디" placeholder=" 이메일" maxlength="18" />&nbsp;&nbsp;@&nbsp;
+										<select class="select" id="accEmailDo" name="accEmailDo"
+											title="이메일 도메인 주소 선택"
+											onclick="setEmailDomain(this.value);return false;">
+											<option value="none">--------선택--------</option>
+											<option value="naver.com">naver.com</option>
+											<option value="gmail.com">gmail.com</option>
+											<option value="hanmail.net">hanmail.net</option>
+											<option value="hotmail.com">hotmail.com</option>
+											<option value="korea.com">korea.com</option>
+											<option value="nate.com">nate.com</option>
+											<option value="yahoo.com">yahoo.com</option>
+										</select>
+									</p>
+								</div>
+								<div>
+									<button id="findId" class="findIdfont">아이디 찾기</button>
+								</div>
 							</div>
 						</div>
 					</div>

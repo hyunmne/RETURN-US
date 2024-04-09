@@ -30,11 +30,12 @@ public class DeleteFaq extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doget(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		try {
 			FaqService faqSerivce = new FaqServiceImpl();
 			faqSerivce.deleteFaq(request);
+			System.out.println(request);
 			response.sendRedirect("faq");
 		}catch (Exception e) {
 			e.printStackTrace();
