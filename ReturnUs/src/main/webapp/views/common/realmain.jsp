@@ -113,6 +113,16 @@ i {
     left: auto;
     right: auto;
 }
+.logoBackground {
+	z-index: 0;
+    position: absolute;
+    top: 41%;
+    right: -38%;
+    width: 194%;
+}
+.imgOpacity {
+	opacity: 0.9;
+}
 </style>
 </head>
 <body class="noto-sans">
@@ -121,6 +131,7 @@ i {
 <div class="container-fluid py-5 mb-5" style="background-color:#fefcf7; margin-top:100px">
 	<div class="container">
 		<div class="row g-5 align-items-center">
+<!-- 			<img src="./resources/img/logoBackground.png"> -->
               <div class="col-md-12 col-lg-7">
                   <h4 class="noto-sans mb-3 text-secondary">일상 속 지구를 지키는 작은 발걸음</h4>
                   <h1 class="noto-sans mb-5 display-3 text-primary">리터너스와 함께 <br>시작해보세요!</h1>
@@ -139,42 +150,42 @@ i {
               </div>
               <div class="col-md-12 col-lg-5">
                   <div id="carouselId" class="carousel slide position-relative" data-bs-ride="carousel">
-                      <div class="carousel-inner" role="listbox">
+                      <div class="carousel-inner" role="listbox" style="z-index: 1;">
                           <div class="carousel-item active rounded">
-                              <img src="./resources/img/plant.jpg" class="img-fluid w-100 h-100 bg-secondary rounded"  alt="First slide">
+                              <img src="./resources/img/plant.jpg" class="img-fluid w-100 h-100 bg-secondary rounded imgOpacity"  alt="Second slide">
 <!-- 								<div style="padding: 100px;"> -->
 <!-- 									<h3 class="noto-sans">방문수거</h3> -->
 <!-- 									<span>하하하하하하하하하하하하ㅏ</span> -->
 <!-- 								</div> -->
                           </div>
                           <div class="carousel-item rounded">
-                              <img src="./resources/img/plant.jpg" class="img-fluid w-100 h-100 rounded" alt="Second slide">
+                              <img src="./resources/img/recycle1.jpg" class="img-fluid w-100 h-100 rounded imgOpacity" alt="Second slide">
 <!--                               <a href="#" class="btn px-4 py-2 text-white rounded">Vesitables</a> -->
-								<span>2. 크크크</span>
+<!-- 								<span>2. 크크크</span> -->
                           </div>
                           <div class="carousel-item rounded">
-                              <img src="./resources/img/plant.jpg" class="img-fluid w-100 h-100 rounded" alt="Second slide">
+                              <img src="./resources/img/recycle2.jpg" class="img-fluid w-100 h-100 rounded imgOpacity" alt="Second slide">
 <!--                               <a href="#" class="btn px-4 py-2 text-white rounded">Vesitables</a> -->
-								<span>3. 아아아아</span>
+<!-- 								<span>3. 아아아아</span> -->
                           </div>
                           <div class="carousel-item rounded">
-                              <img src="./resources/img/plant.jpg" class="img-fluid w-100 h-100 rounded" alt="Second slide">
+                              <img src="./resources/img/recycle3.jpg" class="img-fluid w-100 h-100 rounded imgOpacity" alt="Second slide">
 <!--                               <a href="#" class="btn px-4 py-2 text-white rounded">Vesitables</a> -->
-								<span>4. 히히히히</span>
+<!-- 								<span>4. 히히히히</span> -->
                           </div>
                       </div>
-                      <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
+                      <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev" style="border: 0;background-color: transparent;">
                           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                          <span class="visually-hidden">Previous</span>
+<!--                           <span class="visually-hidden">Previous</span> -->
                       </button>
                       
-                      <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
+                      <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next" style="border: 0;background-color: transparent;">
                           <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                          <span class="visually-hidden">Next</span>
+<!--                           <span class="visually-hidden">Next</span> -->
                       </button>
+	                  <img src="./resources/img/logoBackground.png" class="logoBackground imgOpacity">
                   </div>
               </div>
-              
           </div>
 	</div>
 </div>
