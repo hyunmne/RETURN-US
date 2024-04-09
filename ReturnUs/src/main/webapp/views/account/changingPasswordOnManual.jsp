@@ -89,8 +89,8 @@
 								</div><br>
 								<div class="container">
 									<form class="row g-3 needs-validation" id="information-board" action="change-password" method="post" novalidate>
-									  <div class="row mb-3 mt-4 text-center">					  	  
-										  <p>비밀번호 변경 후에는 다시 로그인 하시기 바랍니다.</p>									  
+									  <div class="row mb-5 mt-4 text-center">					  	  
+										  <h4 class="noto-sans" style="color:black">비밀번호 변경 후에는 다시 로그인 하시기 바랍니다.</h4>									  
 									  </div>
 									  <div class="row mb-3">
 									  	  <div class="col-sm-2"></div>							  	  
