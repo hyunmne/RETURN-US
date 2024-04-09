@@ -73,16 +73,13 @@
 	font-size: 28px;
 	color: black;
 } 
-h4{
+h5{
 	display: inline;
 	padding-bottom: 10px;
 }
-.content{
 
-
-}
 p{
-	font-size: 20px;
+	font-size: 14px;
 	flex-grow: 1;
 }
 .redemp{
@@ -116,6 +113,14 @@ p{
 	#emptyArea .select {
 		background: lightblue;
 	}
+#rounded{
+    padding: 10px 16px;
+    text-decoration: none;
+    transition: 0.5s;
+    border: 1px solid var(--bs-light);
+    margin: 0 4px;
+    background: var(--bs-white);
+}
 </style>
 
 </head>
@@ -154,7 +159,7 @@ p{
 								<c:forEach items="${faqList }" var="faq">
 									<div class="accordion" style="padding-top: 1%">
 										<input type="radio" name="accordion" >
-										<label for="answer?faqNo=${faq.faqNo }"><span class="Q">Q</span><h4 class="noto-sans" >${faq.faqTitle }</h4>
+										<label for="answer?faqNo=${faq.faqNo }"><span class="Q">Q</span><h5 class="noto-sans" >${faq.faqTitle }</h5>
 										</label>						
 										<div><p><span class="A">A</span><br>
 										<span class="content">${faq.faqContent }</span>
@@ -174,10 +179,10 @@ p{
 										<c:forEach begin="${pageInfo.startPage }" end="${pageInfo.endPage }" var="i">
 											<c:choose>
 												<c:when test="${i==pageInfo.curPage}">
-													<a href="faq?page=${i}" class="select">${i }</a>
+													<a href="faq?page=${i}" class="rounded">${i }</a>
 												</c:when>
 												<c:otherwise>
-													<a href="faq?page=${i}" class="btn">${i }</a>
+													<a href="faq?page=${i}" class="rounded">${i }</a>
 												</c:otherwise>
 											</c:choose>
 										</c:forEach>

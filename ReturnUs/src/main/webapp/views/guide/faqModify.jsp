@@ -26,7 +26,7 @@
 }
 
 #FaqNo {
-	width: 3%;
+	width: 5%;
 	height: 30px;
 	border: 1px solid #D0D0D0;
 	border-radius: 6px;
