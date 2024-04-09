@@ -97,7 +97,7 @@
                         	<c:choose>
                         		<c:when test="${adminCheck eq 'admin' }">
 		                            <a href="col-management?colStatus=수거준비중" class="nav-item nav-link menu"><b>신청내역 관리</b></a>
-		                            <a href="joinPick" class="nav-item nav-link menu"><b>픽업맨</b></a>
+		                            <a href="pm" class="nav-item nav-link menu"><b>픽업맨</b></a>
                         		</c:when>
                         		<c:otherwise>
 			                        <c:choose>

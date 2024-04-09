@@ -15,13 +15,8 @@
 	<h5 class="noto-sans" style="padding-bottom:10px; color:#81B622" >픽업맨</h5>
 	<ul class="nav nav-pills flex-column mb-auto" >
 		<li>
-			<a href="joinPick" class="padding">
-				<i class="fas fa-seedling" style="color: #59981A"></i>&nbsp;&nbsp;&nbsp;사원 등록
-			</a>
-		</li>
-		<li>
-			<a href="pmList" class="padding">
-				<i class="fas fa-seedling" style="color: #59981A"></i>&nbsp;&nbsp;&nbsp;사원 조회
+			<a href="pm" class="padding">
+				<i class="fas fa-seedling" style="color: #59981A"></i>&nbsp;&nbsp;&nbsp;사원 관리
 			</a>
 		</li>
 	</ul>
