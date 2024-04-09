@@ -39,44 +39,44 @@ public class PickupmanServiceImpl implements PickupmanService {
 		pmDao.insertPickMan(pm);
 	}
 
-	@Override
-	public List<PickupMan> allPMList(HttpServletRequest request) throws Exception {
-		request.setCharacterEncoding("utf-8");
-		String pmRegion = request.getParameter("pmRegion");
-		System.out.println("serviceImpl pmRegion : " + pmRegion);
-		
-		Integer page = 1;
-		String pageNo = request.getParameter("page");
-		if (pageNo!=null) {
-			page = Integer.parseInt(pageNo);
-		}
-		
-		int maxPage = (int) Math.ceil((double)pmDao.selectAllPMCnt(pmRegion)/10);
-		int startPage = (page-1)/10*10+1;
-		int endPage = startPage+10-1;
-		if(endPage > maxPage) endPage = maxPage;
-		
-		PageInfo pageInfo = new PageInfo();
-		pageInfo.setAllPage(maxPage);
-		pageInfo.setCurPage(page);
-		pageInfo.setStartPage(startPage);
-		pageInfo.setEndPage(endPage);
-		
-		int row = (page-1)*10;
-		
-		List<PickupMan> pmList = pmDao.selectAllPMList(row, pmRegion);
-		
-		int count = pmDao.selectAllPMCnt(pmRegion);
-		System.out.println(count);
-		request.setAttribute("count",  count);
-		request.setAttribute("pageInfo", pageInfo);
-		request.setAttribute("pmList", pmList);
-//		request.setAttribute("regionList", regionList);C
-		request.setAttribute("region", pmRegion);
-		
-		
-		return pmList;
-	}
+//	@Override
+//	public List<PickupMan> allPMList(HttpServletRequest request) throws Exception {
+//		request.setCharacterEncoding("utf-8");
+//		String pmRegion = request.getParameter("pmRegion");
+//		System.out.println("serviceImpl pmRegion : " + pmRegion);
+//		
+//		Integer page = 1;
+//		String pageNo = request.getParameter("page");
+//		if (pageNo!=null) {
+//			page = Integer.parseInt(pageNo);
+//		}
+//		
+//		int maxPage = (int) Math.ceil((double)pmDao.selectAllPMCnt(pmRegion)/10);
+//		int startPage = (page-1)/10*10+1;
+//		int endPage = startPage+10-1;
+//		if(endPage > maxPage) endPage = maxPage;
+//		
+//		PageInfo pageInfo = new PageInfo();
+//		pageInfo.setAllPage(maxPage);
+//		pageInfo.setCurPage(page);
+//		pageInfo.setStartPage(startPage);
+//		pageInfo.setEndPage(endPage);
+//		
+//		int row = (page-1)*10;
+//		
+//		List<PickupMan> pmList = pmDao.selectAllPMList(row, pmRegion);
+//		
+//		int count = pmDao.selectAllPMCnt(pmRegion);
+//		System.out.println(count);
+//		
+//		request.setAttribute("count",  count);
+//		request.setAttribute("pageInfo", pageInfo);
+//		request.setAttribute("pmList", pmList);
+//		request.setAttribute("region", pmRegion);
+//		
+//		
+//		return pmList;
+//	}
 
 	@Override
 	public void allocationPickupMan(String colNum, Integer pmNo, String pmStatus) throws Exception {
@@ -91,6 +91,41 @@ public class PickupmanServiceImpl implements PickupmanService {
 		 Map<String, Object> pmInfo = pmDao.selectPickupMan(colNum);
 		 
 		request.setAttribute("pmInfo", pmInfo);
+	}
+
+	@Override
+	public void allPMList(HttpServletRequest request) throws Exception {
+//		Integer page = 1;
+//		String pageNo = request.getParameter("page");
+		String pmRegion = request.getParameter("pmRegion");
+//		System.out.println("pmRegion" + pmRegion);
+//		
+//		if (pageNo != null) {
+//			page = Integer.parseInt(pageNo);
+//		}
+//		
+//		int maxPage = (int)Math.ceil((double) pmDao.selectAllPMCnt(pmRegion)/10);
+//		int startPage = (page-1)/10*10+1;
+//		int endPage = startPage+10-1;
+//		if(endPage > maxPage) {
+//			endPage = maxPage;
+//		}
+//		
+//		PageInfo pageInfo = new PageInfo();
+//		pageInfo.setAllPage(maxPage);
+//		pageInfo.setCurPage(page);
+//		pageInfo.setStartPage(startPage);
+//		pageInfo.setEndPage(endPage);
+		
+//		int row = (page-1)*10;
+		List<PickupMan> pmList = pmDao.selectAllPMList(pmRegion);
+		
+		int count = pmDao.selectAllPMCnt(pmRegion);
+		System.out.println("count"+count);
+//		request.setAttribute("pageList", pageInfo);
+		request.setAttribute("pmList", pmList);
+		request.setAttribute("count", count);
+		
 	}
 
 

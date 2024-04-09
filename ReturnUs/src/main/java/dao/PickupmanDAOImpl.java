@@ -25,12 +25,12 @@ public class PickupmanDAOImpl implements PickupmanDAO {
 	}
 
 	@Override
-	public List<PickupMan> selectAllPMList(Integer row, String pmRegion) throws Exception {
+	public List<PickupMan> selectAllPMList(String pmRegion) throws Exception {
 		Map<String, Object> map = new HashMap<>();
 		if (pmRegion != null) {
 			map.put("pmRegion", pmRegion);
 		}
-		map.put("row", row);
+//		map.put("row", row);
 		return sqlSession.selectList("mapper.pickupman.selectAllPMList", map);
 	}
 

@@ -20,7 +20,7 @@ import service.PickupmanServiceImpl;
 /**
  * Servlet implementation class PickManList
  */
-@WebServlet("/pmList")
+@WebServlet("/selectPick")
 public class PickManList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -40,8 +40,7 @@ public class PickManList extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		try {
 			PickupmanService service = new PickupmanServiceImpl();
-			List<PickupMan> pmList = service.allPMList(request);
-	        request.setAttribute("pmList", pmList);
+			service.allPMList(request);
 			request.getRequestDispatcher("/views/pickupMan/selectPmList.jsp").forward(request, response);
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -53,22 +52,22 @@ public class PickManList extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		try {
-			PickupmanService service = new PickupmanServiceImpl();
-			List<PickupMan> pmList = service.allPMList(request);
-			request.setAttribute("cnt", request.getParameter("count"));
-			Gson gson = new Gson();
-			String data = gson.toJson(pmList);
-			response.setCharacterEncoding("utf-8");
-			response.getWriter().write(data);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			request.setAttribute("errTitle", "조회실패");
-			request.getRequestDispatcher("/views/common/error.jsp").forward(request, response);
-		}
-	}
+//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		request.setCharacterEncoding("utf-8");
+//		try {
+//			PickupmanService service = new PickupmanServiceImpl();
+//			service.allPMList(request);
+//			request.setAttribute("cnt", request.getParameter("count"));
+//			Gson gson = new Gson();
+//			String data = gson.toJson(request);
+//			response.setCharacterEncoding("utf-8");
+//			response.getWriter().write(data);
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			request.setAttribute("errTitle", "조회실패");
+//			request.getRequestDispatcher("/views/common/error.jsp").forward(request, response);
+//		}
+//	}
 
 }
