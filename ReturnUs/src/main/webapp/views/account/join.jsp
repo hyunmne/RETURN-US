@@ -335,9 +335,10 @@ $(function() {
          type:'post',
          data:{email:email},
          success:function(result) {
+        	 var resData = JSON.parse(result);
             /* alert(result); */
         	 Swal.fire({
-                 title: "메일을 전송했습니다.",
+                 title: resData.titleMsg,
                  icon: "success",
                  timer: 1500,
                  showConfirmButton: false
