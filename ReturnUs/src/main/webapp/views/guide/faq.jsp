@@ -1,140 +1,122 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="utf-8">
-   <title>Return:Us</title>   
+<meta charset="utf-8">
+<title>Return:Us</title>
 <style>
-   
 #big {
-	background-color: #F5F9F1; 
-	height: 100%; 
+	background-color: #F5F9F1;
+	height: 100%;
 	padding: 0px 50px 0px 50px;
-}   
+}
 
 #sm {
-	background-color: white; 
-	height: 100%; 
+	background-color: white;
+	height: 100%;
 	padding: 45px 50px 0px 50px;
 }
 
 .accordion input[type="radio"] {
-    display: none;
-    width: 90%;
-    height: 8%;
-}
-.accordion label {
-    display: block;
-    cursor: pointer;
-    padding: 10px 20px;
-    margin-bottom: 2px;
-    border: 1px solid #D9D9D9;
-}
-.accordion div {
-    display: none;
-    padding: 10px 20px;
-    background-color: #fff;
-}
-.accordion label:nth-child(odd) {
-    background-color: #FAFCF8;
-}
-/* 짝수 번째 라벨 */
-.accordion label:nth-child(even) {
-    background-color: #FFFFFF;
+	display: none;
+	width: 90%;
+	height: 8%;
 }
 
-	#emptyArea .btn {
-		background: lightgray;
-	}
-	#emptyArea .select {
-		background: lightblue;
-	}
-.Q{	
-    color: rgb(26, 124, 255);
-    margin-right: 2px;
-    white-space: nowrap;	
-    font-size: 28px;
-    margin-right: 2%;
+.accordion label {
+	display: block;
+	cursor: pointer;
+	padding: 10px 20px;
+	margin-bottom: 2px;
+	border: 1px solid #D9D9D9;
+/* 	background-color:#59981a; */
 }
-.A{
-    font-size: 28px;
-    line-height: 20px;
-    letter-spacing: -0.2px;
-    font-weight: 700;
-    color: rgb(255, 0, 21);
-    white-space: nowrap;
-    flex-grow: 1; /* 텍스트가 확장되어 영역을 채우도록 설정 */
-}    
-.title{
-	font-style: noto-sans;
+
+.accordion div {
+	display: none;
+	padding: 10px 20px;
+	background-color: #fff;
+}
+#emptyArea .btn {
+	background: lightgray;
+}
+
+#emptyArea .select {
+	background: lightblue;
+}
+
+.Q {
+	color: rgb(26, 124, 255);
+	/*     margin-right: 2px; */
+	white-space: nowrap;
 	font-size: 28px;
-	color: black;
-} 
-h5{
-	display: inline;
+	margin-right: 2%;
+}
+
+.A {
+	font-size: 28px;
+	line-height: 20px;
+	letter-spacing: -0.2px;
+	font-weight: 700;
+	color: rgb(255, 0, 21);
+	white-space: nowrap;
+	flex-grow: 1; /* 텍스트가 확장되어 영역을 채우도록 설정 */
 	padding-bottom: 10px;
 }
 
-p{
-	font-size: 14px;
-	flex-grow: 1;
+.title {
+	font-style: noto-sans;
+	font-size: 28px;
+	color: black;
 }
-.redemp{
+
+.redemp {
 	color: red;
-	
 }
 
-.button{
-	width: 10%;
-	border: solid 0px;
-	padding: 8px 8px;
-	font-weight: 600;
-	font-size: 18px;
-	line-height: 18px;
-	background: #D1E7DD;
-	flex: none;
-	border-radius: 6px;
-	color: #146C43;
 
+#emptyArea .select {
+	background: lightblue;
 }
-#emptyArea { margin: auto; width: 800px; text-align: center; }
-	#emptyArea a {
-		display: inline-block;
-		width: 20px;
-		height: 20px;
-		text-decoration: none;
-	}
-	#emptyArea .btn {
-		background: lightgray;
-	}
-	#emptyArea .select {
-		background: lightblue;
-	}
-#rounded{
+#pageDiv {
+	padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+#pageDiv button {
     padding: 10px 16px;
     text-decoration: none;
     transition: 0.5s;
-    border: 1px solid var(--bs-light);
+    border: 1px solid lightgray;
     margin: 0 4px;
-    background: var(--bs-white);
+     background: var(--bs-white); 
 }
+#pageDiv button:hover {
+	color: white;
+	background: #81c408;
+	text-color:white;
+}
+/* #pageDiv a { */
+/* 	border: 1px solid var(--bs-light); */
+/* } */
+
 </style>
 
 </head>
-    
+
 <body class="noto-sans">
-<!-- 헤더 파일 include -->
-   
-<%@include file="/views/common/header.jsp" %>
+	<!-- 헤더 파일 include -->
+
+	<%@include file="/views/common/header.jsp"%>
 
 
 
 
-	<div class="container-fluid fruite py-5"
-		style="margin: 38px 100px; width: 90%;">
+	<div class="container-fluid fruite py-5" style="margin: 38px 100px; width: 90%;">
 		<div class="col-lg-12">
 			<div class="row g-4">
 				<div class="col-6"></div>
@@ -151,43 +133,70 @@ p{
 								<h3 class="noto-sans" style="color: #3E6D10;">자주 묻는 질문</h3>
 								<span style="color: #3E6D10;">&nbsp;</span>
 							</div>
+							
 							<!--body ** 여기서부터 코딩하시면 됩니다!!! ** -->
 							<div id="sm" class="card">
 								<c:if test="${admin eq 'admin' }">
 									<a href="writefaq"><button class="button">글쓰기</button></a>
-								</c:if>  								
+								</c:if>
 								<c:forEach items="${faqList }" var="faq">
 									<div class="accordion" style="padding-top: 1%">
-										<input type="radio" name="accordion" >
-										<label for="answer?faqNo=${faq.faqNo }"><span class="Q">Q</span><h5 class="noto-sans" >${faq.faqTitle }</h5>
-										</label>						
-										<div><p><span class="A">A</span><br>
-										<span class="content">${faq.faqContent }</span>
-		 								</p>
-		 								<c:if test="${admin eq 'admin' }">
-											<form id="deleteForm" method="get" action="deletefaq?faqNo">
-												<input type="hidden" name="faqNo" id="faqNoInput" value="${faq.faqNo }">
-   												<button type="button" class="button" style="float: right;" onclick="rudeletefaq()">삭제</button>
-											</form>
-											<a href="faqmodify?faqNo=${faq.faqNo }"><button class="button" style="float: right; margin-right:1%;; ">수정</button></a>
-										</c:if> 
-		 								</div>
-		 							</div>
-		 						</c:forEach>	
-		 						<div id="emptyArea" style="margin-top: 10%; margin-bottom: 5%;">
-									<a>&lt;</a>
-										<c:forEach begin="${pageInfo.startPage }" end="${pageInfo.endPage }" var="i">
-											<c:choose>
-												<c:when test="${i==pageInfo.curPage}">
-													<a href="faq?page=${i}" class="rounded">${i }</a>
-												</c:when>
-												<c:otherwise>
-													<a href="faq?page=${i}" class="rounded">${i }</a>
-												</c:otherwise>
-											</c:choose>
-										</c:forEach>
-									<a>&gt;</a>
-								</div>	
+										<input type="radio" name="accordion"> 
+										
+										<label for="answer?faqNo=${faq.faqNo }" style="align-items: center; display: flex"> 
+											<span class="Q">Q</span> 
+											<span style="display: inline; font-style: bold; font-size: large; font-weight: 500">${faq.faqTitle }</span>
+										</label>
+										
+										<div style="padding: 30px; background-color:rgb(176 203 149 / 24%); border-radius:15px">
+											<span class="A">A</span> <br>
+											<br> <span class="content">${faq.faqContent }</span>
+											<c:if test="${admin eq 'admin' }">
+												<form id="deleteForm" method="get" action="deletefaq?faqNo">
+													<input type="hidden" name="faqNo" id="faqNoInput" value="${faq.faqNo }">
+													<button type="button" class="button" style="float: right;" onclick="rudeletefaq()">삭제</button>
+												</form>
+												<a href="faqmodify?faqNo=${faq.faqNo }">
+													<button class="button" style="float: right; margin-right: 1%;">수정</button>
+												</a>
+											</c:if>
+										</div>
+									</div>
+								</c:forEach>
+								<div id="pageDiv">
+									<c:choose>
+										<c:when test="${pageInfo.curPage == 1 }">
+											<a class="rounded">&lt;</a>
+										</c:when>
+										<c:otherwise>
+											<a href="faq&page=${pageInfo.curPage-1 }" class="rounded">&lt;</a>
+										</c:otherwise>
+									</c:choose>
+								
+									<c:forEach begin="${pageInfo.startPage }" end="${pageInfo.endPage }" var="i">
+										<c:choose>
+											<c:when test="${i==pageInfo.curPage}">
+												<a href="faq?page=${i }">
+													<button class="rounded">${i}</button>
+												</a>
+											</c:when>
+											<c:otherwise>
+												<a href="faq?page=${i }">
+													<button class="rounded">${i}</button>
+												</a>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+									
+									<c:choose>
+										<c:when test="${pageInfo.curPage == pageInfo.allPage }">
+											<a class="rounded">&gt;</a>
+										</c:when>
+										<c:otherwise>
+											<a href="faq&page=${pageInfo.curPage+1 }" class="rounded">&gt;</a>
+										</c:otherwise>
+									</c:choose>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -198,10 +207,10 @@ p{
 
 
 
-	<%@ include file="/views/common/footer.jsp" %>
-<script src="sweetalert2.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
+	<%@ include file="/views/common/footer.jsp"%>
+	<script src="sweetalert2.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script>
 function rudeletefaq() {
     var deleteForm = document.getElementById("deleteForm");
     var faqNo = document.getElementById("faqNoInput").value; 
@@ -229,7 +238,7 @@ function rudeletefaq() {
 
 </script>
 
-<script>
+	<script>
 document.addEventListener('DOMContentLoaded', function () {
     var labels = document.querySelectorAll('.accordion label');
     labels.forEach(function(label) {
