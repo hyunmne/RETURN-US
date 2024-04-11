@@ -55,9 +55,6 @@
 	#removeBtn {
 		border-radius: 20px;
 	}
-	#colFormLabel {
-		color: black;
-	}
 </style>
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
@@ -118,50 +115,36 @@
 									<h4 class="main-color-2">개인정보</h4>
 								</div><br>
 								<div class="container">
-									<form class="row g-3 border needs-validation" id="information-board" action="modify-profile" method="post" novalidate>
+									<form class="row g-3 border" id="information-board" action="modify-profile" method="post">
 									  <div class="row mb-3 mt-4">								  	  
 										  <label for="colFormLabel" class="col-sm-2 col-form-label">아이디</label>
 										  <div class="col-sm-4">
 										    <input type="text" readonly class="form-control" name="accId" value="${sessionScope.acc.accId}">
+										    <input type="hidden" class="form-control" id="accPasswordCheck" name="accPasswordCheck" value="${sessionScope.acc.accPassword}">
 										  </div>
 										  <label for="colFormLabel" class="col-sm-2 col-form-label">비밀번호</label>
 										  <div class="col-sm-4">
-										  	<div class="input-group has-validation">
-										    	<input type="password" class="form-control" id="colFormLabel" name="accPassword" placeholder="비밀번호를 입력하세요." required> 
-										  		<div class="invalid-feedback">비밀번호를 입력해주세요.</div>
-										  	</div>
+										  	<input type="password" class="form-control" id="accPassword" name="accPassword" placeholder="비밀번호를 입력하세요."> 
 										  </div>
 									  </div>
 									  <div class="row mb-3">
 									  	  <label for="colFormLabel" class="col-sm-2 col-form-label">이름</label>
 										  <div class="col-sm-4">
-										  	<div class="input-group has-validation">
-										    	<input type="text" class="form-control" id="colFormLabel" name="accName" value="${sessionScope.acc.accName}" required>
-										  		<div class="invalid-feedback">이름을 입력하세요.</div>
-										  	</div>
+										  	<input type="text" class="form-control" id="accName" name="accName" value="${sessionScope.acc.accName}">
 										  </div>										  
 										  <label for="colFormLabel" class="col-sm-2 col-form-label">생년월일</label>
 										  <div class="col-sm-4">
-										  	<div class="input-group has-validation">
-										    	<input type="date" class="form-control" id="colFormLabel" name="accBirth" value="${sessionScope.acc.accBirth}" required>
-										  		<div class="invalid-feedback">생년월일을 입력해주세요.</div>
-										  	</div>
+										  	<input type="date" class="form-control" id="accBirth" name="accBirth" value="${sessionScope.acc.accBirth}">
 										  </div>
 									  </div>
 									  <div class="row mb-3">
 									  	  <label for="colFormLabel" class="col-sm-2 col-form-label">전화번호</label>
 										  <div class="col-sm-4">
-										    <div class="input-group has-validation">
-										    	<input type="text" class="form-control" id="colFormLabel" name="accTel" value="${sessionScope.acc.accTel}" required>
-										  		<div class="invalid-feedback">전화번호를 입력해주세요.</div>
-										  	</div>
+										    <input type="text" class="form-control" id="accTel" name="accTel" value="${sessionScope.acc.accTel}">
 										  </div>
 										  <label for="colFormLabel" class="col-sm-2 col-form-label">이메일</label>
 										  <div class="col-sm-4">
-										  	<div class="input-group has-validation">
-										    	<input type="email" class="form-control" id="colFormLabel" name="accEmail" value="${sessionScope.acc.accEmail}" required>
-										  		<div class="invalid-feedback">이메일을 입력해주세요.</div>
-										  	</div>
+										  	<input type="email" class="form-control" id="accEmail" name="accEmail" value="${sessionScope.acc.accEmail}">
 										  </div>										  
 									  </div>
 									  <div class="row mb-3">
@@ -182,15 +165,12 @@
 									  <div class="row mb-3">
 										  <label for="colFormLabel" class="col-sm-2 col-form-label">상세 주소</label>
 										  <div class="col-sm-10">
-										  	<div class="input-group has-validation">
-										    	<input type="text" class="form-control" id="accDetailAddr" style="color:black" name="accDetailAddr" value="${sessionScope.acc.accDetailAddr}" required>
-										  		<div class="invalid-feedback">상세 주소를 입력해주세요.</div>
-										  	</div>
+										  	<input type="text" class="form-control" id="accDetailAddr" style="color:black" name="accDetailAddr" value="${sessionScope.acc.accDetailAddr}">
 										  </div>										  
 									  </div>
 									  <div class="row mb-4">
 									  	<div class="col-12">
-									    	<button type="submit" class="btn btn-outline-info" id="reviseBtn">저장하기</button>
+									    	<button type="button" class="btn btn-outline-info" id="reviseBtn" onclick="checkForm()">저장하기</button>
 									    </div>
 									  </div>											  
 									</form>
@@ -220,23 +200,64 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script>
-		(() => {
-		  'use strict'
-	
-		  const forms = document.querySelectorAll('.needs-validation')
-	
-		  Array.from(forms).forEach(form => {
-		    form.addEventListener('submit', event => {
-		      if (!form.checkValidity()) {
-		        event.preventDefault()
-		        event.stopPropagation()
-		      }
-	
-		      form.classList.add('was-validated')
-		    }, false)
-		  })
-		})()
+		function checkForm() {
+			var passwordCheck = document.getElementById("accPasswordCheck").value;
+	    	var password = document.getElementById("accPassword").value;
+	    	var name = document.getElementById("accName").value;
+	    	var brith = document.getElementById("accBirth").value;
+	    	var tel = document.getElementById("accTel").value;
+	    	var email = document.getElementById("accEmail").value;
+	    	var detailAddr = document.getElementById("accDetailAddr").value;
+			
+			Swal.fire({
+		        title: "정보를 저장하시겠습니까?",
+		        icon: "question",
+		        showCancelButton: true,
+		        confirmButtonColor: "#3085d6",
+		        cancelButtonColor: "#d33",
+		        confirmButtonText: '저장',
+	            cancelButtonText: '취소'
+		    }).then((result) => {		    	
+		    	if (result.isConfirmed) {	
+		    		if (!name || !brith || !tel || !email || !detailAddr) {
+			        	Swal.fire({
+			                title: "정보가 입력되지 않았습니다",
+			                icon: "warning",
+			                confirmButtonText: '확인',
+			        	})
+			        	return;
+			        }
+		    		
+		    		if (!password) {
+			        	Swal.fire({
+			                title: "비밀번호가 입력되지 않았습니다",
+			                icon: "warning",
+			                confirmButtonText: '확인',
+			        	})
+			        	return;
+			        }
+		    		
+			        if (passwordCheck != password) {
+			        	Swal.fire({
+			                title: "비밀번호가 틀립니다",
+			                icon: "error",
+			                confirmButtonText: '확인',
+			        	})
+			        	return;
+			        }
+			        
+		            Swal.fire({
+		                title: "저장되었습니다! 다시 로그인 해주십시오",
+		                icon: "success",
+		                confirmButtonText: '확인',
+		            }).then(() => {
+		            	document.getElementById("information-board").submit();
+		            });
+		        }
+		    });
+		}
 		
 	function daumPostcode() {
         new daum.Postcode({

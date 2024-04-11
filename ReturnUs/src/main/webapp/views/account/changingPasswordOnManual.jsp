@@ -27,6 +27,9 @@
 		color: #3D550C;		
 		text-align: center;
 	}
+	.form-control {
+		color: black;
+	}
 		   
 	#big {
 		background-color: #F5F9F1; 
@@ -47,9 +50,6 @@
 	}
 	#changeBtn {
 		border-radius: 20px;
-	}
-	#colFormLabel {
-		color: black;
 	}
 </style>
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -88,7 +88,7 @@
 									<h4 class="main-color-2"><!-- 소제목 --></h4>
 								</div><br>
 								<div class="container">
-									<form class="row g-3 needs-validation" id="information-board" action="change-password" method="post" novalidate>
+									<form class="row g-3" id="password-board" action="change-password" method="post">
 									  <div class="row mb-5 mt-4 text-center">					  	  
 										  <h4 class="noto-sans" style="color:black">비밀번호 변경 후에는 다시 로그인 하시기 바랍니다.</h4>									  
 									  </div>
@@ -97,17 +97,15 @@
 										  <label for="colFormLabel" class="col-sm-3 col-form-label">아이디</label>
 										  <div class="col-sm-5">
 										    <input type="text" readonly class="form-control" name="accId" value="${sessionScope.acc.accId}">
-										  </div>
+										    <input type="hidden" class="form-control" id="accPasswordCheck" name="accPasswordCheck" value="${sessionScope.acc.accPassword}">
+										  </div>										    
 										  <div class="col-sm-2"></div>										  
 									  </div>
 									  <div class="row mb-3">
 									  	  <div class="col-sm-2"></div>
 									  	  <label for="colFormLabel" class="col-sm-3 col-form-label">기존 비밀번호</label>
 										  <div class="col-sm-5">
-										  	<div class="input-group has-validation">
-										    	<input type="password" class="form-control" id="colFormLabel" name="accPassword" placeholder="비밀번호를 입력하세요." required> 
-										  		<div class="invalid-feedback">기존 비밀번호를 입력해주세요.</div>
-										  	</div>
+										  	<input type="password" class="form-control" id="accPassword" name="accPassword" placeholder="비밀번호를 입력하세요."> 							  	
 										  </div>
 										  <div class="col-sm-2"></div>
 									  </div>
@@ -115,10 +113,7 @@
 									  	  <div class="col-sm-2"></div>
 									  	  <label for="colFormLabel" class="col-sm-3 col-form-label">새 비밀번호</label>
 										  <div class="col-sm-5">
-										  	<div class="input-group has-validation">
-										    	<input type="password" class="form-control" id="colFormLabel" name="accNewPassword" placeholder="비밀번호를 입력하세요." required> 
-										  		<div class="invalid-feedback">새 비밀번호를 입력해주세요.</div>
-										  	</div>
+										  	<input type="password" class="form-control" id="accNewPassword" name="accNewPassword" placeholder="비밀번호를 입력하세요."> 
 										  </div>
 										  <div class="col-sm-2"></div>
 									  </div>
@@ -126,10 +121,7 @@
 									  	  <div class="col-sm-2"></div>
 									  	  <label for="colFormLabel" class="col-sm-3 col-form-label">새 비밀번호 확인</label>
 										  <div class="col-sm-5">
-										  	<div class="input-group has-validation">
-										    	<input type="password" class="form-control" id="colFormLabel" name="accNewPasswordConfirmation" placeholder="비밀번호를 입력하세요." required> 
-										  		<div class="invalid-feedback">새 비밀번호를 입력해주세요.</div>
-										  	</div>
+										  	<input type="password" class="form-control" id="accNewPasswordConfirmation" name="accNewPasswordConfirmation" placeholder="비밀번호를 입력하세요.">
 										  </div>
 										  <div class="col-sm-2"></div>
 									  </div>
@@ -137,7 +129,7 @@
 									  	<div class="col-5"></div>
 									  	<div class="col-2">
 									  		<div>
-									  			<button type="submit" class="btn btn-outline-info" id="changeBtn">변경</button>
+									  			<button type="button" class="btn btn-outline-info" id="changeBtn" onclick="checkForm()">변경</button>
 									  		</div>									    	
 									    </div>
 									    <div class="col-5"></div>
@@ -169,23 +161,61 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script>
-		(() => {
-		  'use strict'
-	
-		  const forms = document.querySelectorAll('.needs-validation')
-	
-		  Array.from(forms).forEach(form => {
-		    form.addEventListener('submit', event => {
-		      if (!form.checkValidity()) {
-		        event.preventDefault()
-		        event.stopPropagation()
-		      }
-	
-		      form.classList.add('was-validated')
-		    }, false)
-		  })
-		})()		
+		function checkForm() {
+			var passwordCheck = document.getElementById("accPasswordCheck").value;
+	    	var password = document.getElementById("accPassword").value;
+	    	var newPassword = document.getElementById("accNewPassword").value;
+	    	var newPasswordConfirmation = document.getElementById("accNewPasswordConfirmation").value;
+			
+			Swal.fire({
+		        title: "정보를 수정하시겠습니까?",
+		        icon: "question",
+		        showCancelButton: true,
+		        confirmButtonColor: "#3085d6",
+		        cancelButtonColor: "#d33",
+		        confirmButtonText: '수정',
+	            cancelButtonText: '취소'
+		    }).then((result) => {		    	
+		    	if (result.isConfirmed) {	
+		    		if (!passwordCheck || !password || !newPassword || !newPasswordConfirmation) {
+			        	Swal.fire({
+			                title: "비밀번호가 입력되지 않았습니다",
+			                icon: "warning",
+			                confirmButtonText: '확인',
+			        	})
+			        	return;
+			        }
+		    		
+			        if (passwordCheck != password) {
+			        	Swal.fire({
+			                title: "비밀번호가 틀립니다",
+			                icon: "error",
+			                confirmButtonText: '확인',
+			        	})
+			        	return;
+			        }
+			        
+			        if (newPassword != newPasswordConfirmation) {
+			        	Swal.fire({
+			                title: "새 비밀번호가 서로 다릅니다",
+			                icon: "error",
+			                confirmButtonText: '확인',
+			        	})
+			        	return;
+			        }      
+			        
+		            Swal.fire({
+		                title: "수정되었습니다. 다시 로그인 해주십시오",
+		                icon: "success",
+		                confirmButtonText: '확인',
+		            }).then(() => {
+		            	document.getElementById("password-board").submit();
+		            });
+		        }
+		    });
+		}
 	</script>
 </body>
 </html>

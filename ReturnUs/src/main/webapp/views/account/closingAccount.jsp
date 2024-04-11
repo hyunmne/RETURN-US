@@ -48,9 +48,6 @@
 	#removeBtn {
 		border-radius: 20px;
 	}
-	#colFormLabel {
-		color: black;
-	}
 </style>
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
@@ -88,7 +85,7 @@
 									<h4 class="main-color-2"><!-- 소제목 --></h4>
 								</div><br>
 								<div class="container">
-									<form class="row g-3 needs-validation" id="information-board" action="close-account" method="post" novalidate>
+									<form class="row g-3" id="board" action="close-account" method="post">
 									  <div class="row mb-3 mt-4">
 									  	  <div class="col-sm-3"></div>							  	  
 										  <div class="col-sm-6">
@@ -104,6 +101,7 @@
 										  <label for="colFormLabel" class="col-sm-2 col-form-label">아이디</label>
 										  <div class="col-sm-6">
 										    <input type="text" readonly class="form-control" name="accId" value="${sessionScope.acc.accId}">
+										    <input type="hidden" id="accPasswordCheck" name="accPasswordCheck" value="${sessionScope.acc.accPassword}">
 										  </div>
 										  <div class="col-sm-2"></div>										  
 									  </div>
@@ -111,10 +109,7 @@
 									  	  <div class="col-sm-2"></div>
 									  	  <label for="colFormLabel" class="col-sm-2 col-form-label">비밀번호</label>
 										  <div class="col-sm-6">
-										  	<div class="input-group has-validation">
-										    	<input type="password" class="form-control" id="colFormLabel" name="accPassword" placeholder="비밀번호를 입력하세요." required> 
-										  		<div class="invalid-feedback">비밀번호를 입력해주세요.</div>
-										  	</div>
+										  	<input type="password" class="form-control" id="accPassword" name="accPassword" placeholder="비밀번호를 입력하세요.">
 										  </div>
 										  <div class="col-sm-2"></div>
 									  </div>
@@ -122,7 +117,7 @@
 									  	<div class="col-5"></div>
 									  	<div class="col-2">
 									  		<div>
-									  			<button type="submit" class="btn btn-outline-info" id="removeBtn">탈퇴하기</button>
+									  			<button type="button" class="btn btn-outline-info" id="removeBtn" onclick="checkForm()">탈퇴하기</button>
 									  		</div>									    	
 									    </div>
 									    <div class="col-5"></div>
@@ -154,23 +149,50 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script>
-		(() => {
-		  'use strict'
-	
-		  const forms = document.querySelectorAll('.needs-validation')
-	
-		  Array.from(forms).forEach(form => {
-		    form.addEventListener('submit', event => {
-		      if (!form.checkValidity()) {
-		        event.preventDefault()
-		        event.stopPropagation()
-		      }
-	
-		      form.classList.add('was-validated')
-		    }, false)
-		  })
-		})()		
+		function checkForm() {
+			var passwordCheck = document.getElementById("accPasswordCheck").value;
+	    	var password = document.getElementById("accPassword").value;
+			
+			Swal.fire({
+		        title: "탈퇴하시겠습니까?",
+		        icon: "question",
+		        showCancelButton: true,
+		        confirmButtonColor: "#3085d6",
+		        cancelButtonColor: "#d33",
+		        confirmButtonText: '탈퇴',
+	            cancelButtonText: '취소'
+		    }).then((result) => {		    	
+		    	if (result.isConfirmed) {	
+		    		if (!password) {
+			        	Swal.fire({
+			                title: "비밀번호가 입력되지 않았습니다",
+			                icon: "warning",
+			                confirmButtonText: '확인',
+			        	})
+			        	return;
+			        }
+		    		
+			        if (passwordCheck != password) {
+			        	Swal.fire({
+			                title: "비밀번호가 틀립니다",
+			                icon: "error",
+			                confirmButtonText: '확인',
+			        	})
+			        	return;
+			        }
+			        
+		            Swal.fire({
+		                title: "정상적으로 탈퇴되었습니다",
+		                icon: "success",
+		                confirmButtonText: '확인',
+		            }).then(() => {
+		            	document.getElementById("board").submit();
+		            });
+		        }
+		    });
+		}
 	</script>
 </body>
 </html>

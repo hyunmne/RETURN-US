@@ -137,10 +137,9 @@ public class AccountServiceImpl implements AccountService {
 		String id = request.getParameter("accId");
 		String pw = request.getParameter("accPassword");
 		String birth = request.getParameter("accBirth");
-		Date accBirth = new Date(sdf.parse(birth).getTime());		
+		Date accBirth = new Date(sdf.parse(birth).getTime());
 				
 		Account account = accountDao.selectAccount(id);
-		if(!account.getAccPassword().equals(pw)) throw new Exception("비밀번호가 틀립니다");
 		
 		account.setAccName(request.getParameter("accName"));
 		account.setAccBirth(accBirth);
@@ -162,11 +161,8 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public void closeAccount(HttpServletRequest request) throws Exception {
 		String id = request.getParameter("accId");
-		String pw = request.getParameter("accPassword");
 		Account account = accountDao.selectAccount(id);
-		
-		if(!account.getAccPassword().equals(pw)) throw new Exception("비밀번호 오류");		
-		
+
 		HttpSession session = request.getSession();
 		session.invalidate();
 		accountDao.deleteAccount(id);
@@ -174,13 +170,8 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public void changePassword(HttpServletRequest request) throws Exception {
-		String id = request.getParameter("accId");
-		String pw = request.getParameter("accPassword");
-		String pwConfirmation = request.getParameter("accNewPasswordConfirmation");
-				
+		String id = request.getParameter("accId");				
 		Account account = accountDao.selectAccount(id);
-		if(!account.getAccPassword().equals(pw)) throw new Exception("비밀번호가 틀립니다");
-		if(!request.getParameter("accNewPassword").equals(pwConfirmation)) throw new Exception("비밀번호가 다릅니다");
 		
 		account.setAccPassword(request.getParameter("accNewPassword"));
 		accountDao.updateAccountPassword(account);
