@@ -64,7 +64,7 @@ public class AccountServiceImpl implements AccountService {
 		
 		String accId = (String)jobj.get("accId");
 		String accPassword = (String)jobj.get("accPassword");
-		String autologin = (String)jobj.get("autologin");
+		boolean autologin = (boolean)jobj.get("autologin");
 		System.out.println(accId);
 		System.out.println(accPassword);
 		System.out.println(autologin);
@@ -72,8 +72,8 @@ public class AccountServiceImpl implements AccountService {
 		Cookie autoLoginCookie = null;
 		Cookie accIdCookie = null;
 		Cookie accPasswordCookie = null;
-		if(autologin.trim().equals("true")) {
-			autoLoginCookie = new Cookie ("autologin", autologin);
+		if(autologin) {
+			autoLoginCookie = new Cookie ("autologin", "true");
 			autoLoginCookie.setMaxAge(365 * 24 * 60 * 60); 
 			accIdCookie = new Cookie("accId", accId);
 			accIdCookie.setMaxAge(365 * 24 * 60 * 60);                

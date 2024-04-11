@@ -112,7 +112,7 @@ $(function() {
 		var login = {}
 		login.accId = $("#accId").val();
 		login.accPassword = $("#accPassword").val();
-		login.autologin = $("#autologin").val();
+		login.autologin = document.getElementById("autologin").checked;		
 		console.log(login);
 		$.ajax({
 			url : "login",
@@ -185,9 +185,9 @@ $(function() {
 								<br>
 								<div id="loginbox" class="login_box">
 								<%if(autologin) { %>
-									<input type="checkbox" id="autologin" value="true" name="autologin" checked="checked">&nbsp;&nbsp;<span>자동로그인</span> 
+									<input type="checkbox" id="autologin" name="autologin" checked="checked">&nbsp;&nbsp;<span>자동로그인</span> 
 								<%} else { %>
-									<input type="checkbox" id="autologin" value="true" name="autologin">&nbsp;&nbsp;<span>자동로그인</span>
+									<input type="checkbox" id="autologin" name="autologin">&nbsp;&nbsp;<span>자동로그인</span>
 								<%} %>
 									<button type="submit" class="button" id="login">로그인</button>
 								</div>
