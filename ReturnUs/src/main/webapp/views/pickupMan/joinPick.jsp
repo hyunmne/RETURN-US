@@ -27,7 +27,7 @@
 </head>
     
 <body class="noto-sans">
-
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<form id="joinPick" method="post" action="joinPick" enctype="multipart">
 		<div class="col-12 d-flex justify-content-center">
 			<div style="width:700px;">
@@ -84,13 +84,25 @@
 				</div>
 				
 				<div class="col-10 d-flex" style="padding:30px 10px 10px; justify-content: center">
-						<input type="submit" value="등록하기" id="nextBtn" class="btn btn-success" style="color: #fefcf7;">
+					<button onclick="subBtn()" type="button" id="nextBtn" class="btn btn-success" style="color: #fefcf7;">등록하기</button>
 				</div>
 			</div>
 		</div>
 	</form>
 
 
+
+<script>
+function subBtn() {
+	Swal.fire({
+        title: "픽업맨 생성 완료 되었습니다.",
+        icon: "success",
+        confirmButtonText: '확인',
+    }).then(() => {
+    	document.getElementById("joinPick").submit();
+    });
+}
+</script>
 
 
 <script>

@@ -249,7 +249,7 @@
 			        }
 			        
 		            Swal.fire({
-		                title: "저장되었습니다! 다시 로그인 해주십시오",
+		                title: "저장되었습니다!",
 		                icon: "success",
 		                confirmButtonText: '확인',
 		            }).then(() => {

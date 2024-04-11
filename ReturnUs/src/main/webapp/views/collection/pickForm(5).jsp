@@ -232,7 +232,7 @@ input[type='number']::-webkit-inner-spin-button {
 									<div id="content" style="padding:5px 40px;">
 										<div class="d-flex align-items-center" style="flex-direction:column; ">
 										<div class="dd">
-											<div>원가</div>								
+											<div>금액</div>								
 											<div class="money" style="display:flex; align-items:center; ">
 												<span id="colPost" style="font-weight:300; padding-right:10px">${boxSize }</span>원
 											</div>								
