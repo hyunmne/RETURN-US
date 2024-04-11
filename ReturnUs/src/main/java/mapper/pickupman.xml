@@ -15,7 +15,7 @@
 		<if test="pmRegion != null and !pmRegion.equals('none')">
 			where pm.pm_region = #{pmRegion}
 		</if>
-		order by pm_no
+		order by pm_no desc
 <!-- 		limit #{row}, 10 -->
 	</select>
 	

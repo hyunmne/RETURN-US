@@ -33,7 +33,7 @@ public class PickupmanServiceImpl implements PickupmanService {
 		String pmName = request.getParameter("pmName");
 		String pmTel = request.getParameter("pmTel");
 		String pmRegion = request.getParameter("pmRegion");
-		String pmProfile = "./resources/image/" + request.getParameter("pmProfile");
+		String pmProfile = "./resources/img/" + request.getParameter("pmProfile");
 		
 		PickupMan pm = new PickupMan(pmName, pmTel, pmRegion, pmProfile);
 		pmDao.insertPickMan(pm);
