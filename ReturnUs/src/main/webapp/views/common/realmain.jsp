@@ -198,7 +198,7 @@ i {
 		</div>
 		<div class="col-lg-6" style="font-size:large">
 			<span>일상에서 쓰레기 처리가 힘들었던 적 있나요? <br>
-				커버링은 그 모든 걱정을 덜어주고 여러분의 소중한 시간을 찾아줍니다.</span>
+				리터너스는 그 모든 걱정을 덜어주고 여러분의 소중한 시간을 찾아줍니다.</span>
 		</div>
 	</div>
 </div>
